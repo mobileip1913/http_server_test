@@ -361,13 +361,17 @@ class InquiryTester:
             client.tts_stop_time = None  # 重置TTS stop时间
             
             # 加载音频帧（与test_runner.py的逻辑一致）
+            self.logger.info(f"Connection #{client.connection_id}: Loading audio file: {audio_file}")
             audio_frames = self.load_audio_frames(audio_file)
             if not audio_frames:
+                self.logger.error(f"Connection #{client.connection_id}: Failed to load audio frames from {audio_file}")
                 result["error"] = "Failed to load audio frames"
                 return result
+            self.logger.info(f"Connection #{client.connection_id}: Successfully loaded {len(audio_frames)} audio frames from {audio_file}")
             
             # 记录发送消息前的时间，用于判断后续消息是否属于本次测试
             send_start_time = time.time()
+            send_start_time_ms = send_start_time * 1000  # 转换为毫秒时间戳，用于与TTS stop时间戳比较
             
             # 发送消息（完全使用test_runner.py的逻辑：send_user_message）
             # 这与之前成功的测试完全一致
@@ -394,53 +398,72 @@ class InquiryTester:
                     self.logger.warning(f"Connection #{client.connection_id}: Connection lost during wait")
                     break
                 
-                if test_mode == "fast":
-                    # 急速模式：只要大模型开始回复就继续下一个问题
-                    # 检查是否收到LLM响应（必须是大模型开始回复，不能仅仅是STT）
-                    # has_llm 标志只在收到LLM消息或TTS的sentence_start时设置，不会因为STT而设置
-                    # llm_text_buffer 也只在LLM相关消息时填充
-                    if client.has_llm:
-                        # 进一步确认：必须有实际的LLM内容（不能仅仅是STT）
-                        has_llm_content = (hasattr(client, 'llm_text_buffer') and 
-                                          client.llm_text_buffer and 
-                                          len(client.llm_text_buffer) > 0)
-                        if has_llm_content:
-                            self.logger.info(f"Connection #{client.connection_id}: LLM response started at {wait_time:.1f}s, proceeding to next question (fast mode)")
-                            break
+                # 注意：为了确保每个会话完成，即使是急速模式也等待完整响应（TTS stop）
+                # 不再提前退出，必须等待TTS stop才能继续下一个对话
+                # if test_mode == "fast":
+                #     # 急速模式：只要大模型开始回复就继续下一个问题
+                #     # 检查是否收到LLM响应（必须是大模型开始回复，不能仅仅是STT）
+                #     # has_llm 标志只在收到LLM消息或TTS的sentence_start时设置，不会因为STT而设置
+                #     # llm_text_buffer 也只在LLM相关消息时填充
+                #     if client.has_llm:
+                #         # 进一步确认：必须有实际的LLM内容（不能仅仅是STT）
+                #         has_llm_content = (hasattr(client, 'llm_text_buffer') and 
+                #                           client.llm_text_buffer and 
+                #                           len(client.llm_text_buffer) > 0)
+                #         if has_llm_content:
+                #             self.logger.info(f"Connection #{client.connection_id}: LLM response started at {wait_time:.1f}s, proceeding to next question (fast mode)")
+                #             break
                 
                 # 正常模式或急速模式：如果收到完整响应（TTS stop），都可以提前退出
                 # 但需要验证TTS stop是否属于本次测试（时间戳在发送消息之后）
                 if client.has_tts_stop and client.tts_stop_time is not None:
                     # 检查TTS stop时间是否在发送消息之后（允许2秒误差）
-                    tts_stop_time_sec = client.tts_stop_time / 1000.0
-                    if tts_stop_time_sec >= send_start_time - 2.0:
+                    # tts_stop_time是毫秒时间戳，send_start_time_ms也是毫秒时间戳
+                    if client.tts_stop_time >= send_start_time_ms - 2000:  # 允许2秒误差（2000ms）
                         self.logger.info(f"Connection #{client.connection_id}: Received complete response at {wait_time:.1f}s")
                         break
                     else:
                         # TTS stop是上一个测试的，忽略
+                        tts_stop_time_sec = client.tts_stop_time / 1000.0
                         self.logger.debug(f"Connection #{client.connection_id}: TTS stop time ({tts_stop_time_sec:.3f}s) is before send start ({send_start_time:.3f}s), ignoring")
             
             # 等待循环结束后，再给一点时间让异步消息处理完成
-            # 避免消息在等待循环结束后才到达的情况
-            if test_mode == "fast":
-                # 急速模式：如果没有收到LLM响应，额外等待
-                # 但如果收到了TTS start，说明服务器已经开始响应，应该等待更长时间
-                if not client.has_llm or not (hasattr(client, 'llm_text_buffer') and client.llm_text_buffer):
+            # 为了确保每个会话完成，必须等待完整响应（TTS stop）
+            # 验证TTS stop是否属于本次测试
+            tts_stop_valid = False
+            if client.has_tts_stop and client.tts_stop_time is not None:
+                # tts_stop_time是毫秒时间戳，send_start_time_ms也是毫秒时间戳
+                if client.tts_stop_time >= send_start_time_ms - 2000:  # 允许2秒误差（2000ms）
+                    tts_stop_valid = True
+            
+            # 如果没有收到有效的TTS stop，继续等待直到收到TTS stop或超时
+            if not tts_stop_valid:
+                # 额外等待时间：最多等待10秒，确保收到完整响应
+                max_additional_wait = 10.0  # 最多额外等待10秒
+                additional_wait_time = 0
+                check_interval = 0.2  # 每200ms检查一次
+                
+                while additional_wait_time < max_additional_wait:
+                    await asyncio.sleep(check_interval)
+                    additional_wait_time += check_interval
+                    
+                    # 检查是否收到有效的TTS stop
+                    if client.has_tts_stop and client.tts_stop_time is not None:
+                        if client.tts_stop_time >= send_start_time_ms - 2000:
+                            self.logger.info(f"Connection #{client.connection_id}: Received TTS stop after additional wait ({additional_wait_time:.1f}s)")
+                            tts_stop_valid = True
+                            break
+                    
+                    # 如果收到了TTS start，说明服务器已经开始响应，继续等待
                     if client.has_tts_start:
-                        # 如果收到了TTS start但没有sentence_start，等待更长时间（可能服务器响应较慢）
-                        await asyncio.sleep(1.0)  # 额外等待 1秒
-                    else:
-                        await asyncio.sleep(0.2)  # 额外等待 200ms
-            else:
-                # 正常模式：如果没有收到完整响应，额外等待
-                # 验证TTS stop是否属于本次测试
-                tts_stop_valid = False
-                if client.has_tts_stop and client.tts_stop_time is not None:
-                    tts_stop_time_sec = client.tts_stop_time / 1000.0
-                    if tts_stop_time_sec >= send_start_time - 2.0:
-                        tts_stop_valid = True
+                        continue
+                    # 如果既没有TTS start也没有TTS stop，可能服务器没有响应，等待一段时间后退出
+                    elif additional_wait_time >= 3.0:  # 如果等待超过3秒还没有任何响应，退出
+                        self.logger.warning(f"Connection #{client.connection_id}: No response after {additional_wait_time:.1f}s, stopping wait")
+                        break
+                
                 if not tts_stop_valid:
-                    await asyncio.sleep(0.2)  # 额外等待 200ms
+                    self.logger.warning(f"Connection #{client.connection_id}: Did not receive complete TTS stop response after {wait_time + additional_wait_time:.1f}s total wait time")
             
             # 收集响应文本
             stt_text = getattr(client, 'stt_text', '')
@@ -450,18 +473,15 @@ class InquiryTester:
             result["llm_text"] = llm_text
             result["response_text"] = f"[STT] {stt_text} | [LLM] {llm_text}" if (stt_text or llm_text) else ""
             
-            # 判断TTS stop是否有效（确保是本次测试的stop，而不是上一个测试的）
-            tts_stop_valid = False
-            if client.has_tts_stop and client.tts_stop_time is not None:
-                # tts_stop_time是毫秒时间戳（从get_timestamp()获取，返回time.time() * 1000）
-                # send_start_time是秒时间戳（从time.time()获取）
-                # 需要统一单位进行比较：将毫秒转换为秒
-                tts_stop_time_sec = client.tts_stop_time / 1000.0
-                # 检查TTS stop时间是否在发送消息之后（允许2秒误差，因为可能有延迟或时间同步问题）
-                if tts_stop_time_sec >= send_start_time - 2.0:  # 允许2秒误差
+            # 重新验证TTS stop是否有效（在额外等待后再次检查，确保使用最新的状态）
+            # 注意：tts_stop_valid 可能已经在上面被设置为True了，这里只是再次确认
+            if not tts_stop_valid and client.has_tts_stop and client.tts_stop_time is not None:
+                # tts_stop_time是毫秒时间戳，send_start_time_ms也是毫秒时间戳
+                if client.tts_stop_time >= send_start_time_ms - 2000:  # 允许2秒误差（2000ms）
                     tts_stop_valid = True
                 else:
                     # TTS stop时间在发送消息之前，说明是上一个测试的stop，忽略
+                    tts_stop_time_sec = client.tts_stop_time / 1000.0
                     self.logger.debug(f"TTS stop time ({tts_stop_time_sec:.3f}s) is before send start ({send_start_time:.3f}s), ignoring")
             
             # 判断成功：如果鉴权失败，直接标记为失败
@@ -477,81 +497,74 @@ class InquiryTester:
             # 但需要确保时间戳属于本次测试（在send_start_time之后）
             send_start_time_ms = send_start_time * 1000  # 转换为毫秒时间戳
             
+            # 性能指标：服务延迟（专业测试角度）
+            # 1. STT服务延迟：从发送音频到收到STT结果
             if client.send_time and client.stt_response_time:
                 # 确保时间戳属于本次测试
                 if client.send_time >= send_start_time_ms - 2000 and client.stt_response_time >= send_start_time_ms - 2000:
-                    stt_time_ms = client.stt_response_time - client.send_time
+                    stt_latency_ms = client.stt_response_time - client.send_time
                     # 过滤异常值：应该在0到60秒之间（0-60000ms）
-                    if 0 <= stt_time_ms <= 60000:
-                        result["stt_time"] = stt_time_ms
+                    if 0 <= stt_latency_ms <= 60000:
+                        result["stt_latency"] = stt_latency_ms
                     else:
-                        result["stt_time"] = None
+                        result["stt_latency"] = None
                 else:
-                    result["stt_time"] = None
+                    result["stt_latency"] = None
             else:
-                result["stt_time"] = None
+                result["stt_latency"] = None
             
+            # 2. LLM服务延迟：从STT完成到LLM响应
             if client.stt_response_time and client.llm_response_time:
                 if client.stt_response_time >= send_start_time_ms - 2000 and client.llm_response_time >= send_start_time_ms - 2000:
-                    llm_time_ms = client.llm_response_time - client.stt_response_time
+                    llm_latency_ms = client.llm_response_time - client.stt_response_time
                     # 过滤异常值：应该在0到60秒之间
-                    if 0 <= llm_time_ms <= 60000:
-                        result["llm_time"] = llm_time_ms
+                    if 0 <= llm_latency_ms <= 60000:
+                        result["llm_latency"] = llm_latency_ms
                     else:
-                        result["llm_time"] = None
+                        result["llm_latency"] = None
                 else:
-                    result["llm_time"] = None
+                    result["llm_latency"] = None
             else:
-                result["llm_time"] = None
+                result["llm_latency"] = None
             
+            # 3. TTS服务延迟：从LLM完成到TTS开始（TTS启动延迟）
             if client.llm_response_time and client.tts_start_time:
                 if client.llm_response_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
-                    tts_start_time_ms = client.tts_start_time - client.llm_response_time
+                    tts_latency_ms = client.tts_start_time - client.llm_response_time
                     # 过滤异常值：应该在0到10秒之间
-                    if 0 <= tts_start_time_ms <= 10000:
-                        result["tts_start_time"] = tts_start_time_ms
+                    if 0 <= tts_latency_ms <= 10000:
+                        result["tts_latency"] = tts_latency_ms
                     else:
-                        result["tts_start_time"] = None
+                        result["tts_latency"] = None
                 else:
-                    result["tts_start_time"] = None
+                    result["tts_latency"] = None
             else:
-                result["tts_start_time"] = None
+                result["tts_latency"] = None
             
-            if client.tts_start_time and client.tts_stop_time:
-                if client.tts_start_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
-                    tts_duration_ms = client.tts_stop_time - client.tts_start_time
-                    # 过滤异常值：应该在0到120秒之间
-                    if 0 <= tts_duration_ms <= 120000:
-                        result["tts_duration"] = tts_duration_ms
-                    else:
-                        result["tts_duration"] = None
-                else:
-                    result["tts_duration"] = None
-            else:
-                result["tts_duration"] = None
+            # 注意：不记录TTS持续时间，因为这是内容长度决定的，不是性能指标
             
             if client.send_time and client.tts_stop_time:
                 if client.send_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
                     total_time_ms = client.tts_stop_time - client.send_time
                     # 过滤异常值：应该在0到120秒之间
                     if 0 <= total_time_ms <= 120000:
-                        result["total_response_time"] = total_time_ms
+                        result["e2e_response_time"] = total_time_ms
                     else:
-                        result["total_response_time"] = None
+                        result["e2e_response_time"] = None
                 else:
-                    result["total_response_time"] = None
+                    result["e2e_response_time"] = None
             elif client.send_time and client.tts_start_time:
                 if client.send_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
                     total_time_ms = client.tts_start_time - client.send_time
                     # 过滤异常值：应该在0到120秒之间
                     if 0 <= total_time_ms <= 120000:
-                        result["total_response_time"] = total_time_ms
+                        result["e2e_response_time"] = total_time_ms
                     else:
-                        result["total_response_time"] = None
+                        result["e2e_response_time"] = None
                 else:
-                    result["total_response_time"] = None
+                    result["e2e_response_time"] = None
             else:
-                result["total_response_time"] = None
+                result["e2e_response_time"] = None
             
             # 收集消息统计
             result["sent_messages"] = getattr(client, 'sent_messages', 0)

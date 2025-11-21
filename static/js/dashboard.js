@@ -6,6 +6,7 @@ let testState = {
     isRunning: false,
     progress: 0,
     total: 0,
+    total_opus_files: 0,  // opus文件总数
     results: [],
     summary: {
         total: 0,
@@ -69,6 +70,14 @@ function setupSocketListeners() {
         updateUIForTestStart();
         // 清空并发状态指示器，准备接收新的请求
         clearConcurrencyIndicator();
+        // 保存并更新opus文件总数
+        if (data.total_opus_files !== undefined) {
+            testState.total_opus_files = data.total_opus_files;
+            const opusFilesInfo = document.getElementById('opusFilesInfo');
+            if (opusFilesInfo) {
+                opusFilesInfo.textContent = `(Opus文件: ${data.total_opus_files})`;
+            }
+        }
     });
 
     socket.on('test_start', (data) => {
@@ -99,7 +108,7 @@ function setupSocketListeners() {
 
     socket.on('progress_update', (data) => {
         console.log('Progress update', data);
-        updateProgress(data.progress, data.total);
+        updateProgress(data.progress, data.total, data.total_opus_files);
         updateSummary(data.summary);
     });
 
@@ -219,7 +228,7 @@ async function stopTest() {
 
 // 更新UI
 function updateUI() {
-    updateProgress(testState.progress, testState.total);
+    updateProgress(testState.progress, testState.total, testState.total_opus_files);
     updateSummary(testState.summary);
     
     if (testState.is_running) {
@@ -232,10 +241,16 @@ function updateUI() {
 }
 
 // 更新进度
-function updateProgress(progress, total) {
+function updateProgress(progress, total, totalOpusFiles) {
     const percentage = total > 0 ? (progress / total * 100) : 0;
     document.getElementById('progressFill').style.width = percentage + '%';
     document.getElementById('progressText').textContent = `${progress} / ${total}`;
+    
+    // 显示opus文件总数
+    const opusFilesInfo = document.getElementById('opusFilesInfo');
+    if (opusFilesInfo && totalOpusFiles !== undefined) {
+        opusFilesInfo.textContent = `(Opus文件: ${totalOpusFiles})`;
+    }
 }
 
 // 更新统计
@@ -576,7 +591,7 @@ function resetTestState() {
     });
     
     // 重置进度条
-    updateProgress(0, 0);
+    updateProgress(0, 0, 0);
     
     // 清空对话
     clearConversation();
@@ -1063,6 +1078,34 @@ function exportReportPDF() {
     showNotification('PDF报告正在下载...', 'success');
 }
 
+// 导出CSV报告
+function exportReportCSV() {
+    // 创建下载链接
+    const link = document.createElement('a');
+    link.href = '/api/report/csv';
+    link.download = `测试报告_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // 显示提示
+    showNotification('CSV报告正在下载...', 'success');
+}
+
+// 导出JSON报告
+function exportReportJSON() {
+    // 创建下载链接
+    const link = document.createElement('a');
+    link.href = '/api/report/json';
+    link.download = `测试报告_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // 显示提示
+    showNotification('JSON报告正在下载...', 'success');
+}
+
 // 渲染报告
 function renderReport(report) {
     const reportContent = document.getElementById('reportContent');
@@ -1209,11 +1252,10 @@ function formatTime(ms) {
 // 渲染性能指标
 function renderPerformanceMetrics(metrics) {
     const metricNames = {
-        'stt_time': 'STT识别时间',
-        'llm_time': 'LLM响应时间',
-        'tts_start_time': 'TTS启动时间',
-        'tts_duration': 'TTS持续时间',
-        'total_response_time': '总响应时间'
+        'stt_latency': 'STT服务延迟',
+        'llm_latency': 'LLM服务延迟',
+        'tts_latency': 'TTS服务延迟',
+        'e2e_response_time': '端到端响应时间'
     };
     
     let html = '<div class="metrics-grid">';
@@ -1293,9 +1335,9 @@ function renderFailureAnalysis(analysis) {
 
 // 渲染图表
 function renderCharts(report) {
-    // 响应时间分布图
-    if (report.performance_metrics.total_response_time) {
-        const metric = report.performance_metrics.total_response_time;
+    // 端到端响应时间分布图
+    if (report.performance_metrics.e2e_response_time) {
+        const metric = report.performance_metrics.e2e_response_time;
         const ctx1 = document.getElementById('responseTimeChart');
         if (ctx1) {
             // 将毫秒转换为秒
@@ -1437,7 +1479,7 @@ function renderCharts(report) {
             const timeline = report.timeline;
             const labels = timeline.map((_, i) => `测试 #${i + 1}`);
             // 将毫秒转换为秒
-            const responseTimes = timeline.map(t => (t.total_response_time || 0) / 1000);
+            const responseTimes = timeline.map(t => (t.e2e_response_time || 0) / 1000);
             const successData = timeline.map(t => t.success ? 1 : 0);
             
             reportCharts.timeline = new Chart(ctx4, {

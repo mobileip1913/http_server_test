@@ -1,6 +1,8 @@
 # 忽略编译和构建目录
 results/*.opus
-audio/inquiries/*
+results/*.log
+audio/*
+
 
 # 保留 libs 目录和 DLL 文件（需要提交到仓库）
 !libs/

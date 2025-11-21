@@ -75,7 +75,10 @@
         <div class="progress-section">
             <div class="progress-header">
                 <span class="progress-label">测试进度</span>
-                <span class="progress-text" id="progressText">0 / 0</span>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="progress-text" id="progressText">0 / 0</span>
+                    <span style="font-size: 12px; color: var(--text-muted);" id="opusFilesInfo">(Opus文件: 0)</span>
+                </div>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill" style="width: 0%"></div>
@@ -125,9 +128,15 @@
         <div class="settings-modal-content report-modal-content">
             <div class="settings-modal-header">
                 <h2>📊 测试报告</h2>
-                <div style="display: flex; gap: 12px; align-items: center;">
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <button class="btn btn-primary" onclick="exportReportPDF()" style="padding: 8px 16px; font-size: 14px;">
                         <span class="icon">📥</span> 导出PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportReportCSV()" style="padding: 8px 16px; font-size: 14px;">
+                        <span class="icon">📊</span> 导出CSV
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportReportJSON()" style="padding: 8px 16px; font-size: 14px;">
+                        <span class="icon">📄</span> 导出JSON
                     </button>
                     <button class="settings-close-btn" onclick="closeReport()">×</button>
                 </div>

@@ -814,6 +814,7 @@ class WebSocketClient:
         # 关键：在开始发送音频数据时记录 send_time（用于计算响应时间）
         # 而不是在 send_start_listen 时记录，因为 start_listen 只是准备阶段
         if audio_frames:
+            self.logger.info(f"Connection #{self.connection_id}: Preparing to send {len(audio_frames)} audio frames")
             # 在发送第一帧音频之前记录 send_time
             if self.send_time is None:
                 from utils import get_timestamp
@@ -857,11 +858,17 @@ class WebSocketClient:
                 # 批量发送模式：连续发送所有帧，没有间隔（模拟 MainLoop 批量发送）
                 # 项目代码：for (auto& opus : packets) { protocol_->SendAudio(std::move(opus)); }
                 # 每个 SendAudio() 调用对应一个 WebSocket 二进制消息
-                self.logger.debug(
-                    f"Connection #{self.connection_id}: Sending {len(audio_frames)} audio frames "
-                    f"in batch mode (no interval)"
-                )
+                frame_count = len(audio_frames)
+                total_bytes = sum(len(f) for f in audio_frames)
+                self.logger.info(f"Connection #{self.connection_id}: ========== SEND AUDIO DATA ==========")
+                self.logger.info(f"Connection #{self.connection_id}: Device SN: {self.device_sn}")
+                self.logger.info(f"Connection #{self.connection_id}: Frame Count: {frame_count}")
+                self.logger.info(f"Connection #{self.connection_id}: Total Size: {total_bytes} bytes")
+                self.logger.info(f"Connection #{self.connection_id}: Send Mode: Batch (no interval)")
+                self.logger.info(f"Connection #{self.connection_id}: =====================================")
                 
+                sent_count = 0
+                sent_bytes = 0
                 for frame in audio_frames:
                     if not self.is_connected:
                         self.logger.warning(f"Connection #{self.connection_id}: Connection lost during audio sending")
@@ -875,6 +882,14 @@ class WebSocketClient:
                     
                     self.sent_messages += 1
                     self.total_sent_bytes += len(frame)
+                    sent_count += 1
+                    sent_bytes += len(frame)
+                
+                # 记录发送完成
+                self.logger.info(f"Connection #{self.connection_id}: ========== AUDIO SEND COMPLETE ==========")
+                self.logger.info(f"Connection #{self.connection_id}: Frames Sent: {sent_count}/{frame_count}")
+                self.logger.info(f"Connection #{self.connection_id}: Bytes Sent: {sent_bytes} bytes")
+                self.logger.info(f"Connection #{self.connection_id}: =========================================")
             
             # 记录发送完成
             # 记录发送语音结束的时间（发送完所有音频帧后）
@@ -900,6 +915,7 @@ class WebSocketClient:
             return True
         else:
             # 如果没有提供音频数据，只发送文本消息（用于快速测试）
+            self.logger.warning(f"Connection #{self.connection_id}: No audio frames provided, only sending start_listen")
             if Config.SEND_STOP_LISTEN and Config.LISTENING_MODE != "realtime":
                 await asyncio.sleep(0.1)
                 await self.send_stop_listen()
@@ -940,11 +956,10 @@ class WebSocketClient:
             "connect_status": "unknown",
             "send_time": None,
             "send_end_time": None,
-            "stt_time": None,
-            "llm_time": None,
-            "tts_start_time": None,
-            "tts_duration": None,
-            "total_response_time": None,
+            "stt_latency": None,        # STT服务延迟
+            "llm_latency": None,         # LLM服务延迟
+            "tts_latency": None,         # TTS服务延迟
+            "e2e_response_time": None,   # 端到端响应时间
             "audio_to_tts_delay": None,  # 从发送语音结束到TTS开始的延迟
             "message_size": None,
             "response_size": None,
@@ -993,21 +1008,23 @@ class WebSocketClient:
                 f"tts_stop={tts_stop_str}"
             )
         
+        # 性能指标设计（专业测试角度）：
+        # 1. STT服务延迟：从发送音频到收到STT结果（包含网络传输+STT处理时间）
         if self.stt_response_time and self.send_time:
-            metrics["stt_time"] = self.stt_response_time - self.send_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated stt_time = {metrics['stt_time']:.2f}ms")
+            metrics["stt_latency"] = self.stt_response_time - self.send_time
+            self.logger.debug(f"Connection #{self.connection_id}: Calculated stt_latency = {metrics['stt_latency']:.2f}ms")
         
+        # 2. LLM服务延迟：从STT完成到LLM响应（LLM处理时间）
         if self.llm_response_time and self.stt_response_time:
-            metrics["llm_time"] = self.llm_response_time - self.stt_response_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated llm_time = {metrics['llm_time']:.2f}ms")
+            metrics["llm_latency"] = self.llm_response_time - self.stt_response_time
+            self.logger.debug(f"Connection #{self.connection_id}: Calculated llm_latency = {metrics['llm_latency']:.2f}ms")
         
+        # 3. TTS服务延迟：从LLM完成到TTS开始（TTS启动延迟，包含TTS服务启动时间）
         if self.tts_start_time and self.llm_response_time:
-            metrics["tts_start_time"] = self.tts_start_time - self.llm_response_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated tts_start_time = {metrics['tts_start_time']:.2f}ms")
+            metrics["tts_latency"] = self.tts_start_time - self.llm_response_time
+            self.logger.debug(f"Connection #{self.connection_id}: Calculated tts_latency = {metrics['tts_latency']:.2f}ms")
         
-        if self.tts_start_time and self.tts_stop_time:
-            metrics["tts_duration"] = self.tts_stop_time - self.tts_start_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated tts_duration = {metrics['tts_duration']:.2f}ms")
+        # 注意：不记录TTS持续时间，因为这是内容长度决定的，不是性能指标
         
         # 计算从发送语音结束到TTS开始的延迟（这是客户端可以准确测量的指标）
         if self.send_end_time and self.tts_start_time:
@@ -1025,12 +1042,13 @@ class WebSocketClient:
             if base_time:
                 metrics["tts_second_sentence_time"] = self.tts_second_sentence_time - base_time
         
+        # 4. 端到端响应时间：从发送音频到TTS结束（完整对话流程的总时间）
         if self.send_time and self.tts_stop_time:
-            metrics["total_response_time"] = self.tts_stop_time - self.send_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated total_response_time = {metrics['total_response_time']:.2f}ms")
+            metrics["e2e_response_time"] = self.tts_stop_time - self.send_time
+            self.logger.debug(f"Connection #{self.connection_id}: Calculated e2e_response_time = {metrics['e2e_response_time']:.2f}ms")
         elif self.send_time and self.tts_start_time:
-            metrics["total_response_time"] = self.tts_start_time - self.send_time
-            self.logger.debug(f"Connection #{self.connection_id}: Calculated total_response_time (from tts_start) = {metrics['total_response_time']:.2f}ms")
+            metrics["e2e_response_time"] = self.tts_start_time - self.send_time
+            self.logger.debug(f"Connection #{self.connection_id}: Calculated e2e_response_time (from tts_start) = {metrics['e2e_response_time']:.2f}ms")
         
         metrics["message_size"] = self.total_sent_bytes
         metrics["response_size"] = self.total_received_bytes

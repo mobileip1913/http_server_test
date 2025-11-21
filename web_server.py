@@ -256,17 +256,6 @@ class WebInquiryTester(InquiryTester):
             if not orders_texts:
                 orders_texts = [f"购买 #{i+1}" for i in range(50)]
             
-            # 计算总测试数
-            total_tests = len(inquiries_texts) + len(compares_texts) + len(orders_texts)
-            test_state["total"] = total_tests
-            
-            # 发送测试开始通知（在计算 total_tests 之后）
-            emit_test_update("test_started", {
-                "start_time": test_state["start_time"],
-                "total": total_tests,  # 动态计算：询问 + 对比 + 购买/下单
-                "concurrency_count": total_connections_for_notification
-            })
-            
             # 准备所有测试任务
             # 自动适配：使用实际存在的文件数量，而不是文本文件的行数
             all_test_items = []
@@ -278,9 +267,11 @@ class WebInquiryTester(InquiryTester):
             if not order_indices:
                 order_indices = self.scan_audio_files("purchase")
             
+            # 统计opus文件总数
+            total_opus_files = len(inquiry_indices) + len(compare_indices) + len(order_indices)
+            
             # 检查是否有测试数量限制
             test_count = settings.get("test_count")
-            total_available = len(inquiry_indices) + len(compare_indices) + len(order_indices)
             
             if test_count and test_count > 0:
                 # 随机选择指定数量的文件
@@ -290,13 +281,24 @@ class WebInquiryTester(InquiryTester):
                     test_count
                 )
                 all_test_items = selected_items
+                # 计算实际会执行的测试数量（每个测试任务中的每个文件类型都会执行一次）
+                actual_test_count = 0
+                for item in all_test_items:
+                    if "inquiry_file" in item:
+                        actual_test_count += 1
+                    if "compare_file" in item:
+                        actual_test_count += 1
+                    if "order_file" in item or "purchase_file" in item:
+                        actual_test_count += 1
                 if len(all_test_items) < test_count:
-                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}，实际可用: {total_available}）")
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务，共 {actual_test_count} 个测试（设置数量: {test_count}，实际可用: {total_opus_files}）")
                 else:
-                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}）")
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务，共 {actual_test_count} 个测试（设置数量: {test_count}）")
             else:
                 # 测试所有文件
-                self.logger.info(f"测试所有文件，共 {total_available} 个文件（询问: {len(inquiry_indices)}, 对比: {len(compare_indices)}, 下单: {len(order_indices)}）")
+                self.logger.info(f"测试所有文件，共 {total_opus_files} 个文件（询问: {len(inquiry_indices)}, 对比: {len(compare_indices)}, 下单: {len(order_indices)}）")
+                # 实际测试数 = opus文件总数
+                actual_test_count = total_opus_files
                 # 获取所有索引的并集，确保所有文件都被测试
                 all_indices = set(inquiry_indices + compare_indices + order_indices)
                 all_indices = sorted(all_indices)
@@ -341,6 +343,35 @@ class WebInquiryTester(InquiryTester):
                     # 至少有一个文件才添加
                     if "inquiry_file" in test_item or "compare_file" in test_item or "order_file" in test_item or "purchase_file" in test_item:
                         all_test_items.append(test_item)
+                
+                # 计算实际会执行的测试数量（每个测试任务中的每个文件类型都会执行一次测试）
+                actual_test_count = 0
+                for item in all_test_items:
+                    if "inquiry_file" in item:
+                        actual_test_count += 1
+                    if "compare_file" in item:
+                        actual_test_count += 1
+                    if "order_file" in item or "purchase_file" in item:
+                        actual_test_count += 1
+                self.logger.info(f"实际会执行 {actual_test_count} 个测试（测试任务数: {len(all_test_items)}）")
+            
+            # 设置实际测试数（用于进度显示）
+            test_state["total"] = actual_test_count
+            test_state["total_opus_files"] = total_opus_files  # 保存opus文件总数
+            
+            # 保存settings到test_state，供报告使用
+            if "settings" not in test_state:
+                test_state["settings"] = {}
+            test_state["settings"]["total_opus_files"] = total_opus_files
+            test_state["settings"]["test_count"] = test_count
+            
+            # 发送测试开始通知（在计算 actual_test_count 之后）
+            emit_test_update("test_started", {
+                "start_time": test_state["start_time"],
+                "total": actual_test_count,  # 实际测试数（设置的测试数或所有文件数）
+                "total_opus_files": total_opus_files,  # opus文件总数
+                "concurrency_count": total_connections_for_notification
+            })
             
             # 单SN并发测试
             from websocket_client import WebSocketClient
@@ -439,6 +470,7 @@ class WebInquiryTester(InquiryTester):
                                 emit_test_update("progress_update", {
                                     "progress": test_state["progress"],
                                     "total": test_state["total"],
+                                    "total_opus_files": test_state.get("total_opus_files", 0),
                                     "summary": test_state["summary"]
                                 })
                                 await asyncio.sleep(0.2)
@@ -464,6 +496,7 @@ class WebInquiryTester(InquiryTester):
                                 emit_test_update("progress_update", {
                                     "progress": test_state["progress"],
                                     "total": test_state["total"],
+                                    "total_opus_files": test_state.get("total_opus_files", 0),
                                     "summary": test_state["summary"]
                                 })
                                 await asyncio.sleep(0.2)
@@ -489,6 +522,7 @@ class WebInquiryTester(InquiryTester):
                                 emit_test_update("progress_update", {
                                     "progress": test_state["progress"],
                                     "total": test_state["total"],
+                                    "total_opus_files": test_state.get("total_opus_files", 0),
                                     "summary": test_state["summary"]
                                 })
                                 await asyncio.sleep(0.2)
@@ -512,6 +546,7 @@ class WebInquiryTester(InquiryTester):
                                 emit_test_update("progress_update", {
                                     "progress": test_state["progress"],
                                     "total": test_state["total"],
+                                    "total_opus_files": test_state.get("total_opus_files", 0),
                                     "summary": test_state["summary"]
                                 })
                                 await asyncio.sleep(0.2)
@@ -620,12 +655,12 @@ def generate_test_report(results, summary, start_time, end_time, settings):
         except:
             pass
     
-    # 性能指标统计（过滤掉无效值：None、负值、异常大的值）
-    stt_times = [r.get("stt_time") for r in results if r.get("stt_time") is not None and r.get("stt_time") >= 0 and r.get("stt_time") <= 60000]
-    llm_times = [r.get("llm_time") for r in results if r.get("llm_time") is not None and r.get("llm_time") >= 0 and r.get("llm_time") <= 60000]
-    tts_start_times = [r.get("tts_start_time") for r in results if r.get("tts_start_time") is not None and r.get("tts_start_time") >= 0 and r.get("tts_start_time") <= 10000]
-    tts_durations = [r.get("tts_duration") for r in results if r.get("tts_duration") is not None and r.get("tts_duration") >= 0 and r.get("tts_duration") <= 120000]
-    total_response_times = [r.get("total_response_time") for r in results if r.get("total_response_time") is not None and r.get("total_response_time") >= 0 and r.get("total_response_time") <= 120000]
+    # 性能指标统计（专业测试角度：关注服务延迟，不记录持续时间）
+    # 过滤掉无效值：None、负值、异常大的值
+    stt_latencies = [r.get("stt_latency") for r in results if r.get("stt_latency") is not None and r.get("stt_latency") >= 0 and r.get("stt_latency") <= 60000]
+    llm_latencies = [r.get("llm_latency") for r in results if r.get("llm_latency") is not None and r.get("llm_latency") >= 0 and r.get("llm_latency") <= 60000]
+    tts_latencies = [r.get("tts_latency") for r in results if r.get("tts_latency") is not None and r.get("tts_latency") >= 0 and r.get("tts_latency") <= 10000]
+    e2e_response_times = [r.get("e2e_response_time") for r in results if r.get("e2e_response_time") is not None and r.get("e2e_response_time") >= 0 and r.get("e2e_response_time") <= 120000]
     
     def calc_stats(times):
         if not times:
@@ -668,8 +703,48 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             "timestamp": r.get("timestamp"),
             "type": r.get("type"),
             "success": r.get("success", False),
-            "total_response_time": r.get("total_response_time")
+            "e2e_response_time": r.get("e2e_response_time")
         })
+    
+    # 收集测试环境信息
+    from config import Config
+    test_environment = {
+        "websocket_server": settings.get("websocket_url", Config.WSS_SERVER_HOST if Config.USE_SSL else Config.WS_SERVER_HOST),
+        "device_sns": settings.get("device_sns", []),
+        "test_count": settings.get("test_count"),
+        "total_opus_files": settings.get("total_opus_files", 0),
+        "python_version": sys.version.split()[0],
+        "platform": sys.platform
+    }
+    
+    # 详细的测试用例列表（每个测试的完整信息）
+    test_cases = []
+    for i, r in enumerate(results):
+        test_case = {
+            "test_id": i + 1,
+            "timestamp": r.get("timestamp"),
+            "type": r.get("type", "unknown"),
+            "index": r.get("index", 0),
+            "success": r.get("success", False),
+            "request_text": r.get("text", ""),
+            "stt_text": r.get("stt_text", ""),
+            "llm_text": r.get("llm_text", ""),
+            "response_text": r.get("response_text", ""),
+            "audio_file": r.get("audio_file", ""),
+            "connection_id": r.get("connection_id"),
+            "device_sn": r.get("device_sn", ""),
+            "stt_latency_ms": r.get("stt_latency"),
+            "llm_latency_ms": r.get("llm_latency"),
+            "tts_latency_ms": r.get("tts_latency"),
+            "e2e_response_time_ms": r.get("e2e_response_time"),
+            "failure_reason": r.get("failure_reason"),
+            "error": r.get("error"),
+            "sent_messages": r.get("sent_messages", 0),
+            "received_messages": r.get("received_messages", 0),
+            "total_sent_bytes": r.get("total_sent_bytes", 0),
+            "total_received_bytes": r.get("total_received_bytes", 0)
+        }
+        test_cases.append(test_case)
     
     report = {
         "test_info": {
@@ -678,8 +753,12 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             "duration_seconds": duration_seconds,
             "concurrency": settings.get("concurrency", 0),
             "device_count": len(settings.get("device_sns", [])),
-            "test_mode": settings.get("test_mode", "normal")
+            "test_mode": settings.get("test_mode", "normal"),
+            "test_count": settings.get("test_count"),
+            "total_opus_files": settings.get("total_opus_files", 0)
         },
+        "test_environment": test_environment,
+        "test_cases": test_cases,  # 详细的测试用例列表
         "summary": {
             "total_tests": total_tests,
             "successful_tests": successful_tests,
@@ -701,11 +780,10 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             "purchase_success_rate": round((order_success / len(order_results) * 100) if order_results else 0, 2)
         },
         "performance_metrics": {
-            "stt_time": calc_stats(stt_times),
-            "llm_time": calc_stats(llm_times),
-            "tts_start_time": calc_stats(tts_start_times),
-            "tts_duration": calc_stats(tts_durations),
-            "total_response_time": calc_stats(total_response_times)
+            "stt_latency": calc_stats(stt_latencies),
+            "llm_latency": calc_stats(llm_latencies),
+            "tts_latency": calc_stats(tts_latencies),
+            "e2e_response_time": calc_stats(e2e_response_times)
         },
         "failure_analysis": {
             "failure_reasons": failure_reasons,
@@ -758,6 +836,185 @@ def export_report_pdf():
     return send_file(
         pdf_buffer,
         mimetype='application/pdf',
+        as_attachment=True,
+        download_name=filename
+    )
+
+@app.route('/api/report/csv')
+def export_report_csv():
+    """导出测试报告为CSV（专业测试团队使用）"""
+    global test_state
+    import csv
+    
+    results = test_state.get("results", [])
+    summary = test_state.get("summary", {})
+    start_time = test_state.get("start_time")
+    end_time = test_state.get("end_time")
+    settings = test_state.get("settings", {})
+    
+    # 生成报告数据
+    report = generate_test_report(results, summary, start_time, end_time, settings)
+    
+    # 创建CSV内容
+    output = io.StringIO()
+    writer = csv.writer(output)
+    
+    # 写入报告头部信息
+    writer.writerow(["语音对话测试报告 - CSV导出"])
+    writer.writerow(["生成时间", datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+    writer.writerow([])
+    
+    # 测试信息
+    test_info = report.get("test_info", {})
+    writer.writerow(["测试信息"])
+    writer.writerow(["开始时间", test_info.get("start_time", "")])
+    writer.writerow(["结束时间", test_info.get("end_time", "")])
+    writer.writerow(["持续时间(秒)", test_info.get("duration_seconds", 0)])
+    writer.writerow(["并发数", test_info.get("concurrency", 0)])
+    writer.writerow(["设备数量", test_info.get("device_count", 0)])
+    writer.writerow(["测试模式", test_info.get("test_mode", "normal")])
+    writer.writerow(["测试数量", test_info.get("test_count", "全部")])
+    writer.writerow(["Opus文件总数", test_info.get("total_opus_files", 0)])
+    writer.writerow([])
+    
+    # 测试环境
+    env = report.get("test_environment", {})
+    writer.writerow(["测试环境"])
+    writer.writerow(["WebSocket服务器", env.get("websocket_server", "")])
+    writer.writerow(["设备SN列表", ", ".join(env.get("device_sns", []))])
+    writer.writerow(["Python版本", env.get("python_version", "")])
+    writer.writerow(["平台", env.get("platform", "")])
+    writer.writerow([])
+    
+    # 总体统计
+    summary_data = report.get("summary", {})
+    writer.writerow(["总体统计"])
+    writer.writerow(["总测试数", summary_data.get("total_tests", 0)])
+    writer.writerow(["成功", summary_data.get("successful_tests", 0)])
+    writer.writerow(["失败", summary_data.get("failed_tests", 0)])
+    writer.writerow(["成功率(%)", summary_data.get("success_rate", 0)])
+    writer.writerow(["吞吐量(QPS)", summary_data.get("qps", 0)])
+    writer.writerow(["询问测试", f"{summary_data.get('inquiry_success', 0)}/{summary_data.get('inquiry_total', 0)} ({summary_data.get('inquiry_success_rate', 0)}%)"])
+    writer.writerow(["对比测试", f"{summary_data.get('compare_success', 0)}/{summary_data.get('compare_total', 0)} ({summary_data.get('compare_success_rate', 0)}%)"])
+    writer.writerow(["下单测试", f"{summary_data.get('order_success', 0)}/{summary_data.get('order_total', 0)} ({summary_data.get('order_success_rate', 0)}%)"])
+    writer.writerow([])
+    
+    # 性能指标
+    metrics = report.get("performance_metrics", {})
+    writer.writerow(["性能指标"])
+    writer.writerow(["指标", "平均值(ms)", "中位数(ms)", "P95(ms)", "P99(ms)", "最小值(ms)", "最大值(ms)", "样本数"])
+    for key, name in [("stt_latency", "STT服务延迟"), ("llm_latency", "LLM服务延迟"), 
+                      ("tts_latency", "TTS服务延迟"), ("e2e_response_time", "端到端响应时间")]:
+        metric = metrics.get(key)
+        if metric and metric.get("count", 0) > 0:
+            writer.writerow([
+                name,
+                round(metric.get("avg", 0), 2) if metric.get("avg") else "",
+                round(metric.get("median", 0), 2) if metric.get("median") else "",
+                round(metric.get("p95", 0), 2) if metric.get("p95") else "",
+                round(metric.get("p99", 0), 2) if metric.get("p99") else "",
+                round(metric.get("min", 0), 2) if metric.get("min") else "",
+                round(metric.get("max", 0), 2) if metric.get("max") else "",
+                metric.get("count", 0)
+            ])
+    writer.writerow([])
+    
+    # 失败分析
+    failure_analysis = report.get("failure_analysis", {})
+    failure_reasons = failure_analysis.get("failure_reasons", {})
+    if failure_reasons:
+        writer.writerow(["失败分析"])
+        writer.writerow(["失败原因", "数量", "占比(%)"])
+        total_failures = sum(failure_reasons.values())
+        for reason, count in sorted(failure_reasons.items(), key=lambda x: x[1], reverse=True):
+            percentage = (count / total_failures * 100) if total_failures > 0 else 0
+            writer.writerow([reason, count, round(percentage, 2)])
+        writer.writerow([])
+    
+    # 详细测试用例列表
+    test_cases = report.get("test_cases", [])
+    writer.writerow(["详细测试用例列表"])
+    writer.writerow([
+        "测试ID", "时间戳", "类型", "索引", "状态", "请求文本", "STT文本", "LLM文本",
+        "音频文件", "连接ID", "设备SN", "STT延迟(ms)", "LLM延迟(ms)", "TTS延迟(ms)",
+        "端到端响应时间(ms)", "失败原因", "错误信息", "发送消息数", "接收消息数",
+        "发送字节数", "接收字节数"
+    ])
+    
+    for tc in test_cases:
+        writer.writerow([
+            tc.get("test_id", ""),
+            tc.get("timestamp", ""),
+            tc.get("type", ""),
+            tc.get("index", ""),
+            "成功" if tc.get("success") else "失败",
+            tc.get("request_text", "")[:100],  # 限制长度
+            tc.get("stt_text", "")[:100],
+            tc.get("llm_text", "")[:200],
+            tc.get("audio_file", ""),
+            tc.get("connection_id", ""),
+            tc.get("device_sn", ""),
+            round(tc.get("stt_latency_ms", 0), 2) if tc.get("stt_latency_ms") else "",
+            round(tc.get("llm_latency_ms", 0), 2) if tc.get("llm_latency_ms") else "",
+            round(tc.get("tts_latency_ms", 0), 2) if tc.get("tts_latency_ms") else "",
+            round(tc.get("e2e_response_time_ms", 0), 2) if tc.get("e2e_response_time_ms") else "",
+            tc.get("failure_reason", ""),
+            tc.get("error", ""),
+            tc.get("sent_messages", 0),
+            tc.get("received_messages", 0),
+            tc.get("total_sent_bytes", 0),
+            tc.get("total_received_bytes", 0)
+        ])
+    
+    # 生成文件名
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"测试报告_{timestamp}.csv"
+    
+    # 返回CSV文件
+    output.seek(0)
+    csv_bytes = output.getvalue().encode('utf-8-sig')  # 使用UTF-8 BOM以便Excel正确显示中文
+    csv_buffer = io.BytesIO(csv_bytes)
+    
+    return send_file(
+        csv_buffer,
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name=filename
+    )
+
+@app.route('/api/report/json')
+def export_report_json():
+    """导出测试报告为JSON（专业测试团队使用）"""
+    global test_state
+    
+    results = test_state.get("results", [])
+    summary = test_state.get("summary", {})
+    start_time = test_state.get("start_time")
+    end_time = test_state.get("end_time")
+    settings = test_state.get("settings", {})
+    
+    # 生成报告数据
+    report = generate_test_report(results, summary, start_time, end_time, settings)
+    
+    # 添加导出元数据
+    report["export_info"] = {
+        "export_time": datetime.now().isoformat(),
+        "export_format": "JSON",
+        "version": "1.0"
+    }
+    
+    # 生成文件名
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"测试报告_{timestamp}.json"
+    
+    # 返回JSON文件
+    json_str = json.dumps(report, ensure_ascii=False, indent=2)
+    json_bytes = json_str.encode('utf-8')
+    json_buffer = io.BytesIO(json_bytes)
+    
+    return send_file(
+        json_buffer,
+        mimetype='application/json',
         as_attachment=True,
         download_name=filename
     )
@@ -844,8 +1101,35 @@ def generate_pdf_report(report):
         ['持续时间', format_pdf_duration(test_info.get("duration_seconds", 0))],
         ['并发数', str(test_info.get("concurrency", 0))],
         ['设备数量', str(test_info.get("device_count", 0))],
-        ['测试模式', '急速模式' if test_info.get("test_mode") == 'fast' else '正常模式']
+        ['测试模式', '急速模式' if test_info.get("test_mode") == 'fast' else '正常模式'],
+        ['测试数量', str(test_info.get("test_count", "全部"))],
+        ['Opus文件总数', str(test_info.get("total_opus_files", 0))]
     ]
+    
+    # 测试环境信息
+    test_environment = report.get("test_environment", {})
+    if test_environment:
+        story.append(Spacer(1, 5*mm))
+        story.append(Paragraph("测试环境", heading_style))
+        env_data = [
+            ['WebSocket服务器', test_environment.get("websocket_server", "")],
+            ['设备SN列表', ", ".join(test_environment.get("device_sns", []))],
+            ['Python版本', test_environment.get("python_version", "")],
+            ['运行平台', test_environment.get("platform", "")]
+        ]
+        env_table = Table(env_data, colWidths=[40*mm, 120*mm])
+        env_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f1f5f9')),
+            ('TEXTCOLOR', (0, 0), (-1, -1), colors.HexColor('#1e293b')),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('FONTNAME', (0, 0), (0, -1), chinese_font_bold_name),
+            ('FONTNAME', (1, 0), (1, -1), chinese_font_name),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ('TOPPADDING', (0, 0), (-1, -1), 8),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#cbd5e1')),
+        ]))
+        story.append(env_table)
     info_table = Table(info_data, colWidths=[40*mm, 120*mm])
     info_table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f1f5f9')),
@@ -894,11 +1178,10 @@ def generate_pdf_report(report):
     story.append(Paragraph("性能指标", heading_style))
     metrics = report.get("performance_metrics", {})
     metric_names = {
-        'stt_time': 'STT识别时间',
-        'llm_time': 'LLM响应时间',
-        'tts_start_time': 'TTS启动时间',
-        'tts_duration': 'TTS持续时间',
-        'total_response_time': '总响应时间'
+        'stt_latency': 'STT服务延迟',
+        'llm_latency': 'LLM服务延迟',
+        'tts_latency': 'TTS服务延迟',
+        'e2e_response_time': '端到端响应时间'
     }
     
     for key, name in metric_names.items():
@@ -957,6 +1240,42 @@ def generate_pdf_report(report):
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#fef2f2')]),
         ]))
         story.append(failure_table)
+        story.append(Spacer(1, 10*mm))
+    
+    # 测试用例摘要（显示前20个失败的测试用例）
+    test_cases = report.get("test_cases", [])
+    failed_cases = [tc for tc in test_cases if not tc.get("success", False)]
+    if failed_cases:
+        story.append(Paragraph("失败测试用例详情（前20个）", heading_style))
+        case_data = [['测试ID', '类型', '请求文本', '失败原因', '响应时间(ms)']]
+        for tc in failed_cases[:20]:  # 只显示前20个
+            request_text = tc.get("request_text", "")[:30] + "..." if len(tc.get("request_text", "")) > 30 else tc.get("request_text", "")
+            case_data.append([
+                str(tc.get("test_id", "")),
+                tc.get("type", ""),
+                request_text,
+                tc.get("failure_reason", "Unknown")[:40],
+                str(round(tc.get("e2e_response_time_ms", 0), 2)) if tc.get("e2e_response_time_ms") else "N/A"
+            ])
+        
+        case_table = Table(case_data, colWidths=[20*mm, 20*mm, 50*mm, 50*mm, 20*mm])
+        case_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#ef4444')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('FONTNAME', (0, 0), (-1, 0), chinese_font_bold_name),
+            ('FONTNAME', (0, 1), (-1, -1), chinese_font_name),
+            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#cbd5e1')),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#fef2f2')]),
+        ]))
+        story.append(case_table)
+        if len(failed_cases) > 20:
+            story.append(Spacer(1, 5*mm))
+            story.append(Paragraph(f"注：共有 {len(failed_cases)} 个失败用例，此处仅显示前20个。完整列表请查看CSV或JSON导出。", normal_style))
+        story.append(Spacer(1, 10*mm))
     
     # 生成PDF
     doc.build(story)

@@ -297,6 +297,7 @@ async def main():
     # 解析命令行参数
     skip_existing = True
     input_file = None
+    input_type = None  # "inquiry", "compare", "order", 或 None（自动检测）
     
     i = 1
     while i < len(sys.argv):
@@ -306,6 +307,12 @@ async def main():
         elif sys.argv[i] == "--input" and i + 1 < len(sys.argv):
             input_file = sys.argv[i + 1]
             i += 1
+        elif sys.argv[i] == "--type" and i + 1 < len(sys.argv):
+            input_type = sys.argv[i + 1].lower()
+            if input_type not in ["inquiry", "compare", "order"]:
+                logger.error(f"Invalid type: {input_type}. Must be one of: inquiry, compare, order")
+                return 1
+            i += 1
         i += 1
     
     # 读取输入文件
@@ -314,9 +321,34 @@ async def main():
     orders = []
     
     if input_file:
-        # 使用指定的输入文件（可能是组合文件）
+        # 使用指定的输入文件
         logger.info(f"Reading input file: {input_file}")
-        inquiries, compares, orders = parse_combined_file(input_file)
+        
+        if input_type:
+            # 如果指定了类型，按单一类型文件处理
+            logger.info(f"Treating as {input_type} type file")
+            if input_type == "inquiry":
+                inquiries = parse_text_file(input_file, "inquiry")
+            elif input_type == "compare":
+                compares = parse_text_file(input_file, "compare")
+            elif input_type == "order":
+                orders = parse_text_file(input_file, "order")
+        else:
+            # 自动检测：先尝试作为组合文件解析，如果只有一个部分有内容，就当作单一类型
+            inquiries, compares, orders = parse_combined_file(input_file)
+            
+            # 如果只有一个部分有内容，可能是单一类型文件，提示用户可以使用 --type
+            sections_with_content = sum([
+                1 if inquiries else 0,
+                1 if compares else 0,
+                1 if orders else 0
+            ])
+            
+            if sections_with_content == 1 and (not inquiries or not compares or not orders):
+                # 只有一个部分有内容，可能是单一类型文件
+                detected_type = "inquiry" if inquiries else ("compare" if compares else "order")
+                logger.info(f"Detected single-type file (type: {detected_type}). "
+                           f"You can use --type {detected_type} to be explicit.")
     else:
         # 尝试读取独立的文件
         if os.path.exists(INQUIRIES_INPUT_FILE):
@@ -333,11 +365,30 @@ async def main():
     
     if not inquiries and not compares and not orders:
         logger.error("No inquiries, compares, or orders found!")
-        logger.info("Please create one of the following:")
-        logger.info(f"  - {INQUIRIES_INPUT_FILE} (one question per line)")
-        logger.info(f"  - {COMPARES_INPUT_FILE} (one question per line)")
-        logger.info(f"  - {ORDERS_INPUT_FILE} (one question per line)")
-        logger.info("  - Or use --input <file> with a combined file (separated by '---')")
+        logger.info("")
+        logger.info("Usage options:")
+        logger.info("  1. Use default files (at least one must exist):")
+        logger.info(f"     - {INQUIRIES_INPUT_FILE} (one question per line)")
+        logger.info(f"     - {COMPARES_INPUT_FILE} (one question per line)")
+        logger.info(f"     - {ORDERS_INPUT_FILE} (one question per line)")
+        logger.info("")
+        logger.info("  2. Use a single file with --input:")
+        logger.info("     python generate_batch_tts.py --input <file>")
+        logger.info("     - Combined file: use '---' to separate sections")
+        logger.info("     - Single type file: use --type <inquiry|compare|order>")
+        logger.info("")
+        logger.info("  3. Examples:")
+        logger.info("     # Read only inquiries.txt (if it exists)")
+        logger.info("     python generate_batch_tts.py")
+        logger.info("")
+        logger.info("     # Read a single file as inquiry type")
+        logger.info("     python generate_batch_tts.py --input my_questions.txt --type inquiry")
+        logger.info("")
+        logger.info("     # Read a combined file with all three types")
+        logger.info("     python generate_batch_tts.py --input combined.txt")
+        logger.info("")
+        logger.info("     # Force regenerate all files")
+        logger.info("     python generate_batch_tts.py --force")
         return 1
     
     logger.info(f"Found {len(inquiries)} inquiries, {len(compares)} compares, and {len(orders)} orders")

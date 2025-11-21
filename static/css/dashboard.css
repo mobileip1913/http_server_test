@@ -244,6 +244,53 @@ body {
     max-height: 600px;
 }
 
+/* 竖屏模式：增加对话流面板高度，更好地利用空间 */
+@media (orientation: portrait) {
+    /* 竖屏模式下，对话流面板使用更多空间 */
+    .conversation-panel {
+        max-height: calc(100vh - 480px);
+        min-height: 400px;
+    }
+    
+    /* 如果屏幕高度较大，进一步增加高度 */
+    @media (min-height: 1000px) {
+        .conversation-panel {
+            max-height: calc(100vh - 500px);
+            min-height: 500px;
+        }
+    }
+    
+    /* 如果屏幕高度较小，适当调整 */
+    @media (max-height: 900px) {
+        .conversation-panel {
+            max-height: calc(100vh - 450px);
+            min-height: 350px;
+        }
+    }
+    
+    /* 如果屏幕高度很小，仍然保持最小可用高度 */
+    @media (max-height: 700px) {
+        .conversation-panel {
+            max-height: calc(100vh - 400px);
+            min-height: 300px;
+        }
+    }
+    
+    /* 竖屏模式下，减少其他面板的高度，为对话流让出空间 */
+    .test-results-panel {
+        max-height: 300px;
+    }
+    
+    /* 减少统计卡片和进度条的间距 */
+    .stats-grid {
+        margin-bottom: 16px;
+    }
+    
+    .progress-section {
+        margin-bottom: 16px;
+    }
+}
+
 .panel-header {
     padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
