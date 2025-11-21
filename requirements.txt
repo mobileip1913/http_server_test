@@ -1,17 +1,18 @@
-websockets>=12.0
-aiohttp>=3.9.0
-pandas>=2.0.0
-numpy>=1.24.0
-python-dateutil>=2.8.2
-opuslib>=2.0.0  # Opus 音频编解码（用于分割连续的 Opus 数据包）
+# WebSocket 客户端依赖
+websockets>=12.0  # WebSocket 客户端（用于连接服务器）
+
+# Opus 音频编解码
+opuslib>=2.0.0  # Opus 音频编解码（需要系统级别的 Opus 库，见 README_DEPENDENCIES.md）
 
 # Web服务依赖
-flask>=3.0.0
-flask-socketio>=5.3.0
-flask-cors>=4.0.0
-reportlab>=4.0.0  # PDF生成
+flask>=3.0.0  # Flask Web框架
+flask-socketio>=5.3.0  # WebSocket支持
+flask-cors>=4.0.0  # CORS支持
+reportlab>=4.0.0  # PDF报告生成
 
-# 可选依赖（用于音频处理）
-# gtts>=2.3.0  # Google Text-to-Speech（如果使用 TTS）
-# pydub>=0.25.1  # 音频处理库（如果使用）
+# 注意：以下包在当前代码中未使用，但保留以防将来需要
+# aiohttp>=3.9.0  # 异步HTTP客户端（未使用）
+# pandas>=2.0.0  # 数据分析库（未使用）
+# numpy>=1.24.0  # 数值计算库（未使用）
+# python-dateutil>=2.8.2  # 日期处理库（未使用）
 

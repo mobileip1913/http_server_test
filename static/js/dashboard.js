@@ -480,9 +480,30 @@ function updateConversationItemContent(item, result) {
             <div class="section-content input-text">${escapeHtml(questionText)}</div>
         </div>`;
 
-    // LLM返回结果（如果已经通过updateConversationItemLLM更新过，这里就不需要再创建了）
-    // 只在LLM部分不存在时才创建
-    // 注意：LLM部分应该由updateConversationItemLLM函数管理，这里不重复创建
+    // LLM返回结果 - 确保始终显示，即使测试已完成
+    // 先尝试从已存在的LLM部分获取内容（保留流式显示的内容）
+    let existingLlmText = '';
+    const existingLlmSection = item.querySelector('.llm-section');
+    if (existingLlmSection) {
+        const llmContentDiv = existingLlmSection.querySelector('.section-content');
+        if (llmContentDiv && llmContentDiv.textContent && llmContentDiv.textContent.trim() !== '等待响应中...') {
+            existingLlmText = llmContentDiv.textContent.trim();
+        }
+    }
+    
+    // 也尝试从缓存中获取（如果之前通过test_detail_update更新过）
+    const testKey = getTestKey(result.index, result.type);
+    const cachedLlmText = testLlmTexts[testKey] || '';
+    
+    // 优先使用result中的llm_text，其次使用已存在的文本，最后使用缓存的文本
+    const finalLlmText = llmText || existingLlmText || cachedLlmText;
+    
+    // 始终在contentHtml中包含LLM部分
+    contentHtml += `
+        <div class="conversation-section llm-section">
+            <div class="section-label">🤖 LLM返回</div>
+            <div class="section-content">${finalLlmText ? escapeHtml(finalLlmText) : '等待响应中...'}</div>
+        </div>`;
 
     // 错误信息
     if (result.error) {

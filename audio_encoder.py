@@ -2,12 +2,45 @@
 音频编码器：将文本转换为 Opus 编码的音频数据，完全模拟设备的发送流程
 """
 import os
+import sys
+import struct
 import subprocess
 import tempfile
 import time
+import ctypes
 from typing import Optional, List
 from logger import Logger
 from config import Config
+
+# 在导入 opuslib 之前，尝试从项目目录加载 opus.dll
+def _load_opus_dll_from_project():
+    """尝试从项目目录加载 opus.dll，这样用户只需要把 DLL 放到项目目录即可"""
+    try:
+        # 获取项目根目录
+        project_dir = os.path.dirname(os.path.abspath(__file__))
+        dll_paths = [
+            os.path.join(project_dir, "opus.dll"),
+            os.path.join(project_dir, "libopus.dll"),
+            os.path.join(project_dir, "libs", "opus.dll"),
+            os.path.join(project_dir, "libs", "libopus.dll"),
+        ]
+        
+        for dll_path in dll_paths:
+            if os.path.exists(dll_path):
+                try:
+                    # 尝试加载 DLL（这会将其添加到系统 DLL 搜索路径）
+                    ctypes.CDLL(dll_path)
+                    logger = Logger()
+                    logger.info(f"✅ 已从项目目录加载 Opus DLL: {dll_path}")
+                    return True
+                except Exception as e:
+                    continue
+        return False
+    except Exception:
+        return False
+
+# 在导入 opuslib 之前尝试加载项目目录下的 DLL
+_load_opus_dll_from_project()
 
 class AudioEncoder:
     """音频编码器类（使用外部工具进行 TTS 和 Opus 编码）"""
@@ -281,6 +314,7 @@ class AudioEncoder:
         """
         try:
             import opuslib
+            # 尝试创建编码器，如果失败会抛出异常
             encoder = opuslib.Encoder(Config.AUDIO_SAMPLE_RATE, Config.AUDIO_CHANNELS, opuslib.APPLICATION_VOIP)
             # 设置编码参数（参考服务器端配置）
             # 服务器端使用默认参数，但opuslib默认bitrate=40kbps，我们设置为32kbps以匹配ffmpeg参数
@@ -419,8 +453,29 @@ class AudioEncoder:
                     # 这是 Ogg 容器格式，需要提取裸 Opus 数据包
                     # 重新读取 PCM 数据并生成裸 Opus 数据包
                     self.logger.warning("ffmpeg produced Ogg Opus container, generating raw packets from PCM...")
-                    # 重新生成裸 Opus 数据包（此时 pcm_data 还在内存中）
-                    return self._generate_raw_opus_from_pcm(pcm_data)
+                    # 尝试使用 opuslib 从 PCM 生成裸 Opus 数据包
+                    # 注意：需要先保存 temp_opus.name，因为 pcm_data 还在内存中
+                    temp_opus_path = temp_opus.name
+                    try:
+                        frames = self._generate_raw_opus_from_pcm(pcm_data)
+                        if frames:
+                            os.unlink(temp_opus_path)
+                            return frames
+                    except Exception as e:
+                        error_msg = str(e)
+                        if "Could not find Opus library" in error_msg or "Opus library" in error_msg:
+                            self.logger.error(f"Opus library not found: {e}")
+                            self.logger.error("=" * 60)
+                            self.logger.error("未找到 Opus 库，请确保 libs/opus.dll 文件存在")
+                            self.logger.error("如果文件不存在，请从以下地址下载并放到 libs/ 目录：")
+                            self.logger.error("https://github.com/xiph/opus/releases")
+                            self.logger.error("=" * 60)
+                        else:
+                            self.logger.warning(f"Failed to generate Opus packets from PCM: {e}")
+                        # 清理临时文件
+                        if os.path.exists(temp_opus_path):
+                            os.unlink(temp_opus_path)
+                        return None
                 else:
                     # 可能是裸 Opus 数据包，尝试分割
                     return self._split_opus_packets(opus_data)
