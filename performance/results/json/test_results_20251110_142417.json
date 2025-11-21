@@ -1,0 +1,52 @@
+{
+  "test_info": {
+    "start_time": "2025-11-10 14:24:17.739",
+    "end_time": "2025-11-10 14:24:38.442",
+    "duration": 20.70283341407776,
+    "concurrent_connections": 1,
+    "test_message": "你好啊，我想去故宫"
+  },
+  "summary": {
+    "total_connections": 1,
+    "successful_connections": 1,
+    "failed_connections": 0,
+    "connection_success_rate": 100.0,
+    "total_messages": 1,
+    "successful_messages": 0,
+    "failed_messages": 1,
+    "message_success_rate": 0.0,
+    "avg_connect_time": 114.875244140625,
+    "avg_audio_to_tts_delay": 218.530029296875,
+    "p95_audio_to_tts_delay": 218.530029296875,
+    "p99_audio_to_tts_delay": 218.530029296875,
+    "min_audio_to_tts_delay": 218.530029296875,
+    "max_audio_to_tts_delay": 218.530029296875,
+    "qps": 0.048302567093063124,
+    "test_duration": 20.70283341407776
+  },
+  "connections": [
+    {
+      "connection_id": 1,
+      "is_connected": false,
+      "connect_time": 114.875244140625,
+      "connect_status": "success",
+      "send_time": 824.820556640625,
+      "send_end_time": 3924.353271484375,
+      "stt_time": 3317.061279296875,
+      "llm_time": null,
+      "tts_start_time": null,
+      "tts_duration": null,
+      "total_response_time": 3318.062744140625,
+      "audio_to_tts_delay": 218.530029296875,
+      "message_size": 9279,
+      "response_size": 29098,
+      "sent_messages": 51,
+      "received_messages": 262,
+      "total_sent_bytes": 9279,
+      "total_received_bytes": 29098,
+      "complete": false,
+      "error_type": null,
+      "error_message": null
+    }
+  ]
+}

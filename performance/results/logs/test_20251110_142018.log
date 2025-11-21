@@ -1,0 +1,68 @@
+2025-11-10 14:20:18 | INFO     | 正在生成测试音频帧...
+2025-11-10 14:20:18 | INFO     | Using pre-generated audio file: D:\code\vb_eye_st7789\performance\audio\test_audio.opus
+2025-11-10 14:20:18 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 14:20:18 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 14:20:18 | INFO     | Processed remaining 564 bytes PCM data with 1356 bytes padding (total 92724 bytes)
+2025-11-10 14:20:18 | INFO     | Generated 49 raw Opus packets from PCM data (total 9081 bytes, processed 92724 bytes PCM, coverage: 98.6%)
+2025-11-10 14:20:18 | INFO     | Detected 49 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 14:20:18 | INFO     | Detected 49 raw Opus packets from Ogg container. These MUST be sent individually, ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 14:20:18 | INFO     | 已生成 49 个 Opus 帧，总计 9081 字节
+2025-11-10 14:20:18 | INFO     | ============================================================
+2025-11-10 14:20:18 | INFO     | 开始 WebSocket 性能测试 - 测试模式
+2025-11-10 14:20:18 | INFO     | ============================================================
+2025-11-10 14:20:18 | INFO     | 并发连接数: 1
+2025-11-10 14:20:18 | INFO     | ⚡ 极限性能模式: 已启用（根据并发数动态调整等待时间）
+2025-11-10 14:20:18 | INFO     |    - Auth等待: 0.5秒
+2025-11-10 14:20:18 | INFO     |    - 响应等待: 15.2秒（动态计算：基础15.0秒 + 每个连接0.15秒 × 1连接）
+2025-11-10 14:20:18 | INFO     |    - 最后等待: 0.1秒
+2025-11-10 14:20:18 | INFO     | 测试消息: 你好啊，我想去故宫
+2025-11-10 14:20:18 | INFO     | 服务器地址: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0A0&sign=c61505cccb8dc83d8e67450cbd4f32c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=wifi&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-10 14:20:18 | INFO     | 设备SN: FC012C2EA0A0 (已注册)
+2025-11-10 14:20:18 | INFO     | 板卡类型: wifi
+2025-11-10 14:20:18 | INFO     | 发送音频数据: True
+2025-11-10 14:20:18 | INFO     | ============================================================
+2025-11-10 14:20:18 | INFO     | 测试开始
+2025-11-10 14:20:18 | INFO     | 等待 1 个连接完成...
+2025-11-10 14:20:18 | INFO     | 连接 #1: 开始... (USE_IOT_SIMULATOR=True)
+2025-11-10 14:20:18 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 177.00ms
+2025-11-10 14:20:22 | INFO     | Connection #1: STT response received in 3289.07ms | Recognized text: 我想买一瓶红酒，你有推荐吗？
+2025-11-10 14:20:22 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 14:20:23 | INFO     | Connection #1: Received emoji message | Emotion: idel
+2025-11-10 14:20:24 | INFO     | Connection #1: TTS sentence_start | Text: 那我再给你推荐几款不同风格的红酒呀。
+2025-11-10 14:20:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 14:20:26 | INFO     | Connection #1: TTS sentence_start | Text: 。张裕解百纳干红葡萄酒。：口感醇，这款酒是张裕的经典款
+2025-11-10 14:20:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 14:20:33 | INFO     | Connection #1: TTS sentence_start | Text: ，有着浓郁的果香和优雅的单宁，口感醇厚平衡
+2025-11-10 14:20:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 14:20:37 | INFO     | Connection #1: TTS sentence_start | Text: ，很适合日常饮用 。
+2025-11-10 14:20:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 14:20:38 | INFO     | Connection #1: TTS sentence_start | Text: 。奔富BIN28卡琳娜设拉子干红。：香气足
+2025-11-10 14:20:38 | INFO     | 测试结束
+2025-11-10 14:20:38 | INFO     | 导出测试结果...
+2025-11-10 14:20:38 | INFO     | CSV 已导出到: results\csv\test_results_20251110_142018.csv
+2025-11-10 14:20:38 | INFO     | JSON 已导出到: results\json\test_results_20251110_142018.json
+2025-11-10 14:20:38 | INFO     | ============================================================
+2025-11-10 14:20:38 | INFO     | 性能测试摘要
+2025-11-10 14:20:38 | INFO     | ============================================================
+2025-11-10 14:20:38 | INFO     | 测试总时长: 20.73秒
+2025-11-10 14:20:38 | INFO     | 
+2025-11-10 14:20:38 | INFO     | 连接指标:
+2025-11-10 14:20:38 | INFO     |   总连接数: 1
+2025-11-10 14:20:38 | INFO     |   成功连接数: 1
+2025-11-10 14:20:38 | INFO     |   失败连接数: 0
+2025-11-10 14:20:38 | INFO     |   连接成功率: 100.00%
+2025-11-10 14:20:38 | INFO     |   平均连接时间: 0.177秒
+2025-11-10 14:20:38 | INFO     | 
+2025-11-10 14:20:38 | INFO     | 消息指标:
+2025-11-10 14:20:38 | INFO     |   总消息数: 1
+2025-11-10 14:20:38 | INFO     |   成功消息数: 0
+2025-11-10 14:20:38 | INFO     |   失败消息数: 1
+2025-11-10 14:20:38 | INFO     |   消息成功率: 0.00%
+2025-11-10 14:20:38 | INFO     | 
+2025-11-10 14:20:38 | INFO     | 吞吐量指标:
+2025-11-10 14:20:38 | INFO     |   QPS (每秒查询数): 0.05
+2025-11-10 14:20:38 | INFO     | ============================================================
+2025-11-10 14:20:38 | INFO     | [STATISTICS] Total Connections: 1 | Active: 1 | Success: 1 | Failed: 0 | QPS: 0.05
+2025-11-10 14:20:38 | INFO     | 测试完成。结果已保存到:
+2025-11-10 14:20:38 | INFO     |   CSV: results\csv\test_results_20251110_142018.csv
+2025-11-10 14:20:38 | INFO     |   JSON: results\json\test_results_20251110_142018.json

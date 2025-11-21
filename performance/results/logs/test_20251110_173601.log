@@ -1,0 +1,1155 @@
+2025-11-10 17:36:01 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-10 17:36:01 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 114.32ms
+2025-11-10 17:36:01 | INFO     | 
+============================================================
+2025-11-10 17:36:01 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-10 17:36:01 | INFO     | Audio file: inquiry_001.opus
+2025-11-10 17:36:01 | INFO     | ============================================================
+2025-11-10 17:36:01 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:36:01 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:36:01 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-10 17:36:01 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-10 17:36:01 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:36:09 | INFO     | Connection #1: STT response received in 7618.44ms | Recognized text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-10 17:36:09 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:36:13 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:36:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:17 | INFO     | Connection #1: TTS sentence_start | Text: 当然是真的啦。
+2025-11-10 17:36:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:18 | INFO     | Connection #1: TTS sentence_start | Text: 你可以考虑购买秋实十月长粒香5KG/大米这款东北大米哦。
+2025-11-10 17:36:22 | INFO     | Connection #1: Received emoji message | Emotion: idel
+2025-11-10 17:36:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:24 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+它的价格是128.37元。
+2025-11-10 17:36:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:27 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+供应商是黑龙江春华秋实粮油有限公司。
+2025-11-10 17:36:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:30 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+这款米的详细介绍是这样的哈：它是东北长粒香米
+2025-11-10 17:36:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:35 | INFO     | Connection #1: TTS sentence_start | Text: ，产自东北黑土平原，是优质大米。
+2025-11-10 17:36:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:38 | INFO     | Connection #1: TTS sentence_start | Text: 它可是中国优质大米的代表之一呢，因为卓越的口感和香气
+2025-11-10 17:36:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:43 | INFO     | Connection #1: TTS sentence_start | Text: ，特别受大家喜欢。
+2025-11-10 17:36:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:44 | INFO     | Connection #1: TTS sentence_start | Text: 外观上，米粒是细长形的，色泽洁白，还晶莹剔透，模样特别好看。
+2025-11-10 17:36:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:50 | INFO     | Connection #1: TTS sentence_start | Text: 香味特点也超棒，有独特的清香，尤其是蒸煮的时候
+2025-11-10 17:36:55 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:55 | INFO     | Connection #1: TTS sentence_start | Text: ，能让满屋都飘着香味，这也是它被叫做“香米”的原因。
+2025-11-10 17:36:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:36:59 | INFO     | Connection #1: TTS sentence_start | Text: 口感味道方面，煮出来的米饭油润光亮，弹性十足
+2025-11-10 17:37:04 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:04 | INFO     | Connection #1: TTS sentence_start | Text: ，也就是Q弹得很，软硬适中，吃起来爽滑又有嚼劲
+2025-11-10 17:37:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:08 | INFO     | Connection #1: TTS sentence_start | Text: ，就算冷却了也不容易回生。
+2025-11-10 17:37:11 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:11 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+店铺名称同样是黑龙江春华秋实粮油有限公司
+2025-11-10 17:37:14 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:37:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:15 | INFO     | Connection #1: TTS sentence_start | Text: ，商品目前的状态是已成功上架 。
+2025-11-10 17:37:15 | INFO     | 
+============================================================
+2025-11-10 17:37:15 | INFO     | Testing [PURCHASE] #001: 购买 #1...
+2025-11-10 17:37:15 | INFO     | Audio file: purchase_001.opus
+2025-11-10 17:37:15 | INFO     | ============================================================
+2025-11-10 17:37:15 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:37:15 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:37:15 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-10 17:37:15 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-10 17:37:15 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:37:15 | INFO     | Connection #1: TTS stop | Duration: 65497.24ms | State: stop
+2025-11-10 17:37:20 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:37:20 | INFO     | ✓ Response received: ...
+2025-11-10 17:37:20 | INFO     | Connection #1: STT response received in 4775.34ms | Recognized text: 听起来不错，我购买东北大米长粒香5公斤。
+2025-11-10 17:37:20 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:37:21 | INFO     | 
+============================================================
+2025-11-10 17:37:21 | INFO     | Testing [INQUIRY] #002: 询问 #2...
+2025-11-10 17:37:21 | INFO     | Audio file: inquiry_002.opus
+2025-11-10 17:37:21 | INFO     | ============================================================
+2025-11-10 17:37:21 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:37:21 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:37:21 | INFO     | Processed remaining 1272 bytes PCM data with 648 bytes padding (total 177912 bytes)
+2025-11-10 17:37:21 | INFO     | Generated 93 raw Opus packets from PCM data (total 18790 bytes, processed 177912 bytes PCM, coverage: 99.6%)
+2025-11-10 17:37:21 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:37:28 | INFO     | Connection #1: STT response received in 6165.86ms | Recognized text: 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
+2025-11-10 17:37:28 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:37:30 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:37:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:34 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米对应的商品是秋实十月长粒香5KG/大米哈。
+2025-11-10 17:37:40 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:40 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+价格是128.37元。
+2025-11-10 17:37:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:42 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+供应商是黑龙江春华秋实粮油有限公司。
+2025-11-10 17:37:46 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:46 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+关于你问的问题：它的米粒是细长的哦
+2025-11-10 17:37:49 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:49 | INFO     | Connection #1: TTS sentence_start | Text: ，它的外观特征就是米粒呈细长形，色泽洁白、晶莹剔透。
+2025-11-10 17:37:55 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:37:55 | INFO     | Connection #1: TTS sentence_start | Text: 煮出来的米饭不会硬，它的口感味道是米饭油润光亮，弹性十足
+2025-11-10 17:38:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:01 | INFO     | Connection #1: TTS sentence_start | Text: ，软硬适中，吃起来爽滑有嚼劲，冷却后也不容易回生。
+2025-11-10 17:38:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:06 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+店铺名称是黑龙江春华秋实粮油有限公司。
+2025-11-10 17:38:11 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:11 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+商品状态是success ，也就是已成功上架啦。  
+2025-11-10 17:38:14 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:14 | INFO     | Connection #1: TTS stop | Duration: 46863.20ms | State: stop
+2025-11-10 17:38:14 | INFO     | Connection #1: Received complete response at 43.6s
+2025-11-10 17:38:14 | INFO     | ✓ Response received: ...
+2025-11-10 17:38:15 | INFO     | 
+============================================================
+2025-11-10 17:38:15 | INFO     | Testing [PURCHASE] #002: 购买 #2...
+2025-11-10 17:38:15 | INFO     | Audio file: purchase_002.opus
+2025-11-10 17:38:15 | INFO     | ============================================================
+2025-11-10 17:38:15 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:38:15 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:38:15 | INFO     | Processed remaining 594 bytes PCM data with 1326 bytes padding (total 117714 bytes)
+2025-11-10 17:38:15 | INFO     | Generated 62 raw Opus packets from PCM data (total 11837 bytes, processed 117714 bytes PCM, coverage: 98.9%)
+2025-11-10 17:38:15 | INFO     | Detected 62 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:38:20 | INFO     | Connection #1: STT response received in 4120.74ms | Recognized text: 好的，我购买东北大米长粒香5公斤。
+2025-11-10 17:38:20 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:38:23 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理订单
+2025-11-10 17:38:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:26 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞。
+2025-11-10 17:38:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:27 | INFO     | Connection #1: TTS sentence_start | Text: 你购买的商品名称是秋实十月长粒香5KG/大米，类型是大米
+2025-11-10 17:38:28 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-10 17:38:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:33 | INFO     | Connection #1: TTS sentence_start | Text: ，价格是128.37元。
+2025-11-10 17:38:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:35 | INFO     | Connection #1: TTS sentence_start | Text: 订单已经成功创建啦，订单编号是ORDER-2858814 
+2025-11-10 17:38:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:41 | INFO     | Connection #1: TTS sentence_start | Text: ，你可以打开链芯智萌小程序查看订单详情。
+2025-11-10 17:38:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:45 | INFO     | Connection #1: TTS sentence_start | Text: 这款米可是优质大米哦，产自东北黑土平原，米粒细长
+2025-11-10 17:38:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:50 | INFO     | Connection #1: TTS sentence_start | Text: ，有着独特清香，口感Q弹爽滑
+2025-11-10 17:38:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:53 | INFO     | Connection #1: TTS sentence_start | Text: ，外观上米粒细长、色泽洁白、晶莹剔透。
+2025-11-10 17:38:57 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:38:57 | INFO     | Connection #1: TTS sentence_start | Text: 蒸煮时会满屋飘香，煮出的米饭油润光亮、弹性十足、软硬适中
+2025-11-10 17:39:04 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:04 | INFO     | Connection #1: TTS sentence_start | Text: ，吃起来爽滑有嚼劲，冷却后也不容易回生，是不是很赞  
+2025-11-10 17:39:09 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:09 | INFO     | Connection #1: TTS stop | Duration: 48877.93ms | State: stop
+2025-11-10 17:39:09 | INFO     | Connection #1: Received complete response at 45.4s
+2025-11-10 17:39:09 | INFO     | ✓ Response received: ...
+2025-11-10 17:39:09 | INFO     | 
+============================================================
+2025-11-10 17:39:09 | INFO     | Testing [INQUIRY] #003: 询问 #3...
+2025-11-10 17:39:09 | INFO     | Audio file: inquiry_003.opus
+2025-11-10 17:39:09 | INFO     | ============================================================
+2025-11-10 17:39:09 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:39:09 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:39:09 | INFO     | Processed remaining 256 bytes PCM data with 1664 bytes padding (total 155776 bytes)
+2025-11-10 17:39:09 | INFO     | Generated 82 raw Opus packets from PCM data (total 17820 bytes, processed 155776 bytes PCM, coverage: 98.9%)
+2025-11-10 17:39:09 | INFO     | Detected 82 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:39:16 | INFO     | Connection #1: STT response received in 5474.02ms | Recognized text: 我想知道东北长粒香米煮饭时是不是真的满屋飘香？
+2025-11-10 17:39:16 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:39:21 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:39:25 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:25 | INFO     | Connection #1: TTS sentence_start | Text: 你想了解的东北长粒香米对应的商品是秋实十月长粒香5KG/大米哦。
+2025-11-10 17:39:29 | INFO     | Connection #1: Received emoji message | Emotion: idel
+2025-11-10 17:39:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:32 | INFO     | Connection #1: TTS sentence_start | Text:  
+
+价格是128.37元。
+2025-11-10 17:39:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:35 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+供应商是黑龙江春华秋实粮油有限公司。
+2025-11-10 17:39:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:38 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+详细介绍：这可是东北长粒香米，产自东北黑土平原
+2025-11-10 17:39:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:43 | INFO     | Connection #1: TTS sentence_start | Text: ，是那种米粒细长、还带着独特清香、口感Q弹爽滑的优质大米。
+2025-11-10 17:39:49 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:49 | INFO     | Connection #1: TTS sentence_start | Text: 它算是中国优质大米的代表之一啦，就因为那卓越的口感和香气
+2025-11-10 17:39:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:54 | INFO     | Connection #1: TTS sentence_start | Text: ，可受大家喜欢啦。
+2025-11-10 17:39:55 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:39:55 | INFO     | Connection #1: TTS sentence_start | Text: 外观上，米粒是细长形的，色泽洁白、晶莹剔透，模样可好看了。
+2025-11-10 17:40:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:02 | INFO     | Connection #1: TTS sentence_start | Text: 说到煮饭，它的香味特点可绝了，具有独特的清香
+2025-11-10 17:40:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:06 | INFO     | Connection #1: TTS sentence_start | Text: ，尤其是在蒸煮的时候，真的能做到满屋飘香呢
+2025-11-10 17:40:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:10 | INFO     | Connection #1: TTS sentence_start | Text: ，这也是为啥它被叫做“香米”。
+2025-11-10 17:40:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:12 | INFO     | Connection #1: TTS sentence_start | Text: 口感味道也很棒，煮出来的米饭油润光亮，弹性十足
+2025-11-10 17:40:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:17 | INFO     | Connection #1: TTS sentence_start | Text: ，也就是Q弹得很，软硬适中，吃起来爽滑有嚼劲
+2025-11-10 17:40:20 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:40:21 | INFO     | 
+============================================================
+2025-11-10 17:40:21 | INFO     | Testing [PURCHASE] #003: 购买 #3...
+2025-11-10 17:40:21 | INFO     | Audio file: purchase_003.opus
+2025-11-10 17:40:21 | INFO     | ============================================================
+2025-11-10 17:40:21 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:40:21 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:40:21 | INFO     | Processed remaining 136 bytes PCM data with 1784 bytes padding (total 142216 bytes)
+2025-11-10 17:40:21 | INFO     | Generated 75 raw Opus packets from PCM data (total 14727 bytes, processed 142216 bytes PCM, coverage: 98.8%)
+2025-11-10 17:40:21 | INFO     | Detected 75 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:40:21 | INFO     | Connection #1: TTS stop | Duration: 65430.92ms | State: stop
+2025-11-10 17:40:26 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:40:26 | INFO     | ✓ Response received: ...
+2025-11-10 17:40:26 | INFO     | Connection #1: STT response received in 4962.05ms | Recognized text: 如果是这样，我购买东北大米长粒香5公斤。
+2025-11-10 17:40:26 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:40:27 | INFO     | 
+============================================================
+2025-11-10 17:40:27 | INFO     | Testing [INQUIRY] #004: 询问 #4...
+2025-11-10 17:40:27 | INFO     | Audio file: inquiry_004.opus
+2025-11-10 17:40:27 | INFO     | ============================================================
+2025-11-10 17:40:27 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:40:27 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:40:27 | INFO     | Processed remaining 642 bytes PCM data with 1278 bytes padding (total 156162 bytes)
+2025-11-10 17:40:27 | INFO     | Generated 82 raw Opus packets from PCM data (total 16290 bytes, processed 156162 bytes PCM, coverage: 99.2%)
+2025-11-10 17:40:27 | INFO     | Detected 82 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:40:33 | INFO     | Connection #1: STT response received in 5479.41ms | Recognized text: 东北长粒香米冷却后会不会回升？我想买来做便当？
+2025-11-10 17:40:33 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:40:36 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:40:40 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:40 | INFO     | Connection #1: TTS sentence_start | Text: 你想了解的东北长粒香米对应的商品是秋实十月长粒香5KG/大米哦。
+2025-11-10 17:40:44 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-10 17:40:47 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:47 | INFO     | Connection #1: TTS sentence_start | Text:  
+
+价格：128.37元。
+2025-11-10 17:40:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:50 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+供应商：黑龙江春华秋实粮油有限公司。
+2025-11-10 17:40:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:40:53 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+详细介绍：秋实十月长粒香5KG/大米 详细介绍：东北长粒香米是产自东北黑土平原、米粒细长、带有独特清香、口感Q弹爽滑的优质大米。
+2025-11-10 17:41:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:08 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米是中国优质大米的代表之一
+2025-11-10 17:41:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:12 | INFO     | Connection #1: TTS sentence_start | Text: ，因其卓越的口感和香气而备受喜爱，外观特征，米粒呈细长形
+2025-11-10 17:41:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:18 | INFO     | Connection #1: TTS sentence_start | Text: ，色泽洁白、晶莹剔透，外观非常好。
+2025-11-10 17:41:21 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:21 | INFO     | Connection #1: TTS sentence_start | Text: 香味特点 具有独特的清香，尤其是在蒸煮时，满屋飘香
+2025-11-10 17:41:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:26 | INFO     | Connection #1: TTS sentence_start | Text: ，这是其名为“香米”的原因。
+2025-11-10 17:41:28 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:28 | INFO     | Connection #1: TTS sentence_start | Text: 口感味道，米饭油润光亮，弹性十足，软硬适中
+2025-11-10 17:41:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:33 | INFO     | Connection #1: TTS sentence_start | Text: ，吃起来爽滑有嚼劲，冷却后也不容易回生。
+2025-11-10 17:41:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:37 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+店铺名称：黑龙江春华秋实粮油有限公司。
+2025-11-10 17:41:38 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:41:38 | INFO     | 
+============================================================
+2025-11-10 17:41:38 | INFO     | Testing [PURCHASE] #004: 购买 #4...
+2025-11-10 17:41:38 | INFO     | Audio file: purchase_004.opus
+2025-11-10 17:41:38 | INFO     | ============================================================
+2025-11-10 17:41:38 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:41:38 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:41:39 | INFO     | Processed remaining 556 bytes PCM data with 1364 bytes padding (total 144556 bytes)
+2025-11-10 17:41:39 | INFO     | Generated 76 raw Opus packets from PCM data (total 14766 bytes, processed 144556 bytes PCM, coverage: 99.1%)
+2025-11-10 17:41:39 | INFO     | Detected 76 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:41:39 | INFO     | Connection #1: TTS stop | Duration: 65573.72ms | State: stop
+2025-11-10 17:41:44 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:41:44 | INFO     | ✓ Response received: ...
+2025-11-10 17:41:44 | INFO     | Connection #1: STT response received in 5015.00ms | Recognized text: 不会回升的话，我购买东北大米长粒香5公斤。
+2025-11-10 17:41:44 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:41:45 | INFO     | 
+============================================================
+2025-11-10 17:41:45 | INFO     | Testing [INQUIRY] #005: 询问 #5...
+2025-11-10 17:41:45 | INFO     | Audio file: inquiry_005.opus
+2025-11-10 17:41:45 | INFO     | ============================================================
+2025-11-10 17:41:45 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:41:45 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:41:45 | INFO     | Processed remaining 780 bytes PCM data with 1140 bytes padding (total 177420 bytes)
+2025-11-10 17:41:45 | INFO     | Generated 93 raw Opus packets from PCM data (total 18597 bytes, processed 177420 bytes PCM, coverage: 99.4%)
+2025-11-10 17:41:45 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:41:52 | INFO     | Connection #1: STT response received in 6174.06ms | Recognized text: 东北长粒香米是产自黑土平原的吗？我想买点优质大米。
+2025-11-10 17:41:52 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:41:54 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品列表
+2025-11-10 17:41:57 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:41:57 | INFO     | Connection #1: TTS sentence_start | Text: 你问到的东北长粒香米就是秋实十月长粒香5KG这款大米哦。
+2025-11-10 17:42:03 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:03 | INFO     | Connection #1: TTS sentence_start | Text: 它确实产自东北黑土平原。
+2025-11-10 17:42:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:05 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+我还为你推荐了其他几款优质大米：
+- 秋实十月长粒香5KG 
+    - 价格：128.37元
+    - 详细介绍：汲取金秋十月的丰饶精华
+2025-11-10 17:42:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:18 | INFO     | Connection #1: TTS sentence_start | Text: ，故名“秋实十月”。
+2025-11-10 17:42:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:20 | INFO     | Connection #1: TTS sentence_start | Text: 本品为您严选当季新米，米粒纤长均匀，色泽晶莹如玉。
+2025-11-10 17:42:25 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:25 | INFO     | Connection #1: TTS sentence_start | Text: 开袋便闻自然稻香，蒸煮后饭香四溢，口感软滑Q弹，回味甘甜。
+2025-11-10 17:42:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:31 | INFO     | Connection #1: TTS sentence_start | Text: 每一口，都是对丰收季节最真挚的致敬。
+2025-11-10 17:42:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:34 | INFO     | Connection #1: TTS sentence_start | Text: 简约大气的包装，承载着大地慷慨的馈赠。
+2025-11-10 17:42:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:38 | INFO     | Connection #1: TTS sentence_start | Text: 无论是家庭日常享用，还是作为传递心意的佳礼
+2025-11-10 17:42:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:42 | INFO     | Connection #1: TTS sentence_start | Text: ，都尽显质朴与醇厚的品质生活
+
+- 华实稻礼盒5kg 
+    - 价格：158.74元
+    - 详细介绍：名如其米
+2025-11-10 17:42:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:52 | INFO     | Connection #1: TTS sentence_start | Text: ，“华”而“实”在。
+2025-11-10 17:42:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:42:54 | INFO     | Connection #1: TTS sentence_start | Text: 本品甄选优质稻谷，颗颗饱满，米粒晶莹
+2025-11-10 17:42:56 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:42:57 | INFO     | 
+============================================================
+2025-11-10 17:42:57 | INFO     | Testing [PURCHASE] #005: 购买 #5...
+2025-11-10 17:42:57 | INFO     | Audio file: purchase_005.opus
+2025-11-10 17:42:57 | INFO     | ============================================================
+2025-11-10 17:42:57 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:42:57 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:42:57 | INFO     | Processed remaining 1346 bytes PCM data with 574 bytes padding (total 120386 bytes)
+2025-11-10 17:42:57 | INFO     | Generated 63 raw Opus packets from PCM data (total 11978 bytes, processed 120386 bytes PCM, coverage: 99.5%)
+2025-11-10 17:42:57 | INFO     | Detected 63 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:42:57 | INFO     | Connection #1: TTS stop | Duration: 65331.18ms | State: stop
+2025-11-10 17:43:02 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:43:02 | INFO     | ✓ Response received: ...
+2025-11-10 17:43:02 | INFO     | Connection #1: STT response received in 4224.18ms | Recognized text: 是的，我购买东北大米长粒香5公斤。
+2025-11-10 17:43:02 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:43:02 | INFO     | 
+============================================================
+2025-11-10 17:43:02 | INFO     | Testing [INQUIRY] #006: 询问 #6...
+2025-11-10 17:43:02 | INFO     | Audio file: inquiry_006.opus
+2025-11-10 17:43:02 | INFO     | ============================================================
+2025-11-10 17:43:02 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:43:02 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:43:02 | INFO     | Processed remaining 1300 bytes PCM data with 620 bytes padding (total 241300 bytes)
+2025-11-10 17:43:02 | INFO     | Generated 126 raw Opus packets from PCM data (total 24470 bytes, processed 241300 bytes PCM, coverage: 99.7%)
+2025-11-10 17:43:02 | INFO     | Detected 126 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:43:11 | INFO     | Connection #1: STT response received in 8146.00ms | Recognized text: 我想买点普洱茶，10年班章普洱茶357克怎么样？听说茶气很霸道。
+2025-11-10 17:43:11 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:43:13 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:43:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:17 | INFO     | Connection #1: TTS sentence_start | Text: 你问的10年班章普洱茶对应的商品是十年班章普洱茶357克哦。
+2025-11-10 17:43:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:24 | INFO     | Connection #1: TTS sentence_start | Text:  
+
+价格是240.18元。
+2025-11-10 17:43:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:26 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+供应商是湖北兴创农产品供应链有限责任公司。
+2025-11-10 17:43:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:30 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+详细介绍：老班章普洱茶，产自云南布朗山老班章村
+2025-11-10 17:43:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:35 | INFO     | Connection #1: TTS sentence_start | Text: ，因其强劲的茶气和独特的口感，在茶友中有“普洱茶王”的美誉。
+2025-11-10 17:43:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:41 | INFO     | Connection #1: TTS sentence_start | Text: 经过十年陈化，它的风味和价值都会迎来重要转变。
+2025-11-10 17:43:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:45 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈老班章的特点：外观上，茶饼色泽深褐或红褐，油润有光
+2025-11-10 17:43:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:52 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮，显毫。
+2025-11-10 17:43:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:43:53 | INFO     | Connection #1: TTS sentence_start | Text: 香气浓郁，呈现陈香、蜜香、果香等多层次复合香型，持久力强。
+2025-11-10 17:44:00 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:00 | INFO     | Connection #1: TTS sentence_start | Text: 口感上，入口醇厚饱满，茶气霸道，回甘生津迅速且持久
+2025-11-10 17:44:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:07 | INFO     | Connection #1: TTS sentence_start | Text: ，带有独特的“班章韵味”。
+2025-11-10 17:44:09 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:09 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈化后，苦涩感会变得更柔和、顺滑。
+2025-11-10 17:44:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:13 | INFO     | Connection #1: TTS sentence_start | Text: 汤色方面，茶汤红亮透明，清澈如琥珀。
+2025-11-10 17:44:16 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:44:16 | INFO     | 
+============================================================
+2025-11-10 17:44:16 | INFO     | Testing [PURCHASE] #006: 购买 #6...
+2025-11-10 17:44:16 | INFO     | Audio file: purchase_006.opus
+2025-11-10 17:44:16 | INFO     | ============================================================
+2025-11-10 17:44:16 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:44:16 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:44:16 | INFO     | Processed remaining 1574 bytes PCM data with 346 bytes padding (total 170534 bytes)
+2025-11-10 17:44:16 | INFO     | Generated 89 raw Opus packets from PCM data (total 18041 bytes, processed 170534 bytes PCM, coverage: 99.8%)
+2025-11-10 17:44:16 | INFO     | Detected 89 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:44:16 | INFO     | Connection #1: TTS stop | Duration: 65444.89ms | State: stop
+2025-11-10 17:44:23 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:44:23 | INFO     | ✓ Response received: ...
+2025-11-10 17:44:23 | INFO     | Connection #1: STT response received in 5813.03ms | Recognized text: 听起来很特别，我购买10年班章普洱茶357克。
+2025-11-10 17:44:23 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:44:23 | INFO     | 
+============================================================
+2025-11-10 17:44:23 | INFO     | Testing [INQUIRY] #007: 询问 #7...
+2025-11-10 17:44:23 | INFO     | Audio file: inquiry_007.opus
+2025-11-10 17:44:23 | INFO     | ============================================================
+2025-11-10 17:44:23 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:44:23 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:44:23 | INFO     | Processed remaining 888 bytes PCM data with 1032 bytes padding (total 150648 bytes)
+2025-11-10 17:44:23 | INFO     | Generated 79 raw Opus packets from PCM data (total 16905 bytes, processed 150648 bytes PCM, coverage: 99.3%)
+2025-11-10 17:44:23 | INFO     | Detected 79 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:44:29 | INFO     | Connection #1: STT response received in 5235.63ms | Recognized text: 10年班章普洱茶是产自云南布朗山老班章村的吗？
+2025-11-10 17:44:29 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:44:30 | INFO     | Connection #1: Received emoji message | Emotion: idle
+2025-11-10 17:44:31 | INFO     | Connection #1: TTS sentence_start | Text: 是的呀
+2025-11-10 17:44:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:32 | INFO     | Connection #1: TTS sentence_start | Text: ，10年班章普洱茶正是产自云南布朗山老班章村。
+2025-11-10 17:44:36 | INFO     | Connection #1: Received emoji message | Emotion: idel
+2025-11-10 17:44:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:37 | INFO     | Connection #1: TTS sentence_start | Text: 这个地方可是出了名的优质茶叶产地，特殊的地理环境和气候条件
+2025-11-10 17:44:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:42 | INFO     | Connection #1: TTS sentence_start | Text: ，让产出的茶叶品质特别好。
+2025-11-10 17:44:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:45 | INFO     | Connection #1: TTS sentence_start | Text: 就拿你关注的这款十年班章普洱茶来说
+2025-11-10 17:44:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:48 | INFO     | Connection #1: TTS sentence_start | Text: ，在老班章村的先天优势基础上，又经过了十年的陈化
+2025-11-10 17:44:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:52 | INFO     | Connection #1: TTS sentence_start | Text: ，那品质更是没得说。
+2025-11-10 17:44:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:54 | INFO     | Connection #1: TTS sentence_start | Text: 它外观色泽深褐或红褐，油润有光
+2025-11-10 17:44:58 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:44:58 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮还显毫；香气特别浓郁
+2025-11-10 17:45:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:01 | INFO     | Connection #1: TTS sentence_start | Text: ，有陈香、蜜香、果香等好多层香味；口感醇厚饱满
+2025-11-10 17:45:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:06 | INFO     | Connection #1: TTS sentence_start | Text: ，茶气霸道得很，回甘生津又快又持久；汤色红亮透明
+2025-11-10 17:45:11 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:11 | INFO     | Connection #1: TTS sentence_start | Text: ，好看得像琥珀一样。
+2025-11-10 17:45:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:13 | INFO     | Connection #1: TTS sentence_start | Text: 你之前说想买点普洱茶，除了这款
+2025-11-10 17:45:16 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:16 | INFO     | Connection #1: TTS sentence_start | Text: ，你还想看看其他普洱茶不 我可以给你推荐推荐。 
+2025-11-10 17:45:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:20 | INFO     | Connection #1: TTS stop | Duration: 50912.45ms | State: stop
+2025-11-10 17:45:20 | INFO     | Connection #1: Received complete response at 47.3s
+2025-11-10 17:45:20 | INFO     | ✓ Response received: ...
+2025-11-10 17:45:21 | INFO     | 
+============================================================
+2025-11-10 17:45:21 | INFO     | Testing [PURCHASE] #007: 购买 #7...
+2025-11-10 17:45:21 | INFO     | Audio file: purchase_007.opus
+2025-11-10 17:45:21 | INFO     | ============================================================
+2025-11-10 17:45:21 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:45:21 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:45:21 | INFO     | Processed remaining 1828 bytes PCM data with 92 bytes padding (total 143908 bytes)
+2025-11-10 17:45:21 | INFO     | Generated 75 raw Opus packets from PCM data (total 14783 bytes, processed 143908 bytes PCM, coverage: 99.9%)
+2025-11-10 17:45:21 | INFO     | Detected 75 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:45:26 | INFO     | Connection #1: STT response received in 4950.57ms | Recognized text: 是的，我购买10年班章普洱茶357克。
+2025-11-10 17:45:26 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:45:29 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理订单
+2025-11-10 17:45:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:32 | INFO     | Connection #1: TTS sentence_start | Text: 好呀，我已经帮你成功下单啦！
+2025-11-10 17:45:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:34 | INFO     | Connection #1: TTS sentence_start | Text: 这款商品名称是十年班章普洱茶，类型属于普洱茶。
+2025-11-10 17:45:39 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:39 | INFO     | Connection #1: TTS sentence_start | Text: 价格是240.18元，数量是1个
+2025-11-10 17:45:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:43 | INFO     | Connection #1: TTS sentence_start | Text: ，订单号为ORDER-2964642 。
+2025-11-10 17:45:47 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:47 | INFO     | Connection #1: TTS sentence_start | Text: 老班章普洱茶，产自云南布朗山老班章村
+2025-11-10 17:45:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:51 | INFO     | Connection #1: TTS sentence_start | Text: ，有着“普洱茶王”的美誉。
+2025-11-10 17:45:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:53 | INFO     | Connection #1: TTS sentence_start | Text: 经过十年陈化，茶饼色泽深褐或红褐，油润有光
+2025-11-10 17:45:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:45:59 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮显毫；香气浓郁
+2025-11-10 17:46:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:02 | INFO     | Connection #1: TTS sentence_start | Text: ，有陈香、蜜香、果香等复合香型；口感醇厚饱满，茶气霸道
+2025-11-10 17:46:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:08 | INFO     | Connection #1: TTS sentence_start | Text: ，回甘生津快且持久，还有独特的“班章韵味”
+2025-11-10 17:46:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:12 | INFO     | Connection #1: TTS sentence_start | Text: ，苦涩感更柔和、顺滑；茶汤红亮透明如琥珀。
+2025-11-10 17:46:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:17 | INFO     | Connection #1: TTS sentence_start | Text: 它不仅品饮体验好，还具备收藏和投资潜力。
+2025-11-10 17:46:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:20 | INFO     | Connection #1: TTS sentence_start | Text: 你可以打开链芯智萌小程序查看订单哦。  
+2025-11-10 17:46:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:24 | INFO     | Connection #1: TTS stop | Duration: 57398.30ms | State: stop
+2025-11-10 17:46:24 | INFO     | Connection #1: Received complete response at 53.2s
+2025-11-10 17:46:24 | INFO     | ✓ Response received: ...
+2025-11-10 17:46:24 | INFO     | 
+============================================================
+2025-11-10 17:46:24 | INFO     | Testing [INQUIRY] #008: 询问 #8...
+2025-11-10 17:46:24 | INFO     | Audio file: inquiry_008.opus
+2025-11-10 17:46:24 | INFO     | ============================================================
+2025-11-10 17:46:24 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:46:24 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:46:24 | INFO     | Processed remaining 1268 bytes PCM data with 652 bytes padding (total 168308 bytes)
+2025-11-10 17:46:24 | INFO     | Generated 88 raw Opus packets from PCM data (total 17652 bytes, processed 168308 bytes PCM, coverage: 99.6%)
+2025-11-10 17:46:24 | INFO     | Detected 88 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:46:31 | INFO     | Connection #1: STT response received in 5761.61ms | Recognized text: 10年班章普洱茶经过10年陈化，苦涩感会不会很重？
+2025-11-10 17:46:31 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:46:34 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:46:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:37 | INFO     | Connection #1: TTS sentence_start | Text: 十年班章普洱茶经过10年陈化后
+2025-11-10 17:46:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:41 | INFO     | Connection #1: TTS sentence_start | Text: ，苦涩感不会很重哦。
+2025-11-10 17:46:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:42 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+价格是240.18元
+2025-11-10 17:46:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:45 | INFO     | Connection #1: TTS sentence_start | Text: ，供应商是湖北兴创农产品供应链有限责任公司
+2025-11-10 17:46:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:48 | INFO     | Connection #1: TTS sentence_start | Text: ，详细介绍是老班章普洱茶，产自云南布朗山老班章村
+2025-11-10 17:46:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:53 | INFO     | Connection #1: TTS sentence_start | Text: ，因其强劲的茶气和独特的口感，在茶友中有“普洱茶王”的美誉。
+2025-11-10 17:46:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:46:59 | INFO     | Connection #1: TTS sentence_start | Text: 经过十年陈化，它的风味和价值都会迎来重要转变。
+2025-11-10 17:47:04 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:04 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈老班章的特点，外观 ，茶饼色泽深褐或红褐，油润有光
+2025-11-10 17:47:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:10 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮，显毫。
+2025-11-10 17:47:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:12 | INFO     | Connection #1: TTS sentence_start | Text: 香气，香气浓郁，呈现陈香、蜜香、果香等多层次复合香型
+2025-11-10 17:47:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:18 | INFO     | Connection #1: TTS sentence_start | Text: ，持久力强。
+2025-11-10 17:47:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:19 | INFO     | Connection #1: TTS sentence_start | Text: 口感，入口醇厚饱满，茶气霸道，回甘生津迅速且持久
+2025-11-10 17:47:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:26 | INFO     | Connection #1: TTS sentence_start | Text: ，带有独特的“班章韵味”。
+2025-11-10 17:47:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:27 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈化后，苦涩感会变得更柔和、顺滑。
+2025-11-10 17:47:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:31 | INFO     | Connection #1: TTS sentence_start | Text: 汤色，茶汤红亮透明，清澈如琥珀。
+2025-11-10 17:47:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:35 | INFO     | Connection #1: TTS sentence_start | Text: 十年的老班章普洱茶不仅品饮体验上乘
+2025-11-10 17:47:36 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:47:36 | INFO     | 
+============================================================
+2025-11-10 17:47:36 | INFO     | Testing [PURCHASE] #008: 购买 #8...
+2025-11-10 17:47:36 | INFO     | Audio file: purchase_008.opus
+2025-11-10 17:47:36 | INFO     | ============================================================
+2025-11-10 17:47:36 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:47:36 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:47:36 | INFO     | Processed remaining 1124 bytes PCM data with 796 bytes padding (total 187364 bytes)
+2025-11-10 17:47:36 | INFO     | Generated 98 raw Opus packets from PCM data (total 19900 bytes, processed 187364 bytes PCM, coverage: 99.6%)
+2025-11-10 17:47:36 | INFO     | Detected 98 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:47:37 | INFO     | Connection #1: TTS stop | Duration: 65871.90ms | State: stop
+2025-11-10 17:47:43 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:47:43 | INFO     | ✓ Response received: ...
+2025-11-10 17:47:44 | INFO     | Connection #1: STT response received in 6468.26ms | Recognized text: 如果变得柔和顺滑，我购买10年班章普洱茶357克。
+2025-11-10 17:47:44 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:47:44 | INFO     | 
+============================================================
+2025-11-10 17:47:44 | INFO     | Testing [INQUIRY] #009: 询问 #9...
+2025-11-10 17:47:44 | INFO     | Audio file: inquiry_009.opus
+2025-11-10 17:47:44 | INFO     | ============================================================
+2025-11-10 17:47:44 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:47:44 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:47:44 | INFO     | Processed remaining 128 bytes PCM data with 1792 bytes padding (total 190208 bytes)
+2025-11-10 17:47:44 | INFO     | Generated 100 raw Opus packets from PCM data (total 20582 bytes, processed 190208 bytes PCM, coverage: 99.1%)
+2025-11-10 17:47:44 | INFO     | Detected 100 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:47:51 | INFO     | Connection #1: STT response received in 6540.68ms | Recognized text: 我想了解一下10年班章普洱茶的香气是不是有沉香和蜜香？
+2025-11-10 17:47:51 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:47:55 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:47:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:47:59 | INFO     | Connection #1: TTS sentence_start | Text: 你想了解的十年班章普洱茶信息来啦。
+2025-11-10 17:48:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:02 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+价格：240.18元。
+2025-11-10 17:48:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:05 | INFO     | Connection #1: TTS sentence_start | Text: 
+供应商：湖北兴创农产品供应链有限责任公司。
+2025-11-10 17:48:09 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:09 | INFO     | Connection #1: TTS sentence_start | Text: 
+详细介绍：老班章普洱茶，产自云南布朗山老班章村
+2025-11-10 17:48:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:13 | INFO     | Connection #1: TTS sentence_start | Text: ，因其强劲的茶气和独特的口感，在茶友中有“普洱茶王”的美誉。
+2025-11-10 17:48:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:19 | INFO     | Connection #1: TTS sentence_start | Text: 经过十年陈化，它的风味和价值都会迎来重要转变。
+2025-11-10 17:48:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:23 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈老班章的特点：外观上，茶饼色泽深褐或红褐，油润有光
+2025-11-10 17:48:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:30 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮，显毫。
+2025-11-10 17:48:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:32 | INFO     | Connection #1: TTS sentence_start | Text: 香气方面，香气浓郁，呈现陈香、蜜香、果香等多层次复合香型
+2025-11-10 17:48:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:38 | INFO     | Connection #1: TTS sentence_start | Text: ，持久力强。所以呀，这款茶是有陈香和蜜香的哦。
+2025-11-10 17:48:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:43 | INFO     | Connection #1: TTS sentence_start | Text: 口感上，入口醇厚饱满，茶气霸道，回甘生津迅速且持久
+2025-11-10 17:48:49 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:49 | INFO     | Connection #1: TTS sentence_start | Text: ，带有独特的“班章韵味”。
+2025-11-10 17:48:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:51 | INFO     | Connection #1: TTS sentence_start | Text: 十年陈化后，苦涩感会变得更柔和、顺滑。
+2025-11-10 17:48:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:48:56 | INFO     | Connection #1: TTS sentence_start | Text: 汤色方面，茶汤红亮透明，清澈如琥珀。
+2025-11-10 17:48:56 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:48:57 | INFO     | 
+============================================================
+2025-11-10 17:48:57 | INFO     | Testing [PURCHASE] #009: 购买 #9...
+2025-11-10 17:48:57 | INFO     | Audio file: purchase_009.opus
+2025-11-10 17:48:57 | INFO     | ============================================================
+2025-11-10 17:48:57 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:48:57 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:48:57 | INFO     | Processed remaining 1852 bytes PCM data with 68 bytes padding (total 163132 bytes)
+2025-11-10 17:48:57 | INFO     | Generated 85 raw Opus packets from PCM data (total 17139 bytes, processed 163132 bytes PCM, coverage: 100.0%)
+2025-11-10 17:48:57 | INFO     | Detected 85 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:48:57 | INFO     | Connection #1: TTS stop | Duration: 65691.15ms | State: stop
+2025-11-10 17:49:03 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:49:03 | INFO     | ✓ Response received: ...
+2025-11-10 17:49:03 | INFO     | Connection #1: STT response received in 5606.99ms | Recognized text: 听起来很香，我购买10年班章普洱茶357克。
+2025-11-10 17:49:03 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:49:03 | INFO     | 
+============================================================
+2025-11-10 17:49:03 | INFO     | Testing [INQUIRY] #010: 询问 #10...
+2025-11-10 17:49:03 | INFO     | Audio file: inquiry_010.opus
+2025-11-10 17:49:03 | INFO     | ============================================================
+2025-11-10 17:49:03 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:49:03 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:49:03 | INFO     | Processed remaining 104 bytes PCM data with 1816 bytes padding (total 157544 bytes)
+2025-11-10 17:49:03 | INFO     | Generated 83 raw Opus packets from PCM data (total 16300 bytes, processed 157544 bytes PCM, coverage: 98.9%)
+2025-11-10 17:49:03 | INFO     | Detected 83 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:49:10 | INFO     | Connection #1: STT response received in 5462.73ms | Recognized text: 10年班章普洱茶有收藏价值吗？我想买来收藏。
+2025-11-10 17:49:10 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:49:12 | INFO     | Connection #1: TTS sentence_start | Text: 。十年班章普洱茶。的收藏价值：这款茶很有收藏价值呢。
+2025-11-10 17:49:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:18 | INFO     | Connection #1: TTS sentence_start | Text: 它产自云南布朗山老班章村，本身品质就极高
+2025-11-10 17:49:22 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:22 | INFO     | Connection #1: TTS sentence_start | Text: ，有着“普洱茶王”的美誉。
+2025-11-10 17:49:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:24 | INFO     | Connection #1: TTS sentence_start | Text: 经过10年陈化，茶叶在香气、口感等方面都有了进一步提升
+2025-11-10 17:49:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:30 | INFO     | Connection #1: TTS sentence_start | Text: ，香气浓郁且层次丰富，有陈香、蜜香、果香等，口感醇厚饱满
+2025-11-10 17:49:36 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:36 | INFO     | Connection #1: TTS sentence_start | Text: ，茶气霸道，回甘生津持久。
+2025-11-10 17:49:39 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:39 | INFO     | Connection #1: TTS sentence_start | Text: 而且普洱茶随着时间推移，品质和价值还有可能进一步提升。
+2025-11-10 17:49:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:44 | INFO     | Connection #1: TTS sentence_start | Text: 从市场角度看，老班章普洱茶一直以来都备受茶友和收藏家关注
+2025-11-10 17:49:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:50 | INFO     | Connection #1: TTS sentence_start | Text: ，市场需求大，其稀缺性也保证了它在收藏市场有不错的潜力。
+2025-11-10 17:49:55 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:55 | INFO     | Connection #1: TTS sentence_start | Text: 还想了解其他细节，或需要推荐 / 对比 / 下单
+2025-11-10 17:49:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:49:59 | INFO     | Connection #1: TTS sentence_start | Text: ，直接告诉我。
+2025-11-10 17:50:00 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:00 | INFO     | Connection #1: TTS stop | Duration: 50722.47ms | State: stop
+2025-11-10 17:50:00 | INFO     | Connection #1: Received complete response at 46.9s
+2025-11-10 17:50:00 | INFO     | ✓ Response received: ...
+2025-11-10 17:50:01 | INFO     | 
+============================================================
+2025-11-10 17:50:01 | INFO     | Testing [PURCHASE] #010: 购买 #10...
+2025-11-10 17:50:01 | INFO     | Audio file: purchase_010.opus
+2025-11-10 17:50:01 | INFO     | ============================================================
+2025-11-10 17:50:01 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:50:01 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:50:01 | INFO     | Processed remaining 36 bytes PCM data with 1884 bytes padding (total 178596 bytes)
+2025-11-10 17:50:01 | INFO     | Generated 94 raw Opus packets from PCM data (total 18976 bytes, processed 178596 bytes PCM, coverage: 99.0%)
+2025-11-10 17:50:01 | INFO     | Detected 94 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:50:08 | INFO     | Connection #1: STT response received in 6147.53ms | Recognized text: 如果有收藏潜力，我购买10年班章普洱茶357克。
+2025-11-10 17:50:08 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:50:11 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理订单
+2025-11-10 17:50:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:13 | INFO     | Connection #1: TTS sentence_start | Text: 好呀
+2025-11-10 17:50:14 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:14 | INFO     | Connection #1: TTS sentence_start | Text: ，之前咱们就提到这款十年班章普洱茶很有收藏潜力呢。
+2025-11-10 17:50:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:18 | INFO     | Connection #1: TTS sentence_start | Text: 现在给你下单成功啦！
+2025-11-10 17:50:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:20 | INFO     | Connection #1: TTS sentence_start | Text: 这款商品名称是十年班章普洱茶，类型属于普洱茶
+2025-11-10 17:50:25 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:25 | INFO     | Connection #1: TTS sentence_start | Text: ，价格是240.18元，数量是1个
+2025-11-10 17:50:28 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:28 | INFO     | Connection #1: TTS sentence_start | Text: ，订单号为ORDER-2964642 。
+2025-11-10 17:50:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:33 | INFO     | Connection #1: TTS sentence_start | Text: 老班章普洱茶，产自云南布朗山老班章村
+2025-11-10 17:50:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:37 | INFO     | Connection #1: TTS sentence_start | Text: ，有着“普洱茶王”的美誉。
+2025-11-10 17:50:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:38 | INFO     | Connection #1: TTS sentence_start | Text: 经过十年陈化，茶饼色泽深褐或红褐，油润有光
+2025-11-10 17:50:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:44 | INFO     | Connection #1: TTS sentence_start | Text: ，条索肥壮显毫；香气浓郁
+2025-11-10 17:50:46 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:46 | INFO     | Connection #1: TTS sentence_start | Text: ，有陈香、蜜香、果香等复合香型；口感醇厚饱满，茶气霸道
+2025-11-10 17:50:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:52 | INFO     | Connection #1: TTS sentence_start | Text: ，回甘生津快且持久，还有独特的“班章韵味”
+2025-11-10 17:50:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:50:56 | INFO     | Connection #1: TTS sentence_start | Text: ，苦涩感更柔和、顺滑；茶汤红亮透明如琥珀。
+2025-11-10 17:51:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:01 | INFO     | Connection #1: TTS sentence_start | Text: 它不仅品饮体验好，还具备收藏和投资潜力。
+2025-11-10 17:51:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:05 | INFO     | Connection #1: TTS sentence_start | Text: 你可以打开链芯智萌小程序查看订单哦。  
+2025-11-10 17:51:09 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:09 | INFO     | Connection #1: TTS stop | Duration: 61030.10ms | State: stop
+2025-11-10 17:51:09 | INFO     | Connection #1: Received complete response at 56.3s
+2025-11-10 17:51:09 | INFO     | ✓ Response received: ...
+2025-11-10 17:51:09 | INFO     | 
+============================================================
+2025-11-10 17:51:09 | INFO     | Testing [INQUIRY] #011: 询问 #11...
+2025-11-10 17:51:09 | INFO     | Audio file: inquiry_011.opus
+2025-11-10 17:51:09 | INFO     | ============================================================
+2025-11-10 17:51:09 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:51:09 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:51:09 | INFO     | Processed remaining 1222 bytes PCM data with 698 bytes padding (total 131782 bytes)
+2025-11-10 17:51:09 | INFO     | Generated 69 raw Opus packets from PCM data (total 13544 bytes, processed 131782 bytes PCM, coverage: 99.5%)
+2025-11-10 17:51:09 | INFO     | Detected 69 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:51:14 | INFO     | Connection #1: STT response received in 4585.01ms | Recognized text: 我想买点保健品人参乌梅片有什么功效？
+2025-11-10 17:51:14 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:51:17 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:51:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:20 | INFO     | Connection #1: TTS sentence_start | Text: 你提到想买保健品人参乌梅片
+2025-11-10 17:51:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:23 | INFO     | Connection #1: TTS sentence_start | Text: ，但我这里目前没有人参乌梅片的相关信息呢。
+2025-11-10 17:51:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:26 | INFO     | Connection #1: TTS sentence_start | Text: 我这里有金立华牌蜜炼人参膏的信息，给你详细说说呀。
+2025-11-10 17:51:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:31 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+价格是398.88元，供应商是吉林华创瑞品经贸有限公司
+2025-11-10 17:51:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:37 | INFO     | Connection #1: TTS sentence_start | Text: ，它详细介绍是：金立华牌蜜炼人参膏是以优质人参为主要原料
+2025-11-10 17:51:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:43 | INFO     | Connection #1: TTS sentence_start | Text: ，配以蜂蜜等天然辅料，经传统工艺熬制而成的滋补膏方。
+2025-11-10 17:51:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:48 | INFO     | Connection #1: TTS sentence_start | Text: 具有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇，易于吸收
+2025-11-10 17:51:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:53 | INFO     | Connection #1: TTS sentence_start | Text: ，适合体虚乏力、免疫力低下及亚健康人群日常调理使用。
+2025-11-10 17:51:58 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:51:58 | INFO     | Connection #1: TTS sentence_start | Text: 店铺名称是吉林华创瑞品经贸有限公司
+2025-11-10 17:52:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:02 | INFO     | Connection #1: TTS sentence_start | Text: ，商品名称是金立华牌蜜炼人参膏，商品状态是已成功上架 。
+2025-11-10 17:52:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:08 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+要是你对人参乌梅片还是很感兴趣
+2025-11-10 17:52:11 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:11 | INFO     | Connection #1: TTS sentence_start | Text: ，你可以再给我说说你的具体要求，我来帮你找找看。  
+2025-11-10 17:52:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:15 | INFO     | Connection #1: TTS stop | Duration: 60370.27ms | State: stop
+2025-11-10 17:52:15 | INFO     | Connection #1: Received complete response at 56.1s
+2025-11-10 17:52:15 | INFO     | ✓ Response received: ...
+2025-11-10 17:52:15 | INFO     | 
+============================================================
+2025-11-10 17:52:15 | INFO     | Testing [PURCHASE] #011: 购买 #11...
+2025-11-10 17:52:15 | INFO     | Audio file: purchase_011.opus
+2025-11-10 17:52:15 | INFO     | ============================================================
+2025-11-10 17:52:15 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:52:15 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:52:15 | INFO     | Processed remaining 678 bytes PCM data with 1242 bytes padding (total 104358 bytes)
+2025-11-10 17:52:15 | INFO     | Generated 55 raw Opus packets from PCM data (total 10556 bytes, processed 104358 bytes PCM, coverage: 98.8%)
+2025-11-10 17:52:15 | INFO     | Detected 55 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:52:20 | INFO     | Connection #1: STT response received in 3782.20ms | Recognized text: 听起来不错，我购买人参乌梅片。
+2025-11-10 17:52:20 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:52:21 | INFO     | Connection #1: Received emoji message | Emotion: idle
+2025-11-10 17:52:22 | INFO     | Connection #1: TTS sentence_start | Text:  你提到想买人参乌梅片
+2025-11-10 17:52:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:24 | INFO     | Connection #1: TTS sentence_start | Text: ，不过我还不太清楚你具体想购买的数量呢。
+2025-11-10 17:52:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:27 | INFO     | Connection #1: TTS sentence_start | Text: 请问你要购买几个呢？这样我就能尽快帮你处理下单啦。  
+2025-11-10 17:52:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:33 | INFO     | Connection #1: TTS stop | Duration: 12978.95ms | State: stop
+2025-11-10 17:52:33 | INFO     | Connection #1: Received complete response at 12.2s
+2025-11-10 17:52:33 | INFO     | ✓ Response received: ...
+2025-11-10 17:52:33 | INFO     | 
+============================================================
+2025-11-10 17:52:33 | INFO     | Testing [INQUIRY] #012: 询问 #12...
+2025-11-10 17:52:33 | INFO     | Audio file: inquiry_012.opus
+2025-11-10 17:52:33 | INFO     | ============================================================
+2025-11-10 17:52:33 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:52:33 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:52:34 | INFO     | Processed remaining 1064 bytes PCM data with 856 bytes padding (total 141224 bytes)
+2025-11-10 17:52:34 | INFO     | Generated 74 raw Opus packets from PCM data (total 15404 bytes, processed 141224 bytes PCM, coverage: 99.4%)
+2025-11-10 17:52:34 | INFO     | Detected 74 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:52:39 | INFO     | Connection #1: STT response received in 4880.47ms | Recognized text: 人参乌梅片是不是能益气生津，养心安神？
+2025-11-10 17:52:39 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:52:42 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:52:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:45 | INFO     | Connection #1: TTS sentence_start | Text: 朋友
+2025-11-10 17:52:46 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:46 | INFO     | Connection #1: TTS sentence_start | Text: ，我这里没有人参乌梅片的相关信息呢
+2025-11-10 17:52:49 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:49 | INFO     | Connection #1: TTS sentence_start | Text: ，只有金立华牌蜜炼人参膏的信息。
+2025-11-10 17:52:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:52 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+它的价格是398.88元
+2025-11-10 17:52:55 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:55 | INFO     | Connection #1: TTS sentence_start | Text: ，供应商是吉林华创瑞品经贸有限公司。
+2025-11-10 17:52:58 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:52:58 | INFO     | Connection #1: TTS sentence_start | Text: 这个产品是金立华牌蜜炼人参膏
+2025-11-10 17:53:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:01 | INFO     | Connection #1: TTS sentence_start | Text: ，详细介绍是：它是以优质人参为主要原料，配上蜂蜜等天然辅料
+2025-11-10 17:53:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:07 | INFO     | Connection #1: TTS sentence_start | Text: ，经过传统工艺熬制出来的滋补膏方。
+2025-11-10 17:53:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:10 | INFO     | Connection #1: TTS sentence_start | Text: 有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇，容易吸收
+2025-11-10 17:53:16 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:16 | INFO     | Connection #1: TTS sentence_start | Text: ，适合那些体虚乏力、免疫力低下以及处于亚健康状态的人群日常调理使用。
+2025-11-10 17:53:22 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:22 | INFO     | Connection #1: TTS sentence_start | Text: 店铺名称是吉林华创瑞品经贸有限公司，商品状态是已成功上架 。
+2025-11-10 17:53:28 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:28 | INFO     | Connection #1: TTS sentence_start | Text: 但关于人参乌梅片能不能益气生津、养心安神我没办法给到确切回答哦。
+2025-11-10 17:53:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:34 | INFO     | Connection #1: TTS stop | Duration: 55168.54ms | State: stop
+2025-11-10 17:53:34 | INFO     | Connection #1: Received complete response at 50.9s
+2025-11-10 17:53:34 | INFO     | ✓ Response received: ...
+2025-11-10 17:53:35 | INFO     | 
+============================================================
+2025-11-10 17:53:35 | INFO     | Testing [PURCHASE] #012: 购买 #12...
+2025-11-10 17:53:35 | INFO     | Audio file: purchase_012.opus
+2025-11-10 17:53:35 | INFO     | ============================================================
+2025-11-10 17:53:35 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:53:35 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:53:35 | INFO     | Processed remaining 1890 bytes PCM data with 30 bytes padding (total 88290 bytes)
+2025-11-10 17:53:35 | INFO     | Generated 46 raw Opus packets from PCM data (total 8497 bytes, processed 88290 bytes PCM, coverage: 100.0%)
+2025-11-10 17:53:35 | INFO     | Detected 46 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:53:38 | INFO     | Connection #1: STT response received in 3120.72ms | Recognized text: 是的，我购买人参乌梅片。
+2025-11-10 17:53:38 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:53:40 | INFO     | Connection #1: Received emoji message | Emotion: confused
+2025-11-10 17:53:40 | INFO     | Connection #1: TTS sentence_start | Text:  你想买人参乌梅片这个想法很不错呀
+2025-11-10 17:53:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:44 | INFO     | Connection #1: TTS sentence_start | Text: ，但我得再确认下，你具体要购买几个呢？
+2025-11-10 17:53:47 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:47 | INFO     | Connection #1: TTS sentence_start | Text: 明确数量后，我就能马上帮你处理下单事宜啦
+2025-11-10 17:53:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:51 | INFO     | Connection #1: TTS sentence_start | Text: ，这样你很快就能拿到心仪的商品咯。  
+2025-11-10 17:53:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:53:54 | INFO     | Connection #1: TTS stop | Duration: 15065.01ms | State: stop
+2025-11-10 17:53:54 | INFO     | Connection #1: Received complete response at 14.2s
+2025-11-10 17:53:54 | INFO     | ✓ Response received: ...
+2025-11-10 17:53:54 | INFO     | 
+============================================================
+2025-11-10 17:53:54 | INFO     | Testing [INQUIRY] #013: 询问 #13...
+2025-11-10 17:53:54 | INFO     | Audio file: inquiry_013.opus
+2025-11-10 17:53:54 | INFO     | ============================================================
+2025-11-10 17:53:54 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:53:54 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:53:54 | INFO     | Processed remaining 984 bytes PCM data with 936 bytes padding (total 133464 bytes)
+2025-11-10 17:53:54 | INFO     | Generated 70 raw Opus packets from PCM data (total 15034 bytes, processed 133464 bytes PCM, coverage: 99.3%)
+2025-11-10 17:53:54 | INFO     | Detected 70 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:53:59 | INFO     | Connection #1: STT response received in 4629.92ms | Recognized text: 人参乌梅片里面的人参和乌梅是怎么搭配的？
+2025-11-10 17:53:59 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:54:02 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:54:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:06 | INFO     | Connection #1: TTS sentence_start | Text: 朋友
+2025-11-10 17:54:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:07 | INFO     | Connection #1: TTS sentence_start | Text: ，我这里没有人参乌梅片的相关信息
+2025-11-10 17:54:09 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:09 | INFO     | Connection #1: TTS sentence_start | Text: ，只有金立华牌蜜炼人参膏的信息。
+2025-11-10 17:54:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:13 | INFO     | Connection #1: TTS sentence_start | Text: 这个商品名称是金立华牌蜜炼人参膏
+2025-11-10 17:54:16 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:16 | INFO     | Connection #1: TTS sentence_start | Text: ，供应商是吉林华创瑞品经贸有限公司
+2025-11-10 17:54:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:20 | INFO     | Connection #1: TTS sentence_start | Text: ，店铺名称也是吉林华创瑞品经贸有限公司
+2025-11-10 17:54:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:23 | INFO     | Connection #1: TTS sentence_start | Text: ，价格为398.88元，商品状态是已成功上架。
+2025-11-10 17:54:28 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:28 | INFO     | Connection #1: TTS sentence_start | Text: 它是以优质人参为主要原料，配以蜂蜜等天然辅料
+2025-11-10 17:54:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:32 | INFO     | Connection #1: TTS sentence_start | Text: ，经传统工艺熬制而成的滋补膏方。
+2025-11-10 17:54:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:35 | INFO     | Connection #1: TTS sentence_start | Text: 具有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇，易于吸收
+2025-11-10 17:54:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:42 | INFO     | Connection #1: TTS sentence_start | Text: ，适合体虚乏力、免疫力低下及亚健康人群日常调理使用 。
+2025-11-10 17:54:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:48 | INFO     | Connection #1: TTS sentence_start | Text: 但关于人参乌梅片里人参和乌梅怎么搭配的问题
+2025-11-10 17:54:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:52 | INFO     | Connection #1: TTS sentence_start | Text: ，我没办法回答你啦。  
+2025-11-10 17:54:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:54:54 | INFO     | Connection #1: TTS stop | Duration: 54248.42ms | State: stop
+2025-11-10 17:54:54 | INFO     | Connection #1: Received complete response at 50.3s
+2025-11-10 17:54:54 | INFO     | ✓ Response received: ...
+2025-11-10 17:54:54 | INFO     | 
+============================================================
+2025-11-10 17:54:54 | INFO     | Testing [PURCHASE] #013: 购买 #13...
+2025-11-10 17:54:54 | INFO     | Audio file: purchase_013.opus
+2025-11-10 17:54:54 | INFO     | ============================================================
+2025-11-10 17:54:54 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:54:54 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:54:54 | INFO     | Processed remaining 854 bytes PCM data with 1066 bytes padding (total 91094 bytes)
+2025-11-10 17:54:54 | INFO     | Generated 48 raw Opus packets from PCM data (total 8933 bytes, processed 91094 bytes PCM, coverage: 98.8%)
+2025-11-10 17:54:54 | INFO     | Detected 48 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:54:58 | INFO     | Connection #1: STT response received in 3231.95ms | Recognized text: 了解了，我购买人参乌梅片。
+2025-11-10 17:54:58 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:54:59 | INFO     | Connection #1: Received emoji message | Emotion: idle
+2025-11-10 17:55:00 | INFO     | Connection #1: TTS sentence_start | Text:  请问你要购买几个人参乌梅片呢？
+2025-11-10 17:55:03 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:03 | INFO     | Connection #1: TTS sentence_start | Text: 告诉我具体数量，我好尽快为你完成下单流程。  
+2025-11-10 17:55:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:07 | INFO     | Connection #1: TTS stop | Duration: 8343.09ms | State: stop
+2025-11-10 17:55:07 | INFO     | Connection #1: Received complete response at 8.0s
+2025-11-10 17:55:07 | INFO     | ✓ Response received: ...
+2025-11-10 17:55:07 | INFO     | 
+============================================================
+2025-11-10 17:55:07 | INFO     | Testing [INQUIRY] #014: 询问 #14...
+2025-11-10 17:55:07 | INFO     | Audio file: inquiry_014.opus
+2025-11-10 17:55:07 | INFO     | ============================================================
+2025-11-10 17:55:07 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:55:07 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:55:07 | INFO     | Processed remaining 396 bytes PCM data with 1524 bytes padding (total 140556 bytes)
+2025-11-10 17:55:07 | INFO     | Generated 74 raw Opus packets from PCM data (total 14081 bytes, processed 140556 bytes PCM, coverage: 98.9%)
+2025-11-10 17:55:07 | INFO     | Detected 74 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:55:13 | INFO     | Connection #1: STT response received in 4878.96ms | Recognized text: 我想给长辈买点补品人参乌梅片适合吗？
+2025-11-10 17:55:13 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:55:15 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品列表
+2025-11-10 17:55:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:19 | INFO     | Connection #1: TTS sentence_start | Text: 朋友
+2025-11-10 17:55:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:19 | INFO     | Connection #1: TTS sentence_start | Text: ，虽然你指定想买人参乌梅片给长辈当补品
+2025-11-10 17:55:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:23 | INFO     | Connection #1: TTS sentence_start | Text: ，但我这边没找到人参乌梅片的直接信息哦。
+2025-11-10 17:55:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:26 | INFO     | Connection #1: TTS sentence_start | Text: 不过我可以给你推荐其他一些适合作为给长辈补品的商品：
+- 金立华牌蜜炼人参膏
+2025-11-10 17:55:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:34 | INFO     | Connection #1: TTS sentence_start | Text: ，价格398.88元。
+2025-11-10 17:55:36 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:36 | INFO     | Connection #1: TTS sentence_start | Text: 它是以优质人参为主要原料，配上蜂蜜等天然辅料
+2025-11-10 17:55:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:41 | INFO     | Connection #1: TTS sentence_start | Text: ，经过传统工艺熬制出来的滋补膏方。
+2025-11-10 17:55:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:44 | INFO     | Connection #1: TTS sentence_start | Text: 有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇，容易吸收
+2025-11-10 17:55:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:50 | INFO     | Connection #1: TTS sentence_start | Text: ，适合那些体虚乏力、免疫力低下以及处于亚健康状态的人群日常调理使用 。
+2025-11-10 17:55:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:55:56 | INFO     | Connection #1: TTS sentence_start | Text: 
+- 冬和微粉蛹虫草片，价格437.58元。
+2025-11-10 17:56:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:01 | INFO     | Connection #1: TTS sentence_start | Text: 是以蛹虫草为主要原料，采用超微粉碎技术制成的保健食品。
+2025-11-10 17:56:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:06 | INFO     | Connection #1: TTS sentence_start | Text: 富含虫草素、多糖和氨基酸，有助于增强免疫力、抗疲劳和抗氧化。
+2025-11-10 17:56:13 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:13 | INFO     | Connection #1: TTS sentence_start | Text: 天然安全，吸收率高，适合亚健康人群及中老年人日常养生使用。
+2025-11-10 17:56:18 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-10 17:56:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:18 | INFO     | Connection #1: TTS sentence_start | Text:  
+- 金质人参咖啡，价格58.58元 。
+2025-11-10 17:56:18 | INFO     | 
+============================================================
+2025-11-10 17:56:18 | INFO     | Testing [PURCHASE] #014: 购买 #14...
+2025-11-10 17:56:18 | INFO     | Audio file: purchase_014.opus
+2025-11-10 17:56:18 | INFO     | ============================================================
+2025-11-10 17:56:18 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:56:18 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:56:18 | INFO     | Processed remaining 1586 bytes PCM data with 334 bytes padding (total 101426 bytes)
+2025-11-10 17:56:18 | INFO     | Generated 53 raw Opus packets from PCM data (total 10137 bytes, processed 101426 bytes PCM, coverage: 99.7%)
+2025-11-10 17:56:18 | INFO     | Detected 53 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:56:18 | INFO     | Connection #1: TTS stop | Duration: 65547.68ms | State: stop
+2025-11-10 17:56:22 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-10 17:56:22 | INFO     | ✓ Response received: ...
+2025-11-10 17:56:22 | INFO     | Connection #1: STT response received in 3569.24ms | Recognized text: 如果适合我购买人参乌梅片。
+2025-11-10 17:56:22 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:56:23 | INFO     | 
+============================================================
+2025-11-10 17:56:23 | INFO     | Testing [INQUIRY] #015: 询问 #15...
+2025-11-10 17:56:23 | INFO     | Audio file: inquiry_015.opus
+2025-11-10 17:56:23 | INFO     | ============================================================
+2025-11-10 17:56:23 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:56:23 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:56:23 | INFO     | Processed remaining 388 bytes PCM data with 1532 bytes padding (total 117508 bytes)
+2025-11-10 17:56:23 | INFO     | Generated 62 raw Opus packets from PCM data (total 13400 bytes, processed 117508 bytes PCM, coverage: 98.7%)
+2025-11-10 17:56:23 | INFO     | Detected 62 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:56:28 | INFO     | Connection #1: STT response received in 4116.69ms | Recognized text: 人参乌梅片的乌梅是不是能开胃消食？
+2025-11-10 17:56:28 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:56:31 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在查询商品详细信息
+2025-11-10 17:56:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:34 | INFO     | Connection #1: TTS sentence_start | Text: 朋友
+2025-11-10 17:56:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:35 | INFO     | Connection #1: TTS sentence_start | Text: ，你问的是乌梅片的乌梅相关问题
+2025-11-10 17:56:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:38 | INFO     | Connection #1: TTS sentence_start | Text: ，可我这里只有金立华牌蜜炼人参膏的信息呢。
+2025-11-10 17:56:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:42 | INFO     | Connection #1: TTS sentence_start | Text: 这款商品价格是398.88元
+2025-11-10 17:56:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:45 | INFO     | Connection #1: TTS sentence_start | Text: ，供应商是吉林华创瑞品经贸有限公司
+2025-11-10 17:56:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:48 | INFO     | Connection #1: TTS sentence_start | Text: ，店铺名称也是吉林华创瑞品经贸有限公司
+2025-11-10 17:56:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:52 | INFO     | Connection #1: TTS sentence_start | Text: ，商品名称准确来说是金立华牌蜜炼人参膏 。
+2025-11-10 17:56:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:56:56 | INFO     | Connection #1: TTS sentence_start | Text: 它是以优质人参为主要原料，配上蜂蜜等天然辅料
+2025-11-10 17:57:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:01 | INFO     | Connection #1: TTS sentence_start | Text: ，通过传统工艺熬制而成的滋补膏方。
+2025-11-10 17:57:04 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:04 | INFO     | Connection #1: TTS sentence_start | Text: 具有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇，容易吸收
+2025-11-10 17:57:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:10 | INFO     | Connection #1: TTS sentence_start | Text: ，适合体虚乏力、免疫力低下以及处于亚健康状态的人群日常调理使用 。
+2025-11-10 17:57:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:17 | INFO     | Connection #1: TTS sentence_start | Text: 但关于乌梅片的乌梅能不能开胃消食，我没办法给到相关信息哦。
+2025-11-10 17:57:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:23 | INFO     | Connection #1: TTS stop | Duration: 54861.59ms | State: stop
+2025-11-10 17:57:23 | INFO     | Connection #1: Received complete response at 51.0s
+2025-11-10 17:57:23 | INFO     | ✓ Response received: ...
+2025-11-10 17:57:23 | INFO     | 
+============================================================
+2025-11-10 17:57:23 | INFO     | Testing [PURCHASE] #015: 购买 #15...
+2025-11-10 17:57:23 | INFO     | Audio file: purchase_015.opus
+2025-11-10 17:57:23 | INFO     | ============================================================
+2025-11-10 17:57:23 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:57:23 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:57:23 | INFO     | Processed remaining 1138 bytes PCM data with 782 bytes padding (total 85618 bytes)
+2025-11-10 17:57:23 | INFO     | Generated 45 raw Opus packets from PCM data (total 8382 bytes, processed 85618 bytes PCM, coverage: 99.1%)
+2025-11-10 17:57:23 | INFO     | Detected 45 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:57:27 | INFO     | Connection #1: STT response received in 3069.60ms | Recognized text: 好的，我购买人参乌梅片。
+2025-11-10 17:57:27 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:57:29 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理订单
+2025-11-10 17:57:32 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:32 | INFO     | Connection #1: TTS sentence_start | Text: 朋友，我刚刚为你成功下单啦！
+2025-11-10 17:57:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:35 | INFO     | Connection #1: TTS sentence_start | Text: 这次购买的商品名称是金立华牌蜜炼人参膏
+2025-11-10 17:57:39 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:39 | INFO     | Connection #1: TTS sentence_start | Text: ，它属于滋补膏方类型的商品哦，价格是398.88元。
+2025-11-10 17:57:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:44 | INFO     | Connection #1: TTS sentence_start | Text: 订单已经成功创建，订单编号是ORDER-2976672 
+2025-11-10 17:57:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:50 | INFO     | Connection #1: TTS sentence_start | Text: ，你可以打开链芯智萌小程序查看具体订单情况哈。
+2025-11-10 17:57:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:57:54 | INFO     | Connection #1: TTS sentence_start | Text: 这款商品是以优质人参为主要原料，配上蜂蜜等天然辅料
+2025-11-10 17:58:00 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:00 | INFO     | Connection #1: TTS sentence_start | Text: ，经传统工艺熬制而成的
+2025-11-10 17:58:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:02 | INFO     | Connection #1: TTS sentence_start | Text: ，有补气养元、健脾益肺、缓解疲劳等功效，口感甘醇
+2025-11-10 17:58:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:07 | INFO     | Connection #1: TTS sentence_start | Text: ，容易被吸收
+2025-11-10 17:58:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:08 | INFO     | Connection #1: TTS sentence_start | Text: ，适合那些体虚乏力、免疫力低下以及处于亚健康状态的人群日常调理使用。
+2025-11-10 17:58:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:15 | INFO     | Connection #1: TTS stop | Duration: 47763.65ms | State: stop
+2025-11-10 17:58:15 | INFO     | Connection #1: Received complete response at 44.2s
+2025-11-10 17:58:15 | INFO     | ✓ Response received: ...
+2025-11-10 17:58:15 | INFO     | 
+============================================================
+2025-11-10 17:58:15 | INFO     | Testing [INQUIRY] #016: 询问 #16...
+2025-11-10 17:58:15 | INFO     | Audio file: inquiry_016.opus
+2025-11-10 17:58:15 | INFO     | ============================================================
+2025-11-10 17:58:15 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:58:15 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:58:15 | INFO     | Processed remaining 1750 bytes PCM data with 170 bytes padding (total 164950 bytes)
+2025-11-10 17:58:15 | INFO     | Generated 86 raw Opus packets from PCM data (total 17533 bytes, processed 164950 bytes PCM, coverage: 99.9%)
+2025-11-10 17:58:15 | INFO     | Detected 86 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:58:22 | INFO     | Connection #1: STT response received in 5701.21ms | Recognized text: 我想买点红酒送礼，宁夏贺兰山东麓的葡萄酒怎么样？
+2025-11-10 17:58:22 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:58:23 | INFO     | Connection #1: Received emoji message | Emotion: confused
+2025-11-10 17:58:24 | INFO     | Connection #1: TTS sentence_start | Text: 你这个问题问的很好
+2025-11-10 17:58:26 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:27 | INFO     | Connection #1: TTS sentence_start | Text: 宁夏贺兰山东麓的葡萄酒挺不错的
+2025-11-10 17:58:29 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:29 | INFO     | Connection #1: TTS sentence_start | Text: ，很适合拿来送礼。
+2025-11-10 17:58:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:30 | INFO     | Connection #1: TTS sentence_start | Text: 这里被誉为中国酿酒葡萄种植最佳生态区、世界上能酿造出最好葡萄酒的地方
+2025-11-10 17:58:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:37 | INFO     | Connection #1: TTS sentence_start | Text: ，还被国际葡萄与葡萄酒组织评为世界葡萄酒明星产区。
+2025-11-10 17:58:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:42 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+这里的葡萄酒产业发展成果显著
+2025-11-10 17:58:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:44 | INFO     | Connection #1: TTS sentence_start | Text: ，品牌价值达301.07亿元，综合产值达342.7亿元
+2025-11-10 17:58:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:51 | INFO     | Connection #1: TTS sentence_start | Text: ，远销40多个国家和地区
+2025-11-10 17:58:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:53 | INFO     | Connection #1: TTS sentence_start | Text: ，60多家酒庄的葡萄酒在国际大赛中获1100多个顶级大奖。
+2025-11-10 17:58:58 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:58:58 | INFO     | Connection #1: TTS sentence_start | Text: 而且宁夏贺兰山东麓葡萄酒产区还在不断发展，到2030年
+2025-11-10 17:59:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:05 | INFO     | Connection #1: TTS sentence_start | Text: ，酿酒葡萄开发及种植面积将达100万亩，建成酒庄300座
+2025-11-10 17:59:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:10 | INFO     | Connection #1: TTS sentence_start | Text: ，品牌价值力争达到500亿元 ，综合效益1500亿元。
+2025-11-10 17:59:14 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:14 | INFO     | Connection #1: TTS sentence_start | Text: 送这样有品质又有发展潜力产区产出的葡萄酒，有面子又拿得出手。
+2025-11-10 17:59:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:20 | INFO     | Connection #1: TTS stop | Duration: 58615.55ms | State: stop
+2025-11-10 17:59:20 | INFO     | Connection #1: Received complete response at 54.2s
+2025-11-10 17:59:20 | INFO     | ✓ Response received: ...
+2025-11-10 17:59:21 | INFO     | 
+============================================================
+2025-11-10 17:59:21 | INFO     | Testing [PURCHASE] #016: 购买 #16...
+2025-11-10 17:59:21 | INFO     | Audio file: purchase_016.opus
+2025-11-10 17:59:21 | INFO     | ============================================================
+2025-11-10 17:59:21 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:59:21 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:59:21 | INFO     | Processed remaining 736 bytes PCM data with 1184 bytes padding (total 119776 bytes)
+2025-11-10 17:59:21 | INFO     | Generated 63 raw Opus packets from PCM data (total 12295 bytes, processed 119776 bytes PCM, coverage: 99.0%)
+2025-11-10 17:59:21 | INFO     | Detected 63 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:59:26 | INFO     | Connection #1: STT response received in 4174.29ms | Recognized text: 听起来很高端，我购买红酒礼盒套装。
+2025-11-10 17:59:26 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:59:27 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-10 17:59:27 | INFO     | Connection #1: TTS sentence_start | Text: 请问你具体想要购买几个红酒礼盒套装呢？
+2025-11-10 17:59:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:31 | INFO     | Connection #1: TTS sentence_start | Text: 告诉我数量，我好帮你完成下单。  
+2025-11-10 17:59:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:34 | INFO     | Connection #1: TTS stop | Duration: 7973.40ms | State: stop
+2025-11-10 17:59:34 | INFO     | Connection #1: Received complete response at 7.6s
+2025-11-10 17:59:34 | INFO     | ✓ Response received: ...
+2025-11-10 17:59:34 | INFO     | 
+============================================================
+2025-11-10 17:59:34 | INFO     | Testing [INQUIRY] #017: 询问 #17...
+2025-11-10 17:59:34 | INFO     | Audio file: inquiry_017.opus
+2025-11-10 17:59:34 | INFO     | ============================================================
+2025-11-10 17:59:34 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:59:34 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:59:34 | INFO     | Processed remaining 650 bytes PCM data with 1270 bytes padding (total 106250 bytes)
+2025-11-10 17:59:34 | INFO     | Generated 56 raw Opus packets from PCM data (total 12053 bytes, processed 106250 bytes PCM, coverage: 98.8%)
+2025-11-10 17:59:34 | INFO     | Detected 56 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 17:59:39 | INFO     | Connection #1: STT response received in 3742.65ms | Recognized text: 宁夏葡萄酒是不是有甘润平衡的特点？
+2025-11-10 17:59:39 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 17:59:41 | INFO     | Connection #1: TTS sentence_start | Text: 我想想哦
+2025-11-10 17:59:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:43 | INFO     | Connection #1: TTS sentence_start | Text: 是的
+2025-11-10 17:59:44 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:44 | INFO     | Connection #1: TTS sentence_start | Text: ，宁夏葡萄酒有甘润平衡的特点。
+2025-11-10 17:59:47 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:47 | INFO     | Connection #1: TTS sentence_start | Text: 宁夏独特的自然禀赋和风土条件
+2025-11-10 17:59:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:50 | INFO     | Connection #1: TTS sentence_start | Text: ，造就了宁夏葡萄酒色泽鲜明、甘润平衡、香气馥郁、酒体饱满的中国特征和东方特质。
+2025-11-10 17:59:58 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 17:59:58 | INFO     | Connection #1: TTS stop | Duration: 19110.76ms | State: stop
+2025-11-10 17:59:58 | INFO     | Connection #1: Received complete response at 17.8s
+2025-11-10 17:59:58 | INFO     | ✓ Response received: ...
+2025-11-10 17:59:58 | INFO     | 
+============================================================
+2025-11-10 17:59:58 | INFO     | Testing [PURCHASE] #017: 购买 #17...
+2025-11-10 17:59:58 | INFO     | Audio file: purchase_017.opus
+2025-11-10 17:59:58 | INFO     | ============================================================
+2025-11-10 17:59:58 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 17:59:58 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 17:59:59 | INFO     | Processed remaining 1560 bytes PCM data with 360 bytes padding (total 95640 bytes)
+2025-11-10 17:59:59 | INFO     | Generated 50 raw Opus packets from PCM data (total 9359 bytes, processed 95640 bytes PCM, coverage: 99.6%)
+2025-11-10 17:59:59 | INFO     | Detected 50 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 18:00:03 | INFO     | Connection #1: STT response received in 3392.37ms | Recognized text: 是的，我购买红酒礼盒套装。
+2025-11-10 18:00:03 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 18:00:05 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理订单
+2025-11-10 18:00:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:08 | INFO     | Connection #1: TTS sentence_start | Text: 朋友，已经为你成功下单啦！
+2025-11-10 18:00:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:10 | INFO     | Connection #1: TTS sentence_start | Text: 这次购买的商品名称是“红酒/葡萄酒单只礼盒”
+2025-11-10 18:00:14 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:14 | INFO     | Connection #1: TTS sentence_start | Text: ，属于葡萄酒礼盒类型的商品。
+2025-11-10 18:00:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:17 | INFO     | Connection #1: TTS sentence_start | Text: 价格是50.11元，订单编号是ORDER-2962392 。
+2025-11-10 18:00:23 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:23 | INFO     | Connection #1: TTS sentence_start | Text: 这款礼盒精选优质葡萄酒一瓶，搭配精致礼盒包装，设计典雅大方
+2025-11-10 18:00:29 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:29 | INFO     | Connection #1: TTS sentence_start | Text: ，特别彰显品位。
+2025-11-10 18:00:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:31 | INFO     | Connection #1: TTS sentence_start | Text: 不管是商务馈赠、节日送祝福，还是亲友庆贺
+2025-11-10 18:00:35 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:35 | INFO     | Connection #1: TTS sentence_start | Text: ，都能体现你的心意和格调。
+2025-11-10 18:00:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:37 | INFO     | Connection #1: TTS sentence_start | Text: 开盒就能享受醇香佳酿，是既实用又有仪式感的高端礼品选择哦。
+2025-11-10 18:00:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 18:00:42 | INFO     | Connection #1: TTS sentence_start | Text: 你可以打开链芯智萌小程序查看具体订单情况。  

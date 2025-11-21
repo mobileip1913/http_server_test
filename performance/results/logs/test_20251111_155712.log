@@ -1,0 +1,181 @@
+2025-11-11 15:57:12 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 15:57:12 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 172.69ms
+2025-11-11 15:57:13 | INFO     | Connection #1 (SN: FC012C2E1110): Authentication successful
+2025-11-11 15:57:13 | INFO     | 
+============================================================
+2025-11-11 15:57:13 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 15:57:13 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 15:57:13 | INFO     | ============================================================
+2025-11-11 15:57:13 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 15:57:13 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 15:57:13 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 15:57:13 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 15:57:13 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 15:58:25 | WARNING  | ✗ Test FAILED: [INQUIRY] #001
+2025-11-11 15:58:25 | WARNING  |   - Audio file: inquiry_001.opus
+2025-11-11 15:58:25 | WARNING  |   - Text: 询问 #1
+2025-11-11 15:58:25 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 15:58:25 | WARNING  |   - Connection ID: 1
+2025-11-11 15:58:25 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 15:58:25 | WARNING  |   - Connection status: Connected
+2025-11-11 15:58:25 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 15:58:25 | WARNING  |   - Send time: 1762847833.852s, Elapsed: 71.8s
+2025-11-11 15:58:25 | WARNING  |   - STT text: (empty)
+2025-11-11 15:58:25 | WARNING  |   - LLM text: (empty)
+2025-11-11 15:58:25 | WARNING  |   - Messages sent: 120, received: 1
+2025-11-11 15:58:25 | WARNING  |   - Bytes sent: 21152, received: 195
+2025-11-11 15:58:25 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 15:58:25 | INFO     | 
+============================================================
+2025-11-11 15:58:25 | INFO     | Testing [PURCHASE] #001: 购买 #1...
+2025-11-11 15:58:25 | INFO     | Audio file: purchase_001.opus
+2025-11-11 15:58:25 | INFO     | ============================================================
+2025-11-11 15:58:25 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 15:58:25 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 15:58:26 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-11 15:58:26 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-11 15:58:26 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 15:59:35 | WARNING  | ✗ Test FAILED: [PURCHASE] #001
+2025-11-11 15:59:35 | WARNING  |   - Audio file: purchase_001.opus
+2025-11-11 15:59:35 | WARNING  |   - Text: 购买 #1
+2025-11-11 15:59:35 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 15:59:35 | WARNING  |   - Connection ID: 1
+2025-11-11 15:59:35 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 15:59:35 | WARNING  |   - Connection status: Connected
+2025-11-11 15:59:35 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 15:59:35 | WARNING  |   - Send time: 1762847906.664s, Elapsed: 69.0s
+2025-11-11 15:59:35 | WARNING  |   - STT text: (empty)
+2025-11-11 15:59:35 | WARNING  |   - LLM text: (empty)
+2025-11-11 15:59:35 | WARNING  |   - Messages sent: 194, received: 1
+2025-11-11 15:59:35 | WARNING  |   - Bytes sent: 35307, received: 195
+2025-11-11 15:59:35 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 15:59:35 | INFO     | 
+============================================================
+2025-11-11 15:59:35 | INFO     | Testing [INQUIRY] #002: 询问 #2...
+2025-11-11 15:59:35 | INFO     | Audio file: inquiry_002.opus
+2025-11-11 15:59:35 | INFO     | ============================================================
+2025-11-11 15:59:35 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 15:59:35 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 15:59:36 | INFO     | Processed remaining 1272 bytes PCM data with 648 bytes padding (total 177912 bytes)
+2025-11-11 15:59:36 | INFO     | Generated 93 raw Opus packets from PCM data (total 18790 bytes, processed 177912 bytes PCM, coverage: 99.6%)
+2025-11-11 15:59:36 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 16:00:47 | WARNING  | ✗ Test FAILED: [INQUIRY] #002
+2025-11-11 16:00:47 | WARNING  |   - Audio file: inquiry_002.opus
+2025-11-11 16:00:47 | WARNING  |   - Text: 询问 #2
+2025-11-11 16:00:47 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 16:00:47 | WARNING  |   - Connection ID: 1
+2025-11-11 16:00:47 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 16:00:47 | WARNING  |   - Connection status: Connected
+2025-11-11 16:00:47 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 16:00:47 | WARNING  |   - Send time: 1762847976.660s, Elapsed: 70.6s
+2025-11-11 16:00:47 | WARNING  |   - STT text: (empty)
+2025-11-11 16:00:47 | WARNING  |   - LLM text: (empty)
+2025-11-11 16:00:47 | WARNING  |   - Messages sent: 289, received: 1
+2025-11-11 16:00:47 | WARNING  |   - Bytes sent: 54295, received: 195
+2025-11-11 16:00:47 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 16:00:47 | INFO     | 
+============================================================
+2025-11-11 16:00:47 | INFO     | Testing [PURCHASE] #002: 购买 #2...
+2025-11-11 16:00:47 | INFO     | Audio file: purchase_002.opus
+2025-11-11 16:00:47 | INFO     | ============================================================
+2025-11-11 16:00:47 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 16:00:47 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 16:00:47 | INFO     | Processed remaining 594 bytes PCM data with 1326 bytes padding (total 117714 bytes)
+2025-11-11 16:00:47 | INFO     | Generated 62 raw Opus packets from PCM data (total 11837 bytes, processed 117714 bytes PCM, coverage: 98.9%)
+2025-11-11 16:00:47 | INFO     | Detected 62 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 16:01:57 | WARNING  | ✗ Test FAILED: [PURCHASE] #002
+2025-11-11 16:01:57 | WARNING  |   - Audio file: purchase_002.opus
+2025-11-11 16:01:57 | WARNING  |   - Text: 购买 #2
+2025-11-11 16:01:57 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 16:01:57 | WARNING  |   - Connection ID: 1
+2025-11-11 16:01:57 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 16:01:57 | WARNING  |   - Connection status: Connected
+2025-11-11 16:01:57 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 16:01:57 | WARNING  |   - Send time: 1762848048.183s, Elapsed: 69.0s
+2025-11-11 16:01:57 | WARNING  |   - STT text: (empty)
+2025-11-11 16:01:57 | WARNING  |   - LLM text: (empty)
+2025-11-11 16:01:57 | WARNING  |   - Messages sent: 353, received: 1
+2025-11-11 16:01:57 | WARNING  |   - Bytes sent: 66330, received: 195
+2025-11-11 16:01:57 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 16:01:57 | INFO     | 
+============================================================
+2025-11-11 16:01:57 | INFO     | Testing [INQUIRY] #003: 询问 #3...
+2025-11-11 16:01:57 | INFO     | Audio file: inquiry_003.opus
+2025-11-11 16:01:57 | INFO     | ============================================================
+2025-11-11 16:01:57 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 16:01:57 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 16:01:57 | INFO     | Processed remaining 256 bytes PCM data with 1664 bytes padding (total 155776 bytes)
+2025-11-11 16:01:57 | INFO     | Generated 82 raw Opus packets from PCM data (total 17820 bytes, processed 155776 bytes PCM, coverage: 98.9%)
+2025-11-11 16:01:57 | INFO     | Detected 82 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 16:03:07 | WARNING  | ✗ Test FAILED: [INQUIRY] #003
+2025-11-11 16:03:07 | WARNING  |   - Audio file: inquiry_003.opus
+2025-11-11 16:03:07 | WARNING  |   - Text: 询问 #3
+2025-11-11 16:03:07 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 16:03:07 | WARNING  |   - Connection ID: 1
+2025-11-11 16:03:07 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 16:03:07 | WARNING  |   - Connection status: Connected
+2025-11-11 16:03:07 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 16:03:07 | WARNING  |   - Send time: 1762848118.066s, Elapsed: 69.7s
+2025-11-11 16:03:07 | WARNING  |   - STT text: (empty)
+2025-11-11 16:03:07 | WARNING  |   - LLM text: (empty)
+2025-11-11 16:03:07 | WARNING  |   - Messages sent: 437, received: 1
+2025-11-11 16:03:07 | WARNING  |   - Bytes sent: 84348, received: 195
+2025-11-11 16:03:07 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 16:03:07 | INFO     | 
+============================================================
+2025-11-11 16:03:07 | INFO     | Testing [PURCHASE] #003: 购买 #3...
+2025-11-11 16:03:07 | INFO     | Audio file: purchase_003.opus
+2025-11-11 16:03:07 | INFO     | ============================================================
+2025-11-11 16:03:07 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 16:03:07 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 16:03:08 | INFO     | Processed remaining 136 bytes PCM data with 1784 bytes padding (total 142216 bytes)
+2025-11-11 16:03:08 | INFO     | Generated 75 raw Opus packets from PCM data (total 14727 bytes, processed 142216 bytes PCM, coverage: 98.8%)
+2025-11-11 16:03:08 | INFO     | Detected 75 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 16:04:17 | WARNING  | ✗ Test FAILED: [PURCHASE] #003
+2025-11-11 16:04:17 | WARNING  |   - Audio file: purchase_003.opus
+2025-11-11 16:04:17 | WARNING  |   - Text: 购买 #3
+2025-11-11 16:04:17 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 16:04:17 | WARNING  |   - Connection ID: 1
+2025-11-11 16:04:17 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 16:04:17 | WARNING  |   - Connection status: Connected
+2025-11-11 16:04:17 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 16:04:17 | WARNING  |   - Send time: 1762848188.665s, Elapsed: 68.8s
+2025-11-11 16:04:17 | WARNING  |   - STT text: (empty)
+2025-11-11 16:04:17 | WARNING  |   - LLM text: (empty)
+2025-11-11 16:04:17 | WARNING  |   - Messages sent: 514, received: 1
+2025-11-11 16:04:17 | WARNING  |   - Bytes sent: 99273, received: 195
+2025-11-11 16:04:17 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 16:04:17 | INFO     | 
+============================================================
+2025-11-11 16:04:17 | INFO     | Testing [INQUIRY] #004: 询问 #4...
+2025-11-11 16:04:17 | INFO     | Audio file: inquiry_004.opus
+2025-11-11 16:04:17 | INFO     | ============================================================
+2025-11-11 16:04:17 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 16:04:17 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 16:04:17 | INFO     | Processed remaining 642 bytes PCM data with 1278 bytes padding (total 156162 bytes)
+2025-11-11 16:04:17 | INFO     | Generated 82 raw Opus packets from PCM data (total 16290 bytes, processed 156162 bytes PCM, coverage: 99.2%)
+2025-11-11 16:04:17 | INFO     | Detected 82 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 16:05:27 | WARNING  | ✗ Test FAILED: [INQUIRY] #004
+2025-11-11 16:05:27 | WARNING  |   - Audio file: inquiry_004.opus
+2025-11-11 16:05:27 | WARNING  |   - Text: 询问 #4
+2025-11-11 16:05:27 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-11 16:05:27 | WARNING  |   - Connection ID: 1
+2025-11-11 16:05:27 | WARNING  |   - Device SN: FC012C2E1110
+2025-11-11 16:05:27 | WARNING  |   - Connection status: Connected
+2025-11-11 16:05:27 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-11 16:05:27 | WARNING  |   - Send time: 1762848258.514s, Elapsed: 69.3s
+2025-11-11 16:05:27 | WARNING  |   - STT text: (empty)
+2025-11-11 16:05:27 | WARNING  |   - LLM text: (empty)
+2025-11-11 16:05:27 | WARNING  |   - Messages sent: 598, received: 1
+2025-11-11 16:05:27 | WARNING  |   - Bytes sent: 115761, received: 195
+2025-11-11 16:05:27 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-11 16:05:27 | INFO     | 
+============================================================
+2025-11-11 16:05:27 | INFO     | Testing [PURCHASE] #004: 购买 #4...
+2025-11-11 16:05:27 | INFO     | Audio file: purchase_004.opus
+2025-11-11 16:05:27 | INFO     | ============================================================
+2025-11-11 16:05:27 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 16:05:27 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 16:05:28 | INFO     | Processed remaining 556 bytes PCM data with 1364 bytes padding (total 144556 bytes)
+2025-11-11 16:05:28 | INFO     | Generated 76 raw Opus packets from PCM data (total 14766 bytes, processed 144556 bytes PCM, coverage: 99.1%)
+2025-11-11 16:05:28 | INFO     | Detected 76 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False

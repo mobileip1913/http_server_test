@@ -1,0 +1,127 @@
+{
+  "test_start_time": "2025-11-10T15:51:07.371338",
+  "test_end_time": "2025-11-10T15:59:30.971142",
+  "total_tests": 10,
+  "results": [
+    {
+      "index": 1,
+      "type": "inquiry",
+      "text": "询问 #1",
+      "audio_file": "inquiry_001.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:51:07.698647"
+    },
+    {
+      "index": 1,
+      "type": "purchase",
+      "text": "购买 #1",
+      "audio_file": "purchase_001.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:52:08.818531"
+    },
+    {
+      "index": 2,
+      "type": "inquiry",
+      "text": "询问 #2",
+      "audio_file": "inquiry_002.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:53:01.569026"
+    },
+    {
+      "index": 2,
+      "type": "purchase",
+      "text": "购买 #2",
+      "audio_file": "purchase_002.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:53:48.758983"
+    },
+    {
+      "index": 3,
+      "type": "inquiry",
+      "text": "询问 #3",
+      "audio_file": "inquiry_003.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:54:44.471637"
+    },
+    {
+      "index": 3,
+      "type": "purchase",
+      "text": "购买 #3",
+      "audio_file": "purchase_003.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:55:51.058362"
+    },
+    {
+      "index": 4,
+      "type": "inquiry",
+      "text": "询问 #4",
+      "audio_file": "inquiry_004.opus",
+      "success": false,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:56:43.106625"
+    },
+    {
+      "index": 4,
+      "type": "purchase",
+      "text": "购买 #4",
+      "audio_file": "purchase_004.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:57:54.614790"
+    },
+    {
+      "index": 5,
+      "type": "inquiry",
+      "text": "询问 #5",
+      "audio_file": "inquiry_005.opus",
+      "success": false,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:58:00.740585"
+    },
+    {
+      "index": 5,
+      "type": "purchase",
+      "text": "购买 #5",
+      "audio_file": "purchase_005.opus",
+      "success": true,
+      "stt_text": "",
+      "llm_text": "",
+      "response_text": "",
+      "error": null,
+      "timestamp": "2025-11-10T15:59:12.973288"
+    }
+  ]
+}

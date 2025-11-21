@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音对话测试平台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎤 语音对话测试平台</h1>
+                <div class="header-actions">
+                    <button id="btnSettings" class="btn btn-settings" onclick="openSettings()">
+                        <span class="icon">⚙️</span> 设置
+                    </button>
+                    <button id="btnReport" class="btn btn-report" onclick="showReport()" style="display: none;">
+                        <span class="icon">📊</span> 查看报告
+                    </button>
+                    <button id="btnStart" class="btn btn-primary" onclick="startTest()">
+                        <span class="icon">▶</span> 开始测试
+                    </button>
+                    <button id="btnStop" class="btn btn-danger" onclick="stopTest()" disabled>
+                        <span class="icon">⏹</span> 停止测试
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    📊
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">总测试数</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    ✅
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">成功</div>
+                    <div class="stat-value" id="statSuccess">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    ❌
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">失败</div>
+                    <div class="stat-value" id="statFailed">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    📈
+                </div>
+                <div class="stat-content">
+                    <div class="stat-label">成功率</div>
+                    <div class="stat-value" id="statRate">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 进度条 -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-label">测试进度</span>
+                <span class="progress-text" id="progressText">0 / 0</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 实时对话流 -->
+            <div class="panel conversation-panel">
+                <div class="panel-header">
+                    <h2>💬 实时对话流</h2>
+                    <div class="panel-actions">
+                        <button class="btn-icon" onclick="clearConversation()" title="清空">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <div id="conversationList" class="conversation-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">💭</div>
+                            <div class="empty-text">等待测试开始...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 测试结果 -->
+            <div class="panel test-results-panel">
+                <div class="panel-header">
+                    <h2>📊 测试结果</h2>
+                    <div class="panel-actions">
+                        <span class="indicator-count" id="concurrencyCount">0</span>
+                    </div>
+                </div>
+                <div class="panel-content test-results-content">
+                    <div id="concurrencyBlocks" class="concurrency-blocks"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 测试报告模态框 -->
+    <div id="reportModal" class="settings-modal">
+        <div class="settings-modal-overlay" onclick="closeReport()"></div>
+        <div class="settings-modal-content report-modal-content">
+            <div class="settings-modal-header">
+                <h2>📊 测试报告</h2>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button class="btn btn-primary" onclick="exportReportPDF()" style="padding: 8px 16px; font-size: 14px;">
+                        <span class="icon">📥</span> 导出PDF
+                    </button>
+                    <button class="settings-close-btn" onclick="closeReport()">×</button>
+                </div>
+            </div>
+            <div class="settings-modal-body report-body">
+                <div id="reportContent">
+                    <div class="loading-state">正在生成报告...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-modal-overlay" onclick="closeSettings()"></div>
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h2>⚙️ 测试设置</h2>
+                <button class="settings-close-btn" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">🔢</span>
+                        <h3>并发设置</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="concurrencyInput">并发连接数</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="concurrencyInput" class="settings-input" 
+                                   min="1" max="100" value="10" 
+                                   placeholder="请输入并发数 (1-100)">
+                            <div class="input-hint">同时建立的WebSocket连接数量</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">📱</span>
+                        <h3>设备SN设置</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="deviceSnsInput">设备序列号 (每行一个)</label>
+                        <div class="input-wrapper">
+                            <textarea id="deviceSnsInput" class="settings-textarea" 
+                                      rows="10" 
+                                      placeholder="请输入设备SN，每行一个，例如：&#10;FC012C2EA310&#10;FC012C2EA174&#10;FC012C2EA0E8"></textarea>
+                            <div class="input-hint">每个SN将创建一个独立的WebSocket连接</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">🌐</span>
+                        <h3>服务器环境</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="wsUrlInput">WebSocket服务器地址</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="wsUrlInput" class="settings-input" 
+                                   placeholder="ws://toyaiws.spacechaintech.com:8081 或 wss://toyaiws.spacechaintech.com">
+                            <div class="input-hint">
+                                生产环境: wss://toyaiws.spacechaintech.com<br>
+                                生产环境: ws://toyaiws.spacechaintech.com:8081<br>
+                                测试环境: wss://192.168.110.127<br>
+                                <br>
+                                留空则使用默认配置
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">⚡</span>
+                        <h3>测试模式</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="testModeSelect">测试模式选择</label>
+                        <div class="input-wrapper">
+                            <select id="testModeSelect" class="settings-input">
+                                <option value="normal">正常模式 - 等待完整响应</option>
+                                <option value="fast">急速模式 - 大模型开始回复直接进入下一轮</option>
+                            </select>
+                            <div class="input-hint">
+                                <strong>正常模式：</strong>等待完整响应（TTS stop）后再进行下一个问题，确保每个对话完整完成<br>
+                                <strong>急速模式：</strong>只要大模型开始回复就继续下一个问题，提高测试效率
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-modal-footer">
+                <button class="btn btn-secondary" onclick="closeSettings()">取消</button>
+                <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+2025-11-11 10:54:08 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 10:54:08 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 121.06ms
+2025-11-11 10:54:08 | INFO     | 
+============================================================
+2025-11-11 10:54:08 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 10:54:08 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 10:54:08 | INFO     | ============================================================
+2025-11-11 10:54:08 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:54:08 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:54:08 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 10:54:08 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 10:54:08 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:54:18 | INFO     | Connection #1: STT response received in 8852.69ms | Recognized text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-11 10:54:18 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:54:19 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-11 10:54:20 | INFO     | Connection #1: TTS sentence_start | Text: 是真的呀！
+2025-11-11 10:54:20 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:20 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米因为独特的生长环境和品种特性
+2025-11-11 10:54:25 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:25 | INFO     | Connection #1: TTS sentence_start | Text: ，煮饭的时候确实会散发浓郁的香气
+2025-11-11 10:54:28 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:28 | INFO     | Connection #1: TTS sentence_start | Text: ，让整个屋子都充满饭香的味道。
+2025-11-11 10:54:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:31 | INFO     | Connection #1: TTS sentence_start | Text: 这主要是因为它含有一些特殊的挥发性物质
+2025-11-11 10:54:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:34 | INFO     | Connection #1: TTS sentence_start | Text: ，在蒸煮过程中这些香气就释放出来啦。
+2025-11-11 10:54:38 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:38 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+我给你推荐几款不错的东北长粒香米吧。
+2025-11-11 10:54:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:41 | INFO     | Connection #1: TTS sentence_start | Text: 。十月稻田长粒香大米5kg。：米质优。
+2025-11-11 10:54:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:45 | INFO     | Connection #1: TTS sentence_start | Text: 这款大米的米粒细长饱满，蒸煮后香气扑鼻，口感软糯香甜
+2025-11-11 10:54:50 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:50 | INFO     | Connection #1: TTS sentence_start | Text: ，很适合家庭日常食用。。柴火大院长粒香大米5kg。：口感佳。
+2025-11-11 10:54:57 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:54:57 | INFO     | Connection #1: TTS sentence_start | Text: 它煮出来的米饭不仅香气诱人，而且弹性十足，吃起来味道很不错。

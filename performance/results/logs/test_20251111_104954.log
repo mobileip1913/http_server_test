@@ -1,0 +1,165 @@
+2025-11-11 10:49:54 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 10:49:54 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 132.68ms
+2025-11-11 10:49:54 | INFO     | 
+============================================================
+2025-11-11 10:49:54 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 10:49:54 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 10:49:54 | INFO     | ============================================================
+2025-11-11 10:49:54 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:49:54 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:49:54 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 10:49:54 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 10:49:54 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:50:03 | INFO     | Connection #1: STT response received in 8505.74ms | Recognized text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-11 10:50:03 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:50:04 | INFO     | Connection #1: Received emoji message | Emotion: confused
+2025-11-11 10:50:05 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米煮饭确实蛮香的呢！
+2025-11-11 10:50:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:08 | INFO     | Connection #1: TTS sentence_start | Text: 长粒香米本身就自带独特的香气，在蒸煮过程中
+2025-11-11 10:50:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:12 | INFO     | Connection #1: TTS sentence_start | Text: ，这种香味会散发出来，让整个屋子都弥漫着饭香。
+2025-11-11 10:50:17 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:17 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+我给你推荐两款东北长粒香米吧。
+2025-11-11 10:50:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:19 | INFO     | Connection #1: TTS sentence_start | Text: 。十月稻田长粒香大米5kg。：高品质。
+2025-11-11 10:50:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:24 | INFO     | Connection #1: TTS sentence_start | Text: 这款大米米粒细长，长度一般在6-7毫米左右，色泽清白透明
+2025-11-11 10:50:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:30 | INFO     | Connection #1: TTS sentence_start | Text: ，颗粒饱满。
+2025-11-11 10:50:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:31 | INFO     | Connection #1: TTS sentence_start | Text: 煮出来的米饭口感筋糯弹牙，香气浓郁，而且冷了之后也不会回生
+2025-11-11 10:50:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:37 | INFO     | Connection #1: TTS sentence_start | Text: ，依旧好吃。。柴火大院长粒香大米5kg。：好滋味。
+2025-11-11 10:50:42 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:42 | INFO     | Connection #1: TTS sentence_start | Text: 它的米粒均匀，外形美观，做出的米饭松软可口，香味悠长。
+2025-11-11 10:50:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:48 | INFO     | Connection #1: TTS sentence_start | Text:  
+
+你看你对哪款比较感兴趣呢？是否需要对比其中几款？
+2025-11-11 10:50:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:53 | INFO     | Connection #1: TTS sentence_start | Text: 要是确定好了，可直接告诉我下单需求。
+2025-11-11 10:50:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:50:56 | INFO     | Connection #1: TTS sentence_start | Text: 话说回来，北京太空链科技是赋能传统产业高质量发展的创新企业
+2025-11-11 10:51:01 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:01 | INFO     | Connection #1: TTS sentence_start | Text: ，位于清华科技园，秉承“链”享科技
+2025-11-11 10:51:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:05 | INFO     | Connection #1: TTS sentence_start | Text: ，科技“链”享理念；立足中国整合全球资源
+2025-11-11 10:51:07 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-11 10:51:08 | INFO     | 
+============================================================
+2025-11-11 10:51:08 | INFO     | Testing [PURCHASE] #001: 购买 #1...
+2025-11-11 10:51:08 | INFO     | Audio file: purchase_001.opus
+2025-11-11 10:51:08 | INFO     | ============================================================
+2025-11-11 10:51:08 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:51:08 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:51:08 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-11 10:51:08 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-11 10:51:08 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:51:08 | INFO     | Connection #1: TTS stop | Duration: 64484.38ms | State: stop
+2025-11-11 10:51:13 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-11 10:51:13 | INFO     | ✓ Response received: ...
+2025-11-11 10:51:13 | INFO     | Connection #1: STT response received in 5260.07ms | Recognized text: 听起来不错，我购买东北大米长粒香5公斤。
+2025-11-11 10:51:13 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:51:14 | INFO     | 
+============================================================
+2025-11-11 10:51:14 | INFO     | Testing [INQUIRY] #002: 询问 #2...
+2025-11-11 10:51:14 | INFO     | Audio file: inquiry_002.opus
+2025-11-11 10:51:14 | INFO     | ============================================================
+2025-11-11 10:51:14 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:51:14 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:51:14 | INFO     | Processed remaining 1272 bytes PCM data with 648 bytes padding (total 177912 bytes)
+2025-11-11 10:51:14 | INFO     | Generated 93 raw Opus packets from PCM data (total 18790 bytes, processed 177912 bytes PCM, coverage: 99.6%)
+2025-11-11 10:51:14 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:51:21 | INFO     | Connection #1: STT response received in 6819.16ms | Recognized text: 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
+2025-11-11 10:51:21 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:51:24 | INFO     | Connection #1: TTS sentence_start | Text: 这就帮你查商品的详细属性，很快就好。
+2025-11-11 10:51:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:27 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米的米粒是细长的哦。
+2025-11-11 10:51:30 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:30 | INFO     | Connection #1: TTS sentence_start | Text: 它的米粒呈细长形，色泽洁白、晶莹剔透，外观非常好。
+2025-11-11 10:51:36 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:36 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+煮出来的米饭不会硬哈，米饭油润光亮，弹性十足，软硬适中
+2025-11-11 10:51:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:41 | INFO     | Connection #1: TTS sentence_start | Text: ，吃起来爽滑有嚼劲，冷却后也不容易回生。
+2025-11-11 10:51:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:45 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+这里给你介绍一款相关产品哈，秋实十月长粒香5KG/大米
+2025-11-11 10:51:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:51 | INFO     | Connection #1: TTS sentence_start | Text: ，价格是128.37元，供应商是黑龙江春华秋实粮油有限公司
+2025-11-11 10:51:57 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:51:57 | INFO     | Connection #1: TTS sentence_start | Text: ，店铺名称也是黑龙江春华秋实粮油有限公司，产品状态为成功。
+2025-11-11 10:52:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:02 | INFO     | Connection #1: TTS sentence_start | Text:  
+
+要是你想下单这款产品，直接跟我说就行。
+2025-11-11 10:52:06 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:06 | INFO     | Connection #1: TTS sentence_start | Text: 北京太空链科技是赋能传统产业高质量发展的创新企业
+2025-11-11 10:52:11 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:11 | INFO     | Connection #1: TTS sentence_start | Text: ，位于清华科技园，秉承“链”享科技
+2025-11-11 10:52:14 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:14 | INFO     | Connection #1: TTS sentence_start | Text: ，科技“链”享理念；立足中国整合全球资源
+2025-11-11 10:52:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:18 | INFO     | Connection #1: TTS sentence_start | Text: ，聚焦低轨卫星、低空链经济、人形机器人、数智人技术研发应用；为全球客户提供高品质产品与智能化解决方案
+2025-11-11 10:52:25 | WARNING  | ✗ Incomplete response or timeout (waited 60.0s)
+2025-11-11 10:52:26 | INFO     | 
+============================================================
+2025-11-11 10:52:26 | INFO     | Testing [PURCHASE] #002: 购买 #2...
+2025-11-11 10:52:26 | INFO     | Audio file: purchase_002.opus
+2025-11-11 10:52:26 | INFO     | ============================================================
+2025-11-11 10:52:26 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:52:26 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:52:26 | INFO     | Processed remaining 594 bytes PCM data with 1326 bytes padding (total 117714 bytes)
+2025-11-11 10:52:26 | INFO     | Generated 62 raw Opus packets from PCM data (total 11837 bytes, processed 117714 bytes PCM, coverage: 98.9%)
+2025-11-11 10:52:26 | INFO     | Detected 62 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:52:26 | INFO     | Connection #1: TTS stop | Duration: 64497.86ms | State: stop
+2025-11-11 10:52:31 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-11 10:52:31 | INFO     | ✓ Response received: ...
+2025-11-11 10:52:31 | INFO     | Connection #1: STT response received in 4824.36ms | Recognized text: 好的，我购买东北大米长粒香5公斤。
+2025-11-11 10:52:31 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:52:31 | INFO     | 
+============================================================
+2025-11-11 10:52:31 | INFO     | Testing [INQUIRY] #003: 询问 #3...
+2025-11-11 10:52:31 | INFO     | Audio file: inquiry_003.opus
+2025-11-11 10:52:31 | INFO     | ============================================================
+2025-11-11 10:52:31 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:52:31 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:52:31 | INFO     | Processed remaining 256 bytes PCM data with 1664 bytes padding (total 155776 bytes)
+2025-11-11 10:52:31 | INFO     | Generated 82 raw Opus packets from PCM data (total 17820 bytes, processed 155776 bytes PCM, coverage: 98.9%)
+2025-11-11 10:52:31 | INFO     | Detected 82 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:52:38 | INFO     | Connection #1: STT response received in 6099.79ms | Recognized text: 我想知道东北长粒香米煮饭时是不是真的满屋飘香？
+2025-11-11 10:52:38 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:52:40 | INFO     | Connection #1: TTS sentence_start | Text: 我想想哦
+2025-11-11 10:52:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:43 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米煮饭时确实常常满屋飘香。
+2025-11-11 10:52:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:45 | INFO     | Connection #1: TTS sentence_start | Text: 它本身带有独特清香，蒸煮过程中，香味会散发出来弥漫全屋。
+2025-11-11 10:52:51 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:51 | INFO     | Connection #1: TTS sentence_start | Text: 很多人反馈煮长粒香米时
+2025-11-11 10:52:54 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:54 | INFO     | Connection #1: TTS sentence_start | Text: ，还没熟透就能闻到香甜诱人的米饭香气 ，打开电饭煲
+2025-11-11 10:52:59 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:52:59 | INFO     | Connection #1: TTS sentence_start | Text: ，更是清香四溢。  
+2025-11-11 10:53:00 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:53:00 | INFO     | Connection #1: TTS stop | Duration: 22213.22ms | State: stop
+2025-11-11 10:53:00 | INFO     | Connection #1: Received complete response at 21.2s
+2025-11-11 10:53:00 | INFO     | ✓ Response received: ...
+2025-11-11 10:53:01 | INFO     | 
+============================================================
+2025-11-11 10:53:01 | INFO     | Testing [PURCHASE] #003: 购买 #3...
+2025-11-11 10:53:01 | INFO     | Audio file: purchase_003.opus
+2025-11-11 10:53:01 | INFO     | ============================================================
+2025-11-11 10:53:01 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:53:01 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:53:01 | INFO     | Processed remaining 136 bytes PCM data with 1784 bytes padding (total 142216 bytes)
+2025-11-11 10:53:01 | INFO     | Generated 75 raw Opus packets from PCM data (total 14727 bytes, processed 142216 bytes PCM, coverage: 98.8%)
+2025-11-11 10:53:01 | INFO     | Detected 75 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:53:07 | INFO     | Connection #1: STT response received in 5588.66ms | Recognized text: 如果是这样，我购买东北大米长粒香5公斤。
+2025-11-11 10:53:07 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:53:10 | INFO     | Connection #1: TTS sentence_start | Text: 马上帮你处理订单，稍作等待哦
+2025-11-11 10:53:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:53:12 | INFO     | Connection #1: TTS sentence_start | Text: 你购买的商品名称是秋实十月长粒香5KG/大米

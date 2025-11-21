@@ -1,0 +1,45 @@
+{
+  "test_info": {
+    "start_time": "2025-11-10 14:20:18.207",
+    "end_time": "2025-11-10 14:20:38.941",
+    "duration": 20.733747959136963,
+    "concurrent_connections": 1,
+    "test_message": "你好啊，我想去故宫"
+  },
+  "summary": {
+    "total_connections": 1,
+    "successful_connections": 1,
+    "failed_connections": 0,
+    "connection_success_rate": 100.0,
+    "total_messages": 1,
+    "successful_messages": 0,
+    "failed_messages": 1,
+    "message_success_rate": 0.0,
+    "avg_connect_time": 176.998046875,
+    "qps": 0.04823054673814144,
+    "test_duration": 20.733747959136963
+  },
+  "connections": [
+    {
+      "connection_id": 1,
+      "is_connected": false,
+      "connect_time": 176.998046875,
+      "connect_status": "success",
+      "send_time": 821.12744140625,
+      "stt_time": 3289.065673828125,
+      "llm_time": null,
+      "tts_start_time": null,
+      "tts_duration": null,
+      "total_response_time": 3290.06591796875,
+      "message_size": 9279,
+      "response_size": 29543,
+      "sent_messages": 51,
+      "received_messages": 267,
+      "total_sent_bytes": 9279,
+      "total_received_bytes": 29543,
+      "complete": false,
+      "error_type": null,
+      "error_message": null
+    }
+  ]
+}

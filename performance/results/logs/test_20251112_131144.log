@@ -1,0 +1,128 @@
+2025-11-12 13:11:44 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 13:11:44 | INFO     | SN列表: ['FC012C211110']
+2025-11-12 13:11:44 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 13:11:44 | INFO     | 
+============================================================
+2025-11-12 13:11:44 | INFO     | 开始测试 10个SN并发 | 连接数: 1
+2025-11-12 13:11:44 | INFO     | SN列表: FC012C211110
+2025-11-12 13:11:44 | INFO     | ============================================================
+2025-11-12 13:11:44 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 13:11:44 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C211110&sign=facb793689560d0d52b5372ee43a2535&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 13:11:44 | INFO     | Connection #1: Device SN: FC012C211110
+2025-11-12 13:11:44 | INFO     | Connection #1: Request Headers:
+2025-11-12 13:11:44 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 13:11:44 | INFO     | Connection #1:   Device-Id: FC:01:2C:21:11:10
+2025-11-12 13:11:44 | INFO     | Connection #1: ==================================
+2025-11-12 13:11:44 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 114.24ms
+2025-11-12 13:11:45 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 13:11:45 | INFO     | Connection #1: Device SN: FC012C211110
+2025-11-12 13:11:45 | INFO     | Connection #1: Response Code: -1
+2025-11-12 13:11:45 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 13:11:45 | INFO     | Connection #1: Full Response Data:
+2025-11-12 13:11:45 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 13:11:45 | INFO     | Connection #1: Session ID: None
+2025-11-12 13:11:45 | INFO     | Connection #1: ====================================
+2025-11-12 13:11:45 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C211110
+2025-11-12 13:11:45 | ERROR    | SN FC012C211110: 鉴权失败 (Conn #1)
+2025-11-12 13:11:45 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 13:11:54 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 13:11:54 | INFO     | SN列表: ['FC012C211110']
+2025-11-12 13:11:54 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 13:11:54 | INFO     | 
+============================================================
+2025-11-12 13:11:54 | INFO     | 开始测试 10个SN并发 | 连接数: 1
+2025-11-12 13:11:54 | INFO     | SN列表: FC012C211110
+2025-11-12 13:11:54 | INFO     | ============================================================
+2025-11-12 13:11:54 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 13:11:54 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C211110&sign=facb793689560d0d52b5372ee43a2535&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 13:11:54 | INFO     | Connection #1: Device SN: FC012C211110
+2025-11-12 13:11:54 | INFO     | Connection #1: Request Headers:
+2025-11-12 13:11:54 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 13:11:54 | INFO     | Connection #1:   Device-Id: FC:01:2C:21:11:10
+2025-11-12 13:11:54 | INFO     | Connection #1: ==================================
+2025-11-12 13:11:55 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 89.52ms
+2025-11-12 13:11:55 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 13:11:55 | INFO     | Connection #1: Device SN: FC012C211110
+2025-11-12 13:11:55 | INFO     | Connection #1: Response Code: -1
+2025-11-12 13:11:55 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 13:11:55 | INFO     | Connection #1: Full Response Data:
+2025-11-12 13:11:55 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 13:11:55 | INFO     | Connection #1: Session ID: None
+2025-11-12 13:11:55 | INFO     | Connection #1: ====================================
+2025-11-12 13:11:55 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C211110
+2025-11-12 13:11:55 | ERROR    | SN FC012C211110: 鉴权失败 (Conn #1)
+2025-11-12 13:11:55 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 13:12:04 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 13:12:04 | INFO     | SN列表: ['FC012C211111']
+2025-11-12 13:12:04 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 13:12:04 | INFO     | 
+============================================================
+2025-11-12 13:12:04 | INFO     | 开始测试 10个SN并发 | 连接数: 1
+2025-11-12 13:12:04 | INFO     | SN列表: FC012C211111
+2025-11-12 13:12:04 | INFO     | ============================================================
+2025-11-12 13:12:04 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 13:12:04 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C211111&sign=edc461005206ce44866f226f5c724a08&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 13:12:04 | INFO     | Connection #1: Device SN: FC012C211111
+2025-11-12 13:12:04 | INFO     | Connection #1: Request Headers:
+2025-11-12 13:12:04 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 13:12:04 | INFO     | Connection #1:   Device-Id: FC:01:2C:21:11:11
+2025-11-12 13:12:04 | INFO     | Connection #1: ==================================
+2025-11-12 13:12:04 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 95.15ms
+2025-11-12 13:12:04 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 13:12:04 | INFO     | Connection #1: Device SN: FC012C211111
+2025-11-12 13:12:04 | INFO     | Connection #1: Response Code: -1
+2025-11-12 13:12:04 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 13:12:04 | INFO     | Connection #1: Full Response Data:
+2025-11-12 13:12:04 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 13:12:04 | INFO     | Connection #1: Session ID: None
+2025-11-12 13:12:04 | INFO     | Connection #1: ====================================
+2025-11-12 13:12:04 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C211111
+2025-11-12 13:12:04 | ERROR    | SN FC012C211111: 鉴权失败 (Conn #1)
+2025-11-12 13:12:04 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 13:12:14 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 13:12:14 | INFO     | SN列表: ['FC012C211111']
+2025-11-12 13:12:14 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 13:12:14 | INFO     | 
+============================================================
+2025-11-12 13:12:14 | INFO     | 开始测试 10个SN并发 | 连接数: 1
+2025-11-12 13:12:14 | INFO     | SN列表: FC012C211111
+2025-11-12 13:12:14 | INFO     | ============================================================
+2025-11-12 13:12:14 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 13:12:14 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C211111&sign=edc461005206ce44866f226f5c724a08&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 13:12:14 | INFO     | Connection #1: Device SN: FC012C211111
+2025-11-12 13:12:14 | INFO     | Connection #1: Request Headers:
+2025-11-12 13:12:14 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 13:12:14 | INFO     | Connection #1:   Device-Id: FC:01:2C:21:11:11
+2025-11-12 13:12:14 | INFO     | Connection #1: ==================================
+2025-11-12 13:12:15 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 81.16ms
+2025-11-12 13:12:15 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 13:12:15 | INFO     | Connection #1: Device SN: FC012C211111
+2025-11-12 13:12:15 | INFO     | Connection #1: Response Code: -1
+2025-11-12 13:12:15 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 13:12:15 | INFO     | Connection #1: Full Response Data:
+2025-11-12 13:12:15 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 13:12:15 | INFO     | Connection #1: Session ID: None
+2025-11-12 13:12:15 | INFO     | Connection #1: ====================================
+2025-11-12 13:12:15 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C211111
+2025-11-12 13:12:15 | ERROR    | SN FC012C211111: 鉴权失败 (Conn #1)
+2025-11-12 13:12:15 | ERROR    | 所有连接均失败，终止测试

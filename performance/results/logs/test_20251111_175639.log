@@ -1,0 +1,62 @@
+2025-11-11 17:56:39 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 17:56:39 | INFO     | 
+============================================================
+2025-11-11 17:56:39 | INFO     | 开始测试 单SN并发: FC012C2E1111 | 连接数: 1
+2025-11-11 17:56:39 | INFO     | ============================================================
+2025-11-11 17:56:39 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-11 17:56:39 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2E1111&sign=8ba404b2cf1daafe156d6358a27bdece&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-11 17:56:39 | INFO     | Connection #1: Device SN: FC012C2E1111
+2025-11-11 17:56:39 | INFO     | Connection #1: Request Headers:
+2025-11-11 17:56:39 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-11 17:56:39 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:11:11
+2025-11-11 17:56:39 | INFO     | Connection #1: ==================================
+2025-11-11 17:56:40 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 142.10ms
+2025-11-11 17:56:40 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-11 17:56:40 | INFO     | Connection #1: Device SN: FC012C2E1111
+2025-11-11 17:56:40 | INFO     | Connection #1: Response Code: 0
+2025-11-11 17:56:40 | INFO     | Connection #1: Response Message: auth_success
+2025-11-11 17:56:40 | INFO     | Connection #1: Full Response Data:
+2025-11-11 17:56:40 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2E1111",
+    "volume": 50,
+    "light": 20,
+    "time": 1762855000477,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-11 17:56:40 | INFO     | Connection #1: Session ID: None
+2025-11-11 17:56:40 | INFO     | Connection #1: ====================================
+2025-11-11 17:56:40 | INFO     | Connection #1: ✅ Auth SUCCESS | Code: 0, Message: auth_success, Session ID: None
+2025-11-11 17:56:40 | INFO     | SN FC012C2E1111: 鉴权成功 (Conn #1)
+2025-11-11 17:56:40 | INFO     | 
+============================================================
+2025-11-11 17:56:40 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 17:56:40 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 17:56:40 | INFO     | ============================================================
+2025-11-11 17:56:40 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 17:56:40 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 17:56:40 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 17:56:40 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 17:56:40 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 17:56:40 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-11 17:56:40 | INFO     | Connection #1: Device SN: FC012C2E1111
+2025-11-11 17:56:40 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2E1111&sign=8ba404b2cf1daafe156d6358a27bdece&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-11 17:56:40 | INFO     | Connection #1: Session ID: None
+2025-11-11 17:56:40 | INFO     | Connection #1: Message Content:
+2025-11-11 17:56:40 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-11 17:56:40 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-11 17:56:40 | INFO     | Connection #1: =======================================

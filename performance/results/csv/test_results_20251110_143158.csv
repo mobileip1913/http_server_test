@@ -1,0 +1,2 @@
+connection_id,connect_time,connect_status,send_time,send_end_time,stt_time,llm_time,tts_start_time,tts_duration,total_response_time,audio_to_tts_delay,message_size,response_size,complete,error_type,error_message
+1,182.592041015625,success,829.2216796875,3929.921875,3309.90478515625,,,,3311.166015625,210.4658203125,9279,29083,False,,

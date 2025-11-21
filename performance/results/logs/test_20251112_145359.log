@@ -1,0 +1,292 @@
+2025-11-12 14:53:59 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:53:59 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:53:59 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:53:59 | INFO     | 
+============================================================
+2025-11-12 14:53:59 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:53:59 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:53:59 | INFO     | ============================================================
+2025-11-12 14:53:59 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:53:59 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:53:59 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8081/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:53:59 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:53:59 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:53:59 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:53:59 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:53:59 | INFO     | Connection #1: ==================================
+2025-11-12 14:54:01 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 2032.71ms
+2025-11-12 14:54:01 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: [WinError 1225] 远程计算机拒绝网络连接。
+2025-11-12 14:54:01 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:54:01 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:54:15 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:54:15 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:54:15 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:54:15 | INFO     | 
+============================================================
+2025-11-12 14:54:15 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:54:15 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:54:15 | INFO     | ============================================================
+2025-11-12 14:54:15 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:54:15 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:54:15 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:54:15 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:54:15 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:54:15 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:54:15 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:54:15 | INFO     | Connection #1: ==================================
+2025-11-12 14:54:15 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 18.00ms
+2025-11-12 14:54:15 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:54:15 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:54:15 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:54:19 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:54:19 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:54:19 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:54:19 | INFO     | 
+============================================================
+2025-11-12 14:54:19 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:54:19 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:54:19 | INFO     | ============================================================
+2025-11-12 14:54:19 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:54:19 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:54:19 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:54:19 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:54:19 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:54:19 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:54:19 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:54:19 | INFO     | Connection #1: ==================================
+2025-11-12 14:54:19 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 8.00ms
+2025-11-12 14:54:19 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:54:19 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:54:19 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:56:56 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:56:56 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:56:56 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:56:56 | INFO     | 
+============================================================
+2025-11-12 14:56:56 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:56:56 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:56:56 | INFO     | ============================================================
+2025-11-12 14:56:56 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:56:56 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:56:56 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:56:56 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:56:56 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:56:56 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:56:56 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:56:56 | INFO     | Connection #1: ==================================
+2025-11-12 14:56:56 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 8.02ms
+2025-11-12 14:56:56 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:56:56 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:56:56 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:56:59 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:56:59 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:56:59 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:56:59 | INFO     | 
+============================================================
+2025-11-12 14:56:59 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:56:59 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:56:59 | INFO     | ============================================================
+2025-11-12 14:56:59 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:56:59 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:56:59 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:56:59 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:56:59 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:56:59 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:56:59 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:56:59 | INFO     | Connection #1: ==================================
+2025-11-12 14:56:59 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 17.00ms
+2025-11-12 14:56:59 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:56:59 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:56:59 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:00 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:00 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:00 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:00 | INFO     | 
+============================================================
+2025-11-12 14:57:00 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:00 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:00 | INFO     | ============================================================
+2025-11-12 14:57:00 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:00 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:00 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:00 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:00 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:00 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:00 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:00 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:00 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 6.00ms
+2025-11-12 14:57:00 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:57:00 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:57:00 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:01 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:01 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:01 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:01 | INFO     | 
+============================================================
+2025-11-12 14:57:01 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:01 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:01 | INFO     | ============================================================
+2025-11-12 14:57:01 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:01 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:01 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:01 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:01 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:01 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:01 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:01 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:01 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 8.04ms
+2025-11-12 14:57:01 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:57:01 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:57:01 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:02 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:02 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:02 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:02 | INFO     | 
+============================================================
+2025-11-12 14:57:02 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:02 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:02 | INFO     | ============================================================
+2025-11-12 14:57:02 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:02 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:02 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8091/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:02 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:02 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:02 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:02 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:02 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:02 | INFO     | [CONNECTION] Connection #1 | Status: failed | Duration: 6.02ms
+2025-11-12 14:57:02 | ERROR    | [ERROR] Connection #1 | Error Type: ConnectionError | Error Message: server rejected WebSocket connection: HTTP 404
+2025-11-12 14:57:02 | ERROR    | SN FC012C2EA0D4: 连接失败 (Conn #1)
+2025-11-12 14:57:02 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:10 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:10 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:10 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:10 | INFO     | 
+============================================================
+2025-11-12 14:57:10 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:10 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:10 | INFO     | ============================================================
+2025-11-12 14:57:10 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:10 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:10 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8081/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:10 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:10 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:10 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:10 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:10 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:10 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 7.05ms
+2025-11-12 14:57:11 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 14:57:11 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:11 | INFO     | Connection #1: Response Code: -1
+2025-11-12 14:57:11 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 14:57:11 | INFO     | Connection #1: Full Response Data:
+2025-11-12 14:57:11 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 14:57:11 | INFO     | Connection #1: Session ID: None
+2025-11-12 14:57:11 | INFO     | Connection #1: ====================================
+2025-11-12 14:57:11 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C2EA0D4
+2025-11-12 14:57:11 | ERROR    | SN FC012C2EA0D4: 鉴权失败 (Conn #1)
+2025-11-12 14:57:11 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:12 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:12 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:12 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:12 | INFO     | 
+============================================================
+2025-11-12 14:57:12 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:12 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:12 | INFO     | ============================================================
+2025-11-12 14:57:12 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:12 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:12 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8081/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:12 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:12 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:12 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:12 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:12 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:12 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 13.01ms
+2025-11-12 14:57:12 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 14:57:12 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:12 | INFO     | Connection #1: Response Code: -1
+2025-11-12 14:57:12 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 14:57:12 | INFO     | Connection #1: Full Response Data:
+2025-11-12 14:57:12 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 14:57:12 | INFO     | Connection #1: Session ID: None
+2025-11-12 14:57:12 | INFO     | Connection #1: ====================================
+2025-11-12 14:57:12 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C2EA0D4
+2025-11-12 14:57:12 | ERROR    | SN FC012C2EA0D4: 鉴权失败 (Conn #1)
+2025-11-12 14:57:12 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:57:16 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:57:16 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:57:16 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:57:16 | INFO     | 
+============================================================
+2025-11-12 14:57:16 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:57:16 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:57:16 | INFO     | ============================================================
+2025-11-12 14:57:16 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:57:16 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:57:16 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8081/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:57:16 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:16 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:57:16 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:57:16 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:57:16 | INFO     | Connection #1: ==================================
+2025-11-12 14:57:16 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 10.58ms
+2025-11-12 14:57:17 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 14:57:17 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:57:17 | INFO     | Connection #1: Response Code: -1
+2025-11-12 14:57:17 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 14:57:17 | INFO     | Connection #1: Full Response Data:
+2025-11-12 14:57:17 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 14:57:17 | INFO     | Connection #1: Session ID: None
+2025-11-12 14:57:17 | INFO     | Connection #1: ====================================
+2025-11-12 14:57:17 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C2EA0D4
+2025-11-12 14:57:17 | ERROR    | SN FC012C2EA0D4: 鉴权失败 (Conn #1)
+2025-11-12 14:57:17 | ERROR    | 所有连接均失败，终止测试
+2025-11-12 14:58:42 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-12 14:58:42 | INFO     | SN列表: ['FC012C2EA0D4']
+2025-11-12 14:58:42 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-12 14:58:42 | INFO     | 
+============================================================
+2025-11-12 14:58:42 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-12 14:58:42 | INFO     | SN列表: FC012C2EA0D4
+2025-11-12 14:58:42 | INFO     | ============================================================
+2025-11-12 14:58:42 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-12 14:58:42 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-12 14:58:42 | INFO     | Connection #1: Request URL: ws://192.168.110.127:8081/?sn=FC012C2EA0D4&sign=e74b2eb7e4315c84647a63e096962774&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-12 14:58:42 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:58:42 | INFO     | Connection #1: Request Headers:
+2025-11-12 14:58:42 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-12 14:58:42 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:D4
+2025-11-12 14:58:42 | INFO     | Connection #1: ==================================
+2025-11-12 14:58:42 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 13.05ms
+2025-11-12 14:58:42 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-12 14:58:42 | INFO     | Connection #1: Device SN: FC012C2EA0D4
+2025-11-12 14:58:42 | INFO     | Connection #1: Response Code: -1
+2025-11-12 14:58:42 | INFO     | Connection #1: Response Message: auth_failed
+2025-11-12 14:58:42 | INFO     | Connection #1: Full Response Data:
+2025-11-12 14:58:42 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": -1,
+  "msg": "auth_failed",
+  "data": []
+}
+2025-11-12 14:58:42 | INFO     | Connection #1: Session ID: None
+2025-11-12 14:58:42 | INFO     | Connection #1: ====================================
+2025-11-12 14:58:42 | ERROR    | Connection #1: ❌ Auth FAILED | Code: -1, Message: auth_failed, Device SN: FC012C2EA0D4
+2025-11-12 14:58:42 | ERROR    | SN FC012C2EA0D4: 鉴权失败 (Conn #1)
+2025-11-12 14:58:42 | ERROR    | 所有连接均失败，终止测试

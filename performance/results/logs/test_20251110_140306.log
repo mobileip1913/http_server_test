@@ -1,0 +1,58 @@
+2025-11-10 14:03:06 | INFO     | 正在生成测试音频帧...
+2025-11-10 14:03:06 | INFO     | Using pre-generated audio file: D:\code\vb_eye_st7789\performance\audio\test_audio.opus
+2025-11-10 14:03:06 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-10 14:03:06 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-10 14:03:06 | INFO     | Processed remaining 564 bytes PCM data with 1356 bytes padding (total 92724 bytes)
+2025-11-10 14:03:06 | INFO     | Generated 49 raw Opus packets from PCM data (total 9081 bytes, processed 92724 bytes PCM, coverage: 98.6%)
+2025-11-10 14:03:06 | INFO     | Detected 49 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 14:03:06 | INFO     | Detected 49 raw Opus packets from Ogg container. These MUST be sent individually, ignoring SPLIT_OPUS_PACKETS=False
+2025-11-10 14:03:06 | INFO     | 已生成 49 个 Opus 帧，总计 9081 字节
+2025-11-10 14:03:06 | INFO     | ============================================================
+2025-11-10 14:03:06 | INFO     | 开始 WebSocket 性能测试 - 测试模式
+2025-11-10 14:03:06 | INFO     | ============================================================
+2025-11-10 14:03:06 | INFO     | 并发连接数: 1
+2025-11-10 14:03:06 | INFO     | ⚡ 极限性能模式: 已启用（根据并发数动态调整等待时间）
+2025-11-10 14:03:06 | INFO     |    - Auth等待: 0.5秒
+2025-11-10 14:03:06 | INFO     |    - 响应等待: 15.2秒（动态计算：基础15.0秒 + 每个连接0.15秒 × 1连接）
+2025-11-10 14:03:06 | INFO     |    - 最后等待: 0.1秒
+2025-11-10 14:03:06 | INFO     | 测试消息: 你好啊，我想去故宫
+2025-11-10 14:03:06 | INFO     | 服务器地址: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0A0&sign=c61505cccb8dc83d8e67450cbd4f32c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=wifi&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-10 14:03:06 | INFO     | 设备SN: FC012C2EA0A0 (已注册)
+2025-11-10 14:03:06 | INFO     | 板卡类型: wifi
+2025-11-10 14:03:06 | INFO     | 发送音频数据: True
+2025-11-10 14:03:06 | INFO     | ============================================================
+2025-11-10 14:03:06 | INFO     | 测试开始
+2025-11-10 14:03:06 | INFO     | 等待 1 个连接完成...
+2025-11-10 14:03:06 | INFO     | 连接 #1: 开始... (USE_IOT_SIMULATOR=True)
+2025-11-10 14:03:06 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 181.61ms
+2025-11-10 14:03:10 | INFO     | Connection #1: STT response received in 3275.30ms | Recognized text: 我想买一瓶红酒，你有推荐吗？
+2025-11-10 14:03:10 | INFO     | Connection #1: TTS start | State: start
+2025-11-10 14:03:12 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-10 14:03:13 | INFO     | Connection #1: TTS sentence_start | Text: 好嘞，请稍等，正在处理中
+2025-11-10 14:03:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-10 14:03:15 | INFO     | Connection #1: TTS sentence_start | Text: 以下是为你推荐的红酒：
+- 名称：蓝色经典窖藏人参酒
+  价格：1800.18元
+  商品类别：酒水
+  详细介绍：融东方精粹
+2025-11-10 14:03:27 | ERROR    | 测试失败，错误: Invalid format specifier '.2f if self.stt_response_time else None' for object of type 'float'
+2025-11-10 14:03:27 | ERROR    | Traceback (most recent call last):
+  File "D:\code\vb_eye_st7789\performance\test_runner.py", line 337, in run
+    asyncio.run(self.run_concurrent_test())
+  File "C:\Users\mobil\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mobil\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mobil\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 664, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\code\vb_eye_st7789\performance\test_runner.py", line 312, in run_concurrent_test
+    metrics = client.get_metrics()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\code\vb_eye_st7789\performance\websocket_client.py", line 820, in get_metrics
+    f"stt_time={self.stt_response_time:.2f if self.stt_response_time else None}, "
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier '.2f if self.stt_response_time else None' for object of type 'float'
+

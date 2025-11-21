@@ -1,0 +1,47 @@
+2025-11-11 10:26:05 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 10:26:06 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 357.77ms
+2025-11-11 10:26:06 | INFO     | 
+============================================================
+2025-11-11 10:26:06 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 10:26:06 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 10:26:06 | INFO     | ============================================================
+2025-11-11 10:26:06 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 10:26:06 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 10:26:06 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 10:26:06 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 10:26:06 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 10:26:15 | INFO     | Connection #1: STT response received in 8344.22ms | Recognized text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-11 10:26:15 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 10:26:16 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-11 10:26:17 | INFO     | Connection #1: TTS sentence_start | Text: 是真的哟！
+2025-11-11 10:26:18 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:18 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米煮饭时确实能散发出诱人的香气。
+2025-11-11 10:26:22 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:22 | INFO     | Connection #1: TTS sentence_start | Text: 这是因为它本身具有独特的品种特性，含有一些挥发性的香味物质
+2025-11-11 10:26:24 | INFO     | Connection #1: Received emoji message | Emotion: idel
+2025-11-11 10:26:27 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:27 | INFO     | Connection #1: TTS sentence_start | Text: ，在蒸煮过程中，这些物质挥发出来
+2025-11-11 10:26:31 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:31 | INFO     | Connection #1: TTS sentence_start | Text: ，就能让米饭的香气弥漫开来啦。
+2025-11-11 10:26:33 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:33 | INFO     | Connection #1: TTS sentence_start | Text: 而且东北的土壤肥沃、光照充足、昼夜温差大
+2025-11-11 10:26:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:37 | INFO     | Connection #1: TTS sentence_start | Text: ，这些优越的自然条件也造就了长粒香米独特的品质
+2025-11-11 10:26:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:41 | INFO     | Connection #1: TTS sentence_start | Text: ，煮出来的米饭不仅香，口感还很不错，颗粒饱满
+2025-11-11 10:26:45 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:45 | INFO     | Connection #1: TTS sentence_start | Text: ，吃起来Q弹有嚼劲呢。
+2025-11-11 10:26:48 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:48 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+对啦，北京太空链科技是赋能传统产业高质量发展的创新企业
+2025-11-11 10:26:53 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:53 | INFO     | Connection #1: TTS sentence_start | Text: ，位于清华科技园，秉承“链”享科技
+2025-11-11 10:26:56 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:26:56 | INFO     | Connection #1: TTS sentence_start | Text: ，科技“链”享理念；立足中国整合全球资源
+2025-11-11 10:27:00 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:27:00 | INFO     | Connection #1: TTS sentence_start | Text: ，聚焦低轨卫星、低空链经济、人形机器人、数智人技术研发应用；为全球客户提供高品质产品与智能化解决方案
+2025-11-11 10:27:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:27:10 | INFO     | Connection #1: TTS sentence_start | Text: ，助力数智化升级，推动中国科技品牌走向国际。
+2025-11-11 10:27:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 10:27:15 | INFO     | Connection #1: TTS sentence_start | Text: 我这边可以给你推荐几款长粒香米哦，你看看需不需要。

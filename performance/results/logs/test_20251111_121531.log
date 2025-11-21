@@ -1,0 +1,378 @@
+2025-11-11 12:15:31 | WARNING  | File not found: D:\code\vb_eye_st7789\performance\product_inquiries.txt, will use audio files only
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] HTTP Response | Status: 101 | Headers: {'upgrade': 'websocket', 'connection': 'Upgrade', 'sec-websocket-accept': 'OBbNxqr1U8QLGsFPkmfr5mgB69Y='}
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] WebSocket state | Close code: None | Remote address: ('119.91.66.120', 8081)
+2025-11-11 12:15:31 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 188.08ms
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] Received JSON message #1 | Raw message: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA0A0",
+    "volume": 50,
+    "light": 20,
+    "time": 1762834532563,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] Parsed message | Type: auth | Full data: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA0A0",
+    "volume": 50,
+    "light": 20,
+    "time": 1762834532563,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-11 12:15:31 | INFO     | 
+============================================================
+2025-11-11 12:15:31 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-11 12:15:31 | INFO     | Audio file: inquiry_001.opus
+2025-11-11 12:15:31 | INFO     | ============================================================
+2025-11-11 12:15:31 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 12:15:31 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 12:15:31 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-11 12:15:31 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-11 12:15:31 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 140 bytes
+2025-11-11 12:15:31 | INFO     | Connection #1: [DETAILED] Sent message | Type: start_listen | Full message: {"session_id": "", "type": "start_listen", "data": {"format": "opus", "tts_format": "opus", "playTag": 1, "state": "asr", "mode": "manual"}}
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 58 bytes
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Sent message | Type: stop_listen | Full message: {"session_id": "", "type": "stop_listen", "state": "stop"}
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Received JSON message #2 | Raw message: {"type":"stt","text":"你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？"}
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Parsed message | Type: stt | Full data: {
+  "type": "stt",
+  "text": "你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？"
+}
+2025-11-11 12:15:40 | INFO     | Connection #1: STT response received in 8487.55ms | Recognized text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Received JSON message #3 | Raw message: {"type":"tts","state":"start"}
+2025-11-11 12:15:40 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-11 12:15:40 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 12:15:41 | INFO     | Connection #1: [DETAILED] Received JSON message #4 | Raw message: {"type":"emoji","text":"😊","emotion":"happy"}
+2025-11-11 12:15:41 | INFO     | Connection #1: [DETAILED] Parsed message | Type: emoji | Full data: {
+  "type": "emoji",
+  "text": "😊",
+  "emotion": "happy"
+}
+2025-11-11 12:15:41 | INFO     | Connection #1: Received emoji message | Emotion: happy
+2025-11-11 12:15:42 | INFO     | Connection #1: [DETAILED] Received JSON message #5 | Raw message: {"type":"tts","state":"sentence_start","text":"确实如此呀！"}
+2025-11-11 12:15:42 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "确实如此呀！"
+}
+2025-11-11 12:15:42 | INFO     | Connection #1: TTS sentence_start | Text: 确实如此呀！
+2025-11-11 12:15:43 | INFO     | Connection #1: [DETAILED] Received JSON message #27 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:15:43 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:15:43 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:15:43 | INFO     | Connection #1: [DETAILED] Received JSON message #28 | Raw message: {"type":"tts","state":"sentence_start","text":"东北长粒香米煮饭那叫一个香。"}
+2025-11-11 12:15:43 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "东北长粒香米煮饭那叫一个香。"
+}
+2025-11-11 12:15:43 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米煮饭那叫一个香。
+2025-11-11 12:15:46 | INFO     | Connection #1: [DETAILED] Received JSON message #79 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:15:46 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:15:46 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:15:46 | INFO     | Connection #1: [DETAILED] Received JSON message #80 | Raw message: {"type":"tts","state":"sentence_start","text":"它生长环境优越，东北的黑土地肥沃，光照、水源等条件良好"}
+2025-11-11 12:15:46 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "它生长环境优越，东北的黑土地肥沃，光照、水源等条件良好"
+}
+2025-11-11 12:15:46 | INFO     | Connection #1: TTS sentence_start | Text: 它生长环境优越，东北的黑土地肥沃，光照、水源等条件良好
+2025-11-11 12:15:52 | INFO     | Connection #1: [DETAILED] Received JSON message #173 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:15:52 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:15:52 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:15:52 | INFO     | Connection #1: [DETAILED] Received JSON message #174 | Raw message: {"type":"tts","state":"sentence_start","text":"，使得长粒香米积累了丰富的营养物质，也造就了它独特的香气。"}
+2025-11-11 12:15:52 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，使得长粒香米积累了丰富的营养物质，也造就了它独特的香气。"
+}
+2025-11-11 12:15:52 | INFO     | Connection #1: TTS sentence_start | Text: ，使得长粒香米积累了丰富的营养物质，也造就了它独特的香气。
+2025-11-11 12:15:57 | INFO     | Connection #1: [DETAILED] Received JSON message #260 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:15:57 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:15:57 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:15:57 | INFO     | Connection #1: [DETAILED] Received JSON message #261 | Raw message: {"type":"tts","state":"sentence_start","text":"在煮饭过程中，这种香气会充分散发出来，闻着就让人特别有食欲"}
+2025-11-11 12:15:57 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "在煮饭过程中，这种香气会充分散发出来，闻着就让人特别有食欲"
+}
+2025-11-11 12:15:57 | INFO     | Connection #1: TTS sentence_start | Text: 在煮饭过程中，这种香气会充分散发出来，闻着就让人特别有食欲
+2025-11-11 12:16:02 | INFO     | Connection #1: [DETAILED] Received JSON message #352 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:02 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:02 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:02 | INFO     | Connection #1: [DETAILED] Received JSON message #353 | Raw message: {"type":"tts","state":"sentence_start","text":"，煮出的米饭不仅香，口感还软糯筋道，让人回味无穷。"}
+2025-11-11 12:16:02 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，煮出的米饭不仅香，口感还软糯筋道，让人回味无穷。"
+}
+2025-11-11 12:16:02 | INFO     | Connection #1: TTS sentence_start | Text: ，煮出的米饭不仅香，口感还软糯筋道，让人回味无穷。
+2025-11-11 12:16:07 | INFO     | Connection #1: [DETAILED] Received JSON message #433 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:07 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:07 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:07 | INFO     | Connection #1: [DETAILED] Received JSON message #434 | Raw message: {"type":"tts","state":"sentence_start","text":"\n\n说到这，我给你推荐几款长粒香米哈。"}
+2025-11-11 12:16:07 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n说到这，我给你推荐几款长粒香米哈。"
+}
+2025-11-11 12:16:07 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+说到这，我给你推荐几款长粒香米哈。
+2025-11-11 12:16:10 | INFO     | Connection #1: [DETAILED] Received JSON message #489 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:10 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:10 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:10 | INFO     | Connection #1: [DETAILED] Received JSON message #490 | Raw message: {"type":"tts","state":"sentence_start","text":"。金龙鱼长粒香米5kg。：知名品牌型。"}
+2025-11-11 12:16:10 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "。金龙鱼长粒香米5kg。：知名品牌型。"
+}
+2025-11-11 12:16:10 | INFO     | Connection #1: TTS sentence_start | Text: 。金龙鱼长粒香米5kg。：知名品牌型。
+2025-11-11 12:16:15 | INFO     | Connection #1: [DETAILED] Received JSON message #574 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:15 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:15 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:15 | INFO     | Connection #1: [DETAILED] Received JSON message #575 | Raw message: {"type":"tts","state":"sentence_start","text":"金龙鱼可是家喻户晓的大品牌，品质值得信赖。"}
+2025-11-11 12:16:15 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "金龙鱼可是家喻户晓的大品牌，品质值得信赖。"
+}
+2025-11-11 12:16:15 | INFO     | Connection #1: TTS sentence_start | Text: 金龙鱼可是家喻户晓的大品牌，品质值得信赖。
+2025-11-11 12:16:19 | INFO     | Connection #1: [DETAILED] Received JSON message #643 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:19 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:19 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:19 | INFO     | Connection #1: [DETAILED] Received JSON message #644 | Raw message: {"type":"tts","state":"sentence_start","text":"这款米米粒细长均匀，煮出的米饭口感柔软，香气四溢。"}
+2025-11-11 12:16:19 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "这款米米粒细长均匀，煮出的米饭口感柔软，香气四溢。"
+}
+2025-11-11 12:16:19 | INFO     | Connection #1: TTS sentence_start | Text: 这款米米粒细长均匀，煮出的米饭口感柔软，香气四溢。
+2025-11-11 12:16:24 | INFO     | Connection #1: [DETAILED] Received JSON message #727 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:24 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:24 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:24 | INFO     | Connection #1: [DETAILED] Received JSON message #728 | Raw message: {"type":"tts","state":"sentence_start","text":"。福临门长粒香东北大米5kg。：大众喜爱型。"}
+2025-11-11 12:16:24 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "。福临门长粒香东北大米5kg。：大众喜爱型。"
+}
+2025-11-11 12:16:24 | INFO     | Connection #1: TTS sentence_start | Text: 。福临门长粒香东北大米5kg。：大众喜爱型。
+2025-11-11 12:16:29 | INFO     | Connection #1: [DETAILED] Received JSON message #804 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:29 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:29 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:29 | INFO     | Connection #1: [DETAILED] Received JSON message #805 | Raw message: {"type":"tts","state":"sentence_start","text":"福临门也是深受大家欢迎的品牌，米质上乘，长粒饱满"}
+2025-11-11 12:16:29 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "福临门也是深受大家欢迎的品牌，米质上乘，长粒饱满"
+}
+2025-11-11 12:16:29 | INFO     | Connection #1: TTS sentence_start | Text: 福临门也是深受大家欢迎的品牌，米质上乘，长粒饱满
+2025-11-11 12:16:34 | INFO     | Connection #1: [DETAILED] Received JSON message #893 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:34 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:34 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:34 | INFO     | Connection #1: [DETAILED] Received JSON message #894 | Raw message: {"type":"tts","state":"sentence_start","text":"，蒸煮后米饭香气扑鼻，口感不错。"}
+2025-11-11 12:16:34 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，蒸煮后米饭香气扑鼻，口感不错。"
+}
+2025-11-11 12:16:34 | INFO     | Connection #1: TTS sentence_start | Text: ，蒸煮后米饭香气扑鼻，口感不错。
+2025-11-11 12:16:37 | INFO     | Connection #1: [DETAILED] Received JSON message #951 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:37 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:37 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:37 | INFO     | Connection #1: [DETAILED] Received JSON message #952 | Raw message: {"type":"tts","state":"sentence_start","text":"\n\n这里面有你想进一步了解的吗？要不要对比一下这几款？"}
+2025-11-11 12:16:37 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n这里面有你想进一步了解的吗？要不要对比一下这几款？"
+}
+2025-11-11 12:16:37 | INFO     | Connection #1: TTS sentence_start | Text: 
+
+这里面有你想进一步了解的吗？要不要对比一下这几款？
+2025-11-11 12:16:41 | INFO     | Connection #1: [DETAILED] Received JSON message #1025 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:16:41 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:16:41 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:16:41 | INFO     | Connection #1: [DETAILED] Received JSON message #1026 | Raw message: {"type":"tts","state":"sentence_start","text":"对啦，北京太空链科技是赋能传统产业高质量发展的创新企业"}
+2025-11-11 12:16:41 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "对啦，北京太空链科技是赋能传统产业高质量发展的创新企业"
+}
+2025-11-11 12:16:41 | INFO     | Connection #1: TTS sentence_start | Text: 对啦，北京太空链科技是赋能传统产业高质量发展的创新企业
+2025-11-11 12:16:44 | INFO     | ✓ Response received: [STT] 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？ | [LLM] 确实如此呀！ 东北长粒香米煮饭那叫一个香。 它生长环境优越，东北的黑土地肥沃，光照、水源等条件良好 ，使得长粒香...
+2025-11-11 12:16:45 | INFO     | 
+============================================================
+2025-11-11 12:16:45 | INFO     | Testing [PURCHASE] #001: 购买 #1...
+2025-11-11 12:16:45 | INFO     | Audio file: purchase_001.opus
+2025-11-11 12:16:45 | INFO     | ============================================================
+2025-11-11 12:16:45 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 12:16:45 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 12:16:45 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-11 12:16:45 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-11 12:16:45 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 12:16:45 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 140 bytes
+2025-11-11 12:16:45 | INFO     | Connection #1: [DETAILED] Sent message | Type: start_listen | Full message: {"session_id": "", "type": "start_listen", "data": {"format": "opus", "tts_format": "opus", "playTag": 1, "state": "asr", "mode": "manual"}}
+2025-11-11 12:16:45 | INFO     | Connection #1: [DETAILED] Received JSON message #1108 | Raw message: {"type":"tts","state":"stop"}
+2025-11-11 12:16:45 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "stop"
+}
+2025-11-11 12:16:45 | INFO     | Connection #1: TTS stop | Duration: 64642.89ms | State: stop
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 58 bytes
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Sent message | Type: stop_listen | Full message: {"session_id": "", "type": "stop_listen", "state": "stop"}
+2025-11-11 12:16:51 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-11 12:16:51 | INFO     | ✓ Response received: ...
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Received JSON message #1109 | Raw message: {"type":"stt","text":"听起来不错，我购买东北大米长粒香5公斤。"}
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Parsed message | Type: stt | Full data: {
+  "type": "stt",
+  "text": "听起来不错，我购买东北大米长粒香5公斤。"
+}
+2025-11-11 12:16:51 | INFO     | Connection #1: STT response received in 5366.77ms | Recognized text: 听起来不错，我购买东北大米长粒香5公斤。
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Received JSON message #1110 | Raw message: {"type":"tts","state":"start"}
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-11 12:16:51 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 12:16:51 | INFO     | 
+============================================================
+2025-11-11 12:16:51 | INFO     | Testing [INQUIRY] #002: 询问 #2...
+2025-11-11 12:16:51 | INFO     | Audio file: inquiry_002.opus
+2025-11-11 12:16:51 | INFO     | ============================================================
+2025-11-11 12:16:51 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-11 12:16:51 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-11 12:16:51 | INFO     | Processed remaining 1272 bytes PCM data with 648 bytes padding (total 177912 bytes)
+2025-11-11 12:16:51 | INFO     | Generated 93 raw Opus packets from PCM data (total 18790 bytes, processed 177912 bytes PCM, coverage: 99.6%)
+2025-11-11 12:16:51 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 140 bytes
+2025-11-11 12:16:51 | INFO     | Connection #1: [DETAILED] Sent message | Type: start_listen | Full message: {"session_id": "", "type": "start_listen", "data": {"format": "opus", "tts_format": "opus", "playTag": 1, "state": "asr", "mode": "manual"}}
+2025-11-11 12:16:58 | INFO     | Connection #1: [DETAILED] Sending text message | Connection closed: False | Message size: 58 bytes
+2025-11-11 12:16:58 | INFO     | Connection #1: [DETAILED] Sent message | Type: stop_listen | Full message: {"session_id": "", "type": "stop_listen", "state": "stop"}
+2025-11-11 12:16:59 | INFO     | Connection #1: [DETAILED] Received JSON message #1111 | Raw message: {"type":"stt","text":"东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？"}
+2025-11-11 12:16:59 | INFO     | Connection #1: [DETAILED] Parsed message | Type: stt | Full data: {
+  "type": "stt",
+  "text": "东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？"
+}
+2025-11-11 12:16:59 | INFO     | Connection #1: STT response received in 6801.23ms | Recognized text: 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
+2025-11-11 12:16:59 | INFO     | Connection #1: [DETAILED] Received JSON message #1112 | Raw message: {"type":"tts","state":"start"}
+2025-11-11 12:16:59 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-11 12:16:59 | INFO     | Connection #1: TTS start | State: start
+2025-11-11 12:17:02 | INFO     | Connection #1: [DETAILED] Received JSON message #1113 | Raw message: {"type":"tts","state":"sentence_start","text":"这就帮你查商品的详细属性，很快就好。"}
+2025-11-11 12:17:02 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "这就帮你查商品的详细属性，很快就好。"
+}
+2025-11-11 12:17:02 | INFO     | Connection #1: TTS sentence_start | Text: 这就帮你查商品的详细属性，很快就好。
+2025-11-11 12:17:05 | INFO     | Connection #1: [DETAILED] Received JSON message #1167 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:17:05 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:17:05 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:17:05 | INFO     | Connection #1: [DETAILED] Received JSON message #1168 | Raw message: {"type":"tts","state":"sentence_start","text":"东北长粒香米的米粒是细长的哟。"}
+2025-11-11 12:17:05 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "东北长粒香米的米粒是细长的哟。"
+}
+2025-11-11 12:17:05 | INFO     | Connection #1: TTS sentence_start | Text: 东北长粒香米的米粒是细长的哟。
+2025-11-11 12:17:08 | INFO     | Connection #1: [DETAILED] Received JSON message #1216 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:17:08 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:17:08 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:17:08 | INFO     | Connection #1: [DETAILED] Received JSON message #1217 | Raw message: {"type":"tts","state":"sentence_start","text":"这款米详细介绍来啦：它产自东北黑土平原"}
+2025-11-11 12:17:08 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "这款米详细介绍来啦：它产自东北黑土平原"
+}
+2025-11-11 12:17:08 | INFO     | Connection #1: TTS sentence_start | Text: 这款米详细介绍来啦：它产自东北黑土平原
+2025-11-11 12:17:12 | INFO     | Connection #1: [DETAILED] Received JSON message #1283 | Raw message: {"type":"tts","state":"sentence_end","text":""}
+2025-11-11 12:17:12 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-11 12:17:12 | INFO     | Connection #1: TTS update | State: sentence_end
+2025-11-11 12:17:12 | INFO     | Connection #1: [DETAILED] Received JSON message #1284 | Raw message: {"type":"tts","state":"sentence_start","text":"，是带有独特清香、口感Q弹爽滑的优质大米"}
+2025-11-11 12:17:12 | INFO     | Connection #1: [DETAILED] Parsed message | Type: tts | Full data: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，是带有独特清香、口感Q弹爽滑的优质大米"
+}
+2025-11-11 12:17:12 | INFO     | Connection #1: TTS sentence_start | Text: ，是带有独特清香、口感Q弹爽滑的优质大米
