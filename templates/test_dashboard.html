@@ -167,6 +167,26 @@
 
                 <div class="settings-section">
                     <div class="settings-section-header">
+                        <span class="settings-icon">🎯</span>
+                        <h3>测试数量设置</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="testCountInput">测试数量</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="testCountInput" class="settings-input" 
+                                   min="1" value="" 
+                                   placeholder="留空则测试所有文件">
+                            <div class="input-hint">
+                                从所有opus文件中随机选择指定数量的文件进行测试<br>
+                                三种类型（询问、对比、下单）平均分配，有余数随机分配<br>
+                                留空则测试所有找到的文件
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
                         <span class="settings-icon">📱</span>
                         <h3>设备SN设置</h3>
                     </div>

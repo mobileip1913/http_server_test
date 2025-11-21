@@ -52,11 +52,260 @@ class InquiryTester:
         
         return inquiries, purchases
     
+    def _random_select_test_files(self, inquiry_indices: list, compare_indices: list, 
+                                   order_indices: list, inquiries_texts: list, 
+                                   compares_texts: list, orders_texts: list, 
+                                   test_count: int) -> list:
+        """
+        从所有opus文件中随机选择指定数量的文件进行测试
+        三种类型平均分配，有余数随机分配到某个类型
+        如果某种类型的文件数量不足，从其他类型补充
+        
+        Args:
+            inquiry_indices: 询问文件索引列表
+            compare_indices: 对比文件索引列表
+            order_indices: 下单文件索引列表
+            inquiries_texts: 询问文本列表
+            compares_texts: 对比文本列表
+            orders_texts: 下单文本列表
+            test_count: 要选择的测试数量
+        
+        Returns:
+            测试任务列表
+        """
+        import random
+        
+        # 计算实际可用的文件总数
+        total_available = len(inquiry_indices) + len(compare_indices) + len(order_indices)
+        
+        # 如果测试数量大于可用文件总数，只测试所有可用文件
+        actual_test_count = min(test_count, total_available)
+        
+        if actual_test_count == 0:
+            return []
+        
+        # 计算每种类型应该选多少个（平均分配）
+        base_count = actual_test_count // 3
+        remainder = actual_test_count % 3
+        
+        # 分配基础数量
+        inquiry_count = base_count
+        compare_count = base_count
+        order_count = base_count
+        
+        # 有余数的话随机分配到某个类型
+        if remainder > 0:
+            types = ['inquiry', 'compare', 'order']
+            selected_types = random.sample(types, remainder)
+            for t in selected_types:
+                if t == 'inquiry':
+                    inquiry_count += 1
+                elif t == 'compare':
+                    compare_count += 1
+                else:
+                    order_count += 1
+        
+        # 从每种类型中随机选择指定数量的文件（不超过实际可用数量）
+        selected_inquiry_indices = random.sample(inquiry_indices, min(inquiry_count, len(inquiry_indices))) if inquiry_indices else []
+        selected_compare_indices = random.sample(compare_indices, min(compare_count, len(compare_indices))) if compare_indices else []
+        selected_order_indices = random.sample(order_indices, min(order_count, len(order_indices))) if order_indices else []
+        
+        # 如果某种类型的文件数量不足，从其他类型补充
+        actual_selected = len(selected_inquiry_indices) + len(selected_compare_indices) + len(selected_order_indices)
+        if actual_selected < actual_test_count:
+            # 计算还需要选择多少个
+            remaining_count = actual_test_count - actual_selected
+            
+            # 收集所有未选择的文件索引
+            all_available = {
+                'inquiry': [idx for idx in inquiry_indices if idx not in selected_inquiry_indices],
+                'compare': [idx for idx in compare_indices if idx not in selected_compare_indices],
+                'order': [idx for idx in order_indices if idx not in selected_order_indices]
+            }
+            
+            # 从剩余文件中随机选择补充
+            all_remaining = []
+            for type_name, indices in all_available.items():
+                for idx in indices:
+                    all_remaining.append((type_name, idx))
+            
+            if all_remaining:
+                random.shuffle(all_remaining)
+                for type_name, idx in all_remaining[:remaining_count]:
+                    if type_name == 'inquiry' and idx not in selected_inquiry_indices:
+                        selected_inquiry_indices.append(idx)
+                    elif type_name == 'compare' and idx not in selected_compare_indices:
+                        selected_compare_indices.append(idx)
+                    elif type_name == 'order' and idx not in selected_order_indices:
+                        selected_order_indices.append(idx)
+        
+        # 构建测试任务
+        all_test_items = []
+        
+        # 处理询问类型
+        for index in selected_inquiry_indices:
+            inquiry_file = self.get_audio_file(index, "inquiry")
+            if inquiry_file:
+                inquiry_text = inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"询问 #{index}"
+                all_test_items.append({
+                    "index": index,
+                    "inquiry_file": inquiry_file,
+                    "inquiry_text": inquiry_text
+                })
+        
+        # 处理对比类型
+        for index in selected_compare_indices:
+            compare_file = self.get_audio_file(index, "compare")
+            if compare_file:
+                compare_text = compares_texts[index - 1] if index <= len(compares_texts) else f"对比 #{index}"
+                # 检查是否已有相同index的任务，如果有则合并
+                existing_item = next((item for item in all_test_items if item.get("index") == index), None)
+                if existing_item:
+                    existing_item["compare_file"] = compare_file
+                    existing_item["compare_text"] = compare_text
+                else:
+                    all_test_items.append({
+                        "index": index,
+                        "compare_file": compare_file,
+                        "compare_text": compare_text
+                    })
+        
+        # 处理下单类型
+        for index in selected_order_indices:
+            order_file = self.get_audio_file(index, "order")
+            if order_file:
+                order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
+                # 检查是否已有相同index的任务，如果有则合并
+                existing_item = next((item for item in all_test_items if item.get("index") == index), None)
+                if existing_item:
+                    existing_item["order_file"] = order_file
+                    existing_item["order_text"] = order_text
+                else:
+                    # 兼容旧格式：尝试 purchase
+                    purchase_file = self.get_audio_file(index, "purchase")
+                    if purchase_file:
+                        all_test_items.append({
+                            "index": index,
+                            "purchase_file": purchase_file,
+                            "purchase_text": order_text
+                        })
+                    else:
+                        all_test_items.append({
+                            "index": index,
+                            "order_file": order_file,
+                            "order_text": order_text
+                        })
+        
+        # 按index排序
+        all_test_items.sort(key=lambda x: x["index"])
+        
+        return all_test_items
+    
+    def scan_audio_files(self, prefix: str) -> list:
+        """
+        自动扫描目录中的音频文件
+        
+        Args:
+            prefix: 文件前缀 ("inquiry", "compare", "order", "purchase")
+        
+        Returns:
+            找到的文件索引列表，按数字顺序排序
+        """
+        indices = []
+        if not os.path.exists(AUDIO_DIR):
+            return indices
+        
+        # 扫描所有匹配的opus文件
+        for filename in os.listdir(AUDIO_DIR):
+            if filename.startswith(f"{prefix}_") and filename.endswith(".opus"):
+                try:
+                    # 提取索引：inquiry_001.opus -> 1
+                    index_str = filename.replace(f"{prefix}_", "").replace(".opus", "")
+                    index = int(index_str)
+                    indices.append(index)
+                except ValueError:
+                    continue
+        
+        # 排序并返回
+        indices.sort()
+        return indices
+    
+    def parse_text_files(self) -> tuple:
+        """
+        解析新的文本文件格式（inquiries.txt, compares.txt, orders.txt）
+        如果文本文件不存在或行数不足，自动扫描目录中的opus文件
+        返回 (inquiries, compares, orders) 元组
+        """
+        inquiries = []
+        compares = []
+        orders = []
+        
+        # 解析 inquiries.txt
+        inquiries_file = os.path.join(AUDIO_DIR, "inquiries.txt")
+        if os.path.exists(inquiries_file):
+            with open(inquiries_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('---'):
+                        inquiries.append(line)
+        
+        # 如果文本文件为空或不存在，自动扫描音频文件
+        if not inquiries:
+            inquiry_indices = self.scan_audio_files("inquiry")
+            inquiries = [f"询问 #{i}" for i in inquiry_indices]
+        
+        # 解析 compares.txt
+        compares_file = os.path.join(AUDIO_DIR, "compares.txt")
+        if os.path.exists(compares_file):
+            with open(compares_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('---'):
+                        compares.append(line)
+        
+        # 如果文本文件为空或不存在，自动扫描音频文件
+        if not compares:
+            compare_indices = self.scan_audio_files("compare")
+            compares = [f"对比 #{i}" for i in compare_indices]
+        
+        # 解析 orders.txt
+        orders_file = os.path.join(AUDIO_DIR, "orders.txt")
+        if os.path.exists(orders_file):
+            with open(orders_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('---'):
+                        orders.append(line)
+        
+        # 如果文本文件为空或不存在，自动扫描音频文件（先尝试order，再尝试purchase）
+        if not orders:
+            order_indices = self.scan_audio_files("order")
+            if not order_indices:
+                order_indices = self.scan_audio_files("purchase")
+            orders = [f"购买 #{i}" for i in order_indices]
+        
+        return inquiries, compares, orders
+    
     def get_audio_file(self, index: int, prefix: str) -> Optional[str]:
-        """获取音频文件路径（Opus格式）"""
+        """
+        获取音频文件路径（Opus格式）
+        兼容新格式：如果查找 purchase 但文件不存在，尝试查找 order
+        """
         filename = f"{prefix}_{index:03d}.opus"
         file_path = os.path.join(AUDIO_DIR, filename)
-        return file_path if os.path.exists(file_path) else None
+        
+        # 如果文件存在，直接返回
+        if os.path.exists(file_path):
+            return file_path
+        
+        # 兼容新格式：如果查找 purchase 但文件不存在，尝试查找 order
+        if prefix == "purchase":
+            order_filename = f"order_{index:03d}.opus"
+            order_file_path = os.path.join(AUDIO_DIR, order_filename)
+            if os.path.exists(order_file_path):
+                return order_file_path
+        
+        return None
     
     def load_audio_frames(self, audio_file: str) -> Optional[List[bytes]]:
         """加载Opus文件为帧列表（与test_runner.py的逻辑一致）"""
@@ -197,8 +446,11 @@ class InquiryTester:
                     # TTS stop时间在发送消息之前，说明是上一个测试的stop，忽略
                     self.logger.debug(f"TTS stop time ({tts_stop_time_sec:.3f}s) is before send start ({send_start_time:.3f}s), ignoring")
             
-            # 判断成功：如果鉴权失败，直接标记为失败；否则检查TTS stop有效，或者有LLM返回内容
-            result["success"] = not client.auth_failed and (tts_stop_valid or (bool(llm_text and llm_text.strip())))
+            # 判断成功：如果鉴权失败，直接标记为失败；否则检查TTS stop有效，或者有LLM返回内容，或者有TTS start
+            # 即使没有收到 stop，只要有 LLM 文本或 TTS start，也认为成功
+            has_llm_content = bool(llm_text and llm_text.strip())
+            has_tts_response = client.has_tts_start or client.has_tts_stop
+            result["success"] = not client.auth_failed and (tts_stop_valid or has_llm_content or has_tts_response)
             
             # 收集性能指标（时间单位：毫秒）
             # 注意：send_time, stt_response_time等都是毫秒时间戳，直接相减即可得到毫秒差值

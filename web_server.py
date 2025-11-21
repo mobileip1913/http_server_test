@@ -239,44 +239,108 @@ class WebInquiryTester(InquiryTester):
             connections_per_sn_for_notification = max(1, concurrency // len(device_sns)) if concurrency > len(device_sns) else 1
             total_connections_for_notification = connections_per_sn_for_notification * len(device_sns) if concurrency > len(device_sns) else min(concurrency, len(device_sns))
             
-            # 先发送测试开始通知
-            emit_test_update("test_started", {
-                "start_time": test_state["start_time"],
-                "total": 100,  # 50个询问 + 50个购买
-                "concurrency_count": total_connections_for_notification
-            })
+            # 优先尝试解析新的文本文件格式（支持三种类型）
+            inquiries_texts, compares_texts, orders_texts = self.parse_text_files()
             
-            # 解析询问文件
-            inquiries_file = os.path.join(os.path.dirname(__file__), "product_inquiries.txt")
-            inquiries_texts, purchases_texts = self.parse_inquiries_file(inquiries_file)
+            # 如果新格式文件不存在，尝试旧格式
+            if not inquiries_texts and not compares_texts and not orders_texts:
+                inquiries_file = os.path.join(os.path.dirname(__file__), "product_inquiries.txt")
+                inquiries_texts_old, purchases_texts_old = self.parse_inquiries_file(inquiries_file)
+                inquiries_texts = inquiries_texts_old
+                orders_texts = purchases_texts_old  # 将旧格式的 purchases 转换为 orders
             
             if not inquiries_texts:
                 inquiries_texts = [f"询问 #{i+1}" for i in range(50)]
-            if not purchases_texts:
-                purchases_texts = [f"购买 #{i+1}" for i in range(50)]
+            if not compares_texts:
+                compares_texts = []
+            if not orders_texts:
+                orders_texts = [f"购买 #{i+1}" for i in range(50)]
             
-            total_tests = len(inquiries_texts) + len(purchases_texts)
+            # 计算总测试数
+            total_tests = len(inquiries_texts) + len(compares_texts) + len(orders_texts)
             test_state["total"] = total_tests
             
+            # 发送测试开始通知（在计算 total_tests 之后）
+            emit_test_update("test_started", {
+                "start_time": test_state["start_time"],
+                "total": total_tests,  # 动态计算：询问 + 对比 + 购买/下单
+                "concurrency_count": total_connections_for_notification
+            })
+            
             # 准备所有测试任务
+            # 自动适配：使用实际存在的文件数量，而不是文本文件的行数
             all_test_items = []
-            for i in range(min(len(inquiries_texts), len(purchases_texts))):
-                inquiry_text = inquiries_texts[i] if i < len(inquiries_texts) else f"询问 #{i+1}"
-                purchase_text = purchases_texts[i] if i < len(purchases_texts) else f"购买 #{i+1}"
+            
+            # 获取每种类型实际存在的文件索引
+            inquiry_indices = self.scan_audio_files("inquiry")
+            compare_indices = self.scan_audio_files("compare")
+            order_indices = self.scan_audio_files("order")
+            if not order_indices:
+                order_indices = self.scan_audio_files("purchase")
+            
+            # 检查是否有测试数量限制
+            test_count = settings.get("test_count")
+            total_available = len(inquiry_indices) + len(compare_indices) + len(order_indices)
+            
+            if test_count and test_count > 0:
+                # 随机选择指定数量的文件
+                selected_items = self._random_select_test_files(
+                    inquiry_indices, compare_indices, order_indices,
+                    inquiries_texts, compares_texts, orders_texts,
+                    test_count
+                )
+                all_test_items = selected_items
+                if len(all_test_items) < test_count:
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}，实际可用: {total_available}）")
+                else:
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}）")
+            else:
+                # 测试所有文件
+                self.logger.info(f"测试所有文件，共 {total_available} 个文件（询问: {len(inquiry_indices)}, 对比: {len(compare_indices)}, 下单: {len(order_indices)}）")
+                # 获取所有索引的并集，确保所有文件都被测试
+                all_indices = set(inquiry_indices + compare_indices + order_indices)
+                all_indices = sorted(all_indices)
                 
-                inquiry_file = self.get_audio_file(i + 1, "inquiry")
-                purchase_file = self.get_audio_file(i + 1, "purchase")
-                
-                if not inquiry_file or not purchase_file:
-                    continue
-                
-                all_test_items.append({
-                    "index": i + 1,
-                    "inquiry_file": inquiry_file,
-                    "purchase_file": purchase_file,
-                    "inquiry_text": inquiry_text,
-                    "purchase_text": purchase_text
-                })
+                for index in all_indices:
+                    test_item = {"index": index}
+                    
+                    # 询问
+                    if index in inquiry_indices:
+                        inquiry_file = self.get_audio_file(index, "inquiry")
+                        if inquiry_file:
+                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
+                            inquiry_text = inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"询问 #{index}"
+                            test_item["inquiry_file"] = inquiry_file
+                            test_item["inquiry_text"] = inquiry_text
+                    
+                    # 对比
+                    if index in compare_indices:
+                        compare_file = self.get_audio_file(index, "compare")
+                        if compare_file:
+                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
+                            compare_text = compares_texts[index - 1] if index <= len(compares_texts) else f"对比 #{index}"
+                            test_item["compare_file"] = compare_file
+                            test_item["compare_text"] = compare_text
+                    
+                    # 购买/下单
+                    if index in order_indices:
+                        order_file = self.get_audio_file(index, "order")
+                        if order_file:
+                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
+                            order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
+                            test_item["order_file"] = order_file
+                            test_item["order_text"] = order_text
+                        else:
+                            # 兼容旧格式：尝试 purchase
+                            purchase_file = self.get_audio_file(index, "purchase")
+                            if purchase_file:
+                                order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
+                                test_item["purchase_file"] = purchase_file
+                                test_item["purchase_text"] = order_text
+                    
+                    # 至少有一个文件才添加
+                    if "inquiry_file" in test_item or "compare_file" in test_item or "order_file" in test_item or "purchase_file" in test_item:
+                        all_test_items.append(test_item)
             
             # 单SN并发测试
             from websocket_client import WebSocketClient
@@ -354,53 +418,103 @@ class WebInquiryTester(InquiryTester):
                             break
                         
                         try:
-                            # 测试询问（使用client的connection_id作为concurrency_index）
-                            inquiry_result = await self.test_single_audio(
-                                client, test_item["inquiry_file"], test_item["inquiry_text"],
-                                "inquiry", test_item["index"], concurrency_index=client.connection_id - 1
-                            )
-                            self.results.append(inquiry_result)
-                            test_state["results"].append(inquiry_result)
-                            test_state["progress"] = len(test_state["results"])
-                            if inquiry_result["success"]:
-                                test_state["summary"]["successful"] += 1
-                            else:
-                                test_state["summary"]["failed"] += 1
-                            test_state["summary"]["total"] += 1
-                            test_state["summary"]["success_rate"] = (
-                                test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
-                                if test_state["summary"]["total"] > 0 else 0
-                            )
-                            emit_test_update("progress_update", {
-                                "progress": test_state["progress"],
-                                "total": test_state["total"],
-                                "summary": test_state["summary"]
-                            })
-                            await asyncio.sleep(0.2)
+                            # 测试询问
+                            if "inquiry_file" in test_item:
+                                inquiry_result = await self.test_single_audio(
+                                    client, test_item["inquiry_file"], test_item["inquiry_text"],
+                                    "inquiry", test_item["index"], concurrency_index=client.connection_id - 1
+                                )
+                                self.results.append(inquiry_result)
+                                test_state["results"].append(inquiry_result)
+                                test_state["progress"] = len(test_state["results"])
+                                if inquiry_result["success"]:
+                                    test_state["summary"]["successful"] += 1
+                                else:
+                                    test_state["summary"]["failed"] += 1
+                                test_state["summary"]["total"] += 1
+                                test_state["summary"]["success_rate"] = (
+                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
+                                    if test_state["summary"]["total"] > 0 else 0
+                                )
+                                emit_test_update("progress_update", {
+                                    "progress": test_state["progress"],
+                                    "total": test_state["total"],
+                                    "summary": test_state["summary"]
+                                })
+                                await asyncio.sleep(0.2)
                             
-                            # 测试购买（使用client的connection_id作为concurrency_index）
-                            purchase_result = await self.test_single_audio(
-                                client, test_item["purchase_file"], test_item["purchase_text"],
-                                "purchase", test_item["index"], concurrency_index=client.connection_id - 1
-                            )
-                            self.results.append(purchase_result)
-                            test_state["results"].append(purchase_result)
-                            test_state["progress"] = len(test_state["results"])
-                            if purchase_result["success"]:
-                                test_state["summary"]["successful"] += 1
-                            else:
-                                test_state["summary"]["failed"] += 1
-                            test_state["summary"]["total"] += 1
-                            test_state["summary"]["success_rate"] = (
-                                test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
-                                if test_state["summary"]["total"] > 0 else 0
-                            )
-                            emit_test_update("progress_update", {
-                                "progress": test_state["progress"],
-                                "total": test_state["total"],
-                                "summary": test_state["summary"]
-                            })
-                            await asyncio.sleep(0.2)
+                            # 测试对比
+                            if "compare_file" in test_item:
+                                compare_result = await self.test_single_audio(
+                                    client, test_item["compare_file"], test_item["compare_text"],
+                                    "compare", test_item["index"], concurrency_index=client.connection_id - 1
+                                )
+                                self.results.append(compare_result)
+                                test_state["results"].append(compare_result)
+                                test_state["progress"] = len(test_state["results"])
+                                if compare_result["success"]:
+                                    test_state["summary"]["successful"] += 1
+                                else:
+                                    test_state["summary"]["failed"] += 1
+                                test_state["summary"]["total"] += 1
+                                test_state["summary"]["success_rate"] = (
+                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
+                                    if test_state["summary"]["total"] > 0 else 0
+                                )
+                                emit_test_update("progress_update", {
+                                    "progress": test_state["progress"],
+                                    "total": test_state["total"],
+                                    "summary": test_state["summary"]
+                                })
+                                await asyncio.sleep(0.2)
+                            
+                            # 测试购买/下单
+                            if "order_file" in test_item:
+                                order_result = await self.test_single_audio(
+                                    client, test_item["order_file"], test_item["order_text"],
+                                    "order", test_item["index"], concurrency_index=client.connection_id - 1
+                                )
+                                self.results.append(order_result)
+                                test_state["results"].append(order_result)
+                                test_state["progress"] = len(test_state["results"])
+                                if order_result["success"]:
+                                    test_state["summary"]["successful"] += 1
+                                else:
+                                    test_state["summary"]["failed"] += 1
+                                test_state["summary"]["total"] += 1
+                                test_state["summary"]["success_rate"] = (
+                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
+                                    if test_state["summary"]["total"] > 0 else 0
+                                )
+                                emit_test_update("progress_update", {
+                                    "progress": test_state["progress"],
+                                    "total": test_state["total"],
+                                    "summary": test_state["summary"]
+                                })
+                                await asyncio.sleep(0.2)
+                            elif "purchase_file" in test_item:  # 兼容旧格式
+                                purchase_result = await self.test_single_audio(
+                                    client, test_item["purchase_file"], test_item["purchase_text"],
+                                    "purchase", test_item["index"], concurrency_index=client.connection_id - 1
+                                )
+                                self.results.append(purchase_result)
+                                test_state["results"].append(purchase_result)
+                                test_state["progress"] = len(test_state["results"])
+                                if purchase_result["success"]:
+                                    test_state["summary"]["successful"] += 1
+                                else:
+                                    test_state["summary"]["failed"] += 1
+                                test_state["summary"]["total"] += 1
+                                test_state["summary"]["success_rate"] = (
+                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
+                                    if test_state["summary"]["total"] > 0 else 0
+                                )
+                                emit_test_update("progress_update", {
+                                    "progress": test_state["progress"],
+                                    "total": test_state["total"],
+                                    "summary": test_state["summary"]
+                                })
+                                await asyncio.sleep(0.2)
                             
                             # 标记任务完成
                             task_queue.task_done()
@@ -534,12 +648,14 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             reason = r.get("failure_reason", "Unknown")
             failure_reasons[reason] = failure_reasons.get(reason, 0) + 1
     
-    # 按测试类型统计
+    # 按测试类型统计（支持三种类型：inquiry、compare、order/purchase）
     inquiry_results = [r for r in results if r.get("type") == "inquiry"]
-    purchase_results = [r for r in results if r.get("type") == "purchase"]
+    compare_results = [r for r in results if r.get("type") == "compare"]
+    order_results = [r for r in results if r.get("type") in ["order", "purchase"]]
     
     inquiry_success = sum(1 for r in inquiry_results if r.get("success", False))
-    purchase_success = sum(1 for r in purchase_results if r.get("success", False))
+    compare_success = sum(1 for r in compare_results if r.get("success", False))
+    order_success = sum(1 for r in order_results if r.get("success", False))
     
     # 吞吐量计算（QPS）
     qps = total_tests / duration_seconds if duration_seconds > 0 else 0
@@ -573,9 +689,16 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             "inquiry_total": len(inquiry_results),
             "inquiry_success": inquiry_success,
             "inquiry_success_rate": round((inquiry_success / len(inquiry_results) * 100) if inquiry_results else 0, 2),
-            "purchase_total": len(purchase_results),
-            "purchase_success": purchase_success,
-            "purchase_success_rate": round((purchase_success / len(purchase_results) * 100) if purchase_results else 0, 2)
+            "compare_total": len(compare_results),
+            "compare_success": compare_success,
+            "compare_success_rate": round((compare_success / len(compare_results) * 100) if compare_results else 0, 2),
+            "order_total": len(order_results),
+            "order_success": order_success,
+            "order_success_rate": round((order_success / len(order_results) * 100) if order_results else 0, 2),
+            # 兼容旧格式
+            "purchase_total": len(order_results),
+            "purchase_success": order_success,
+            "purchase_success_rate": round((order_success / len(order_results) * 100) if order_results else 0, 2)
         },
         "performance_metrics": {
             "stt_time": calc_stats(stt_times),
@@ -748,7 +871,8 @@ def generate_pdf_report(report):
         ['失败', f"{summary.get('failed_tests', 0)} ({100 - summary.get('success_rate', 0):.2f}%)"],
         ['吞吐量 (QPS)', str(summary.get("qps", 0))],
         ['询问测试', f"{summary.get('inquiry_success', 0)}/{summary.get('inquiry_total', 0)} ({summary.get('inquiry_success_rate', 0)}%)"],
-        ['购买测试', f"{summary.get('purchase_success', 0)}/{summary.get('purchase_total', 0)} ({summary.get('purchase_success_rate', 0)}%)"]
+        ['对比测试', f"{summary.get('compare_success', 0)}/{summary.get('compare_total', 0)} ({summary.get('compare_success_rate', 0)}%)"],
+        ['购买测试', f"{summary.get('order_success', summary.get('purchase_success', 0))}/{summary.get('order_total', summary.get('purchase_total', 0))} ({summary.get('order_success_rate', summary.get('purchase_success_rate', 0))}%)"]
     ]
     stats_table = Table(stats_data, colWidths=[60*mm, 100*mm])
     stats_table.setStyle(TableStyle([
@@ -931,12 +1055,23 @@ def start_test():
             Config.USE_SSL = False
         print(f"WebSocket URL已设置为: {Config.WSS_SERVER_HOST if Config.USE_SSL else Config.WS_SERVER_HOST} (USE_SSL={Config.USE_SSL})")
     
+    # 获取测试数量（可选）
+    test_count = data.get("test_count")
+    if test_count:
+        try:
+            test_count = int(test_count)
+            if test_count < 1:
+                test_count = None
+        except (ValueError, TypeError):
+            test_count = None
+    
     # 保存设置到全局变量，供测试使用
     test_state["settings"] = {
         "concurrency": concurrency,
         "device_sns": device_sns,
         "test_mode": test_mode,
-        "ws_url": ws_url
+        "ws_url": ws_url,
+        "test_count": test_count
     }
     
     # 重置状态

@@ -167,7 +167,8 @@ async function startTest() {
             concurrency: testSettings.concurrency || 10,
             device_sns: testSettings.deviceSns || [],
             test_mode: testSettings.testMode || 'normal',
-            ws_url: testSettings.wsUrl || ''  // 如果为空，后端使用默认值
+            ws_url: testSettings.wsUrl || '',  // 如果为空，后端使用默认值
+            test_count: testSettings.testCount || null  // 测试数量，null表示测试所有文件
         };
         
         // 验证设置
@@ -365,8 +366,21 @@ function addConversationItem(test, status) {
     item.className = `conversation-item ${test.type} ${status}`;
     item.id = `conversation-${test.index}-${test.type}`;
     
-    const badgeClass = test.type === 'inquiry' ? 'badge-inquiry' : 'badge-purchase';
-    const badgeText = test.type === 'inquiry' ? '询问' : '购买';
+    // 支持三种类型：inquiry（询问）、compare（对比）、order/purchase（购买/下单）
+    let badgeClass, badgeText;
+    if (test.type === 'inquiry') {
+        badgeClass = 'badge-inquiry';
+        badgeText = '询问';
+    } else if (test.type === 'compare') {
+        badgeClass = 'badge-compare';
+        badgeText = '对比';
+    } else if (test.type === 'order' || test.type === 'purchase') {
+        badgeClass = 'badge-purchase';
+        badgeText = '购买';
+    } else {
+        badgeClass = 'badge-purchase';
+        badgeText = '购买';
+    }
     const statusBadge = status === 'running' ? '<span class="conversation-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">⏳ 测试中</span>' : '';
     
     // 获取用户输入（优先使用STT识别结果）
@@ -433,8 +447,21 @@ function updateConversationItemContent(item, result) {
     const statusClass = isSuccess ? 'success' : 'failed';
     item.className = `conversation-item ${result.type} ${statusClass}`;
 
-    const badgeClass = result.type === 'inquiry' ? 'badge-inquiry' : 'badge-purchase';
-    const badgeText = result.type === 'inquiry' ? '询问' : '购买';
+    // 支持三种类型：inquiry（询问）、compare（对比）、order/purchase（购买/下单）
+    let badgeClass, badgeText;
+    if (result.type === 'inquiry') {
+        badgeClass = 'badge-inquiry';
+        badgeText = '询问';
+    } else if (result.type === 'compare') {
+        badgeClass = 'badge-compare';
+        badgeText = '对比';
+    } else if (result.type === 'order' || result.type === 'purchase') {
+        badgeClass = 'badge-purchase';
+        badgeText = '购买';
+    } else {
+        badgeClass = 'badge-purchase';
+        badgeText = '购买';
+    }
     const statusBadge = isSuccess ? '<span class="conversation-badge badge-success">✓ 成功</span>' : 
                         '<span class="conversation-badge badge-failed">✗ 失败</span>';
 
@@ -588,11 +615,9 @@ function addConcurrencyBlock(status = 'waiting', testIndex = null, testType = nu
     const displayIndex = testIndex !== null ? testIndex : (index + 1);
     block.setAttribute('title', `测试 #${displayIndex} (${testType || '未知'}): ${statusText[status] || status}`);
     
-    // 根据类型设置data-type属性
-    if (testType === 'inquiry') {
-        block.setAttribute('data-type', 'inquiry');
-    } else if (testType === 'purchase') {
-        block.setAttribute('data-type', 'purchase');
+    // 根据类型设置data-type属性（支持三种类型）
+    if (testType === 'inquiry' || testType === 'compare' || testType === 'order' || testType === 'purchase') {
+        block.setAttribute('data-type', testType);
     }
     
     // 添加点击事件，定位到对应的对话项
@@ -778,7 +803,8 @@ let testSettings = {
         "FC012C2E9E2C"
     ],
     testMode: "normal",  // 默认正常模式
-    wsUrl: ""  // WebSocket服务器地址，为空则使用默认值
+    wsUrl: "",  // WebSocket服务器地址，为空则使用默认值
+    testCount: null  // 测试数量，null表示测试所有文件
 };
 
 // 从localStorage加载设置
@@ -801,6 +827,9 @@ function loadSettings() {
             if (document.getElementById('wsUrlInput')) {
                 document.getElementById('wsUrlInput').value = testSettings.wsUrl || '';
             }
+            if (document.getElementById('testCountInput')) {
+                document.getElementById('testCountInput').value = testSettings.testCount || '';
+            }
         } catch (e) {
             console.error('Failed to load settings:', e);
         }
@@ -822,6 +851,7 @@ function openSettings() {
         document.getElementById('deviceSnsInput').value = (testSettings.deviceSns || []).join('\n');
         document.getElementById('testModeSelect').value = testSettings.testMode || 'normal';
         document.getElementById('wsUrlInput').value = testSettings.wsUrl || '';
+        document.getElementById('testCountInput').value = testSettings.testCount || '';
     }
 }
 
@@ -839,6 +869,8 @@ function saveSettings() {
     const deviceSnsText = document.getElementById('deviceSnsInput').value.trim();
     const testMode = document.getElementById('testModeSelect').value;
     const wsUrl = document.getElementById('wsUrlInput').value.trim();
+    const testCountText = document.getElementById('testCountInput').value.trim();
+    const testCount = testCountText ? parseInt(testCountText) : null;
     
     // 验证并发数
     if (isNaN(concurrency) || concurrency < 1 || concurrency > 100) {
@@ -874,11 +906,20 @@ function saveSettings() {
         return;
     }
     
+    // 验证测试数量（如果填写了）
+    if (testCount !== null) {
+        if (isNaN(testCount) || testCount < 1) {
+            alert('测试数量必须是大于0的整数');
+            return;
+        }
+    }
+    
     // 保存设置
     testSettings.concurrency = concurrency;
     testSettings.deviceSns = deviceSns;
     testSettings.testMode = testMode;
     testSettings.wsUrl = wsUrl;
+    testSettings.testCount = testCount;
     saveSettingsToStorage();
     
     // 调试：打印保存的设置

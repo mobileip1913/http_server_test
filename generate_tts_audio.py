@@ -95,17 +95,40 @@ def build_websocket_url() -> str:
     return url
 
 
-async def synthesize_speech(text: str, output_file: str, audio_format: str = "opus") -> bool:
+async def synthesize_speech(text: str, output_file: str, audio_format: str = "opus") -> dict:
     """
     调用讯飞TTS API合成语音并保存
     
     Args:
         text: 要合成的文本
         output_file: 输出文件路径
+        audio_format: 音频格式（默认 "opus"）
     
     Returns:
-        True if success, False otherwise
+        包含请求和响应信息的字典：
+        {
+            "success": bool,
+            "request_text": str,
+            "request_time": str,
+            "response_code": int,
+            "response_message": str,
+            "audio_size": int,
+            "error": str or None
+        }
     """
+    from datetime import datetime
+    
+    # 初始化返回结果
+    result = {
+        "success": False,
+        "request_text": text,
+        "request_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+        "response_code": -1,
+        "response_message": "",
+        "audio_size": 0,
+        "error": None
+    }
+    
     try:
         # 构建WebSocket URL
         url = build_websocket_url()
@@ -143,17 +166,23 @@ async def synthesize_speech(text: str, output_file: str, audio_format: str = "op
             # 接收音频数据
             audio_data = []
             received_size = 0
+            response_messages = []
             
             async for message in websocket:
                 try:
                     response = json.loads(message)
+                    response_messages.append(response)
                     
                     # 检查响应状态
                     code = response.get("code", -1)
+                    result["response_code"] = code
+                    result["response_message"] = response.get("message", "")
+                    
                     if code != 0:
                         error_msg = response.get("message", "Unknown error")
                         logger.error(f"TTS API error: code={code}, message={error_msg}")
-                        return False
+                        result["error"] = f"API Error: code={code}, message={error_msg}"
+                        return result
                     
                     # 获取音频数据
                     data_obj = response.get("data", {})
@@ -174,9 +203,11 @@ async def synthesize_speech(text: str, output_file: str, audio_format: str = "op
                         
                 except json.JSONDecodeError as e:
                     logger.warning(f"Failed to parse JSON response: {e}")
+                    result["error"] = f"JSON Parse Error: {str(e)}"
                     continue
                 except Exception as e:
                     logger.error(f"Error processing response: {e}")
+                    result["error"] = f"Processing Error: {str(e)}"
                     continue
             
             # 保存音频文件
@@ -190,15 +221,20 @@ async def synthesize_speech(text: str, output_file: str, audio_format: str = "op
                         f.write(chunk)
                 
                 total_size = sum(len(chunk) for chunk in audio_data)
+                result["audio_size"] = total_size
+                result["success"] = True
                 logger.info(f"Audio saved to: {output_file} ({total_size} bytes)")
-                return True
+                return result
             else:
                 logger.error("No audio data received")
-                return False
+                result["error"] = "No audio data received from API"
+                return result
                 
     except Exception as e:
-        logger.error(f"Failed to synthesize speech: {e}", exc_info=True)
-        return False
+        error_msg = f"Failed to synthesize speech: {e}"
+        logger.error(error_msg, exc_info=True)
+        result["error"] = str(e)
+        return result
 
 
 async def main():
@@ -239,14 +275,16 @@ async def main():
     if output_format == "mp3":
         # 生成MP3格式（用于播放测试）
         logger.info("Generating MP3 format for playback testing...")
-        success = await synthesize_speech(test_text, AUDIO_OUTPUT_FILE_MP3, audio_format="mp3")
+        result = await synthesize_speech(test_text, AUDIO_OUTPUT_FILE_MP3, audio_format="mp3")
+        success = result.get("success", False)
         output_file = AUDIO_OUTPUT_FILE_MP3
     elif output_format == "pcm" or output_format == "pcm_to_opus":
         # 生成PCM格式（使用 raw），然后转换为Opus（更可靠）
         # 根据服务器代码，aue 应该使用 "raw" 而不是 "pcm"
         pcm_file = os.path.join(AUDIO_OUTPUT_DIR, "test_audio.pcm")
         logger.info("Generating PCM format (raw)...")
-        success = await synthesize_speech(test_text, pcm_file, audio_format="raw")  # 使用 raw 格式（固定）
+        result = await synthesize_speech(test_text, pcm_file, audio_format="raw")  # 使用 raw 格式（固定）
+        success = result.get("success", False)
         if success:
             # 使用 ffmpeg 将 PCM 转换为 Opus 和 WAV（用于验证）
             import subprocess
@@ -274,7 +312,8 @@ async def main():
     else:
         # 生成Opus格式（用于测试）
         logger.info("Generating Opus format for testing...")
-        success = await synthesize_speech(test_text, AUDIO_OUTPUT_FILE, audio_format="opus")
+        result = await synthesize_speech(test_text, AUDIO_OUTPUT_FILE, audio_format="opus")
+        success = result.get("success", False)
         output_file = AUDIO_OUTPUT_FILE
     
     if success:
