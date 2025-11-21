@@ -409,19 +409,37 @@ class InquiryTester:
                             break
                 
                 # 正常模式或急速模式：如果收到完整响应（TTS stop），都可以提前退出
-                if client.has_tts_stop:
-                    self.logger.info(f"Connection #{client.connection_id}: Received complete response at {wait_time:.1f}s")
-                    break
+                # 但需要验证TTS stop是否属于本次测试（时间戳在发送消息之后）
+                if client.has_tts_stop and client.tts_stop_time is not None:
+                    # 检查TTS stop时间是否在发送消息之后（允许2秒误差）
+                    tts_stop_time_sec = client.tts_stop_time / 1000.0
+                    if tts_stop_time_sec >= send_start_time - 2.0:
+                        self.logger.info(f"Connection #{client.connection_id}: Received complete response at {wait_time:.1f}s")
+                        break
+                    else:
+                        # TTS stop是上一个测试的，忽略
+                        self.logger.debug(f"Connection #{client.connection_id}: TTS stop time ({tts_stop_time_sec:.3f}s) is before send start ({send_start_time:.3f}s), ignoring")
             
             # 等待循环结束后，再给一点时间让异步消息处理完成
             # 避免消息在等待循环结束后才到达的情况
             if test_mode == "fast":
                 # 急速模式：如果没有收到LLM响应，额外等待
+                # 但如果收到了TTS start，说明服务器已经开始响应，应该等待更长时间
                 if not client.has_llm or not (hasattr(client, 'llm_text_buffer') and client.llm_text_buffer):
-                    await asyncio.sleep(0.2)  # 额外等待 200ms
+                    if client.has_tts_start:
+                        # 如果收到了TTS start但没有sentence_start，等待更长时间（可能服务器响应较慢）
+                        await asyncio.sleep(1.0)  # 额外等待 1秒
+                    else:
+                        await asyncio.sleep(0.2)  # 额外等待 200ms
             else:
                 # 正常模式：如果没有收到完整响应，额外等待
-                if not client.has_tts_stop:
+                # 验证TTS stop是否属于本次测试
+                tts_stop_valid = False
+                if client.has_tts_stop and client.tts_stop_time is not None:
+                    tts_stop_time_sec = client.tts_stop_time / 1000.0
+                    if tts_stop_time_sec >= send_start_time - 2.0:
+                        tts_stop_valid = True
+                if not tts_stop_valid:
                     await asyncio.sleep(0.2)  # 额外等待 200ms
             
             # 收集响应文本
@@ -446,11 +464,13 @@ class InquiryTester:
                     # TTS stop时间在发送消息之前，说明是上一个测试的stop，忽略
                     self.logger.debug(f"TTS stop time ({tts_stop_time_sec:.3f}s) is before send start ({send_start_time:.3f}s), ignoring")
             
-            # 判断成功：如果鉴权失败，直接标记为失败；否则检查TTS stop有效，或者有LLM返回内容，或者有TTS start
-            # 即使没有收到 stop，只要有 LLM 文本或 TTS start，也认为成功
+            # 判断成功：如果鉴权失败，直接标记为失败
+            # 成功的条件：
+            # 1. 有有效的TTS stop（完整响应）
+            # 2. 或者有LLM文本内容（即使没有stop，有内容也算成功）
+            # 注意：仅仅有TTS start不算成功，因为可能只是开始响应但还没有实际内容
             has_llm_content = bool(llm_text and llm_text.strip())
-            has_tts_response = client.has_tts_start or client.has_tts_stop
-            result["success"] = not client.auth_failed and (tts_stop_valid or has_llm_content or has_tts_response)
+            result["success"] = not client.auth_failed and (tts_stop_valid or has_llm_content)
             
             # 收集性能指标（时间单位：毫秒）
             # 注意：send_time, stt_response_time等都是毫秒时间戳，直接相减即可得到毫秒差值

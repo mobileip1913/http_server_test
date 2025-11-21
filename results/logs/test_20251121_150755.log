@@ -1,0 +1,997 @@
+2025-11-21 15:07:55 | INFO     | ✅ 已从项目目录加载 Opus DLL: D:\code\http_server\libs\opus.dll
+2025-11-21 15:08:00 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-21 15:08:00 | INFO     | SN列表: ['FC012C2EA080']
+2025-11-21 15:08:00 | INFO     | 随机选择了 4 个测试任务（设置数量: 10，实际可用: 15）
+2025-11-21 15:08:00 | INFO     | 
+============================================================
+2025-11-21 15:08:00 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-21 15:08:00 | INFO     | SN列表: FC012C2EA080
+2025-11-21 15:08:00 | INFO     | ============================================================
+2025-11-21 15:08:00 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-21 15:08:00 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-21 15:08:00 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 15:08:00 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:00 | INFO     | Connection #1: Request Headers:
+2025-11-21 15:08:00 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-21 15:08:00 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:80
+2025-11-21 15:08:00 | INFO     | Connection #1: ==================================
+2025-11-21 15:08:00 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 211.74ms
+2025-11-21 15:08:01 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-21 15:08:01 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:01 | INFO     | Connection #1: Response Code: 0
+2025-11-21 15:08:01 | INFO     | Connection #1: Response Message: auth_success
+2025-11-21 15:08:01 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:01 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA080",
+    "volume": 70,
+    "light": 20,
+    "time": 1763708882146,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-21 15:08:01 | INFO     | Connection #1: Session ID: None
+2025-11-21 15:08:01 | INFO     | Connection #1: ====================================
+2025-11-21 15:08:01 | INFO     | Connection #1: ✅ Auth SUCCESS | Code: 0, Message: auth_success, Session ID: None
+2025-11-21 15:08:01 | INFO     | SN FC012C2EA080: 鉴权成功 (Conn #1)
+2025-11-21 15:08:01 | INFO     | 
+============================================================
+2025-11-21 15:08:01 | INFO     | Testing [INQUIRY] #001: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？...
+2025-11-21 15:08:01 | INFO     | Audio file: inquiry_001.opus
+2025-11-21 15:08:01 | INFO     | ============================================================
+2025-11-21 15:08:01 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 15:08:01 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 15:08:01 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-21 15:08:01 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-21 15:08:01 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 15:08:01 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 15:08:01 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:01 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 15:08:01 | INFO     | Connection #1: Session ID: None
+2025-11-21 15:08:01 | INFO     | Connection #1: Message Content:
+2025-11-21 15:08:01 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 15:08:01 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 15:08:01 | INFO     | Connection #1: =======================================
+2025-11-21 15:08:09 | INFO     | Connection #1: ========== STT RESPONSE ==========
+2025-11-21 15:08:09 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:09 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:09 | INFO     | Connection #1: {
+  "type": "stt",
+  "text": "你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？"
+}
+2025-11-21 15:08:09 | INFO     | Connection #1: Response Time: 7649.38ms (from send_start)
+2025-11-21 15:08:09 | INFO     | Connection #1: Recognized Text: 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
+2025-11-21 15:08:09 | INFO     | Connection #1: =================================
+2025-11-21 15:08:09 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:09 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:09 | INFO     | Connection #1: State: start
+2025-11-21 15:08:09 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:09 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-21 15:08:09 | INFO     | Connection #1: TTS Start Time
+2025-11-21 15:08:09 | INFO     | Connection #1: =================================
+2025-11-21 15:08:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:11 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:11 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "这就为你筛选商品列表，稍等就能看到啦"
+}
+2025-11-21 15:08:11 | INFO     | Connection #1: TTS Sentence Start | Text: 这就为你筛选商品列表，稍等就能看到啦
+2025-11-21 15:08:11 | INFO     | Connection #1: =================================
+2025-11-21 15:08:14 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:14 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:14 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:14 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:14 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:14 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:14 | INFO     | Connection #1: =================================
+2025-11-21 15:08:14 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:14 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:14 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:14 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:14 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "是真的哦。"
+}
+2025-11-21 15:08:14 | INFO     | Connection #1: TTS Sentence Start | Text: 是真的哦。
+2025-11-21 15:08:14 | INFO     | Connection #1: =================================
+2025-11-21 15:08:16 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:16 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:16 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:16 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:16 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:16 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:16 | INFO     | Connection #1: =================================
+2025-11-21 15:08:16 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:16 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:16 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:16 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:16 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "商城里有两款东北长粒香米，煮饭的时候都挺香的。"
+}
+2025-11-21 15:08:16 | INFO     | Connection #1: TTS Sentence Start | Text: 商城里有两款东北长粒香米，煮饭的时候都挺香的。
+2025-11-21 15:08:16 | INFO     | Connection #1: =================================
+2025-11-21 15:08:20 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:20 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:20 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:20 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:20 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:20 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:20 | INFO     | Connection #1: =================================
+2025-11-21 15:08:20 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:20 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:20 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:20 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:20 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n秋实十月长粒香5KG/大米，售价128.37元。"
+}
+2025-11-21 15:08:20 | INFO     | Connection #1: TTS Sentence Start | Text: 
+
+秋实十月长粒香5KG/大米，售价128.37元。
+2025-11-21 15:08:20 | INFO     | Connection #1: =================================
+2025-11-21 15:08:25 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:25 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:25 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:25 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:25 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:25 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:25 | INFO     | Connection #1: =================================
+2025-11-21 15:08:25 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:25 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:25 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:25 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:25 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "它产自东北黑土平原，是中国优质大米的代表之一。"
+}
+2025-11-21 15:08:25 | INFO     | Connection #1: TTS Sentence Start | Text: 它产自东北黑土平原，是中国优质大米的代表之一。
+2025-11-21 15:08:25 | INFO     | Connection #1: =================================
+2025-11-21 15:08:29 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:29 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:29 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:29 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:29 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:29 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:29 | INFO     | Connection #1: =================================
+2025-11-21 15:08:29 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:29 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:29 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:29 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:29 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "米粒呈细长形，色泽洁白、晶莹剔透，外观非常好。"
+}
+2025-11-21 15:08:29 | INFO     | Connection #1: TTS Sentence Start | Text: 米粒呈细长形，色泽洁白、晶莹剔透，外观非常好。
+2025-11-21 15:08:29 | INFO     | Connection #1: =================================
+2025-11-21 15:08:34 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:34 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:34 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:34 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:34 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:34 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:34 | INFO     | Connection #1: =================================
+2025-11-21 15:08:34 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:34 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:34 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:34 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:34 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "具有独特的清香，尤其是在蒸煮时，满屋飘香。"
+}
+2025-11-21 15:08:34 | INFO     | Connection #1: TTS Sentence Start | Text: 具有独特的清香，尤其是在蒸煮时，满屋飘香。
+2025-11-21 15:08:34 | INFO     | Connection #1: =================================
+2025-11-21 15:08:39 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:39 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:39 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:39 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:39 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:39 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:39 | INFO     | Connection #1: =================================
+2025-11-21 15:08:39 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:39 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:39 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:39 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:39 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "米饭油润光亮，弹性十足，软硬适中，吃起来爽滑有嚼劲"
+}
+2025-11-21 15:08:39 | INFO     | Connection #1: TTS Sentence Start | Text: 米饭油润光亮，弹性十足，软硬适中，吃起来爽滑有嚼劲
+2025-11-21 15:08:39 | INFO     | Connection #1: =================================
+2025-11-21 15:08:44 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:44 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:44 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:44 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:44 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:44 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:44 | INFO     | Connection #1: =================================
+2025-11-21 15:08:44 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:44 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:44 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:44 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:44 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，冷却后也不容易回生。"
+}
+2025-11-21 15:08:44 | INFO     | Connection #1: TTS Sentence Start | Text: ，冷却后也不容易回生。
+2025-11-21 15:08:44 | INFO     | Connection #1: =================================
+2025-11-21 15:08:46 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:46 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:46 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:46 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:46 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:46 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:46 | INFO     | Connection #1: =================================
+2025-11-21 15:08:46 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:46 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:46 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:46 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:46 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n还有秋实十月长粒香5KG，价格也是128.37元。"
+}
+2025-11-21 15:08:46 | INFO     | Connection #1: TTS Sentence Start | Text: 
+
+还有秋实十月长粒香5KG，价格也是128.37元。
+2025-11-21 15:08:46 | INFO     | Connection #1: =================================
+2025-11-21 15:08:52 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:52 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:52 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:52 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:52 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:52 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:52 | INFO     | Connection #1: =================================
+2025-11-21 15:08:52 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:52 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:52 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:52 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:52 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "它汲取金秋十月的丰饶精华，严选当季新米，米粒纤长均匀"
+}
+2025-11-21 15:08:52 | INFO     | Connection #1: TTS Sentence Start | Text: 它汲取金秋十月的丰饶精华，严选当季新米，米粒纤长均匀
+2025-11-21 15:08:52 | INFO     | Connection #1: =================================
+2025-11-21 15:08:58 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:58 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:58 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:08:58 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:58 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:08:58 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:08:58 | INFO     | Connection #1: =================================
+2025-11-21 15:08:58 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:08:58 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:08:58 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:08:58 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:08:58 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，色泽晶莹如玉。"
+}
+2025-11-21 15:08:58 | INFO     | Connection #1: TTS Sentence Start | Text: ，色泽晶莹如玉。
+2025-11-21 15:08:58 | INFO     | Connection #1: =================================
+2025-11-21 15:09:00 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:00 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:00 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:00 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:00 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:00 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:00 | INFO     | Connection #1: =================================
+2025-11-21 15:09:00 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:00 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:00 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:00 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:00 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "开袋就能闻到自然稻香，蒸煮后饭香四溢，口感软滑Q弹"
+}
+2025-11-21 15:09:00 | INFO     | Connection #1: TTS Sentence Start | Text: 开袋就能闻到自然稻香，蒸煮后饭香四溢，口感软滑Q弹
+2025-11-21 15:09:00 | INFO     | Connection #1: =================================
+2025-11-21 15:09:05 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:05 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:05 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:05 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:05 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:05 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:05 | INFO     | Connection #1: =================================
+2025-11-21 15:09:05 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:05 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:05 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:05 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:05 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，回味甘甜。"
+}
+2025-11-21 15:09:05 | INFO     | Connection #1: TTS Sentence Start | Text: ，回味甘甜。
+2025-11-21 15:09:05 | INFO     | Connection #1: =================================
+2025-11-21 15:09:07 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:07 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:07 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:07 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:07 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:07 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:07 | INFO     | Connection #1: =================================
+2025-11-21 15:09:07 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:07 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:07 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:07 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:07 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "它包装简约大气，不管是自己家里吃还是送人都挺不错的。"
+}
+2025-11-21 15:09:07 | INFO     | Connection #1: TTS Sentence Start | Text: 它包装简约大气，不管是自己家里吃还是送人都挺不错的。
+2025-11-21 15:09:07 | INFO     | Connection #1: =================================
+2025-11-21 15:09:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:11 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:11 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:11 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:11 | INFO     | Connection #1: =================================
+2025-11-21 15:09:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:11 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:11 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n另外商城还有其他优质大米哦。"
+}
+2025-11-21 15:09:11 | INFO     | Connection #1: TTS Sentence Start | Text: 
+
+另外商城还有其他优质大米哦。
+2025-11-21 15:09:11 | INFO     | Connection #1: =================================
+2025-11-21 15:09:14 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:14 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:14 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:14 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:14 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:14 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:14 | INFO     | Connection #1: =================================
+2025-11-21 15:09:14 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:14 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:14 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:14 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:14 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n。吉林鸭稻米。软香米，售价84元。\n良种大米，售价20元。"
+}
+2025-11-21 15:09:14 | INFO     | Connection #1: TTS Sentence Start | Text: 
+。吉林鸭稻米。软香米，售价84元。
+良种大米，售价20元。
+2025-11-21 15:09:14 | INFO     | Connection #1: =================================
+2025-11-21 15:09:14 | INFO     | ✓ Response received: [STT] 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？ | [LLM] 这就为你筛选商品列表，稍等就能看到啦 是真的哦。 商城里有两款东北长粒香米，煮饭的时候都挺香的。 秋实十月长粒香...
+2025-11-21 15:09:14 | INFO     | 
+============================================================
+2025-11-21 15:09:14 | INFO     | Testing [ORDER] #001: 听起来不错，我购买东北大米长粒香5KG。...
+2025-11-21 15:09:14 | INFO     | Audio file: order_001.opus
+2025-11-21 15:09:14 | INFO     | ============================================================
+2025-11-21 15:09:14 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 15:09:14 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 15:09:15 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-21 15:09:15 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-21 15:09:15 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 15:09:15 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 15:09:15 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:15 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 15:09:15 | INFO     | Connection #1: Session ID: None
+2025-11-21 15:09:15 | INFO     | Connection #1: Message Content:
+2025-11-21 15:09:15 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 15:09:15 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 15:09:15 | INFO     | Connection #1: =======================================
+2025-11-21 15:09:15 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:15 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:15 | INFO     | Connection #1: State: stop
+2025-11-21 15:09:15 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:15 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "stop"
+}
+2025-11-21 15:09:15 | INFO     | Connection #1: TTS Stop Time | Duration: 65501.87ms
+2025-11-21 15:09:15 | INFO     | Connection #1: =================================
+2025-11-21 15:09:20 | INFO     | Connection #1: Received complete response at 0.1s
+2025-11-21 15:09:20 | INFO     | ✓ Response received: ...
+2025-11-21 15:09:20 | INFO     | Connection #1: ========== STT RESPONSE ==========
+2025-11-21 15:09:20 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:20 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:20 | INFO     | Connection #1: {
+  "type": "stt",
+  "text": "听起来不错，我购买东北大米长粒香5公斤。"
+}
+2025-11-21 15:09:20 | INFO     | Connection #1: Response Time: 4847.79ms (from send_start)
+2025-11-21 15:09:20 | INFO     | Connection #1: Recognized Text: 听起来不错，我购买东北大米长粒香5公斤。
+2025-11-21 15:09:20 | INFO     | Connection #1: =================================
+2025-11-21 15:09:20 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:20 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:20 | INFO     | Connection #1: State: start
+2025-11-21 15:09:20 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:20 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-21 15:09:20 | INFO     | Connection #1: TTS Start Time | Duration: 68656.70ms
+2025-11-21 15:09:20 | INFO     | Connection #1: =================================
+2025-11-21 15:09:20 | INFO     | 
+============================================================
+2025-11-21 15:09:20 | INFO     | Testing [INQUIRY] #002: 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？...
+2025-11-21 15:09:20 | INFO     | Audio file: inquiry_002.opus
+2025-11-21 15:09:20 | INFO     | ============================================================
+2025-11-21 15:09:20 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 15:09:20 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 15:09:20 | INFO     | Processed remaining 1272 bytes PCM data with 648 bytes padding (total 177912 bytes)
+2025-11-21 15:09:20 | INFO     | Generated 93 raw Opus packets from PCM data (total 18790 bytes, processed 177912 bytes PCM, coverage: 99.6%)
+2025-11-21 15:09:20 | INFO     | Detected 93 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 15:09:20 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 15:09:20 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:20 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 15:09:20 | INFO     | Connection #1: Session ID: None
+2025-11-21 15:09:20 | INFO     | Connection #1: Message Content:
+2025-11-21 15:09:20 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 15:09:20 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 15:09:20 | INFO     | Connection #1: =======================================
+2025-11-21 15:09:27 | INFO     | Connection #1: ========== STT RESPONSE ==========
+2025-11-21 15:09:27 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:27 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:27 | INFO     | Connection #1: {
+  "type": "stt",
+  "text": "东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？"
+}
+2025-11-21 15:09:27 | INFO     | Connection #1: Response Time: 6170.41ms (from send_start)
+2025-11-21 15:09:27 | INFO     | Connection #1: Recognized Text: 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
+2025-11-21 15:09:27 | INFO     | Connection #1: =================================
+2025-11-21 15:09:27 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:27 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:27 | INFO     | Connection #1: State: start
+2025-11-21 15:09:27 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:27 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-21 15:09:27 | INFO     | Connection #1: TTS Start Time | Duration: 75652.20ms
+2025-11-21 15:09:27 | INFO     | Connection #1: =================================
+2025-11-21 15:09:33 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:33 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:33 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:33 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:33 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "这就帮你查商品的详细属性，很快就好。"
+}
+2025-11-21 15:09:33 | INFO     | Connection #1: TTS Sentence Start | Text: 这就帮你查商品的详细属性，很快就好。
+2025-11-21 15:09:33 | INFO     | Connection #1: =================================
+2025-11-21 15:09:35 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:35 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:35 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:35 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:35 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:35 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:35 | INFO     | Connection #1: =================================
+2025-11-21 15:09:35 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:35 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:35 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:35 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:35 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "东北长粒香米的米粒是细长的哦"
+}
+2025-11-21 15:09:35 | INFO     | Connection #1: TTS Sentence Start | Text: 东北长粒香米的米粒是细长的哦
+2025-11-21 15:09:35 | INFO     | Connection #1: =================================
+2025-11-21 15:09:38 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:38 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:38 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:38 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:38 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:38 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:38 | INFO     | Connection #1: =================================
+2025-11-21 15:09:38 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:38 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:38 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:38 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:38 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，它的米粒呈细长形，色泽洁白、晶莹剔透。"
+}
+2025-11-21 15:09:38 | INFO     | Connection #1: TTS Sentence Start | Text: ，它的米粒呈细长形，色泽洁白、晶莹剔透。
+2025-11-21 15:09:38 | INFO     | Connection #1: =================================
+2025-11-21 15:09:43 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:43 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:43 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:43 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:43 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:43 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:43 | INFO     | Connection #1: =================================
+2025-11-21 15:09:43 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:43 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:43 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:43 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:43 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n\n煮出来的米饭不会硬，这款米煮出的米饭油润光亮，弹性十足"
+}
+2025-11-21 15:09:43 | INFO     | Connection #1: TTS Sentence Start | Text: 
+
+煮出来的米饭不会硬，这款米煮出的米饭油润光亮，弹性十足
+2025-11-21 15:09:43 | INFO     | Connection #1: =================================
+2025-11-21 15:09:48 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:48 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:48 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:48 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:48 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:48 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:48 | INFO     | Connection #1: =================================
+2025-11-21 15:09:48 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:48 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:48 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:48 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:48 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，软硬适中，吃起来爽滑有嚼劲，冷却后也不容易回生。"
+}
+2025-11-21 15:09:48 | INFO     | Connection #1: TTS Sentence Start | Text: ，软硬适中，吃起来爽滑有嚼劲，冷却后也不容易回生。
+2025-11-21 15:09:48 | INFO     | Connection #1: =================================
+2025-11-21 15:09:54 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:54 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:54 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:54 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:54 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:54 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:54 | INFO     | Connection #1: =================================
+2025-11-21 15:09:54 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:54 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:54 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:54 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:54 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": " \n\n这款米的供应商是黑龙江春华秋实粮油有限公司"
+}
+2025-11-21 15:09:54 | INFO     | Connection #1: TTS Sentence Start | Text:  
+
+这款米的供应商是黑龙江春华秋实粮油有限公司
+2025-11-21 15:09:54 | INFO     | Connection #1: =================================
+2025-11-21 15:09:58 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:58 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:58 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:09:58 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:58 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:09:58 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:09:58 | INFO     | Connection #1: =================================
+2025-11-21 15:09:58 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:09:58 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:09:58 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:09:58 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:09:58 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，售价128.37元 。  "
+}
+2025-11-21 15:09:58 | INFO     | Connection #1: TTS Sentence Start | Text: ，售价128.37元 。  
+2025-11-21 15:09:58 | INFO     | Connection #1: =================================
+2025-11-21 15:10:00 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:00 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:00 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:00 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:00 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:00 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:00 | INFO     | Connection #1: =================================
+2025-11-21 15:10:00 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:00 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:00 | INFO     | Connection #1: State: stop
+2025-11-21 15:10:00 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:00 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "stop"
+}
+2025-11-21 15:10:00 | INFO     | Connection #1: TTS Stop Time | Duration: 33438.79ms
+2025-11-21 15:10:00 | INFO     | Connection #1: =================================
+2025-11-21 15:10:01 | INFO     | Connection #1: Received complete response at 31.1s
+2025-11-21 15:10:01 | INFO     | ✓ Response received: [STT] 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？ | [LLM] 这就帮你查商品的详细属性，很快就好。 东北长粒香米的米粒是细长的哦 ，它的米粒呈细长形，色泽洁白、晶莹剔透。 煮出来...
+2025-11-21 15:10:01 | INFO     | 
+============================================================
+2025-11-21 15:10:01 | INFO     | Testing [COMPARE] #002: 十年班章普洱茶和普通普洱茶有什么区别？...
+2025-11-21 15:10:01 | INFO     | Audio file: compare_002.opus
+2025-11-21 15:10:01 | INFO     | ============================================================
+2025-11-21 15:10:01 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 15:10:01 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 15:10:01 | INFO     | Processed remaining 1764 bytes PCM data with 156 bytes padding (total 128484 bytes)
+2025-11-21 15:10:01 | INFO     | Generated 67 raw Opus packets from PCM data (total 14347 bytes, processed 128484 bytes PCM, coverage: 99.9%)
+2025-11-21 15:10:01 | INFO     | Detected 67 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 15:10:01 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 15:10:01 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:01 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 15:10:01 | INFO     | Connection #1: Session ID: None
+2025-11-21 15:10:01 | INFO     | Connection #1: Message Content:
+2025-11-21 15:10:01 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 15:10:01 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 15:10:01 | INFO     | Connection #1: =======================================
+2025-11-21 15:10:06 | INFO     | Connection #1: ========== STT RESPONSE ==========
+2025-11-21 15:10:06 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:06 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:06 | INFO     | Connection #1: {
+  "type": "stt",
+  "text": "10年班章普洱茶和普通普洱茶有什么区别？"
+}
+2025-11-21 15:10:06 | INFO     | Connection #1: Response Time: 4443.79ms (from send_start)
+2025-11-21 15:10:06 | INFO     | Connection #1: Recognized Text: 10年班章普洱茶和普通普洱茶有什么区别？
+2025-11-21 15:10:06 | INFO     | Connection #1: =================================
+2025-11-21 15:10:06 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:06 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:06 | INFO     | Connection #1: State: start
+2025-11-21 15:10:06 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:06 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-21 15:10:06 | INFO     | Connection #1: TTS Start Time | Duration: 33056.57ms
+2025-11-21 15:10:06 | INFO     | Connection #1: =================================
+2025-11-21 15:10:08 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:08 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:08 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:08 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:08 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "马上进行商品对比，结果很快就出来呀"
+}
+2025-11-21 15:10:08 | INFO     | Connection #1: TTS Sentence Start | Text: 马上进行商品对比，结果很快就出来呀
+2025-11-21 15:10:08 | INFO     | Connection #1: =================================
+2025-11-21 15:10:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:11 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:11 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:11 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:11 | INFO     | Connection #1: =================================
+2025-11-21 15:10:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:11 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:11 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "10年班章普洱茶和普通普洱茶相比"
+}
+2025-11-21 15:10:11 | INFO     | Connection #1: TTS Sentence Start | Text: 10年班章普洱茶和普通普洱茶相比
+2025-11-21 15:10:11 | INFO     | Connection #1: =================================
+2025-11-21 15:10:15 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:15 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:15 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:15 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:15 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:15 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:15 | INFO     | Connection #1: =================================
+2025-11-21 15:10:15 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:15 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:15 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:15 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:15 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，有下面这些明显区别：\n- **产地**：10年班章普洱茶产自云南布朗山老班章村"
+}
+2025-11-21 15:10:15 | INFO     | Connection #1: TTS Sentence Start | Text: ，有下面这些明显区别：
+- **产地**：10年班章普洱茶产自云南布朗山老班章村
+2025-11-21 15:10:15 | INFO     | Connection #1: =================================
+2025-11-21 15:10:21 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:21 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:21 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:21 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:21 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:21 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:21 | INFO     | Connection #1: =================================
+2025-11-21 15:10:21 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:21 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:21 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:21 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:21 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，普通普洱茶产地多样，范围更广。"
+}
+2025-11-21 15:10:21 | INFO     | Connection #1: TTS Sentence Start | Text: ，普通普洱茶产地多样，范围更广。
+2025-11-21 15:10:21 | INFO     | Connection #1: =================================
+2025-11-21 15:10:24 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:24 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:24 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:24 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:24 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:24 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:24 | INFO     | Connection #1: =================================
+2025-11-21 15:10:24 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:24 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:24 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:24 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:24 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n- **外观**：10年班章普洱茶茶饼色泽深褐或红褐"
+}
+2025-11-21 15:10:24 | INFO     | Connection #1: TTS Sentence Start | Text: 
+- **外观**：10年班章普洱茶茶饼色泽深褐或红褐
+2025-11-21 15:10:24 | INFO     | Connection #1: =================================
+2025-11-21 15:10:29 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:29 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:29 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:29 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:29 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:29 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:29 | INFO     | Connection #1: =================================
+2025-11-21 15:10:29 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:29 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:29 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:29 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:29 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，油润有光，条索肥壮"
+}
+2025-11-21 15:10:29 | INFO     | Connection #1: TTS Sentence Start | Text: ，油润有光，条索肥壮
+2025-11-21 15:10:29 | INFO     | Connection #1: =================================
+2025-11-21 15:10:32 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:32 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:32 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:32 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:32 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:32 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:32 | INFO     | Connection #1: =================================
+2025-11-21 15:10:32 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:32 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:32 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:32 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:32 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，显毫；普通普洱茶外观因品种、年份、制作工艺等不同"
+}
+2025-11-21 15:10:32 | INFO     | Connection #1: TTS Sentence Start | Text: ，显毫；普通普洱茶外观因品种、年份、制作工艺等不同
+2025-11-21 15:10:32 | INFO     | Connection #1: =================================
+2025-11-21 15:10:37 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:37 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:37 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:37 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:37 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:37 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:37 | INFO     | Connection #1: =================================
+2025-11-21 15:10:37 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:37 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:37 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:37 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:37 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，差异较大，难以一概而论。"
+}
+2025-11-21 15:10:37 | INFO     | Connection #1: TTS Sentence Start | Text: ，差异较大，难以一概而论。
+2025-11-21 15:10:37 | INFO     | Connection #1: =================================
+2025-11-21 15:10:39 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:39 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:39 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:39 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:39 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:39 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:39 | INFO     | Connection #1: =================================
+2025-11-21 15:10:39 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:39 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:39 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:39 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:39 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "\n- **香气**：10年班章普洱茶香气浓郁"
+}
+2025-11-21 15:10:39 | INFO     | Connection #1: TTS Sentence Start | Text: 
+- **香气**：10年班章普洱茶香气浓郁
+2025-11-21 15:10:39 | INFO     | Connection #1: =================================
+2025-11-21 15:10:44 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:44 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:44 | INFO     | Connection #1: State: sentence_end
+2025-11-21 15:10:44 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:44 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-21 15:10:44 | INFO     | Connection #1: TTS Sentence End
+2025-11-21 15:10:44 | INFO     | Connection #1: =================================
+2025-11-21 15:10:44 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-21 15:10:44 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 15:10:44 | INFO     | Connection #1: State: sentence_start
+2025-11-21 15:10:44 | INFO     | Connection #1: Full Response Data:
+2025-11-21 15:10:44 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，呈现陈香、蜜香、果香等多层次复合香型"
+}
+2025-11-21 15:10:44 | INFO     | Connection #1: TTS Sentence Start | Text: ，呈现陈香、蜜香、果香等多层次复合香型
+2025-11-21 15:10:44 | INFO     | Connection #1: =================================

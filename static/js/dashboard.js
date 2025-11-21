@@ -110,22 +110,14 @@ function setupSocketListeners() {
         if (data.summary) {
             updateSummary(data.summary);
         }
-        // 显示报告按钮（只要有测试结果，即使为0也显示，因为报告可能包含测试信息）
-        const btnReport = document.getElementById('btnReport');
-        if (btnReport) {
-            btnReport.style.display = 'inline-flex';
-        }
+        // 报告按钮始终显示，不需要额外操作
     });
 
     socket.on('test_error', (data) => {
         console.error('Test error', data);
         showError(data.error);
         updateUIForTestComplete();
-        // 即使出错也显示报告按钮（可能有一些结果）
-        const btnReport = document.getElementById('btnReport');
-        if (btnReport && testState.summary.total > 0) {
-            btnReport.style.display = 'inline-flex';
-        }
+        // 报告按钮始终显示，不需要额外操作
     });
 
     socket.on('status_update', (data) => {
@@ -498,11 +490,24 @@ function updateConversationItemContent(item, result) {
     // 优先使用result中的llm_text，其次使用已存在的文本，最后使用缓存的文本
     const finalLlmText = llmText || existingLlmText || cachedLlmText;
     
+    // 确定LLM显示内容
+    let llmDisplayText = '';
+    if (finalLlmText) {
+        llmDisplayText = escapeHtml(finalLlmText);
+    } else if (isSuccess) {
+        // 如果测试成功但没有LLM文本，说明可能是通过TTS stop判断成功的，但LLM内容还没到达
+        // 或者测试已完成但内容为空
+        llmDisplayText = '<span style="color: #9ca3af; font-style: italic;">测试已完成，但未收到LLM响应内容</span>';
+    } else {
+        // 测试未成功，仍在等待
+        llmDisplayText = '等待响应中...';
+    }
+    
     // 始终在contentHtml中包含LLM部分
     contentHtml += `
         <div class="conversation-section llm-section">
             <div class="section-label">🤖 LLM返回</div>
-            <div class="section-content">${finalLlmText ? escapeHtml(finalLlmText) : '等待响应中...'}</div>
+            <div class="section-content">${llmDisplayText}</div>
         </div>`;
 
     // 错误信息
@@ -579,11 +584,7 @@ function resetTestState() {
     // 清空并发状态指示器
     clearConcurrencyIndicator();
     
-    // 隐藏报告按钮（测试开始时）
-    const btnReport = document.getElementById('btnReport');
-    if (btnReport) {
-        btnReport.style.display = 'none';
-    }
+    // 报告按钮始终显示，不需要隐藏
 }
 
 // 更新UI为测试开始
