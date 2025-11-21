@@ -1,4 +1,4 @@
 # 忽略编译和构建目录
-results/*
-audio\inquiries\*
+results/*.opus
+audio/inquiries/*
 

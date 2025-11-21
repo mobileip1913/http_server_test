@@ -1,0 +1,124 @@
+2025-11-21 11:13:32 | INFO     | 测试设置 - 并发数: 1, SN数量: 1, 测试模式: normal
+2025-11-21 11:13:32 | INFO     | SN列表: ['FC012C2EA0CC']
+2025-11-21 11:13:32 | WARNING  | File not found: D:\code\http_server\product_inquiries.txt, will use audio files only
+2025-11-21 11:13:32 | INFO     | 
+============================================================
+2025-11-21 11:13:32 | INFO     | 开始测试 | SN数量: 1, 每个SN连接数: 1, 总并发连接数: 1, 测试模式: normal
+2025-11-21 11:13:32 | INFO     | SN列表: FC012C2EA0CC
+2025-11-21 11:13:32 | INFO     | ============================================================
+2025-11-21 11:13:32 | INFO     | 共创建 1 个WebSocket客户端
+2025-11-21 11:13:32 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-21 11:13:32 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 11:13:32 | INFO     | Connection #1: Device SN: FC012C2EA0CC
+2025-11-21 11:13:32 | INFO     | Connection #1: Request Headers:
+2025-11-21 11:13:32 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-21 11:13:32 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:CC
+2025-11-21 11:13:32 | INFO     | Connection #1: ==================================
+2025-11-21 11:13:32 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 201.08ms
+2025-11-21 11:13:32 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-21 11:13:32 | INFO     | Connection #1: Device SN: FC012C2EA0CC
+2025-11-21 11:13:32 | INFO     | Connection #1: Response Code: 1
+2025-11-21 11:13:32 | INFO     | Connection #1: Response Message: auth_success
+2025-11-21 11:13:32 | INFO     | Connection #1: Full Response Data:
+2025-11-21 11:13:32 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": 1,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA0CC",
+    "volume": 80,
+    "light": 20,
+    "time": 1763694813190,
+    "can_use_while_charging": 0
+  }
+}
+2025-11-21 11:13:32 | INFO     | Connection #1: Session ID: None
+2025-11-21 11:13:32 | INFO     | Connection #1: ====================================
+2025-11-21 11:13:32 | INFO     | Connection #1: ✅ Auth SUCCESS | Code: 1, Message: auth_success, Session ID: None
+2025-11-21 11:13:32 | INFO     | SN FC012C2EA0CC: 鉴权成功 (Conn #1)
+2025-11-21 11:13:32 | INFO     | 
+============================================================
+2025-11-21 11:13:32 | INFO     | Testing [INQUIRY] #001: 询问 #1...
+2025-11-21 11:13:32 | INFO     | Audio file: inquiry_001.opus
+2025-11-21 11:13:32 | INFO     | ============================================================
+2025-11-21 11:13:32 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 11:13:32 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 11:13:35 | INFO     | Processed remaining 1104 bytes PCM data with 816 bytes padding (total 225744 bytes)
+2025-11-21 11:13:35 | INFO     | Generated 118 raw Opus packets from PCM data (total 20954 bytes, processed 225744 bytes PCM, coverage: 99.6%)
+2025-11-21 11:13:35 | INFO     | Detected 118 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 11:13:35 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 11:13:35 | INFO     | Connection #1: Device SN: FC012C2EA0CC
+2025-11-21 11:13:35 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 11:13:35 | INFO     | Connection #1: Session ID: None
+2025-11-21 11:13:35 | INFO     | Connection #1: Message Content:
+2025-11-21 11:13:35 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 11:13:35 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 11:13:35 | INFO     | Connection #1: =======================================
+2025-11-21 11:14:49 | WARNING  | ✗ Test FAILED: [INQUIRY] #001
+2025-11-21 11:14:49 | WARNING  |   - Audio file: inquiry_001.opus
+2025-11-21 11:14:49 | WARNING  |   - Text: 询问 #1
+2025-11-21 11:14:49 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-21 11:14:49 | WARNING  |   - Connection ID: 1
+2025-11-21 11:14:49 | WARNING  |   - Device SN: FC012C2EA0CC
+2025-11-21 11:14:49 | WARNING  |   - Connection status: Connected
+2025-11-21 11:14:49 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-21 11:14:49 | WARNING  |   - Send time: 1763694816.519s, Elapsed: 73.3s
+2025-11-21 11:14:49 | WARNING  |   - STT text: (empty)
+2025-11-21 11:14:49 | WARNING  |   - LLM text: (empty)
+2025-11-21 11:14:49 | WARNING  |   - Messages sent: 120, received: 2
+2025-11-21 11:14:49 | WARNING  |   - Bytes sent: 21152, received: 280
+2025-11-21 11:14:49 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-21 11:14:50 | INFO     | 
+============================================================
+2025-11-21 11:14:50 | INFO     | Testing [PURCHASE] #001: 购买 #1...
+2025-11-21 11:14:50 | INFO     | Audio file: purchase_001.opus
+2025-11-21 11:14:50 | INFO     | ============================================================
+2025-11-21 11:14:50 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 11:14:50 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 11:14:50 | INFO     | Processed remaining 134 bytes PCM data with 1786 bytes padding (total 136454 bytes)
+2025-11-21 11:14:50 | INFO     | Generated 72 raw Opus packets from PCM data (total 13957 bytes, processed 136454 bytes PCM, coverage: 98.7%)
+2025-11-21 11:14:50 | INFO     | Detected 72 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 11:14:50 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 11:14:50 | INFO     | Connection #1: Device SN: FC012C2EA0CC
+2025-11-21 11:14:50 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 11:14:50 | INFO     | Connection #1: Session ID: None
+2025-11-21 11:14:50 | INFO     | Connection #1: Message Content:
+2025-11-21 11:14:50 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 11:14:50 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 11:14:50 | INFO     | Connection #1: =======================================
+2025-11-21 11:16:01 | WARNING  | ✗ Test FAILED: [PURCHASE] #001
+2025-11-21 11:16:01 | WARNING  |   - Audio file: purchase_001.opus
+2025-11-21 11:16:01 | WARNING  |   - Text: 购买 #1
+2025-11-21 11:16:01 | WARNING  |   - Wait time: 60.0s (max: 60.0s)
+2025-11-21 11:16:01 | WARNING  |   - Connection ID: 1
+2025-11-21 11:16:01 | WARNING  |   - Device SN: FC012C2EA0CC
+2025-11-21 11:16:01 | WARNING  |   - Connection status: Connected
+2025-11-21 11:16:01 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-21 11:16:01 | WARNING  |   - Send time: 1763694890.810s, Elapsed: 70.4s
+2025-11-21 11:16:01 | WARNING  |   - STT text: (empty)
+2025-11-21 11:16:01 | WARNING  |   - LLM text: (empty)
+2025-11-21 11:16:01 | WARNING  |   - Messages sent: 194, received: 3
+2025-11-21 11:16:01 | WARNING  |   - Bytes sent: 35307, received: 365
+2025-11-21 11:16:01 | WARNING  |   - ❌ Failure reason: No response received (no STT, no LLM)
+2025-11-21 11:16:01 | INFO     | SN FC012C2EA0CC (Conn #1): 任务处理完成
+2025-11-21 11:29:57 | WARNING  | Connection #1: Connection closed by server/network, received 3 messages total
