@@ -1,9 +1,22 @@
 Inquiry Files:
+017: audio_017.opus - 
+018: audio_018.opus - 
 001: inquiry_001.opus - 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
 002: inquiry_002.opus - 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
 003: inquiry_003.opus - 我想知道东北长粒香米煮饭时是不是真的满屋飘香？
 004: inquiry_004.opus - 东北长粒香米冷却后会不会回生？我想买来做便当。
 005: inquiry_005.opus - 东北长粒香米是产自黑土平原的吗？我想买点优质大米。
+006: inquiry_006.opus - 
+007: inquiry_007.opus - 下单两斤牛肉
+008: inquiry_008.opus - 下单牛肉
+009: inquiry_009.opus - 介绍香水
+010: inquiry_010.opus - 下单两斤牛肉
+011: inquiry_011.opus - 下单牛肉
+012: inquiry_012.opus - 介绍香水
+013: inquiry_013.opus - 
+014: inquiry_014.opus - 
+015: inquiry_015.opus - 
+016: inquiry_016.opus - 
 
 Compare Files:
 001: compare_001.opus - 我想对比一下东北长粒香米和五常大米，哪个更好？
@@ -11,6 +24,11 @@ Compare Files:
 003: compare_003.opus - 人参乌梅片和西洋参片哪个更适合我？
 004: compare_004.opus - 宁夏葡萄酒和法国葡萄酒相比怎么样？
 005: compare_005.opus - 香卉儿沉香香水和普通香水有什么区别？
+006: compare_006.opus - 
+007: compare_007.opus - 
+008: compare_008.opus - 
+009: compare_009.opus - 
+010: compare_010.opus - 
 
 Order Files:
 001: order_001.opus - 听起来不错，我购买东北大米长粒香5KG。
@@ -18,3 +36,8 @@ Order Files:
 003: order_003.opus - 如果是这样，我购买人参乌梅片。
 004: order_004.opus - 不会回生的话，我购买东北大米长粒香5KG。
 005: order_005.opus - 是的，我购买红酒礼盒套装。
+006: order_006.opus - 
+007: order_007.opus - 
+008: order_008.opus - 
+009: order_009.opus - 
+010: order_010.opus - 

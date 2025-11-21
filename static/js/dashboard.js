@@ -30,14 +30,108 @@ document.addEventListener('DOMContentLoaded', function() {
     loadStatus();
     loadSettings();
     
-    // 点击模态框外部关闭
+    // 改进的模态框关闭逻辑：只有在外部按下并松开鼠标时才关闭
+    // 设置模态框
     const settingsModal = document.getElementById('settingsModal');
     if (settingsModal) {
-        settingsModal.addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('settings-modal-overlay')) {
-                closeSettings();
-            }
-        });
+        let mouseDownOnOverlay = false;
+        const overlay = settingsModal.querySelector('.settings-modal-overlay');
+        const content = settingsModal.querySelector('.settings-modal-content');
+        
+        if (overlay) {
+            overlay.addEventListener('mousedown', function(e) {
+                // 只有在overlay上按下时才标记
+                if (e.target === overlay) {
+                    mouseDownOnOverlay = true;
+                }
+            });
+            
+            overlay.addEventListener('mouseup', function(e) {
+                // 只有在overlay上按下且松开时才关闭
+                if (mouseDownOnOverlay && e.target === overlay) {
+                    closeSettings();
+                }
+                mouseDownOnOverlay = false;
+            });
+            
+            // 如果鼠标移出overlay区域，重置标记
+            overlay.addEventListener('mouseleave', function() {
+                mouseDownOnOverlay = false;
+            });
+        }
+        
+        // 阻止内容区域的点击事件冒泡
+        if (content) {
+            content.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+        }
+    }
+    
+    // 报告模态框
+    const reportModal = document.getElementById('reportModal');
+    if (reportModal) {
+        let mouseDownOnOverlay = false;
+        const overlay = reportModal.querySelector('.settings-modal-overlay');
+        const content = reportModal.querySelector('.settings-modal-content');
+        
+        if (overlay) {
+            overlay.addEventListener('mousedown', function(e) {
+                if (e.target === overlay) {
+                    mouseDownOnOverlay = true;
+                }
+            });
+            
+            overlay.addEventListener('mouseup', function(e) {
+                if (mouseDownOnOverlay && e.target === overlay) {
+                    closeReport();
+                }
+                mouseDownOnOverlay = false;
+            });
+            
+            overlay.addEventListener('mouseleave', function() {
+                mouseDownOnOverlay = false;
+            });
+        }
+        
+        if (content) {
+            content.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+        }
+    }
+    
+    // 单语音测试模态框
+    const singleTestModal = document.getElementById('singleTestModal');
+    if (singleTestModal) {
+        let mouseDownOnOverlay = false;
+        const overlay = singleTestModal.querySelector('.settings-modal-overlay');
+        const content = singleTestModal.querySelector('.settings-modal-content');
+        
+        if (overlay) {
+            overlay.addEventListener('mousedown', function(e) {
+                if (e.target === overlay) {
+                    mouseDownOnOverlay = true;
+                }
+            });
+            
+            overlay.addEventListener('mouseup', function(e) {
+                if (mouseDownOnOverlay && e.target === overlay) {
+                    closeSingleTest();
+                }
+                mouseDownOnOverlay = false;
+            });
+            
+            overlay.addEventListener('mouseleave', function() {
+                mouseDownOnOverlay = false;
+            });
+        }
+        
+        if (content) {
+            content.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+        }
     }
     
     // ESC键关闭设置或报告
@@ -45,18 +139,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Escape') {
             closeSettings();
             closeReport();
+            closeSingleTest();
         }
     });
-    
-    // 点击报告模态框外部关闭
-    const reportModal = document.getElementById('reportModal');
-    if (reportModal) {
-        reportModal.addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('settings-modal-overlay')) {
-                closeReport();
-            }
-        });
-    }
 });
 
 // 设置WebSocket监听
@@ -1105,6 +1190,145 @@ function exportReportJSON() {
     // 显示提示
     showNotification('JSON报告正在下载...', 'success');
 }
+
+// 单语音测试功能
+function openSingleTest() {
+    document.getElementById('singleTestModal').classList.add('active');
+    // 重置状态
+    document.getElementById('singleTestStatus').style.display = 'none';
+    document.getElementById('singleTestMetrics').style.display = 'none';
+    document.getElementById('singleTestText').value = '';
+    document.getElementById('btnStartSingleTest').disabled = false;
+}
+
+function closeSingleTest() {
+    document.getElementById('singleTestModal').classList.remove('active');
+}
+
+async function startSingleTest() {
+    const text = document.getElementById('singleTestText').value.trim();
+    if (!text) {
+        alert('请输入要测试的文字');
+        return;
+    }
+    
+    const deviceSN = document.getElementById('singleTestDeviceSN').value.trim();
+    const testMode = document.getElementById('singleTestMode').value;
+    
+    // 禁用按钮
+    const btn = document.getElementById('btnStartSingleTest');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="icon">⏳</span> 生成中...';
+    
+    // 显示状态
+    document.getElementById('singleTestStatus').style.display = 'block';
+    document.getElementById('singleTestStatusText').textContent = '正在生成TTS音频...';
+    document.getElementById('singleTestRequestText').textContent = text;
+    document.getElementById('singleTestSTTText').textContent = '-';
+    document.getElementById('singleTestLLMText').textContent = '-';
+    
+    try {
+        // 获取设置中的WebSocket URL（loadSettings会更新testSettings，但不返回值）
+        loadSettings();  // 确保设置已加载
+        const wsUrl = testSettings.wsUrl || '';
+        
+        // 发送测试请求
+        const response = await fetch('/api/single-test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text: text,
+                device_sns: deviceSN ? [deviceSN] : (testSettings.deviceSns && testSettings.deviceSns.length > 0 ? testSettings.deviceSns : []),
+                test_mode: testMode,
+                ws_url: wsUrl
+            })
+        });
+        
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.error || '测试启动失败');
+        }
+        
+        // 更新状态
+        document.getElementById('singleTestStatusText').textContent = 'TTS生成完成，正在执行测试...';
+        
+    } catch (error) {
+        console.error('Single test error:', error);
+        alert('测试启动失败: ' + error.message);
+        btn.disabled = false;
+        btn.innerHTML = '<span class="icon">▶</span> 生成并测试';
+        document.getElementById('singleTestStatusText').textContent = '测试失败: ' + error.message;
+    }
+}
+
+// 监听单语音测试事件
+socket.on('single_test_start', (data) => {
+    if (data.status) {
+        document.getElementById('singleTestStatusText').textContent = data.status;
+    } else {
+        document.getElementById('singleTestStatusText').textContent = '测试进行中...';
+    }
+});
+
+// 单语音测试实时更新
+socket.on('single_test_update', (data) => {
+    // 实时更新STT识别结果
+    if (data.stt_text) {
+        document.getElementById('singleTestSTTText').textContent = data.stt_text;
+    }
+    
+    // 实时更新LLM回复（流式显示）
+    if (data.llm_text) {
+        const llmTextElement = document.getElementById('singleTestLLMText');
+        if (llmTextElement) {
+            llmTextElement.textContent = data.llm_text;
+        }
+    }
+});
+
+socket.on('single_test_complete', (data) => {
+    const result = data.result;
+    const btn = document.getElementById('btnStartSingleTest');
+    btn.disabled = false;
+    btn.innerHTML = '<span class="icon">▶</span> 生成并测试';
+    
+    // 更新状态
+    document.getElementById('singleTestStatusText').textContent = result.success ? '测试成功' : '测试失败';
+    document.getElementById('singleTestSTTText').textContent = result.stt_text || '-';
+    document.getElementById('singleTestLLMText').textContent = result.llm_text || '-';
+    
+    // 显示性能指标
+    document.getElementById('singleTestMetrics').style.display = 'block';
+    document.getElementById('metricSTT').textContent = result.stt_latency ? `${result.stt_latency.toFixed(2)} ms` : '-';
+    document.getElementById('metricLLM').textContent = result.llm_latency ? `${result.llm_latency.toFixed(2)} ms` : '-';
+    document.getElementById('metricTTS').textContent = result.tts_latency ? `${result.tts_latency.toFixed(2)} ms` : '-';
+    document.getElementById('metricE2E').textContent = result.e2e_response_time ? `${result.e2e_response_time.toFixed(2)} ms` : '-';
+    
+    // 添加到对话流
+    addConversationItem({
+        type: 'single',
+        index: 1,
+        text: data.text,
+        stt_text: result.stt_text || '',
+        llm_text: result.llm_text || '',
+        success: result.success,
+        stt_latency: result.stt_latency,
+        llm_latency: result.llm_latency,
+        tts_latency: result.tts_latency,
+        e2e_response_time: result.e2e_response_time,
+        timestamp: new Date().toISOString()
+    }, result.success ? 'completed' : 'failed');
+});
+
+socket.on('single_test_error', (data) => {
+    const btn = document.getElementById('btnStartSingleTest');
+    btn.disabled = false;
+    btn.innerHTML = '<span class="icon">▶</span> 生成并测试';
+    document.getElementById('singleTestStatusText').textContent = '错误: ' + (data.error || '未知错误');
+    alert('测试失败: ' + (data.error || '未知错误'));
+});
 
 // 渲染报告
 function renderReport(report) {

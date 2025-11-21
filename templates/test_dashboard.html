@@ -21,6 +21,9 @@
                     <button id="btnReport" class="btn btn-report" onclick="showReport()">
                         <span class="icon">📊</span> 查看报告
                     </button>
+                    <button id="btnSingleTest" class="btn btn-secondary" onclick="openSingleTest()">
+                        <span class="icon">🎤</span> 单语音测试
+                    </button>
                     <button id="btnStart" class="btn btn-primary" onclick="startTest()">
                         <span class="icon">▶</span> 开始测试
                     </button>
@@ -77,7 +80,7 @@
                 <span class="progress-label">测试进度</span>
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <span class="progress-text" id="progressText">0 / 0</span>
-                    <span style="font-size: 12px; color: var(--text-muted);" id="opusFilesInfo">(Opus文件: 0)</span>
+                    <span style="font-size: 12px; color: var(--text-muted); cursor: pointer; text-decoration: underline;" id="opusFilesInfo" onclick="window.location.href='/opus-management'">(Opus文件: 0)</span>
                 </div>
             </div>
             <div class="progress-bar">
@@ -124,7 +127,7 @@
 
     <!-- 测试报告模态框 -->
     <div id="reportModal" class="settings-modal">
-        <div class="settings-modal-overlay" onclick="closeReport()"></div>
+        <div class="settings-modal-overlay"></div>
         <div class="settings-modal-content report-modal-content">
             <div class="settings-modal-header">
                 <h2>📊 测试报告</h2>
@@ -149,9 +152,106 @@
         </div>
     </div>
 
+    <!-- 单语音测试模态框 -->
+    <div id="singleTestModal" class="settings-modal">
+        <div class="settings-modal-overlay"></div>
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h2>🎤 单语音测试</h2>
+                <button class="settings-close-btn" onclick="closeSingleTest()">×</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">✏️</span>
+                        <h3>输入测试文字</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="singleTestText">测试文字</label>
+                        <div class="input-wrapper">
+                            <textarea id="singleTestText" class="settings-input" rows="3" 
+                                      placeholder="请输入要测试的文字，例如：你好，我想购买人参乌梅片"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">⚙️</span>
+                        <h3>测试配置</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="singleTestDeviceSN">设备SN（可选，留空使用默认配置）</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="singleTestDeviceSN" class="settings-input" 
+                                   placeholder="留空则使用设置中的设备SN">
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label for="singleTestMode">测试模式</label>
+                        <div class="input-wrapper">
+                            <select id="singleTestMode" class="settings-input">
+                                <option value="normal">正常模式</option>
+                                <option value="fast">急速模式</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="singleTestStatus" class="single-test-status" style="display: none;">
+                    <div class="status-item">
+                        <span class="status-label">状态：</span>
+                        <span id="singleTestStatusText" class="status-text">准备中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">请求文字：</span>
+                        <span id="singleTestRequestText" class="status-text">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">STT识别：</span>
+                        <span id="singleTestSTTText" class="status-text">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">LLM回复：</span>
+                        <span id="singleTestLLMText" class="status-text">-</span>
+                    </div>
+                </div>
+
+                <div id="singleTestMetrics" class="single-test-metrics" style="display: none;">
+                    <h3>性能指标</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">STT延迟：</span>
+                            <span id="metricSTT" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">LLM延迟：</span>
+                            <span id="metricLLM" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">TTS延迟：</span>
+                            <span id="metricTTS" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">端到端延迟：</span>
+                            <span id="metricE2E" class="metric-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button id="btnStartSingleTest" class="btn btn-primary" onclick="startSingleTest()">
+                        <span class="icon">▶</span> 生成并测试
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeSingleTest()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 设置模态框 -->
     <div id="settingsModal" class="settings-modal">
-        <div class="settings-modal-overlay" onclick="closeSettings()"></div>
+        <div class="settings-modal-overlay"></div>
         <div class="settings-modal-content">
             <div class="settings-modal-header">
                 <h2>⚙️ 测试设置</h2>

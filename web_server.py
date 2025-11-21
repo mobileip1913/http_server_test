@@ -77,7 +77,7 @@ class WebInquiryTester(InquiryTester):
         self.current_index = 0
         self.current_client = None  # 保存当前测试的客户端，用于实时更新
     
-    def _create_tts_sentence_callback(self, client, test_index: int, test_type: str, test_text: str):
+    def _create_tts_sentence_callback(self, client, test_index: int, test_type: str, test_text: str, is_single_test: bool = False):
         """为每个测试创建独立的TTS句子回调函数，绑定到该测试的index和type"""
         # 存储已发送的句子数量，用于流式显示
         sent_sentence_count = [0]  # 使用列表以便在闭包中修改
@@ -106,29 +106,41 @@ class WebInquiryTester(InquiryTester):
                 new_sentence = ""
                 cumulative_text = " ".join(llm_sentences) if llm_sentences else ""
             
-            # 实时更新测试详情（使用绑定的test_index和test_type，确保每个测试的STT文本只更新到对应的对话项）
-            emit_test_update("test_detail_update", {
-                "index": test_index,
-                "type": test_type,
-                "text": test_text,
-                "stt_text": current_stt_text,
-                "llm_text": cumulative_text,  # 累积文本（用于完整显示）
-                "llm_sentence": new_sentence,  # 新句子（用于流式追加）
-                "status": "testing"
-            })
+            # 根据是否为单语音测试选择不同的事件
+            if is_single_test:
+                # 单语音测试使用专门的事件
+                emit_test_update("single_test_update", {
+                    "stt_text": current_stt_text,
+                    "llm_text": cumulative_text,  # 累积文本（用于完整显示）
+                    "llm_sentence": new_sentence,  # 新句子（用于流式追加）
+                    "status": "testing"
+                })
+            else:
+                # 批量测试使用原有的事件
+                emit_test_update("test_detail_update", {
+                    "index": test_index,
+                    "type": test_type,
+                    "text": test_text,
+                    "stt_text": current_stt_text,
+                    "llm_text": cumulative_text,  # 累积文本（用于完整显示）
+                    "llm_sentence": new_sentence,  # 新句子（用于流式追加）
+                    "status": "testing"
+                })
         
         return callback
     
     async def test_single_audio(self, client, audio_file: str, text: str, 
-                                test_type: str, index: int, concurrency_index: int = None) -> dict:
+                                test_type: str, index: int, concurrency_index: int = None, is_single_test: bool = False) -> dict:
         """重写测试方法，添加实时通知"""
         # 保存当前客户端，用于实时更新
         self.current_client = client
         
         # 为当前测试创建独立的TTS句子回调函数（绑定到当前测试的index和type）
-        client._tts_sentence_callback = self._create_tts_sentence_callback(
-            client, index, test_type, text
-        )
+        # 如果回调已经设置（例如在单语音测试中），则不覆盖
+        if not hasattr(client, '_tts_sentence_callback') or client._tts_sentence_callback is None:
+            client._tts_sentence_callback = self._create_tts_sentence_callback(
+                client, index, test_type, text, is_single_test=is_single_test
+            )
         
         # 更新当前测试状态
         test_state["current_test"] = {
@@ -620,6 +632,11 @@ def run_test_async():
 def index():
     """主页面"""
     return render_template('test_dashboard.html')
+
+@app.route('/opus-management')
+def opus_management():
+    """Opus文件管理页面"""
+    return render_template('opus_management.html')
 
 @app.route('/api/status')
 def get_status():
@@ -1322,6 +1339,278 @@ def format_pdf_time(ms):
         minutes = int((ms % 3600000) // 60000)
         return f"{hours}小时 {minutes}分钟"
 
+@app.route('/api/generate-tts', methods=['POST'])
+def generate_tts():
+    """生成TTS音频文件（单语音测试模式）"""
+    import subprocess
+    import tempfile
+    import shutil
+    
+    data = request.get_json() or {}
+    text = data.get('text', '').strip()
+    
+    if not text:
+        return jsonify({"error": "请输入要测试的文字"}), 400
+    
+    try:
+        # 创建临时目录
+        temp_dir = tempfile.mkdtemp(prefix='tts_test_')
+        temp_pcm = os.path.join(temp_dir, 'temp_audio.pcm')
+        temp_opus = os.path.join(temp_dir, 'temp_audio.opus')
+        
+        # 调用generate_tts_audio.py生成音频
+        from generate_tts_audio import synthesize_speech
+        
+        # 异步生成PCM
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        result = loop.run_until_complete(synthesize_speech(text, temp_pcm, audio_format="raw"))
+        loop.close()
+        
+        if not result.get("success", False):
+            shutil.rmtree(temp_dir, ignore_errors=True)
+            return jsonify({"error": f"TTS生成失败: {result.get('error', 'Unknown error')}"}), 500
+        
+        # 使用ffmpeg转换为Opus
+        try:
+            subprocess.run([
+                "ffmpeg", "-y", "-f", "s16le", "-ar", "16000", "-ac", "1",
+                "-i", temp_pcm, "-c:a", "libopus", "-b:a", "32k", "-frame_duration", "60",
+                temp_opus
+            ], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except subprocess.CalledProcessError as e:
+            shutil.rmtree(temp_dir, ignore_errors=True)
+            return jsonify({"error": f"音频转换失败: {str(e)}"}), 500
+        
+        # 读取opus文件内容
+        with open(temp_opus, 'rb') as f:
+            opus_data = f.read()
+        
+        # 清理临时文件
+        shutil.rmtree(temp_dir, ignore_errors=True)
+        
+        # 保存到临时文件供测试使用
+        test_audio_dir = os.path.join(os.path.dirname(__file__), "audio", "temp_test")
+        os.makedirs(test_audio_dir, exist_ok=True)
+        import time as time_module
+        test_audio_file = os.path.join(test_audio_dir, f"single_test_{int(time_module.time() * 1000)}.opus")
+        
+        with open(test_audio_file, 'wb') as f:
+            f.write(opus_data)
+        
+        return jsonify({
+            "success": True,
+            "audio_file": test_audio_file,
+            "text": text,
+            "size": len(opus_data)
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"生成TTS失败: {str(e)}"}), 500
+
+@app.route('/api/single-test', methods=['POST'])
+def single_test():
+    """执行单语音测试"""
+    global test_state
+    
+    if test_state["is_running"]:
+        return jsonify({"error": "测试正在进行中，请先停止当前测试"}), 400
+    
+    data = request.get_json() or {}
+    text = data.get('text', '').strip()
+    
+    if not text:
+        return jsonify({"error": "请输入要测试的文字"}), 400
+    
+    # 获取测试配置（多层fallback）
+    device_sns = data.get('device_sns', [])
+    if not device_sns:
+        # 从test_state获取默认配置
+        settings = test_state.get("settings", {})
+        device_sns = settings.get("device_sns", [])
+    
+    # 如果还是没有，使用Config中的默认值（单设备SN）
+    if not device_sns:
+        from config import Config
+        device_sns = [Config.DEVICE_SN]  # 使用Config中的默认设备SN
+    
+    # 确保至少有一个设备SN
+    if not device_sns:
+        return jsonify({"error": "请先配置设备SN（可在设置中配置，或使用config.py中的默认值）"}), 400
+    
+    ws_url = data.get('ws_url', '')
+    test_mode = data.get('test_mode', 'normal')
+    
+    # 在新线程中执行测试
+    def run_single_test():
+        global test_state
+        temp_dir = None
+        try:
+            # 生成TTS音频
+            from generate_tts_audio import synthesize_speech
+            import subprocess
+            import tempfile
+            import shutil
+            
+            temp_dir = tempfile.mkdtemp(prefix='tts_test_')
+            temp_pcm = os.path.join(temp_dir, 'temp_audio.pcm')
+            temp_opus = os.path.join(temp_dir, 'temp_audio.opus')
+            
+            socketio.emit('single_test_start', {
+                "text": text,
+                "status": "正在生成TTS音频..."
+            })
+            
+            # 异步生成PCM
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            result = loop.run_until_complete(synthesize_speech(text, temp_pcm, audio_format="raw"))
+            loop.close()
+            
+            if not result.get("success", False):
+                socketio.emit('single_test_error', {"error": f"TTS生成失败: {result.get('error', 'Unknown error')}"})
+                if temp_dir:
+                    shutil.rmtree(temp_dir, ignore_errors=True)
+                return
+            
+            # 转换为Opus
+            socketio.emit('single_test_start', {
+                "text": text,
+                "status": "正在转换音频格式..."
+            })
+            
+            try:
+                subprocess.run([
+                    "ffmpeg", "-y", "-f", "s16le", "-ar", "16000", "-ac", "1",
+                    "-i", temp_pcm, "-c:a", "libopus", "-b:a", "32k", "-frame_duration", "60",
+                    temp_opus
+                ], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError as e:
+                socketio.emit('single_test_error', {"error": f"音频转换失败: {str(e)}"})
+                if temp_dir:
+                    shutil.rmtree(temp_dir, ignore_errors=True)
+                return
+            
+            # 执行测试
+            test_state["is_running"] = True
+            test_state["start_time"] = datetime.now().isoformat()
+            
+            socketio.emit('single_test_start', {
+                "text": text,
+                "status": "TTS生成完成，正在执行测试..."
+            })
+            
+            # 使用第一个设备SN进行测试
+            device_sn = device_sns[0] if device_sns else None
+            
+            # 如果提供了WebSocket URL，设置到Config
+            if ws_url:
+                from urllib.parse import urlparse
+                from config import Config as ConfigModule  # 在函数内部重新导入
+                if ws_url.startswith('wss://'):
+                    parsed = urlparse(ws_url.replace('wss://', 'http://'))
+                    host_with_port = f"{parsed.hostname}" + (f":{parsed.port}" if parsed.port else "")
+                    ConfigModule.WSS_SERVER_HOST = f"wss://{host_with_port}"
+                    ConfigModule.WS_SERVER_HOST = f"ws://{host_with_port}"
+                    ConfigModule.USE_SSL = True
+                else:
+                    parsed = urlparse(ws_url.replace('ws://', 'http://'))
+                    host_with_port = f"{parsed.hostname}" + (f":{parsed.port}" if parsed.port else "")
+                    ConfigModule.WS_SERVER_HOST = f"ws://{host_with_port}"
+                    ConfigModule.WSS_SERVER_HOST = f"wss://{host_with_port}"
+                    ConfigModule.USE_SSL = False
+            
+            # 执行测试
+            from websocket_client import WebSocketClient
+            
+            # 使用WebInquiryTester以支持实时更新
+            tester = WebInquiryTester()
+            client = WebSocketClient(connection_id=1, device_sn=device_sn)
+            
+            # 建立WebSocket连接
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            async def run_test_with_connection():
+                # 先建立连接
+                connected = await client.connect()
+                if not connected:
+                    socketio.emit('single_test_error', {"error": "WebSocket连接失败"})
+                    if temp_dir:
+                        shutil.rmtree(temp_dir, ignore_errors=True)
+                    return None
+                
+                # 等待一小段时间让服务器响应（鉴权）
+                await asyncio.sleep(0.2)
+                wait_server_msg_time = 0
+                max_wait_server_msg = 3.0
+                check_interval = 0.1
+                while wait_server_msg_time < max_wait_server_msg and client.is_connected:
+                    if client.auth_received or client.session_id:
+                        break
+                    await asyncio.sleep(check_interval)
+                    wait_server_msg_time += check_interval
+                
+                if client.auth_failed:
+                    socketio.emit('single_test_error', {"error": "WebSocket鉴权失败"})
+                    if temp_dir:
+                        shutil.rmtree(temp_dir, ignore_errors=True)
+                    return None
+                
+                # 为单语音测试创建实时更新回调
+                client._tts_sentence_callback = tester._create_tts_sentence_callback(
+                    client, 1, "single", text, is_single_test=True
+                )
+                
+                # 执行单次测试（传入is_single_test=True，但回调已设置，不会覆盖）
+                test_result = await tester.test_single_audio(
+                    client, temp_opus, text, "single", 1, is_single_test=True
+                )
+                
+                # 关闭连接
+                if client.is_connected:
+                    await client.close()
+                
+                return test_result
+            
+            # 执行测试
+            test_result = loop.run_until_complete(run_test_with_connection())
+            loop.close()
+            
+            if test_result is None:
+                return
+            
+            # 清理临时文件
+            if temp_dir:
+                shutil.rmtree(temp_dir, ignore_errors=True)
+            
+            # 发送测试结果
+            test_state["end_time"] = datetime.now().isoformat()
+            test_state["is_running"] = False
+            
+            socketio.emit('single_test_complete', {
+                "result": test_result,
+                "text": text
+            })
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            test_state["is_running"] = False
+            socketio.emit('single_test_error', {"error": str(e)})
+            if temp_dir:
+                try:
+                    shutil.rmtree(temp_dir, ignore_errors=True)
+                except:
+                    pass
+    
+    test_thread = threading.Thread(target=run_single_test, daemon=True)
+    test_thread.start()
+    
+    return jsonify({"status": "started"})
+
 @app.route('/api/start', methods=['POST'])
 def start_test():
     """开始测试"""
@@ -1411,6 +1700,376 @@ def stop_test():
     global test_state
     test_state["is_running"] = False
     return jsonify({"status": "stopped"})
+
+# ==================== Opus文件管理API ====================
+
+AUDIO_DIR = os.path.join(os.path.dirname(__file__), "audio", "inquiries")
+INQUIRIES_TXT = os.path.join(AUDIO_DIR, "inquiries.txt")
+COMPARES_TXT = os.path.join(AUDIO_DIR, "compares.txt")
+ORDERS_TXT = os.path.join(AUDIO_DIR, "orders.txt")
+FILE_LIST_TXT = os.path.join(AUDIO_DIR, "file_list.txt")
+
+def get_next_index(file_type: str) -> int:
+    """获取下一个可用的文件编号"""
+    import glob
+    import re
+    
+    pattern = os.path.join(AUDIO_DIR, f"{file_type}_*.opus")
+    existing_files = glob.glob(pattern)
+    if not existing_files:
+        return 1
+    
+    indices = []
+    for file in existing_files:
+        basename = os.path.basename(file)
+        match = re.match(rf"{file_type}_(\d+)\.opus", basename)
+        if match:
+            indices.append(int(match.group(1)))
+    
+    return max(indices) + 1 if indices else 1
+
+def scan_opus_files():
+    """扫描所有Opus文件并返回列表"""
+    import glob
+    import re
+    from datetime import datetime
+    
+    inquiries = []
+    compares = []
+    orders = []
+    
+    # 优先从file_list.txt读取文本映射（最准确）
+    text_map = {}
+    if os.path.exists(FILE_LIST_TXT):
+        current_section = None
+        with open(FILE_LIST_TXT, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                if line == "Inquiry Files:":
+                    current_section = "inquiry"
+                    continue
+                elif line == "Compare Files:":
+                    current_section = "compare"
+                    continue
+                elif line == "Order Files:":
+                    current_section = "order"
+                    continue
+                
+                # 解析格式：001: inquiry_001.opus - 文本内容
+                match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s+(.+)', line)
+                if match:
+                    filename = match.group(2)
+                    text = match.group(3)
+                    text_map[filename] = text
+    
+    # 如果file_list.txt没有，则从文本文件读取
+    if not text_map:
+        text_files = {
+            "inquiry": INQUIRIES_TXT,
+            "compare": COMPARES_TXT,
+            "order": ORDERS_TXT
+        }
+        
+        for file_type, txt_file in text_files.items():
+            if os.path.exists(txt_file):
+                with open(txt_file, 'r', encoding='utf-8') as f:
+                    for idx, line in enumerate(f, start=1):
+                        line = line.strip()
+                        if line and not line.startswith('---'):
+                            filename = f"{file_type}_{idx:03d}.opus"
+                            text_map[filename] = line
+    
+    # 扫描所有文件（不区分类型，包括audio_xxx.opus）
+    pattern = os.path.join(AUDIO_DIR, "*.opus")
+    files = sorted(glob.glob(pattern))
+    
+    for file_path in files:
+        basename = os.path.basename(file_path)
+        # 匹配任何格式：inquiry_001, compare_001, order_001, audio_001等
+        match = re.match(r'\w+_(\d+)\.opus', basename)
+        if match:
+            index = match.group(1)
+            file_stat = os.stat(file_path)
+            
+            # 检测文件类型（用于文本映射和分类）
+            type_match = re.match(r'(\w+)_\d+\.opus', basename)
+            detected_type = type_match.group(1) if type_match else "unknown"
+            
+            file_info = {
+                "index": index,
+                "filename": basename,
+                "text": text_map.get(basename, ""),
+                "file_size": file_stat.st_size,
+                "created_time": datetime.fromtimestamp(file_stat.st_ctime).isoformat()
+            }
+            
+            # 为了保持兼容性，仍然分类存储（但前端会统一显示）
+            if detected_type == "inquiry":
+                inquiries.append(file_info)
+            elif detected_type == "compare":
+                compares.append(file_info)
+            elif detected_type == "order":
+                orders.append(file_info)
+            else:
+                # 新生成的audio_xxx文件，默认放到inquiries（不影响功能）
+                inquiries.append(file_info)
+    
+    return inquiries, compares, orders
+
+@app.route('/api/opus/list')
+def get_opus_list():
+    """获取Opus文件列表（统一管理，不区分类型）"""
+    try:
+        inquiries, compares, orders = scan_opus_files()
+        # 合并所有文件，按文件名排序
+        all_files = inquiries + compares + orders
+        # 按文件名排序（自然排序）
+        import re
+        def natural_sort_key(filename):
+            match = re.search(r'(\d+)', filename)
+            return int(match.group(1)) if match else 0
+        
+        all_files.sort(key=lambda x: natural_sort_key(x['filename']))
+        
+        return jsonify({
+            "files": all_files,
+            "total": len(all_files)
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/opus/delete', methods=['DELETE'])
+def delete_opus_file():
+    """删除Opus文件（统一管理，不区分类型）"""
+    try:
+        data = request.get_json() or {}
+        filename = data.get('filename')
+        
+        if not filename:
+            return jsonify({"error": "缺少必要参数"}), 400
+        
+        file_path = os.path.join(AUDIO_DIR, filename)
+        if not os.path.exists(file_path):
+            return jsonify({"error": "文件不存在"}), 404
+        
+        # 删除文件
+        os.remove(file_path)
+        
+        # 尝试从对应的文本文件中删除（如果存在）
+        import re
+        # 检测文件类型
+        match = re.match(r'(\w+)_(\d+)\.opus', filename)
+        if match:
+            file_type = match.group(1)
+            txt_files = {
+                "inquiry": INQUIRIES_TXT,
+                "compare": COMPARES_TXT,
+                "order": ORDERS_TXT
+            }
+            
+            txt_file = txt_files.get(file_type)
+            if txt_file and os.path.exists(txt_file):
+                # 读取所有行
+                with open(txt_file, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                
+                # 找到要删除的行（通过文件名中的索引）
+                index_to_remove = int(match.group(2)) - 1  # 转换为0-based索引
+                if 0 <= index_to_remove < len(lines):
+                    lines.pop(index_to_remove)
+                    
+                    # 写回文件
+                    with open(txt_file, 'w', encoding='utf-8') as f:
+                        f.writelines(lines)
+        
+        # 重新生成file_list.txt
+        inquiries, compares, orders = scan_opus_files()
+        from generate_batch_tts import generate_file_list
+        generate_file_list(
+            [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
+            [(int(f["index"]), f["filename"], f["text"]) for f in compares],
+            [(int(f["index"]), f["filename"], f["text"]) for f in orders],
+            FILE_LIST_TXT
+        )
+        
+        return jsonify({"success": True, "message": "文件已删除"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/opus/upload', methods=['POST'])
+def upload_text_file():
+    """上传文本文件或直接输入文本生成Opus文件（统一管理，不区分类型）"""
+    try:
+        texts = []
+        
+        # 检查是文件上传还是JSON文本输入
+        if request.content_type and 'application/json' in request.content_type:
+            # JSON格式：直接输入文本
+            data = request.get_json() or {}
+            texts_list = data.get('texts', [])
+            if isinstance(texts_list, list):
+                texts = [line.strip() for line in texts_list if line.strip()]
+            elif isinstance(texts_list, str):
+                # 如果是字符串，按换行分割
+                texts = [line.strip() for line in texts_list.split('\n') if line.strip()]
+        elif 'file' in request.files:
+            # 文件上传
+            file = request.files['file']
+            
+            if file.filename == '':
+                return jsonify({"error": "文件名为空"}), 400
+            
+            # 读取文本文件内容
+            for line in file:
+                line = line.decode('utf-8').strip()
+                if line and not line.startswith('---'):
+                    texts.append(line)
+        else:
+            return jsonify({"error": "请上传文件或输入文本"}), 400
+        
+        if not texts:
+            return jsonify({"error": "文本内容为空"}), 400
+        
+        # 生成Opus文件
+        from generate_tts_audio import synthesize_speech
+        import subprocess
+        import tempfile
+        
+        generated_files = []
+        # 统一管理，不再区分类型，不追加到文本文件
+        
+        # 在后台线程中异步生成音频文件（避免请求超时）
+        def generate_files_async():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            async def generate_files():
+                result_files = []
+                # 获取所有现有文件的最大编号（不区分类型）
+                import glob
+                import re
+                
+                # 扫描所有opus文件，找到最大编号
+                pattern = os.path.join(AUDIO_DIR, "*.opus")
+                existing_files = glob.glob(pattern)
+                max_index = 0
+                
+                for file_path in existing_files:
+                    basename = os.path.basename(file_path)
+                    # 匹配任何类型的文件：inquiry_001, compare_001, order_001, audio_001等
+                    match = re.match(r'\w+_(\d+)\.opus', basename)
+                    if match:
+                        index = int(match.group(1))
+                        if index > max_index:
+                            max_index = index
+                
+                current_index = max_index + 1
+                file_type = "audio"  # 统一使用audio前缀
+                
+                for idx, text in enumerate(texts):
+                    # 检查文件是否已存在，如果存在则使用下一个索引
+                    while True:
+                        filename = f"{file_type}_{current_index:03d}.opus"
+                        output_file = os.path.join(AUDIO_DIR, filename)
+                        
+                        if os.path.exists(output_file):
+                            # 文件已存在，使用下一个索引
+                            current_index += 1
+                            print(f"File {filename} already exists, using next index: {current_index:03d}")
+                        else:
+                            # 文件不存在，可以使用这个索引
+                            break
+                    
+                    # 生成PCM
+                    temp_pcm = os.path.join(tempfile.gettempdir(), f"temp_{current_index}_{idx}.pcm")
+                    success = await synthesize_speech(text, temp_pcm, audio_format="raw")
+                    
+                    if success:
+                        # 转换为Opus
+                        try:
+                            # 再次检查文件是否已存在（防止并发问题）
+                            if os.path.exists(output_file):
+                                current_index += 1
+                                filename = f"{file_type}_{current_index:03d}.opus"
+                                output_file = os.path.join(AUDIO_DIR, filename)
+                            
+                            subprocess.run([
+                                "ffmpeg", "-y", "-f", "s16le", "-ar", "16000", "-ac", "1",
+                                "-i", temp_pcm, "-c:a", "libopus", "-b:a", "32k", "-frame_duration", "60",
+                                output_file
+                            ], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                            
+                            if os.path.exists(temp_pcm):
+                                os.remove(temp_pcm)
+                            
+                            result_files.append({
+                                "index": f"{current_index:03d}",
+                                "filename": filename,
+                                "text": text
+                            })
+                            
+                            # 移动到下一个索引
+                            current_index += 1
+                            
+                            await asyncio.sleep(0.5)  # 避免API限流
+                        except Exception as e:
+                            print(f"Failed to convert {filename}: {e}")
+                            # 即使失败也移动到下一个索引，避免重复尝试
+                            current_index += 1
+                    else:
+                        print(f"Failed to generate PCM for {filename}")
+                        # 即使失败也移动到下一个索引
+                        current_index += 1
+                
+                # 重新生成file_list.txt（保持兼容性）
+                inquiries, compares, orders = scan_opus_files()
+                from generate_batch_tts import generate_file_list
+                generate_file_list(
+                    [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
+                    [(int(f["index"]), f["filename"], f["text"]) for f in compares],
+                    [(int(f["index"]), f["filename"], f["text"]) for f in orders],
+                    FILE_LIST_TXT
+                )
+                
+                return result_files
+            
+            result = loop.run_until_complete(generate_files())
+            loop.close()
+            return result
+        
+        # 在后台线程中执行（不阻塞请求）
+        import threading
+        thread = threading.Thread(target=generate_files_async, daemon=True)
+        thread.start()
+        
+        # 立即返回，告知用户文件正在生成
+        return jsonify({
+            "success": True,
+            "message": f"已开始生成{len(texts)}个文件，请稍后刷新页面查看",
+            "generated_files": []  # 实际文件在后台生成
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/opus/file/<filename>')
+def get_opus_file(filename):
+    """获取Opus音频文件"""
+    try:
+        file_path = os.path.join(AUDIO_DIR, filename)
+        if not os.path.exists(file_path):
+            return jsonify({"error": "文件不存在"}), 404
+        
+        # 使用正确的MIME类型，并添加CORS头
+        response = send_file(file_path, mimetype='audio/ogg')  # Opus通常使用ogg容器
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Accept-Ranges'] = 'bytes'
+        return response
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @socketio.on('connect')
 def handle_connect():

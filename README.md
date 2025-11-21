@@ -329,3 +329,11 @@ A: CSV文件使用UTF-8 BOM编码，Excel应该能正确显示。如果仍有问
 1. 日志文件中的错误信息
 2. Web界面中的错误提示
 3. 测试报告中的失败分析
+
+## 相关文档
+
+详细文档请查看 `docs/` 目录：
+- **[需求文档](docs/REQUIREMENTS.md)** - 详细的功能需求、非功能需求、验收标准
+- **[开发文档](docs/DEVELOPMENT.md)** - 项目架构、核心模块、开发指南
+- **[API文档](docs/API.md)** - REST API和WebSocket事件说明
+- **[文档索引](docs/README.md)** - 文档导航和快速查找

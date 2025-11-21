@@ -1,0 +1,95 @@
+2025-11-21 16:58:02 | INFO     | ✅ 已从项目目录加载 Opus DLL: D:\code\http_server\libs\opus.dll
+2025-11-21 16:58:14 | INFO     | 
+============================================================
+2025-11-21 16:58:14 | INFO     | Testing [SINGLE] #001: 介绍香水...
+2025-11-21 16:58:14 | INFO     | Audio file: temp_audio.opus
+2025-11-21 16:58:14 | INFO     | ============================================================
+2025-11-21 16:58:14 | INFO     | Connection #1: Loading audio file: C:\Users\mobil\AppData\Local\Temp\tts_test_2hsbob29\temp_audio.opus
+2025-11-21 16:58:14 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 16:58:14 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 16:58:14 | INFO     | Processed remaining 1330 bytes PCM data with 590 bytes padding (total 32050 bytes)
+2025-11-21 16:58:14 | INFO     | Generated 17 raw Opus packets from PCM data (total 3722 bytes, processed 32050 bytes PCM, coverage: 98.2%)
+2025-11-21 16:58:14 | INFO     | Detected 17 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 16:58:14 | INFO     | Connection #1: Successfully loaded 17 audio frames from C:\Users\mobil\AppData\Local\Temp\tts_test_2hsbob29\temp_audio.opus
+2025-11-21 16:58:14 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 16:58:14 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 16:58:14 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 16:58:14 | INFO     | Connection #1: Session ID: None
+2025-11-21 16:58:14 | INFO     | Connection #1: Message Content:
+2025-11-21 16:58:14 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 16:58:14 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 16:58:14 | INFO     | Connection #1: =======================================
+2025-11-21 16:58:14 | ERROR    | [ERROR] Connection #1 | Error Type: SendError | Error Message: Not connected
+2025-11-21 16:58:14 | WARNING  | Connection #1: Connection lost during wait
+2025-11-21 16:58:17 | WARNING  | Connection #1: No response after 3.0s, stopping wait
+2025-11-21 16:58:17 | WARNING  | Connection #1: Did not receive complete TTS stop response after 3.1s total wait time
+2025-11-21 16:58:17 | WARNING  | ✗ Test FAILED: [SINGLE] #001
+2025-11-21 16:58:17 | WARNING  |   - Audio file: temp_audio.opus
+2025-11-21 16:58:17 | WARNING  |   - Text: 介绍香水
+2025-11-21 16:58:17 | WARNING  |   - Wait time: 0.1s (max: 60.0s)
+2025-11-21 16:58:17 | WARNING  |   - Connection ID: 1
+2025-11-21 16:58:17 | WARNING  |   - Device SN: FC012C2EA080
+2025-11-21 16:58:17 | WARNING  |   - Connection status: Disconnected
+2025-11-21 16:58:17 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-21 16:58:17 | WARNING  |   - STT text: (empty)
+2025-11-21 16:58:17 | WARNING  |   - LLM text: (empty)
+2025-11-21 16:58:17 | WARNING  |   - Messages sent: 0, received: 0
+2025-11-21 16:58:17 | WARNING  |   - Bytes sent: 0, received: 0
+2025-11-21 16:58:17 | WARNING  |   - ❌ Failure reason: Connection lost
+2025-11-21 16:58:50 | INFO     | 
+============================================================
+2025-11-21 16:58:50 | INFO     | Testing [SINGLE] #001: 介绍香水...
+2025-11-21 16:58:50 | INFO     | Audio file: temp_audio.opus
+2025-11-21 16:58:50 | INFO     | ============================================================
+2025-11-21 16:58:50 | INFO     | Connection #1: Loading audio file: C:\Users\mobil\AppData\Local\Temp\tts_test_iv7nvwkr\temp_audio.opus
+2025-11-21 16:58:50 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-21 16:58:50 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-21 16:58:50 | INFO     | Processed remaining 1330 bytes PCM data with 590 bytes padding (total 32050 bytes)
+2025-11-21 16:58:50 | INFO     | Generated 17 raw Opus packets from PCM data (total 3722 bytes, processed 32050 bytes PCM, coverage: 98.2%)
+2025-11-21 16:58:50 | INFO     | Detected 17 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-21 16:58:50 | INFO     | Connection #1: Successfully loaded 17 audio frames from C:\Users\mobil\AppData\Local\Temp\tts_test_iv7nvwkr\temp_audio.opus
+2025-11-21 16:58:50 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-21 16:58:50 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-21 16:58:50 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-21 16:58:50 | INFO     | Connection #1: Session ID: None
+2025-11-21 16:58:50 | INFO     | Connection #1: Message Content:
+2025-11-21 16:58:50 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-21 16:58:50 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-21 16:58:50 | INFO     | Connection #1: =======================================
+2025-11-21 16:58:50 | ERROR    | [ERROR] Connection #1 | Error Type: SendError | Error Message: Not connected
+2025-11-21 16:58:50 | WARNING  | Connection #1: Connection lost during wait
+2025-11-21 16:58:53 | WARNING  | Connection #1: No response after 3.0s, stopping wait
+2025-11-21 16:58:53 | WARNING  | Connection #1: Did not receive complete TTS stop response after 3.1s total wait time
+2025-11-21 16:58:53 | WARNING  | ✗ Test FAILED: [SINGLE] #001
+2025-11-21 16:58:53 | WARNING  |   - Audio file: temp_audio.opus
+2025-11-21 16:58:53 | WARNING  |   - Text: 介绍香水
+2025-11-21 16:58:53 | WARNING  |   - Wait time: 0.1s (max: 60.0s)
+2025-11-21 16:58:53 | WARNING  |   - Connection ID: 1
+2025-11-21 16:58:53 | WARNING  |   - Device SN: FC012C2EA080
+2025-11-21 16:58:53 | WARNING  |   - Connection status: Disconnected
+2025-11-21 16:58:53 | WARNING  |   - Response status: STT: False, LLM: False, TTS_start: False, TTS_stop: False
+2025-11-21 16:58:53 | WARNING  |   - STT text: (empty)
+2025-11-21 16:58:53 | WARNING  |   - LLM text: (empty)
+2025-11-21 16:58:53 | WARNING  |   - Messages sent: 0, received: 0
+2025-11-21 16:58:53 | WARNING  |   - Bytes sent: 0, received: 0
+2025-11-21 16:58:53 | WARNING  |   - ❌ Failure reason: Connection lost

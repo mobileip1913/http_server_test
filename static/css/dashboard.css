@@ -1445,6 +1445,85 @@ body {
     height: 300px;
 }
 
+/* 单语音测试样式 */
+.single-test-status {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid var(--border-color);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+}
+
+.status-item:last-child {
+    margin-bottom: 0;
+}
+
+.status-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.status-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    flex: 1;
+    word-break: break-word;
+}
+
+.single-test-metrics {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid var(--border-color);
+}
+
+.single-test-metrics h3 {
+    font-size: 16px;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+}
+
+.metric-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 16px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 .loading-state,
 .error-state {
     text-align: center;
@@ -1476,5 +1555,145 @@ body {
     .chart-wrapper {
         height: 250px;
     }
+}
+
+/* ==================== Opus管理页面样式 ==================== */
+
+/* 标签页 */
+.tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* 文件表格 */
+.file-table-container {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.file-table thead {
+    background: var(--bg-tertiary);
+}
+
+.file-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.file-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.file-table tbody tr:hover {
+    background: var(--bg-tertiary);
+}
+
+.file-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 文本预览 */
+.text-preview {
+    display: inline-block;
+    max-width: 400px;
+}
+
+.text-full {
+    margin-top: 5px;
+    padding: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.btn-text {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 8px;
+    text-decoration: underline;
+}
+
+.btn-text:hover {
+    color: var(--secondary-color);
+}
+
+/* 小按钮 */
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+/* 模态框 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+}
+
+/* 上传区域 */
+.upload-section {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
