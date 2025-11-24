@@ -52,161 +52,100 @@ class InquiryTester:
         
         return inquiries, purchases
     
+    def _get_text_for_file(self, filename: str, index: int, prefix: str, 
+                          text_map: dict, default_texts: list) -> str:
+        """
+        根据文件名获取对应的文本内容
+        优先从file_list.txt的text_map中获取，否则从default_texts中按索引获取
+        """
+        # 先尝试从text_map中获取（最准确）
+        text = text_map.get(filename)
+        if text:
+            return text
+        
+        # 如果text_map中没有，尝试从default_texts中按索引获取
+        if index <= len(default_texts):
+            return default_texts[index - 1]
+        
+        # 如果都没有，返回占位符
+        return f"{'询问' if prefix == 'inquiry' else '对比' if prefix == 'compare' else '购买'} #{index}"
+    
     def _random_select_test_files(self, inquiry_indices: list, compare_indices: list, 
                                    order_indices: list, inquiries_texts: list, 
                                    compares_texts: list, orders_texts: list, 
                                    test_count: int) -> list:
         """
-        从所有opus文件中随机选择指定数量的文件进行测试
-        三种类型平均分配，有余数随机分配到某个类型
-        如果某种类型的文件数量不足，从其他类型补充
+        从所有opus文件中随机选择指定数量的文件进行测试（统一处理，不再区分类型）
         
         Args:
-            inquiry_indices: 询问文件索引列表
-            compare_indices: 对比文件索引列表
-            order_indices: 下单文件索引列表
-            inquiries_texts: 询问文本列表
-            compares_texts: 对比文本列表
-            orders_texts: 下单文本列表
+            inquiry_indices: 已废弃，保留以兼容旧代码
+            compare_indices: 已废弃，保留以兼容旧代码
+            order_indices: 已废弃，保留以兼容旧代码
+            inquiries_texts: 文本列表（统一使用）
+            compares_texts: 已废弃，保留以兼容旧代码
+            orders_texts: 已废弃，保留以兼容旧代码
             test_count: 要选择的测试数量
         
         Returns:
             测试任务列表
         """
         import random
+        import re
         
-        # 计算实际可用的文件总数
-        total_available = len(inquiry_indices) + len(compare_indices) + len(order_indices)
+        # 统一使用inquiry_indices（实际是所有audio_文件的索引）
+        all_indices = inquiry_indices if inquiry_indices else []
         
         # 如果测试数量大于可用文件总数，只测试所有可用文件
-        actual_test_count = min(test_count, total_available)
+        actual_test_count = min(test_count, len(all_indices))
         
         if actual_test_count == 0:
             return []
         
-        # 计算每种类型应该选多少个（平均分配）
-        base_count = actual_test_count // 3
-        remainder = actual_test_count % 3
+        # 从所有文件中随机选择指定数量
+        selected_indices = random.sample(all_indices, actual_test_count)
         
-        # 分配基础数量
-        inquiry_count = base_count
-        compare_count = base_count
-        order_count = base_count
+        # 从file_list.txt读取文本映射（用于准确匹配文本）
+        file_list_txt = os.path.join(AUDIO_DIR, "file_list.txt")
+        text_map = {}  # {filename: text}
+        if os.path.exists(file_list_txt):
+            with open(file_list_txt, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
+                        continue
+                    # 解析格式：001: filename.opus - 文本内容
+                    match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s+(.+)', line)
+                    if match:
+                        filename = match.group(2)
+                        text = match.group(3)
+                        if text:  # 只保存非空文本
+                            text_map[filename] = text
         
-        # 有余数的话随机分配到某个类型
-        if remainder > 0:
-            types = ['inquiry', 'compare', 'order']
-            selected_types = random.sample(types, remainder)
-            for t in selected_types:
-                if t == 'inquiry':
-                    inquiry_count += 1
-                elif t == 'compare':
-                    compare_count += 1
-                else:
-                    order_count += 1
-        
-        # 从每种类型中随机选择指定数量的文件（不超过实际可用数量）
-        selected_inquiry_indices = random.sample(inquiry_indices, min(inquiry_count, len(inquiry_indices))) if inquiry_indices else []
-        selected_compare_indices = random.sample(compare_indices, min(compare_count, len(compare_indices))) if compare_indices else []
-        selected_order_indices = random.sample(order_indices, min(order_count, len(order_indices))) if order_indices else []
-        
-        # 如果某种类型的文件数量不足，从其他类型补充
-        actual_selected = len(selected_inquiry_indices) + len(selected_compare_indices) + len(selected_order_indices)
-        if actual_selected < actual_test_count:
-            # 计算还需要选择多少个
-            remaining_count = actual_test_count - actual_selected
-            
-            # 收集所有未选择的文件索引
-            all_available = {
-                'inquiry': [idx for idx in inquiry_indices if idx not in selected_inquiry_indices],
-                'compare': [idx for idx in compare_indices if idx not in selected_compare_indices],
-                'order': [idx for idx in order_indices if idx not in selected_order_indices]
-            }
-            
-            # 从剩余文件中随机选择补充
-            all_remaining = []
-            for type_name, indices in all_available.items():
-                for idx in indices:
-                    all_remaining.append((type_name, idx))
-            
-            if all_remaining:
-                random.shuffle(all_remaining)
-                for type_name, idx in all_remaining[:remaining_count]:
-                    if type_name == 'inquiry' and idx not in selected_inquiry_indices:
-                        selected_inquiry_indices.append(idx)
-                    elif type_name == 'compare' and idx not in selected_compare_indices:
-                        selected_compare_indices.append(idx)
-                    elif type_name == 'order' and idx not in selected_order_indices:
-                        selected_order_indices.append(idx)
-        
-        # 构建测试任务
+        # 构建测试任务（统一使用inquiry_file和inquiry_text，保持兼容性）
         all_test_items = []
-        
-        # 处理询问类型
-        for index in selected_inquiry_indices:
-            inquiry_file = self.get_audio_file(index, "inquiry")
-            if inquiry_file:
-                inquiry_text = inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"询问 #{index}"
+        for index in selected_indices:
+            audio_file = self.get_audio_file(index)
+            if audio_file:
+                # 根据实际文件名获取文本
+                filename = os.path.basename(audio_file)
+                text = text_map.get(filename) if filename in text_map else (inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"测试 #{index}")
                 all_test_items.append({
                     "index": index,
-                    "inquiry_file": inquiry_file,
-                    "inquiry_text": inquiry_text
+                    "inquiry_file": audio_file,  # 统一使用inquiry_file字段
+                    "inquiry_text": text  # 统一使用inquiry_text字段
                 })
-        
-        # 处理对比类型
-        for index in selected_compare_indices:
-            compare_file = self.get_audio_file(index, "compare")
-            if compare_file:
-                compare_text = compares_texts[index - 1] if index <= len(compares_texts) else f"对比 #{index}"
-                # 检查是否已有相同index的任务，如果有则合并
-                existing_item = next((item for item in all_test_items if item.get("index") == index), None)
-                if existing_item:
-                    existing_item["compare_file"] = compare_file
-                    existing_item["compare_text"] = compare_text
-                else:
-                    all_test_items.append({
-                        "index": index,
-                        "compare_file": compare_file,
-                        "compare_text": compare_text
-                    })
-        
-        # 处理下单类型
-        for index in selected_order_indices:
-            order_file = self.get_audio_file(index, "order")
-            if order_file:
-                order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
-                # 检查是否已有相同index的任务，如果有则合并
-                existing_item = next((item for item in all_test_items if item.get("index") == index), None)
-                if existing_item:
-                    existing_item["order_file"] = order_file
-                    existing_item["order_text"] = order_text
-                else:
-                    # 兼容旧格式：尝试 purchase
-                    purchase_file = self.get_audio_file(index, "purchase")
-                    if purchase_file:
-                        all_test_items.append({
-                            "index": index,
-                            "purchase_file": purchase_file,
-                            "purchase_text": order_text
-                        })
-                    else:
-                        all_test_items.append({
-                            "index": index,
-                            "order_file": order_file,
-                            "order_text": order_text
-                        })
         
         # 按index排序
         all_test_items.sort(key=lambda x: x["index"])
         
         return all_test_items
     
-    def scan_audio_files(self, prefix: str) -> list:
+    def scan_audio_files(self, prefix: str = None) -> list:
         """
-        自动扫描目录中的音频文件
+        自动扫描目录中的音频文件（统一使用audio_前缀，不再区分类型）
         
         Args:
-            prefix: 文件前缀 ("inquiry", "compare", "order", "purchase")
+            prefix: 已废弃，保留以兼容旧代码，实际不再使用
         
         Returns:
             找到的文件索引列表，按数字顺序排序
@@ -215,12 +154,12 @@ class InquiryTester:
         if not os.path.exists(AUDIO_DIR):
             return indices
         
-        # 扫描所有匹配的opus文件
+        # 统一扫描audio_前缀的文件（不再区分类型）
         for filename in os.listdir(AUDIO_DIR):
-            if filename.startswith(f"{prefix}_") and filename.endswith(".opus"):
+            if filename.startswith("audio_") and filename.endswith(".opus"):
                 try:
-                    # 提取索引：inquiry_001.opus -> 1
-                    index_str = filename.replace(f"{prefix}_", "").replace(".opus", "")
+                    # 提取索引：audio_001.opus -> 1
+                    index_str = filename.replace("audio_", "").replace(".opus", "")
                     index = int(index_str)
                     indices.append(index)
                 except ValueError:
@@ -232,78 +171,59 @@ class InquiryTester:
     
     def parse_text_files(self) -> tuple:
         """
-        解析新的文本文件格式（inquiries.txt, compares.txt, orders.txt）
-        如果文本文件不存在或行数不足，自动扫描目录中的opus文件
-        返回 (inquiries, compares, orders) 元组
+        解析文本文件（统一处理，不再区分类型）
+        优先从file_list.txt读取文本内容（所有audio_前缀的文件）
+        返回 (texts, [], []) 元组（保持兼容性，但只使用第一个元素）
         """
-        inquiries = []
-        compares = []
-        orders = []
+        import re
+        texts = []
         
-        # 解析 inquiries.txt
-        inquiries_file = os.path.join(AUDIO_DIR, "inquiries.txt")
-        if os.path.exists(inquiries_file):
-            with open(inquiries_file, 'r', encoding='utf-8') as f:
+        # 优先从file_list.txt读取文本映射（所有audio_前缀的文件）
+        file_list_txt = os.path.join(AUDIO_DIR, "file_list.txt")
+        text_map = {}  # {filename: text}
+        if os.path.exists(file_list_txt):
+            with open(file_list_txt, 'r', encoding='utf-8') as f:
                 for line in f:
                     line = line.strip()
-                    if line and not line.startswith('---'):
-                        inquiries.append(line)
+                    if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
+                        continue
+                    
+                    # 解析格式：001: filename.opus - 文本内容
+                    match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s+(.+)', line)
+                    if match:
+                        filename = match.group(2)
+                        text = match.group(3)
+                        if text:  # 只保存非空文本
+                            text_map[filename] = text
         
-        # 如果文本文件为空或不存在，自动扫描音频文件
-        if not inquiries:
-            inquiry_indices = self.scan_audio_files("inquiry")
-            inquiries = [f"询问 #{i}" for i in inquiry_indices]
+        # 扫描所有audio_前缀的文件，按索引顺序获取文本
+        audio_indices = self.scan_audio_files()
+        for idx in sorted(audio_indices):
+            filename = f"audio_{idx:03d}.opus"
+            text = text_map.get(filename)
+            if text:
+                texts.append(text)
+            else:
+                texts.append(f"测试 #{idx}")
         
-        # 解析 compares.txt
-        compares_file = os.path.join(AUDIO_DIR, "compares.txt")
-        if os.path.exists(compares_file):
-            with open(compares_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('---'):
-                        compares.append(line)
-        
-        # 如果文本文件为空或不存在，自动扫描音频文件
-        if not compares:
-            compare_indices = self.scan_audio_files("compare")
-            compares = [f"对比 #{i}" for i in compare_indices]
-        
-        # 解析 orders.txt
-        orders_file = os.path.join(AUDIO_DIR, "orders.txt")
-        if os.path.exists(orders_file):
-            with open(orders_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('---'):
-                        orders.append(line)
-        
-        # 如果文本文件为空或不存在，自动扫描音频文件（先尝试order，再尝试purchase）
-        if not orders:
-            order_indices = self.scan_audio_files("order")
-            if not order_indices:
-                order_indices = self.scan_audio_files("purchase")
-            orders = [f"购买 #{i}" for i in order_indices]
-        
-        return inquiries, compares, orders
+        # 返回 (texts, [], []) 保持兼容性
+        return texts, [], []
     
-    def get_audio_file(self, index: int, prefix: str) -> Optional[str]:
+    def get_audio_file(self, index: int, prefix: str = None) -> Optional[str]:
         """
         获取音频文件路径（Opus格式）
-        兼容新格式：如果查找 purchase 但文件不存在，尝试查找 order
+        统一使用audio_前缀，不再区分类型
+        
+        Args:
+            index: 文件索引
+            prefix: 已废弃，保留以兼容旧代码，实际不再使用
         """
-        filename = f"{prefix}_{index:03d}.opus"
+        # 统一使用audio_前缀
+        filename = f"audio_{index:03d}.opus"
         file_path = os.path.join(AUDIO_DIR, filename)
         
-        # 如果文件存在，直接返回
         if os.path.exists(file_path):
             return file_path
-        
-        # 兼容新格式：如果查找 purchase 但文件不存在，尝试查找 order
-        if prefix == "purchase":
-            order_filename = f"order_{index:03d}.opus"
-            order_file_path = os.path.join(AUDIO_DIR, order_filename)
-            if os.path.exists(order_file_path):
-                return order_file_path
         
         return None
     
@@ -443,6 +363,17 @@ class InquiryTester:
                 additional_wait_time = 0
                 check_interval = 0.2  # 每200ms检查一次
                 
+                # 诊断日志：记录等待开始时的状态
+                self.logger.info(
+                    f"Connection #{client.connection_id}: [DIAGNOSTIC] Starting additional wait | "
+                    f"Has_STT: {client.has_stt} | "
+                    f"Has_LLM: {client.has_llm} | "
+                    f"Has_TTS_Start: {client.has_tts_start} | "
+                    f"Has_TTS_Stop: {client.has_tts_stop} | "
+                    f"STT_Text: {getattr(client, 'stt_text', '')[:50]}... | "
+                    f"LLM_Text: {' '.join(getattr(client, 'llm_text_buffer', []))[:50]}..."
+                )
+                
                 while additional_wait_time < max_additional_wait:
                     await asyncio.sleep(check_interval)
                     additional_wait_time += check_interval
@@ -454,16 +385,37 @@ class InquiryTester:
                             tts_stop_valid = True
                             break
                     
+                    # 每2秒输出一次诊断信息
+                    if int(additional_wait_time * 5) % 10 == 0 and additional_wait_time > 0:
+                        self.logger.info(
+                            f"Connection #{client.connection_id}: [DIAGNOSTIC] Waiting... ({additional_wait_time:.1f}s) | "
+                            f"Has_STT: {client.has_stt} | "
+                            f"Has_LLM: {client.has_llm} | "
+                            f"Has_TTS_Start: {client.has_tts_start} | "
+                            f"Has_TTS_Stop: {client.has_tts_stop} | "
+                            f"TTS_Sentence_Count: {getattr(client, 'tts_sentence_count', 0)}"
+                        )
+                    
                     # 如果收到了TTS start，说明服务器已经开始响应，继续等待
                     if client.has_tts_start:
                         continue
                     # 如果既没有TTS start也没有TTS stop，可能服务器没有响应，等待一段时间后退出
                     elif additional_wait_time >= 3.0:  # 如果等待超过3秒还没有任何响应，退出
-                        self.logger.warning(f"Connection #{client.connection_id}: No response after {additional_wait_time:.1f}s, stopping wait")
+                        self.logger.warning(
+                            f"Connection #{client.connection_id}: [DIAGNOSTIC] No response after {additional_wait_time:.1f}s, stopping wait | "
+                            f"Final state - Has_STT: {client.has_stt}, Has_LLM: {client.has_llm}, "
+                            f"Has_TTS_Start: {client.has_tts_start}, Has_TTS_Stop: {client.has_tts_stop}"
+                        )
                         break
                 
                 if not tts_stop_valid:
-                    self.logger.warning(f"Connection #{client.connection_id}: Did not receive complete TTS stop response after {wait_time + additional_wait_time:.1f}s total wait time")
+                    self.logger.warning(
+                        f"Connection #{client.connection_id}: [DIAGNOSTIC] Did not receive complete TTS stop response after {wait_time + additional_wait_time:.1f}s total wait time | "
+                        f"Final state - Has_STT: {client.has_stt}, Has_LLM: {client.has_llm}, "
+                        f"Has_TTS_Start: {client.has_tts_start}, Has_TTS_Stop: {client.has_tts_stop} | "
+                        f"STT_Text: {getattr(client, 'stt_text', '')} | "
+                        f"LLM_Text: {' '.join(getattr(client, 'llm_text_buffer', []))}"
+                    )
             
             # 收集响应文本
             stt_text = getattr(client, 'stt_text', '')
@@ -497,27 +449,43 @@ class InquiryTester:
             # 但需要确保时间戳属于本次测试（在send_start_time之后）
             send_start_time_ms = send_start_time * 1000  # 转换为毫秒时间戳
             
-            # 性能指标：服务延迟（专业测试角度）
-            # 1. STT服务延迟：从发送音频到收到STT结果
+            # 性能指标：详细拆解各个阶段的延迟（精细化指标）
+            # 1. 音频发送阶段
+            if client.send_time:
+                result["send_time"] = client.send_time
+            if client.send_end_time:
+                result["send_end_time"] = client.send_end_time
+                # 计算音频发送耗时（从第一帧到最后一帧）
+                if client.send_time and client.send_end_time >= send_start_time_ms - 2000:
+                    send_duration_ms = client.send_end_time - client.send_time
+                    if 0 <= send_duration_ms <= 60000:
+                        result["send_duration"] = send_duration_ms
+            
+            # 2. STT服务延迟（详细拆解）
+            # STT是流式处理，收到第一个包就开始处理，但最终结果在发送完所有包后才返回
             if client.send_time and client.stt_response_time:
-                # 确保时间戳属于本次测试
                 if client.send_time >= send_start_time_ms - 2000 and client.stt_response_time >= send_start_time_ms - 2000:
-                    stt_latency_ms = client.stt_response_time - client.send_time
-                    # 过滤异常值：应该在0到60秒之间（0-60000ms）
-                    if 0 <= stt_latency_ms <= 60000:
-                        result["stt_latency"] = stt_latency_ms
-                    else:
-                        result["stt_latency"] = None
+                    # 从第一帧发送到STT响应（包含发送时间+STT处理时间）
+                    stt_latency_from_first = client.stt_response_time - client.send_time
+                    if 0 <= stt_latency_from_first <= 60000:
+                        result["stt_latency"] = stt_latency_from_first  # 保持兼容性
+                        result["stt_latency_from_first_frame"] = stt_latency_from_first
+                    
+                    # 从最后一帧发送到STT响应（纯STT处理时间，更准确）
+                    if client.send_end_time and client.send_end_time >= send_start_time_ms - 2000:
+                        stt_latency_from_last = client.stt_response_time - client.send_end_time
+                        if 0 <= stt_latency_from_last <= 60000:
+                            result["stt_latency_from_last_frame"] = stt_latency_from_last
                 else:
                     result["stt_latency"] = None
             else:
                 result["stt_latency"] = None
             
-            # 2. LLM服务延迟：从STT完成到LLM响应
+            # 3. LLM服务延迟（详细拆解）
             if client.stt_response_time and client.llm_response_time:
                 if client.stt_response_time >= send_start_time_ms - 2000 and client.llm_response_time >= send_start_time_ms - 2000:
+                    # 从STT完成到LLM响应（纯LLM处理时间）
                     llm_latency_ms = client.llm_response_time - client.stt_response_time
-                    # 过滤异常值：应该在0到60秒之间
                     if 0 <= llm_latency_ms <= 60000:
                         result["llm_latency"] = llm_latency_ms
                     else:
@@ -527,11 +495,11 @@ class InquiryTester:
             else:
                 result["llm_latency"] = None
             
-            # 3. TTS服务延迟：从LLM完成到TTS开始（TTS启动延迟）
+            # 4. TTS服务延迟（详细拆解）
             if client.llm_response_time and client.tts_start_time:
                 if client.llm_response_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
+                    # 从LLM完成到TTS开始（TTS启动延迟）
                     tts_latency_ms = client.tts_start_time - client.llm_response_time
-                    # 过滤异常值：应该在0到10秒之间
                     if 0 <= tts_latency_ms <= 10000:
                         result["tts_latency"] = tts_latency_ms
                     else:
@@ -541,30 +509,75 @@ class InquiryTester:
             else:
                 result["tts_latency"] = None
             
-            # 注意：不记录TTS持续时间，因为这是内容长度决定的，不是性能指标
+            # TTS持续时间（从TTS开始到TTS结束）
+            if client.tts_start_time and client.tts_stop_time:
+                if client.tts_start_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
+                    tts_duration_ms = client.tts_stop_time - client.tts_start_time
+                    if 0 <= tts_duration_ms <= 120000:
+                        result["tts_duration"] = tts_duration_ms
+                    else:
+                        result["tts_duration"] = None
+                else:
+                    result["tts_duration"] = None
+            else:
+                result["tts_duration"] = None
             
+            # 5. 端到端响应时间（多个维度）
+            # 5.1 从第一帧发送到TTS结束（完整端到端时间）
             if client.send_time and client.tts_stop_time:
                 if client.send_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
-                    total_time_ms = client.tts_stop_time - client.send_time
-                    # 过滤异常值：应该在0到120秒之间
-                    if 0 <= total_time_ms <= 120000:
-                        result["e2e_response_time"] = total_time_ms
-                    else:
-                        result["e2e_response_time"] = None
+                    e2e_from_first = client.tts_stop_time - client.send_time
+                    if 0 <= e2e_from_first <= 120000:
+                        result["e2e_response_time"] = e2e_from_first  # 保持兼容性
+                        result["e2e_from_first_frame"] = e2e_from_first
                 else:
                     result["e2e_response_time"] = None
             elif client.send_time and client.tts_start_time:
                 if client.send_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
-                    total_time_ms = client.tts_start_time - client.send_time
-                    # 过滤异常值：应该在0到120秒之间
-                    if 0 <= total_time_ms <= 120000:
-                        result["e2e_response_time"] = total_time_ms
-                    else:
-                        result["e2e_response_time"] = None
+                    e2e_from_first = client.tts_start_time - client.send_time
+                    if 0 <= e2e_from_first <= 120000:
+                        result["e2e_response_time"] = e2e_from_first
+                        result["e2e_from_first_frame"] = e2e_from_first
                 else:
                     result["e2e_response_time"] = None
             else:
                 result["e2e_response_time"] = None
+            
+            # 5.2 从最后一帧发送到TTS结束（不包含发送时间）
+            if client.send_end_time and client.tts_stop_time:
+                if client.send_end_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
+                    e2e_from_last = client.tts_stop_time - client.send_end_time
+                    if 0 <= e2e_from_last <= 120000:
+                        result["e2e_from_last_frame"] = e2e_from_last
+            elif client.send_end_time and client.tts_start_time:
+                if client.send_end_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
+                    e2e_from_last = client.tts_start_time - client.send_end_time
+                    if 0 <= e2e_from_last <= 120000:
+                        result["e2e_from_last_frame"] = e2e_from_last
+            
+            # 5.3 从STT响应到TTS结束（STT后的完整处理时间）
+            if client.stt_response_time and client.tts_stop_time:
+                if client.stt_response_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
+                    e2e_from_stt = client.tts_stop_time - client.stt_response_time
+                    if 0 <= e2e_from_stt <= 120000:
+                        result["e2e_from_stt"] = e2e_from_stt
+            elif client.stt_response_time and client.tts_start_time:
+                if client.stt_response_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
+                    e2e_from_stt = client.tts_start_time - client.stt_response_time
+                    if 0 <= e2e_from_stt <= 120000:
+                        result["e2e_from_stt"] = e2e_from_stt
+            
+            # 5.4 从LLM响应到TTS结束（LLM后的完整处理时间）
+            if client.llm_response_time and client.tts_stop_time:
+                if client.llm_response_time >= send_start_time_ms - 2000 and client.tts_stop_time >= send_start_time_ms - 2000:
+                    e2e_from_llm = client.tts_stop_time - client.llm_response_time
+                    if 0 <= e2e_from_llm <= 120000:
+                        result["e2e_from_llm"] = e2e_from_llm
+            elif client.llm_response_time and client.tts_start_time:
+                if client.llm_response_time >= send_start_time_ms - 2000 and client.tts_start_time >= send_start_time_ms - 2000:
+                    e2e_from_llm = client.tts_start_time - client.llm_response_time
+                    if 0 <= e2e_from_llm <= 120000:
+                        result["e2e_from_llm"] = e2e_from_llm
             
             # 收集消息统计
             result["sent_messages"] = getattr(client, 'sent_messages', 0)

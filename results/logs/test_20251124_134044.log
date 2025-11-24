@@ -1,0 +1,603 @@
+2025-11-24 13:40:44 | INFO     | ✅ 已从项目目录加载 Opus DLL: D:\code\http_server\libs\opus.dll
+2025-11-24 13:40:47 | INFO     | 测试设置 - 并发数: 2, SN数量: 2, 测试模式: normal
+2025-11-24 13:40:47 | INFO     | SN列表: ['FC012C2EA080', 'FC012C2EA0CC']
+2025-11-24 13:40:47 | INFO     | 随机选择了 10 个测试任务（设置数量: 10）
+2025-11-24 13:40:47 | INFO     | 
+============================================================
+2025-11-24 13:40:47 | INFO     | 开始测试 | SN数量: 2, 每个SN连接数: 1, 总并发连接数: 2, 测试模式: normal
+2025-11-24 13:40:47 | INFO     | SN列表: FC012C2EA080, FC012C2EA0CC
+2025-11-24 13:40:47 | INFO     | ============================================================
+2025-11-24 13:40:47 | INFO     | 共创建 2 个WebSocket客户端
+2025-11-24 13:40:47 | INFO     | Connection #1: ========== AUTH REQUEST ==========
+2025-11-24 13:40:47 | INFO     | Connection #1: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:40:47 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:47 | INFO     | Connection #1: Request Headers:
+2025-11-24 13:40:47 | INFO     | Connection #1:   Protocol-Version: 1
+2025-11-24 13:40:47 | INFO     | Connection #1:   Device-Id: FC:01:2C:2E:A0:80
+2025-11-24 13:40:47 | INFO     | Connection #1: ==================================
+2025-11-24 13:40:47 | INFO     | Connection #2: ========== AUTH REQUEST ==========
+2025-11-24 13:40:47 | INFO     | Connection #2: Request URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:40:47 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:47 | INFO     | Connection #2: Request Headers:
+2025-11-24 13:40:47 | INFO     | Connection #2:   Protocol-Version: 1
+2025-11-24 13:40:47 | INFO     | Connection #2:   Device-Id: FC:01:2C:2E:A0:CC
+2025-11-24 13:40:47 | INFO     | Connection #2: ==================================
+2025-11-24 13:40:47 | INFO     | [CONNECTION] Connection #1 | Status: success | Duration: 122.73ms
+2025-11-24 13:40:47 | INFO     | [CONNECTION] Connection #2 | Status: success | Duration: 116.39ms
+2025-11-24 13:40:48 | INFO     | Connection #1: ========== AUTH RESPONSE ==========
+2025-11-24 13:40:48 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:48 | INFO     | Connection #1: Response Code: 0
+2025-11-24 13:40:48 | INFO     | Connection #1: Response Message: auth_success
+2025-11-24 13:40:48 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:48 | INFO     | Connection #1: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA080",
+    "volume": 70,
+    "light": 20,
+    "time": 1763962848714,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-24 13:40:48 | INFO     | Connection #1: Session ID: None
+2025-11-24 13:40:48 | INFO     | Connection #1: ====================================
+2025-11-24 13:40:48 | INFO     | Connection #1: ✅ Auth SUCCESS | Code: 0, Message: auth_success, Session ID: None
+2025-11-24 13:40:48 | INFO     | Connection #2: ========== AUTH RESPONSE ==========
+2025-11-24 13:40:48 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:48 | INFO     | Connection #2: Response Code: 0
+2025-11-24 13:40:48 | INFO     | Connection #2: Response Message: auth_success
+2025-11-24 13:40:48 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:48 | INFO     | Connection #2: {
+  "type": "auth",
+  "code": 0,
+  "msg": "auth_success",
+  "data": {
+    "sn": "FC012C2EA0CC",
+    "volume": 60,
+    "light": 20,
+    "time": 1763962848746,
+    "can_use_while_charging": 1
+  }
+}
+2025-11-24 13:40:48 | INFO     | Connection #2: Session ID: None
+2025-11-24 13:40:48 | INFO     | Connection #2: ====================================
+2025-11-24 13:40:48 | INFO     | Connection #2: ✅ Auth SUCCESS | Code: 0, Message: auth_success, Session ID: None
+2025-11-24 13:40:48 | INFO     | SN FC012C2EA080: 鉴权成功 (Conn #1)
+2025-11-24 13:40:48 | INFO     | SN FC012C2EA0CC: 鉴权成功 (Conn #2)
+2025-11-24 13:40:48 | INFO     | 
+============================================================
+2025-11-24 13:40:48 | INFO     | Testing [INQUIRY] #001: 我想下单一份香水...
+2025-11-24 13:40:48 | INFO     | Audio file: audio_001.opus
+2025-11-24 13:40:48 | INFO     | ============================================================
+2025-11-24 13:40:48 | INFO     | Connection #1: Loading audio file: D:\code\http_server\audio\inquiries\audio_001.opus
+2025-11-24 13:40:48 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-24 13:40:48 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-24 13:40:48 | INFO     | Processed remaining 1460 bytes PCM data with 460 bytes padding (total 55220 bytes)
+2025-11-24 13:40:48 | INFO     | Generated 29 raw Opus packets from PCM data (total 6431 bytes, processed 55220 bytes PCM, coverage: 99.2%)
+2025-11-24 13:40:48 | INFO     | Detected 29 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-24 13:40:48 | INFO     | Connection #1: Successfully loaded 29 audio frames from D:\code\http_server\audio\inquiries\audio_001.opus
+2025-11-24 13:40:48 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-24 13:40:48 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:48 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:40:48 | INFO     | Connection #1: Session ID: None
+2025-11-24 13:40:48 | INFO     | Connection #1: Message Content:
+2025-11-24 13:40:48 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-24 13:40:48 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-24 13:40:48 | INFO     | Connection #1: =======================================
+2025-11-24 13:40:48 | INFO     | 
+============================================================
+2025-11-24 13:40:48 | INFO     | Testing [INQUIRY] #004: 请下单精品牛头肉500斤...
+2025-11-24 13:40:48 | INFO     | Audio file: audio_004.opus
+2025-11-24 13:40:48 | INFO     | ============================================================
+2025-11-24 13:40:48 | INFO     | Connection #2: Loading audio file: D:\code\http_server\audio\inquiries\audio_004.opus
+2025-11-24 13:40:48 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-24 13:40:48 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-24 13:40:48 | INFO     | Processed remaining 206 bytes PCM data with 1714 bytes padding (total 84686 bytes)
+2025-11-24 13:40:48 | INFO     | Generated 45 raw Opus packets from PCM data (total 9698 bytes, processed 84686 bytes PCM, coverage: 98.0%)
+2025-11-24 13:40:48 | INFO     | Detected 45 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-24 13:40:48 | INFO     | Connection #2: Successfully loaded 45 audio frames from D:\code\http_server\audio\inquiries\audio_004.opus
+2025-11-24 13:40:48 | INFO     | Connection #2: ========== SEND START_LISTEN ==========
+2025-11-24 13:40:48 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:48 | INFO     | Connection #2: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:40:48 | INFO     | Connection #2: Session ID: None
+2025-11-24 13:40:48 | INFO     | Connection #2: Message Content:
+2025-11-24 13:40:48 | INFO     | Connection #2: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-24 13:40:48 | INFO     | Connection #2: Message Size: 140 bytes
+2025-11-24 13:40:48 | INFO     | Connection #2: =======================================
+2025-11-24 13:40:48 | INFO     | Connection #1: Preparing to send 29 audio frames
+2025-11-24 13:40:48 | INFO     | Connection #2: Preparing to send 45 audio frames
+2025-11-24 13:40:51 | INFO     | Connection #1: ========== STT RESPONSE ==========
+2025-11-24 13:40:51 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:51 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:51 | INFO     | Connection #1: {
+  "type": "stt",
+  "text": "我想下单一份香水。"
+}
+2025-11-24 13:40:51 | INFO     | Connection #1: Response Time: 2127.51ms (from send_start)
+2025-11-24 13:40:51 | INFO     | Connection #1: Recognized Text: 我想下单一份香水。
+2025-11-24 13:40:51 | INFO     | Connection #1: =================================
+2025-11-24 13:40:51 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:51 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:51 | INFO     | Connection #1: State: start
+2025-11-24 13:40:51 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:51 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-24 13:40:51 | INFO     | Connection #1: TTS Start Time | Duration from STT: 4.00ms
+2025-11-24 13:40:51 | WARNING  | Connection #1: [DIAGNOSTIC] TTS start received but no LLM response yet! STT_Time: 1763962851009.10ms
+2025-11-24 13:40:51 | INFO     | Connection #1: =================================
+2025-11-24 13:40:52 | INFO     | Connection #2: ========== STT RESPONSE ==========
+2025-11-24 13:40:52 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:52 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:52 | INFO     | Connection #2: {
+  "type": "stt",
+  "text": "请下单精品牛头肉500斤。"
+}
+2025-11-24 13:40:52 | INFO     | Connection #2: Response Time: 3117.62ms (from send_start)
+2025-11-24 13:40:52 | INFO     | Connection #2: Recognized Text: 请下单精品牛头肉500斤。
+2025-11-24 13:40:52 | INFO     | Connection #2: =================================
+2025-11-24 13:40:52 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:52 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:52 | INFO     | Connection #2: State: start
+2025-11-24 13:40:52 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:52 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "start"
+}
+2025-11-24 13:40:52 | INFO     | Connection #2: TTS Start Time | Duration from STT: 2.77ms
+2025-11-24 13:40:52 | WARNING  | Connection #2: [DIAGNOSTIC] TTS start received but no LLM response yet! STT_Time: 1763962852091.45ms
+2025-11-24 13:40:52 | INFO     | Connection #2: =================================
+2025-11-24 13:40:53 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:53 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:53 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:40:53 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:53 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "马上帮你处理订单，稍作等待哦"
+}
+2025-11-24 13:40:53 | INFO     | Connection #1: TTS Sentence Start | Text: 马上帮你处理订单，稍作等待哦
+2025-11-24 13:40:53 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #1 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:40:53 | INFO     | Connection #1: =================================
+2025-11-24 13:40:54 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:54 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:54 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:40:54 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:54 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "马上帮你处理订单，稍作等待哦"
+}
+2025-11-24 13:40:54 | INFO     | Connection #2: TTS Sentence Start | Text: 马上帮你处理订单，稍作等待哦
+2025-11-24 13:40:54 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #1 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:40:54 | INFO     | Connection #2: =================================
+2025-11-24 13:40:56 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:56 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:56 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:40:56 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:56 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:40:56 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:40:56 | INFO     | Connection #1: =================================
+2025-11-24 13:40:56 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:56 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:56 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:40:56 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:56 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "哎呀"
+}
+2025-11-24 13:40:56 | INFO     | Connection #1: TTS Sentence Start | Text: 哎呀
+2025-11-24 13:40:56 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #2 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:40:56 | INFO     | Connection #1: =================================
+2025-11-24 13:40:57 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:57 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:57 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:40:57 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:57 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:40:57 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:40:57 | INFO     | Connection #1: =================================
+2025-11-24 13:40:57 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:40:57 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:40:57 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:40:57 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:40:57 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，商城里没有香水这款商品呢，没办法帮你下单啦。"
+}
+2025-11-24 13:40:57 | INFO     | Connection #1: TTS Sentence Start | Text: ，商城里没有香水这款商品呢，没办法帮你下单啦。
+2025-11-24 13:40:57 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #3 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:40:57 | INFO     | Connection #1: =================================
+2025-11-24 13:40:57 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:57 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:57 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:40:57 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:57 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:40:57 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:40:57 | INFO     | Connection #2: =================================
+2025-11-24 13:40:57 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:57 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:57 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:40:57 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:57 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "不好意思呀"
+}
+2025-11-24 13:40:57 | INFO     | Connection #2: TTS Sentence Start | Text: 不好意思呀
+2025-11-24 13:40:57 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #2 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:40:57 | INFO     | Connection #2: =================================
+2025-11-24 13:40:58 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:58 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:58 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:40:58 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:58 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:40:58 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:40:58 | INFO     | Connection #2: =================================
+2025-11-24 13:40:58 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:40:58 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:40:58 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:40:58 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:40:58 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，商城里没有精品牛头肉这款商品，没办法帮你下单500斤。"
+}
+2025-11-24 13:40:58 | INFO     | Connection #2: TTS Sentence Start | Text: ，商城里没有精品牛头肉这款商品，没办法帮你下单500斤。
+2025-11-24 13:40:58 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #3 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:40:58 | INFO     | Connection #2: =================================
+2025-11-24 13:41:01 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:01 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:01 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:41:01 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:01 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:01 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:41:01 | INFO     | Connection #1: =================================
+2025-11-24 13:41:01 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:01 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:01 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:41:01 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:01 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "之前我给你推荐过香奈儿可可小姐香精、冰希黎幻彩鎏金女士香水、迪奥Miss Dior小姐花漾淡香水等香水"
+}
+2025-11-24 13:41:01 | INFO     | Connection #1: TTS Sentence Start | Text: 之前我给你推荐过香奈儿可可小姐香精、冰希黎幻彩鎏金女士香水、迪奥Miss Dior小姐花漾淡香水等香水
+2025-11-24 13:41:01 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #4 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:41:01 | INFO     | Connection #1: =================================
+2025-11-24 13:41:04 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:04 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:04 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:04 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:04 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:04 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:04 | INFO     | Connection #2: =================================
+2025-11-24 13:41:04 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:04 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:04 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:41:04 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:04 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "我从互联网上了解到，精品牛头肉属于肉类食品。"
+}
+2025-11-24 13:41:04 | INFO     | Connection #2: TTS Sentence Start | Text: 我从互联网上了解到，精品牛头肉属于肉类食品。
+2025-11-24 13:41:04 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #4 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:41:04 | INFO     | Connection #2: =================================
+2025-11-24 13:41:08 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:08 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:08 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:08 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:08 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:08 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:08 | INFO     | Connection #2: =================================
+2025-11-24 13:41:08 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:08 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:08 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:41:08 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:08 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "不过呢，关于价格"
+}
+2025-11-24 13:41:08 | INFO     | Connection #2: TTS Sentence Start | Text: 不过呢，关于价格
+2025-11-24 13:41:08 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #5 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:41:08 | INFO     | Connection #2: =================================
+2025-11-24 13:41:10 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:10 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:10 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:10 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:10 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:10 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:10 | INFO     | Connection #2: =================================
+2025-11-24 13:41:10 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:10 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:10 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:41:10 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:10 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，由于它会受到品质、市场供需情况、销售渠道等多种因素影响"
+}
+2025-11-24 13:41:10 | INFO     | Connection #2: TTS Sentence Start | Text: ，由于它会受到品质、市场供需情况、销售渠道等多种因素影响
+2025-11-24 13:41:10 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #6 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:41:10 | INFO     | Connection #2: =================================
+2025-11-24 13:41:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:11 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:41:11 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:11 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:41:11 | INFO     | Connection #1: =================================
+2025-11-24 13:41:11 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:11 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:11 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:41:11 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:11 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，但这些也不在商城里。"
+}
+2025-11-24 13:41:11 | INFO     | Connection #1: TTS Sentence Start | Text: ，但这些也不在商城里。
+2025-11-24 13:41:11 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #5 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:41:11 | INFO     | Connection #1: =================================
+2025-11-24 13:41:13 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:13 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:13 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:41:13 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:13 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:13 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:41:13 | INFO     | Connection #1: =================================
+2025-11-24 13:41:13 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:13 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:13 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:41:13 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:13 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "目前还不知道能不能从互联网找到可下单的香水以及它详细的类型、价格这些信息"
+}
+2025-11-24 13:41:13 | INFO     | Connection #1: TTS Sentence Start | Text: 目前还不知道能不能从互联网找到可下单的香水以及它详细的类型、价格这些信息
+2025-11-24 13:41:13 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #6 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:41:13 | INFO     | Connection #1: =================================
+2025-11-24 13:41:15 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:15 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:15 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:15 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:15 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:15 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:15 | INFO     | Connection #2: =================================
+2025-11-24 13:41:15 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:15 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:15 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:41:15 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:15 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，所以很难给出一个具体的价格数字。"
+}
+2025-11-24 13:41:15 | INFO     | Connection #2: TTS Sentence Start | Text: ，所以很难给出一个具体的价格数字。
+2025-11-24 13:41:15 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #7 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:41:15 | INFO     | Connection #2: =================================
+2025-11-24 13:41:18 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:18 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:18 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:18 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:18 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:18 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:18 | INFO     | Connection #2: =================================
+2025-11-24 13:41:18 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:18 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:18 | INFO     | Connection #2: State: sentence_start
+2025-11-24 13:41:18 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:18 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "要是后续商城上架了这款商品，你有下单需求，随时跟我说。  "
+}
+2025-11-24 13:41:18 | INFO     | Connection #2: TTS Sentence Start | Text: 要是后续商城上架了这款商品，你有下单需求，随时跟我说。  
+2025-11-24 13:41:18 | INFO     | Connection #2: [DIAGNOSTIC] TTS sentence_start | Sentence #8 | Has_LLM: True | LLM_Time: 1763962854935.77ms
+2025-11-24 13:41:18 | INFO     | Connection #2: =================================
+2025-11-24 13:41:21 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:21 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:21 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:41:21 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:21 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:21 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:41:21 | INFO     | Connection #1: =================================
+2025-11-24 13:41:21 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:21 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:21 | INFO     | Connection #1: State: sentence_start
+2025-11-24 13:41:21 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:21 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_start",
+  "text": "，要是有新消息我第一时间告诉你哈。  "
+}
+2025-11-24 13:41:21 | INFO     | Connection #1: TTS Sentence Start | Text: ，要是有新消息我第一时间告诉你哈。  
+2025-11-24 13:41:21 | INFO     | Connection #1: [DIAGNOSTIC] TTS sentence_start | Sentence #7 | Has_LLM: True | LLM_Time: 1763962853538.45ms
+2025-11-24 13:41:21 | INFO     | Connection #1: =================================
+2025-11-24 13:41:23 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:23 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:23 | INFO     | Connection #2: State: sentence_end
+2025-11-24 13:41:23 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:23 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:23 | INFO     | Connection #2: TTS Sentence End
+2025-11-24 13:41:23 | INFO     | Connection #2: =================================
+2025-11-24 13:41:24 | INFO     | Connection #2: ========== TTS RESPONSE ==========
+2025-11-24 13:41:24 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:24 | INFO     | Connection #2: State: stop
+2025-11-24 13:41:24 | INFO     | Connection #2: Full Response Data:
+2025-11-24 13:41:24 | INFO     | Connection #2: {
+  "type": "tts",
+  "state": "stop"
+}
+2025-11-24 13:41:24 | INFO     | Connection #2: TTS Stop Time | Duration: 32029.62ms
+2025-11-24 13:41:24 | INFO     | Connection #2: =================================
+2025-11-24 13:41:24 | INFO     | Connection #2: Received complete response at 30.2s
+2025-11-24 13:41:24 | INFO     | ✓ Response received: [STT] 请下单精品牛头肉500斤。 | [LLM] 马上帮你处理订单，稍作等待哦 不好意思呀 ，商城里没有精品牛头肉这款商品，没办法帮你下单500斤。 我从互联网上了解到，精品牛头肉属于肉类食品。...
+2025-11-24 13:41:24 | INFO     | 
+============================================================
+2025-11-24 13:41:24 | INFO     | Testing [INQUIRY] #006: 请比较啤酒和香水...
+2025-11-24 13:41:24 | INFO     | Audio file: audio_006.opus
+2025-11-24 13:41:24 | INFO     | ============================================================
+2025-11-24 13:41:24 | INFO     | Connection #2: Loading audio file: D:\code\http_server\audio\inquiries\audio_006.opus
+2025-11-24 13:41:24 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-24 13:41:24 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-24 13:41:24 | INFO     | Processed remaining 156 bytes PCM data with 1764 bytes padding (total 61596 bytes)
+2025-11-24 13:41:24 | INFO     | Generated 33 raw Opus packets from PCM data (total 7218 bytes, processed 61596 bytes PCM, coverage: 97.2%)
+2025-11-24 13:41:24 | INFO     | Detected 33 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-24 13:41:24 | INFO     | Connection #2: Successfully loaded 33 audio frames from D:\code\http_server\audio\inquiries\audio_006.opus
+2025-11-24 13:41:24 | INFO     | Connection #2: ========== SEND START_LISTEN ==========
+2025-11-24 13:41:24 | INFO     | Connection #2: Device SN: FC012C2EA0CC
+2025-11-24 13:41:24 | INFO     | Connection #2: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA0CC&sign=f5059bd1dadd6580df0fa398360390cd&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:41:24 | INFO     | Connection #2: Session ID: None
+2025-11-24 13:41:24 | INFO     | Connection #2: Message Content:
+2025-11-24 13:41:24 | INFO     | Connection #2: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-24 13:41:24 | INFO     | Connection #2: Message Size: 140 bytes
+2025-11-24 13:41:24 | INFO     | Connection #2: =======================================
+2025-11-24 13:41:24 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:24 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:24 | INFO     | Connection #1: State: sentence_end
+2025-11-24 13:41:24 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:24 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "sentence_end",
+  "text": ""
+}
+2025-11-24 13:41:24 | INFO     | Connection #1: TTS Sentence End
+2025-11-24 13:41:24 | INFO     | Connection #1: =================================
+2025-11-24 13:41:24 | INFO     | Connection #1: ========== TTS RESPONSE ==========
+2025-11-24 13:41:24 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:24 | INFO     | Connection #1: State: stop
+2025-11-24 13:41:24 | INFO     | Connection #1: Full Response Data:
+2025-11-24 13:41:24 | INFO     | Connection #1: {
+  "type": "tts",
+  "state": "stop"
+}
+2025-11-24 13:41:24 | INFO     | Connection #1: TTS Stop Time | Duration: 33424.71ms
+2025-11-24 13:41:24 | INFO     | Connection #1: =================================
+2025-11-24 13:41:24 | INFO     | Connection #1: Received complete response at 31.5s
+2025-11-24 13:41:24 | INFO     | ✓ Response received: [STT] 我想下单一份香水。 | [LLM] 马上帮你处理订单，稍作等待哦 哎呀 ，商城里没有香水这款商品呢，没办法帮你下单啦。 之前我给你推荐过香奈儿可可小姐香精、冰希黎幻彩鎏金女士香水、迪奥Mi...
+2025-11-24 13:41:24 | INFO     | 
+============================================================
+2025-11-24 13:41:24 | INFO     | Testing [INQUIRY] #008: 请介绍商品苹果...
+2025-11-24 13:41:24 | INFO     | Audio file: audio_008.opus
+2025-11-24 13:41:24 | INFO     | ============================================================
+2025-11-24 13:41:24 | INFO     | Connection #1: Loading audio file: D:\code\http_server\audio\inquiries\audio_008.opus
+2025-11-24 13:41:24 | INFO     | Detected Ogg Opus container, converting with ffmpeg...
+2025-11-24 13:41:24 | INFO     | Converting Ogg Opus to PCM and re-encoding to raw Opus packets...
+2025-11-24 13:41:24 | INFO     | Processed remaining 84 bytes PCM data with 1836 bytes padding (total 53844 bytes)
+2025-11-24 13:41:24 | INFO     | Generated 29 raw Opus packets from PCM data (total 6357 bytes, processed 53844 bytes PCM, coverage: 96.7%)
+2025-11-24 13:41:24 | INFO     | Detected 29 raw Opus packets from Ogg container. These MUST be sent individually (one per WebSocket message), ignoring SPLIT_OPUS_PACKETS=False
+2025-11-24 13:41:24 | INFO     | Connection #1: Successfully loaded 29 audio frames from D:\code\http_server\audio\inquiries\audio_008.opus
+2025-11-24 13:41:24 | INFO     | Connection #1: ========== SEND START_LISTEN ==========
+2025-11-24 13:41:24 | INFO     | Connection #1: Device SN: FC012C2EA080
+2025-11-24 13:41:24 | INFO     | Connection #1: WebSocket URL: ws://toyaiws.spacechaintech.com:8081/?sn=FC012C2EA080&sign=bf4a0b6fb38f351a59583f97352dc6c4&platform=hw&bid=TKAI_BOARD_03_4G_VB6824_EYE_ST7789&fv=0.0.1&fvc=20250908001&strategy_id=0&uid=0&board_type=ml307&recover=0&enableP3=2&tool=idf&screen=1
+2025-11-24 13:41:24 | INFO     | Connection #1: Session ID: None
+2025-11-24 13:41:24 | INFO     | Connection #1: Message Content:
+2025-11-24 13:41:24 | INFO     | Connection #1: {
+  "session_id": "",
+  "type": "start_listen",
+  "data": {
+    "format": "opus",
+    "tts_format": "opus",
+    "playTag": 1,
+    "state": "asr",
+    "mode": "manual"
+  }
+}
+2025-11-24 13:41:24 | INFO     | Connection #1: Message Size: 140 bytes
+2025-11-24 13:41:24 | INFO     | Connection #1: =======================================
+2025-11-24 13:41:25 | INFO     | Connection #2: Preparing to send 33 audio frames
+2025-11-24 13:41:25 | INFO     | Connection #1: Preparing to send 29 audio frames

@@ -158,10 +158,6 @@ function setupSocketListeners() {
         // 保存并更新opus文件总数
         if (data.total_opus_files !== undefined) {
             testState.total_opus_files = data.total_opus_files;
-            const opusFilesInfo = document.getElementById('opusFilesInfo');
-            if (opusFilesInfo) {
-                opusFilesInfo.textContent = `(Opus文件: ${data.total_opus_files})`;
-            }
         }
     });
 
@@ -330,12 +326,6 @@ function updateProgress(progress, total, totalOpusFiles) {
     const percentage = total > 0 ? (progress / total * 100) : 0;
     document.getElementById('progressFill').style.width = percentage + '%';
     document.getElementById('progressText').textContent = `${progress} / ${total}`;
-    
-    // 显示opus文件总数
-    const opusFilesInfo = document.getElementById('opusFilesInfo');
-    if (opusFilesInfo && totalOpusFiles !== undefined) {
-        opusFilesInfo.textContent = `(Opus文件: ${totalOpusFiles})`;
-    }
 }
 
 // 更新统计
@@ -458,21 +448,9 @@ function addConversationItem(test, status) {
     item.className = `conversation-item ${test.type} ${status}`;
     item.id = `conversation-${test.index}-${test.type}`;
     
-    // 支持三种类型：inquiry（询问）、compare（对比）、order/purchase（购买/下单）
-    let badgeClass, badgeText;
-    if (test.type === 'inquiry') {
-        badgeClass = 'badge-inquiry';
-        badgeText = '询问';
-    } else if (test.type === 'compare') {
-        badgeClass = 'badge-compare';
-        badgeText = '对比';
-    } else if (test.type === 'order' || test.type === 'purchase') {
-        badgeClass = 'badge-purchase';
-        badgeText = '购买';
-    } else {
-        badgeClass = 'badge-purchase';
-        badgeText = '购买';
-    }
+    // 统一管理，不再区分类型
+    let badgeClass = 'badge-inquiry';
+    let badgeText = '测试';
     const statusBadge = status === 'running' ? '<span class="conversation-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">⏳ 测试中</span>' : '';
     
     // 获取用户输入（优先使用STT识别结果）
@@ -539,21 +517,9 @@ function updateConversationItemContent(item, result) {
     const statusClass = isSuccess ? 'success' : 'failed';
     item.className = `conversation-item ${result.type} ${statusClass}`;
 
-    // 支持三种类型：inquiry（询问）、compare（对比）、order/purchase（购买/下单）
-    let badgeClass, badgeText;
-    if (result.type === 'inquiry') {
-        badgeClass = 'badge-inquiry';
-        badgeText = '询问';
-    } else if (result.type === 'compare') {
-        badgeClass = 'badge-compare';
-        badgeText = '对比';
-    } else if (result.type === 'order' || result.type === 'purchase') {
-        badgeClass = 'badge-purchase';
-        badgeText = '购买';
-    } else {
-        badgeClass = 'badge-purchase';
-        badgeText = '购买';
-    }
+    // 统一管理，不再区分类型
+    let badgeClass = 'badge-inquiry';
+    let badgeText = '测试';
     const statusBadge = isSuccess ? '<span class="conversation-badge badge-success">✓ 成功</span>' : 
                         '<span class="conversation-badge badge-failed">✗ 失败</span>';
 
@@ -1473,59 +1439,101 @@ function formatTime(ms) {
     }
 }
 
-// 渲染性能指标
+// 渲染性能指标（精细化拆解）
 function renderPerformanceMetrics(metrics) {
-    const metricNames = {
-        'stt_latency': 'STT服务延迟',
-        'llm_latency': 'LLM服务延迟',
-        'tts_latency': 'TTS服务延迟',
-        'e2e_response_time': '端到端响应时间'
+    if (!metrics) {
+        return '<div class="no-data">暂无性能指标数据</div>';
+    }
+    
+    // 按阶段分组显示指标
+    const metricGroups = {
+        '音频发送阶段': {
+            'send_duration': '音频发送耗时（从第一帧到最后一帧）'
+        },
+        'STT服务延迟': {
+            'stt_latency_from_last_frame': 'STT延迟（从最后一帧发送，纯STT处理时间）',
+            'stt_latency_from_first_frame': 'STT延迟（从第一帧发送，包含发送时间）',
+            'stt_latency': 'STT延迟（综合，优先使用从最后一帧）'
+        },
+        'LLM服务延迟': {
+            'llm_latency': 'LLM延迟（从STT完成到LLM响应）'
+        },
+        'TTS服务延迟': {
+            'tts_latency': 'TTS启动延迟（从LLM完成到TTS开始）',
+            'tts_duration': 'TTS持续时间（从TTS开始到TTS结束）'
+        },
+        '端到端响应时间': {
+            'e2e_from_first_frame': '端到端时间（从第一帧发送到TTS结束）',
+            'e2e_from_last_frame': '端到端时间（从最后一帧发送到TTS结束）',
+            'e2e_from_stt': '端到端时间（从STT响应到TTS结束）',
+            'e2e_from_llm': '端到端时间（从LLM响应到TTS结束）',
+            'e2e_response_time': '端到端时间（综合，从第一帧发送）'
+        }
     };
     
-    let html = '<div class="metrics-grid">';
+    let html = '';
     
-    for (const [key, name] of Object.entries(metricNames)) {
-        const metric = metrics[key];
-        if (metric && metric.count > 0) {
-            html += `
-                <div class="metric-card">
-                    <div class="metric-header">${name}</div>
-                    <div class="metric-values">
-                        <div class="metric-row">
-                            <span class="metric-label">平均值:</span>
-                            <span class="metric-value">${formatTime(metric.avg)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">中位数:</span>
-                            <span class="metric-value">${formatTime(metric.median)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">P95:</span>
-                            <span class="metric-value">${formatTime(metric.p95)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">P99:</span>
-                            <span class="metric-value">${formatTime(metric.p99)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">最小值:</span>
-                            <span class="metric-value">${formatTime(metric.min)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">最大值:</span>
-                            <span class="metric-value">${formatTime(metric.max)}</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">样本数:</span>
-                            <span class="metric-value">${metric.count}</span>
+    // 按阶段分组显示
+    for (const [groupName, metricDict] of Object.entries(metricGroups)) {
+        const groupMetrics = [];
+        for (const [key, name] of Object.entries(metricDict)) {
+            const metric = metrics[key];
+            if (metric && metric.count > 0) {
+                groupMetrics.push({ key, name, metric });
+            }
+        }
+        
+        if (groupMetrics.length > 0) {
+            html += `<div class="metric-group">`;
+            html += `<h4 class="metric-group-title">${groupName}</h4>`;
+            html += `<div class="metrics-grid">`;
+            
+            for (const { key, name, metric } of groupMetrics) {
+                html += `
+                    <div class="metric-card">
+                        <div class="metric-header">${name}</div>
+                        <div class="metric-values">
+                            <div class="metric-row">
+                                <span class="metric-label">平均值:</span>
+                                <span class="metric-value">${formatTime(metric.avg)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">中位数:</span>
+                                <span class="metric-value">${formatTime(metric.median)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">P95:</span>
+                                <span class="metric-value">${formatTime(metric.p95)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">P99:</span>
+                                <span class="metric-value">${formatTime(metric.p99)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">最小值:</span>
+                                <span class="metric-value">${formatTime(metric.min)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">最大值:</span>
+                                <span class="metric-value">${formatTime(metric.max)}</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">样本数:</span>
+                                <span class="metric-value">${metric.count}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            
+            html += `</div></div>`;
         }
     }
     
-    html += '</div>';
+    if (html === '') {
+        return '<div class="no-data">暂无性能指标数据</div>';
+    }
+    
     return html;
 }
 

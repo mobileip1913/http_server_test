@@ -1,43 +1,36 @@
 Inquiry Files:
-017: audio_017.opus - 
-018: audio_018.opus - 
-001: inquiry_001.opus - 你好，我想买点东北大米，听说长粒香米煮饭特别香，是真的吗？
-002: inquiry_002.opus - 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
-003: inquiry_003.opus - 我想知道东北长粒香米煮饭时是不是真的满屋飘香？
-004: inquiry_004.opus - 东北长粒香米冷却后会不会回生？我想买来做便当。
-005: inquiry_005.opus - 东北长粒香米是产自黑土平原的吗？我想买点优质大米。
-006: inquiry_006.opus - 
-007: inquiry_007.opus - 下单两斤牛肉
-008: inquiry_008.opus - 下单牛肉
-009: inquiry_009.opus - 介绍香水
-010: inquiry_010.opus - 下单两斤牛肉
-011: inquiry_011.opus - 下单牛肉
-012: inquiry_012.opus - 介绍香水
-013: inquiry_013.opus - 
-014: inquiry_014.opus - 
-015: inquiry_015.opus - 
-016: inquiry_016.opus - 
+001: audio_001.opus - 我想下单一份香水
+002: audio_002.opus - 我想购买两斤牛肉
+003: audio_003.opus - 我想吃川驰精品牛脚，请帮我下单
+004: audio_004.opus - 请下单精品牛头肉500斤
+005: audio_005.opus - 请对比香卉儿乌木香水和香卉儿沉香香水
+006: audio_006.opus - 请比较啤酒和香水
+007: audio_007.opus - 我对选择啤酒还是香水很纠结，请帮我选择
+008: audio_008.opus - 请介绍商品苹果
+009: audio_009.opus - 请介绍吃的苹果
+010: audio_010.opus - 请介绍苹果笔记本
+011: audio_011.opus - 请介绍笔记本
+012: audio_012.opus - 请介绍牛肉
+013: audio_013.opus - 请介绍牛肉面
+014: audio_014.opus - 请介绍人参
+015: audio_015.opus - 请介绍香水
+016: audio_016.opus - 请介绍啤酒
+017: audio_017.opus - 十年班章普洱茶和普通普洱茶有什么区别？
+018: audio_018.opus - 人参乌梅片和西洋参片哪个更适合我？
+019: audio_019.opus - 宁夏葡萄酒和法国葡萄酒相比怎么样？
+020: audio_020.opus - 香卉儿沉香香水和普通香水有什么区别？
+021: audio_021.opus - 东北长粒香米的米粒是细长的吗？煮出来的米饭会不会很硬？
+022: audio_022.opus - 我想知道东北长粒香米煮饭时是不是真的满屋飘香？
+023: audio_023.opus - 东北长粒香米冷却后会不会回生？我想买来做便当。
+024: audio_024.opus - 东北长粒香米是产自黑土平原的吗？我想买点优质大米。
+025: audio_025.opus - 下单两斤牛肉
+026: audio_026.opus - 下单牛肉
+027: audio_027.opus - 介绍香水
+028: audio_028.opus - 下单两斤牛肉
+029: audio_029.opus - 下单牛肉
+030: audio_030.opus - 介绍香水
+031: audio_031.opus - 好的，我购买十年班章普洱茶357g。
+032: audio_032.opus - 如果是这样，我购买人参乌梅片。
+033: audio_033.opus - 不会回生的话，我购买东北大米长粒香5KG。
+034: audio_034.opus - 有白胡椒粒推荐吗？是方家铺子的吗？
 
-Compare Files:
-001: compare_001.opus - 我想对比一下东北长粒香米和五常大米，哪个更好？
-002: compare_002.opus - 十年班章普洱茶和普通普洱茶有什么区别？
-003: compare_003.opus - 人参乌梅片和西洋参片哪个更适合我？
-004: compare_004.opus - 宁夏葡萄酒和法国葡萄酒相比怎么样？
-005: compare_005.opus - 香卉儿沉香香水和普通香水有什么区别？
-006: compare_006.opus - 
-007: compare_007.opus - 
-008: compare_008.opus - 
-009: compare_009.opus - 
-010: compare_010.opus - 
-
-Order Files:
-001: order_001.opus - 听起来不错，我购买东北大米长粒香5KG。
-002: order_002.opus - 好的，我购买十年班章普洱茶357g。
-003: order_003.opus - 如果是这样，我购买人参乌梅片。
-004: order_004.opus - 不会回生的话，我购买东北大米长粒香5KG。
-005: order_005.opus - 是的，我购买红酒礼盒套装。
-006: order_006.opus - 
-007: order_007.opus - 
-008: order_008.opus - 
-009: order_009.opus - 
-010: order_010.opus - 

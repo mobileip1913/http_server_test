@@ -60,12 +60,13 @@ function renderFileTable() {
     }
     
     tbody.innerHTML = files.map(file => {
-        const textPreview = file.text.length > 50 
+        const hasText = file.text && file.text.trim().length > 0;
+        const textPreview = hasText && file.text.length > 50 
             ? escapeHtml(file.text.substring(0, 50)) + '...' 
-            : escapeHtml(file.text);
+            : (hasText ? escapeHtml(file.text) : '<span style="color: var(--text-muted); font-style: italic;">（无文本）</span>');
         const fileSize = formatFileSize(file.file_size);
-        const fullText = escapeHtml(file.text);
-        const escapedText = escapeHtml(file.text).replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+        const fullText = escapeHtml(file.text || '');
+        const escapedText = escapeHtml(file.text || '').replace(/'/g, "&#39;").replace(/"/g, "&quot;");
         
         return `
             <tr>
@@ -73,12 +74,12 @@ function renderFileTable() {
                 <td>${escapeHtml(file.filename)}</td>
                 <td>
                     <span class="text-preview" title="${escapedText}">${textPreview}</span>
-                    ${file.text.length > 50 ? '<button class="btn-text" onclick="toggleText(this)">展开</button>' : ''}
+                    ${hasText && file.text.length > 50 ? '<button class="btn-text" onclick="toggleText(this)">展开</button>' : ''}
                     <div class="text-full" style="display: none;">${fullText}</div>
                 </td>
                 <td>${fileSize}</td>
                 <td>
-                    <button class="btn btn-small btn-danger" onclick="deleteFile('${escapeHtml(file.filename)}', '${escapedText}')">
+                    <button class="btn btn-small btn-danger" onclick="deleteFile('${escapeHtml(file.filename)}', '${escapedText}')" style="margin-right: 5px;">
                         删除
                     </button>
                     <button class="btn btn-small btn-secondary" onclick="playAudio('${escapeHtml(file.filename)}')">
@@ -202,6 +203,44 @@ function switchInputMode(mode) {
     } else {
         fileMode.style.display = 'none';
         textMode.style.display = 'block';
+    }
+}
+
+// 编辑文本
+function editText(filename, currentText) {
+    const text = prompt('请输入文本内容：', currentText || '');
+    if (text === null) {
+        return; // 用户取消
+    }
+    
+    updateText(filename, text.trim());
+}
+
+// 更新文本内容
+async function updateText(filename, text) {
+    try {
+        const response = await fetch('/api/opus/update-text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                filename: filename,
+                text: text
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+            showError(data.error);
+            return;
+        }
+        
+        showSuccess('文本内容已更新');
+        loadFileList(); // 重新加载列表
+    } catch (error) {
+        showError('更新失败: ' + error.message);
     }
 }
 

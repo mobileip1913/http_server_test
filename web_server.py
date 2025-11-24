@@ -251,110 +251,70 @@ class WebInquiryTester(InquiryTester):
             connections_per_sn_for_notification = max(1, concurrency // len(device_sns)) if concurrency > len(device_sns) else 1
             total_connections_for_notification = connections_per_sn_for_notification * len(device_sns) if concurrency > len(device_sns) else min(concurrency, len(device_sns))
             
-            # 优先尝试解析新的文本文件格式（支持三种类型）
+            # 统一处理所有audio_前缀的文件（不再区分类型）
             inquiries_texts, compares_texts, orders_texts = self.parse_text_files()
             
-            # 如果新格式文件不存在，尝试旧格式
-            if not inquiries_texts and not compares_texts and not orders_texts:
-                inquiries_file = os.path.join(os.path.dirname(__file__), "product_inquiries.txt")
-                inquiries_texts_old, purchases_texts_old = self.parse_inquiries_file(inquiries_file)
-                inquiries_texts = inquiries_texts_old
-                orders_texts = purchases_texts_old  # 将旧格式的 purchases 转换为 orders
+            # 从file_list.txt读取文本映射（用于准确匹配文本）
+            import re
+            FILE_LIST_TXT = os.path.join(os.path.dirname(__file__), "audio", "inquiries", "file_list.txt")
+            text_map = {}  # {filename: text}
+            if os.path.exists(FILE_LIST_TXT):
+                with open(FILE_LIST_TXT, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
+                            continue
+                        # 解析格式：001: filename.opus - 文本内容
+                        match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s+(.+)', line)
+                        if match:
+                            filename = match.group(2)
+                            text = match.group(3)
+                            if text:  # 只保存非空文本
+                                text_map[filename] = text
             
-            if not inquiries_texts:
-                inquiries_texts = [f"询问 #{i+1}" for i in range(50)]
-            if not compares_texts:
-                compares_texts = []
-            if not orders_texts:
-                orders_texts = [f"购买 #{i+1}" for i in range(50)]
-            
-            # 准备所有测试任务
-            # 自动适配：使用实际存在的文件数量，而不是文本文件的行数
+            # 准备所有测试任务（统一处理，不再区分类型）
             all_test_items = []
             
-            # 获取每种类型实际存在的文件索引
-            inquiry_indices = self.scan_audio_files("inquiry")
-            compare_indices = self.scan_audio_files("compare")
-            order_indices = self.scan_audio_files("order")
-            if not order_indices:
-                order_indices = self.scan_audio_files("purchase")
+            # 统一扫描所有audio_前缀的文件
+            all_indices = self.scan_audio_files()
             
             # 统计opus文件总数
-            total_opus_files = len(inquiry_indices) + len(compare_indices) + len(order_indices)
+            total_opus_files = len(all_indices)
             
             # 检查是否有测试数量限制
             test_count = settings.get("test_count")
             
             if test_count and test_count > 0:
-                # 随机选择指定数量的文件
+                # 随机选择指定数量的文件（统一处理，不再区分类型）
                 selected_items = self._random_select_test_files(
-                    inquiry_indices, compare_indices, order_indices,
-                    inquiries_texts, compares_texts, orders_texts,
+                    all_indices, [], [],  # 统一使用all_indices
+                    inquiries_texts, [], [],  # 统一使用inquiries_texts
                     test_count
                 )
                 all_test_items = selected_items
-                # 计算实际会执行的测试数量（每个测试任务中的每个文件类型都会执行一次）
-                actual_test_count = 0
-                for item in all_test_items:
-                    if "inquiry_file" in item:
-                        actual_test_count += 1
-                    if "compare_file" in item:
-                        actual_test_count += 1
-                    if "order_file" in item or "purchase_file" in item:
-                        actual_test_count += 1
+                # 实际测试数 = 选择的文件数
+                actual_test_count = len(all_test_items)
                 if len(all_test_items) < test_count:
-                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务，共 {actual_test_count} 个测试（设置数量: {test_count}，实际可用: {total_opus_files}）")
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}，实际可用: {total_opus_files}）")
                 else:
-                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务，共 {actual_test_count} 个测试（设置数量: {test_count}）")
+                    self.logger.info(f"随机选择了 {len(all_test_items)} 个测试任务（设置数量: {test_count}）")
             else:
-                # 测试所有文件
-                self.logger.info(f"测试所有文件，共 {total_opus_files} 个文件（询问: {len(inquiry_indices)}, 对比: {len(compare_indices)}, 下单: {len(order_indices)}）")
+                # 测试所有文件（统一处理，不再区分类型）
+                self.logger.info(f"测试所有文件，共 {total_opus_files} 个文件")
                 # 实际测试数 = opus文件总数
                 actual_test_count = total_opus_files
-                # 获取所有索引的并集，确保所有文件都被测试
-                all_indices = set(inquiry_indices + compare_indices + order_indices)
-                all_indices = sorted(all_indices)
                 
-                for index in all_indices:
-                    test_item = {"index": index}
-                    
-                    # 询问
-                    if index in inquiry_indices:
-                        inquiry_file = self.get_audio_file(index, "inquiry")
-                        if inquiry_file:
-                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
-                            inquiry_text = inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"询问 #{index}"
-                            test_item["inquiry_file"] = inquiry_file
-                            test_item["inquiry_text"] = inquiry_text
-                    
-                    # 对比
-                    if index in compare_indices:
-                        compare_file = self.get_audio_file(index, "compare")
-                        if compare_file:
-                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
-                            compare_text = compares_texts[index - 1] if index <= len(compares_texts) else f"对比 #{index}"
-                            test_item["compare_file"] = compare_file
-                            test_item["compare_text"] = compare_text
-                    
-                    # 购买/下单
-                    if index in order_indices:
-                        order_file = self.get_audio_file(index, "order")
-                        if order_file:
-                            # 使用文本文件中的文本，如果索引超出范围则使用默认文本
-                            order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
-                            test_item["order_file"] = order_file
-                            test_item["order_text"] = order_text
-                        else:
-                            # 兼容旧格式：尝试 purchase
-                            purchase_file = self.get_audio_file(index, "purchase")
-                            if purchase_file:
-                                order_text = orders_texts[index - 1] if index <= len(orders_texts) else f"购买 #{index}"
-                                test_item["purchase_file"] = purchase_file
-                                test_item["purchase_text"] = order_text
-                    
-                    # 至少有一个文件才添加
-                    if "inquiry_file" in test_item or "compare_file" in test_item or "order_file" in test_item or "purchase_file" in test_item:
-                        all_test_items.append(test_item)
+                for index in sorted(all_indices):
+                    audio_file = self.get_audio_file(index)
+                    if audio_file:
+                        # 从file_list.txt获取文本（更准确）
+                        filename = os.path.basename(audio_file)
+                        text = text_map.get(filename) if filename in text_map else (inquiries_texts[index - 1] if index <= len(inquiries_texts) else f"测试 #{index}")
+                        all_test_items.append({
+                            "index": index,
+                            "inquiry_file": audio_file,  # 统一使用inquiry_file字段
+                            "inquiry_text": text  # 统一使用inquiry_text字段
+                        })
                 
                 # 计算实际会执行的测试数量（每个测试任务中的每个文件类型都会执行一次测试）
                 actual_test_count = 0
@@ -461,92 +421,16 @@ class WebInquiryTester(InquiryTester):
                             break
                         
                         try:
-                            # 测试询问
+                            # 统一处理所有测试任务（不再区分类型）
                             if "inquiry_file" in test_item:
-                                inquiry_result = await self.test_single_audio(
+                                test_result = await self.test_single_audio(
                                     client, test_item["inquiry_file"], test_item["inquiry_text"],
                                     "inquiry", test_item["index"], concurrency_index=client.connection_id - 1
                                 )
-                                self.results.append(inquiry_result)
-                                test_state["results"].append(inquiry_result)
+                                self.results.append(test_result)
+                                test_state["results"].append(test_result)
                                 test_state["progress"] = len(test_state["results"])
-                                if inquiry_result["success"]:
-                                    test_state["summary"]["successful"] += 1
-                                else:
-                                    test_state["summary"]["failed"] += 1
-                                test_state["summary"]["total"] += 1
-                                test_state["summary"]["success_rate"] = (
-                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
-                                    if test_state["summary"]["total"] > 0 else 0
-                                )
-                                emit_test_update("progress_update", {
-                                    "progress": test_state["progress"],
-                                    "total": test_state["total"],
-                                    "total_opus_files": test_state.get("total_opus_files", 0),
-                                    "summary": test_state["summary"]
-                                })
-                                await asyncio.sleep(0.2)
-                            
-                            # 测试对比
-                            if "compare_file" in test_item:
-                                compare_result = await self.test_single_audio(
-                                    client, test_item["compare_file"], test_item["compare_text"],
-                                    "compare", test_item["index"], concurrency_index=client.connection_id - 1
-                                )
-                                self.results.append(compare_result)
-                                test_state["results"].append(compare_result)
-                                test_state["progress"] = len(test_state["results"])
-                                if compare_result["success"]:
-                                    test_state["summary"]["successful"] += 1
-                                else:
-                                    test_state["summary"]["failed"] += 1
-                                test_state["summary"]["total"] += 1
-                                test_state["summary"]["success_rate"] = (
-                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
-                                    if test_state["summary"]["total"] > 0 else 0
-                                )
-                                emit_test_update("progress_update", {
-                                    "progress": test_state["progress"],
-                                    "total": test_state["total"],
-                                    "total_opus_files": test_state.get("total_opus_files", 0),
-                                    "summary": test_state["summary"]
-                                })
-                                await asyncio.sleep(0.2)
-                            
-                            # 测试购买/下单
-                            if "order_file" in test_item:
-                                order_result = await self.test_single_audio(
-                                    client, test_item["order_file"], test_item["order_text"],
-                                    "order", test_item["index"], concurrency_index=client.connection_id - 1
-                                )
-                                self.results.append(order_result)
-                                test_state["results"].append(order_result)
-                                test_state["progress"] = len(test_state["results"])
-                                if order_result["success"]:
-                                    test_state["summary"]["successful"] += 1
-                                else:
-                                    test_state["summary"]["failed"] += 1
-                                test_state["summary"]["total"] += 1
-                                test_state["summary"]["success_rate"] = (
-                                    test_state["summary"]["successful"] / test_state["summary"]["total"] * 100
-                                    if test_state["summary"]["total"] > 0 else 0
-                                )
-                                emit_test_update("progress_update", {
-                                    "progress": test_state["progress"],
-                                    "total": test_state["total"],
-                                    "total_opus_files": test_state.get("total_opus_files", 0),
-                                    "summary": test_state["summary"]
-                                })
-                                await asyncio.sleep(0.2)
-                            elif "purchase_file" in test_item:  # 兼容旧格式
-                                purchase_result = await self.test_single_audio(
-                                    client, test_item["purchase_file"], test_item["purchase_text"],
-                                    "purchase", test_item["index"], concurrency_index=client.connection_id - 1
-                                )
-                                self.results.append(purchase_result)
-                                test_state["results"].append(purchase_result)
-                                test_state["progress"] = len(test_state["results"])
-                                if purchase_result["success"]:
+                                if test_result["success"]:
                                     test_state["summary"]["successful"] += 1
                                 else:
                                     test_state["summary"]["failed"] += 1
@@ -672,12 +556,42 @@ def generate_test_report(results, summary, start_time, end_time, settings):
         except:
             pass
     
-    # 性能指标统计（专业测试角度：关注服务延迟，不记录持续时间）
+    # 性能指标统计（专业测试角度：精细化拆解各个阶段的延迟）
     # 过滤掉无效值：None、负值、异常大的值
-    stt_latencies = [r.get("stt_latency") for r in results if r.get("stt_latency") is not None and r.get("stt_latency") >= 0 and r.get("stt_latency") <= 60000]
+    
+    # 1. 音频发送阶段
+    send_durations = [r.get("send_duration") for r in results if r.get("send_duration") is not None and r.get("send_duration") >= 0 and r.get("send_duration") <= 60000]
+    
+    # 2. STT服务延迟（优先使用从最后一帧计算的延迟，纯STT处理时间）
+    stt_latencies = []
+    stt_latencies_from_first = []
+    stt_latencies_from_last = []
+    for r in results:
+        # 从最后一帧计算的延迟（纯STT处理时间，更准确）
+        stt_latency_from_last = r.get("stt_latency_from_last_frame")
+        if stt_latency_from_last is not None and 0 <= stt_latency_from_last <= 60000:
+            stt_latencies_from_last.append(stt_latency_from_last)
+            stt_latencies.append(stt_latency_from_last)  # 优先使用这个
+        
+        # 从第一帧计算的延迟（包含发送时间）
+        stt_latency_from_first = r.get("stt_latency_from_first_frame") or r.get("stt_latency")
+        if stt_latency_from_first is not None and 0 <= stt_latency_from_first <= 60000:
+            stt_latencies_from_first.append(stt_latency_from_first)
+            if stt_latency_from_last is None:  # 如果没有最后一帧的延迟，使用第一帧的
+                stt_latencies.append(stt_latency_from_first)
+    
+    # 3. LLM服务延迟
     llm_latencies = [r.get("llm_latency") for r in results if r.get("llm_latency") is not None and r.get("llm_latency") >= 0 and r.get("llm_latency") <= 60000]
+    
+    # 4. TTS服务延迟
     tts_latencies = [r.get("tts_latency") for r in results if r.get("tts_latency") is not None and r.get("tts_latency") >= 0 and r.get("tts_latency") <= 10000]
-    e2e_response_times = [r.get("e2e_response_time") for r in results if r.get("e2e_response_time") is not None and r.get("e2e_response_time") >= 0 and r.get("e2e_response_time") <= 120000]
+    tts_durations = [r.get("tts_duration") for r in results if r.get("tts_duration") is not None and r.get("tts_duration") >= 0 and r.get("tts_duration") <= 120000]
+    
+    # 5. 端到端响应时间（多个维度）
+    e2e_from_first = [r.get("e2e_from_first_frame") or r.get("e2e_response_time") for r in results if (r.get("e2e_from_first_frame") or r.get("e2e_response_time")) is not None and (r.get("e2e_from_first_frame") or r.get("e2e_response_time")) >= 0 and (r.get("e2e_from_first_frame") or r.get("e2e_response_time")) <= 120000]
+    e2e_from_last = [r.get("e2e_from_last_frame") for r in results if r.get("e2e_from_last_frame") is not None and r.get("e2e_from_last_frame") >= 0 and r.get("e2e_from_last_frame") <= 120000]
+    e2e_from_stt = [r.get("e2e_from_stt") for r in results if r.get("e2e_from_stt") is not None and r.get("e2e_from_stt") >= 0 and r.get("e2e_from_stt") <= 120000]
+    e2e_from_llm = [r.get("e2e_from_llm") for r in results if r.get("e2e_from_llm") is not None and r.get("e2e_from_llm") >= 0 and r.get("e2e_from_llm") <= 120000]
     
     def calc_stats(times):
         if not times:
@@ -797,10 +711,27 @@ def generate_test_report(results, summary, start_time, end_time, settings):
             "purchase_success_rate": round((order_success / len(order_results) * 100) if order_results else 0, 2)
         },
         "performance_metrics": {
-            "stt_latency": calc_stats(stt_latencies),
-            "llm_latency": calc_stats(llm_latencies),
-            "tts_latency": calc_stats(tts_latencies),
-            "e2e_response_time": calc_stats(e2e_response_times)
+            # 1. 音频发送阶段
+            "send_duration": calc_stats(send_durations),  # 音频发送耗时（从第一帧到最后一帧）
+            
+            # 2. STT服务延迟
+            "stt_latency": calc_stats(stt_latencies),  # STT延迟（优先使用从最后一帧计算的，纯STT处理时间）
+            "stt_latency_from_first_frame": calc_stats(stt_latencies_from_first),  # STT延迟（从第一帧发送，包含发送时间）
+            "stt_latency_from_last_frame": calc_stats(stt_latencies_from_last),  # STT延迟（从最后一帧发送，纯STT处理时间）
+            
+            # 3. LLM服务延迟
+            "llm_latency": calc_stats(llm_latencies),  # LLM延迟（从STT完成到LLM响应）
+            
+            # 4. TTS服务延迟
+            "tts_latency": calc_stats(tts_latencies),  # TTS启动延迟（从LLM完成到TTS开始）
+            "tts_duration": calc_stats(tts_durations),  # TTS持续时间（从TTS开始到TTS结束）
+            
+            # 5. 端到端响应时间（多个维度）
+            "e2e_response_time": calc_stats(e2e_from_first),  # 端到端响应时间（从第一帧发送到TTS结束）
+            "e2e_from_first_frame": calc_stats(e2e_from_first),  # 从第一帧发送到TTS结束
+            "e2e_from_last_frame": calc_stats(e2e_from_last),  # 从最后一帧发送到TTS结束（不包含发送时间）
+            "e2e_from_stt": calc_stats(e2e_from_stt),  # 从STT响应到TTS结束（STT后的完整处理时间）
+            "e2e_from_llm": calc_stats(e2e_from_llm)  # 从LLM响应到TTS结束（LLM后的完整处理时间）
         },
         "failure_analysis": {
             "failure_reasons": failure_reasons,
@@ -1191,30 +1122,58 @@ def generate_pdf_report(report):
     story.append(stats_table)
     story.append(Spacer(1, 10*mm))
     
-    # 性能指标
+    # 性能指标（精细化拆解）
     story.append(Paragraph("性能指标", heading_style))
     metrics = report.get("performance_metrics", {})
-    metric_names = {
-        'stt_latency': 'STT服务延迟',
-        'llm_latency': 'LLM服务延迟',
-        'tts_latency': 'TTS服务延迟',
-        'e2e_response_time': '端到端响应时间'
+    
+    # 按阶段分组显示指标
+    metric_groups = {
+        '音频发送阶段': {
+            'send_duration': '音频发送耗时（从第一帧到最后一帧）'
+        },
+        'STT服务延迟': {
+            'stt_latency_from_last_frame': 'STT延迟（从最后一帧发送，纯STT处理时间）',
+            'stt_latency_from_first_frame': 'STT延迟（从第一帧发送，包含发送时间）',
+            'stt_latency': 'STT延迟（综合，优先使用从最后一帧）'
+        },
+        'LLM服务延迟': {
+            'llm_latency': 'LLM延迟（从STT完成到LLM响应）'
+        },
+        'TTS服务延迟': {
+            'tts_latency': 'TTS启动延迟（从LLM完成到TTS开始）',
+            'tts_duration': 'TTS持续时间（从TTS开始到TTS结束）'
+        },
+        '端到端响应时间': {
+            'e2e_from_first_frame': '端到端时间（从第一帧发送到TTS结束）',
+            'e2e_from_last_frame': '端到端时间（从最后一帧发送到TTS结束）',
+            'e2e_from_stt': '端到端时间（从STT响应到TTS结束）',
+            'e2e_from_llm': '端到端时间（从LLM响应到TTS结束）',
+            'e2e_response_time': '端到端时间（综合，从第一帧发送）'
+        }
     }
     
-    for key, name in metric_names.items():
-        metric = metrics.get(key)
-        if metric and metric.get("count", 0) > 0:
-            story.append(Paragraph(f"<b>{name}</b>", normal_style))
-            metric_data = [
-                ['指标', '数值'],
-                ['平均值', format_pdf_time(metric.get("avg"))],
-                ['中位数', format_pdf_time(metric.get("median"))],
-                ['P95', format_pdf_time(metric.get("p95"))],
-                ['P99', format_pdf_time(metric.get("p99"))],
-                ['最小值', format_pdf_time(metric.get("min"))],
-                ['最大值', format_pdf_time(metric.get("max"))],
-                ['样本数', str(metric.get("count", 0))]
-            ]
+    # 按阶段分组显示
+    for group_name, metric_dict in metric_groups.items():
+        group_metrics = []
+        for key, name in metric_dict.items():
+            metric = metrics.get(key)
+            if metric and metric.get("count", 0) > 0:
+                group_metrics.append((key, name, metric))
+        
+        if group_metrics:
+            story.append(Paragraph(f"<b>{group_name}</b>", heading_style))
+            for key, name, metric in group_metrics:
+                story.append(Paragraph(f"  {name}", normal_style))
+                metric_data = [
+                    ['指标', '数值'],
+                    ['平均值', format_pdf_time(metric.get("avg"))],
+                    ['中位数', format_pdf_time(metric.get("median"))],
+                    ['P95', format_pdf_time(metric.get("p95"))],
+                    ['P99', format_pdf_time(metric.get("p99"))],
+                    ['最小值', format_pdf_time(metric.get("min"))],
+                    ['最大值', format_pdf_time(metric.get("max"))],
+                    ['样本数', str(metric.get("count", 0))]
+                ]
             metric_table = Table(metric_data, colWidths=[40*mm, 120*mm])
             metric_table.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#1e293b')),
@@ -1582,6 +1541,108 @@ def single_test():
             if test_result is None:
                 return
             
+            # 保存Opus文件和文字到记录中
+            try:
+                # 获取下一个可用的文件编号
+                import glob
+                import re
+                pattern = os.path.join(AUDIO_DIR, "audio_*.opus")
+                existing_files = glob.glob(pattern)
+                current_index = 1
+                if existing_files:
+                    indices = []
+                    for file in existing_files:
+                        basename = os.path.basename(file)
+                        match = re.match(r'audio_(\d+)\.opus', basename)
+                        if match:
+                            indices.append(int(match.group(1)))
+                    if indices:
+                        current_index = max(indices) + 1
+                
+                # 检查文件是否已存在，如果存在则使用下一个索引
+                while True:
+                    filename = f"audio_{current_index:03d}.opus"
+                    output_file = os.path.join(AUDIO_DIR, filename)
+                    if os.path.exists(output_file):
+                        current_index += 1
+                    else:
+                        break
+                
+                # 复制临时Opus文件到目标位置
+                if os.path.exists(temp_opus):
+                    shutil.copy2(temp_opus, output_file)
+                    
+                    # 更新file_list.txt
+                    # 先读取现有的file_list.txt，保留已存在文件的文本内容
+                    existing_text_map = {}
+                    if os.path.exists(FILE_LIST_TXT):
+                        with open(FILE_LIST_TXT, 'r', encoding='utf-8') as f:
+                            for line in f:
+                                line = line.strip()
+                                if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
+                                    continue
+                                # 解析格式：001: filename.opus - 文本内容
+                                match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s*(.+)', line)
+                                if match:
+                                    existing_filename = match.group(2)
+                                    existing_text = match.group(3)
+                                    if existing_text:  # 只保存非空文本
+                                        existing_text_map[existing_filename] = existing_text
+                    
+                    # 添加新文件的文本内容
+                    existing_text_map[filename] = text
+                    
+                    # 重新扫描所有文件
+                    inquiries, compares, orders = scan_opus_files()
+                    
+                    # 用existing_text_map中的文本内容覆盖扫描结果
+                    for file_list in [inquiries, compares, orders]:
+                        for file_info in file_list:
+                            if file_info["filename"] in existing_text_map:
+                                file_info["text"] = existing_text_map[file_info["filename"]]
+                    
+                    # 确保新文件在列表中
+                    found = False
+                    for file_list in [inquiries, compares, orders]:
+                        if any(f["filename"] == filename for f in file_list):
+                            # 确保文本内容正确
+                            for f in file_list:
+                                if f["filename"] == filename:
+                                    f["text"] = text
+                            found = True
+                            break
+                    
+                    # 如果不在任何列表中，添加到inquiries
+                    if not found:
+                        file_stat = os.stat(output_file)
+                        inquiries.append({
+                            "index": f"{current_index:03d}",
+                            "filename": filename,
+                            "text": text,
+                            "file_size": file_stat.st_size,
+                            "created_time": datetime.fromtimestamp(file_stat.st_ctime).isoformat()
+                        })
+                    
+                    # 生成新的file_list.txt
+                    from generate_batch_tts import generate_file_list
+                    generate_file_list(
+                        [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
+                        [(int(f["index"]), f["filename"], f["text"]) for f in compares],
+                        [(int(f["index"]), f["filename"], f["text"]) for f in orders],
+                        FILE_LIST_TXT
+                    )
+                    
+                    socketio.emit('single_test_saved', {
+                        "filename": filename,
+                        "text": text,
+                        "message": f"已保存到记录：{filename}"
+                    })
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                # 保存失败不影响测试结果，只记录错误
+                print(f"保存Opus文件失败: {e}")
+            
             # 清理临时文件
             if temp_dir:
                 shutil.rmtree(temp_dir, ignore_errors=True)
@@ -1729,73 +1790,43 @@ def get_next_index(file_type: str) -> int:
     return max(indices) + 1 if indices else 1
 
 def scan_opus_files():
-    """扫描所有Opus文件并返回列表"""
+    """扫描所有Opus文件并返回列表（统一使用audio_前缀，不再区分类型）"""
     import glob
     import re
     from datetime import datetime
     
-    inquiries = []
-    compares = []
-    orders = []
+    inquiries = []  # 统一使用inquiries存储所有文件（保持兼容性）
+    compares = []  # 保持为空，不再使用
+    orders = []  # 保持为空，不再使用
     
     # 优先从file_list.txt读取文本映射（最准确）
     text_map = {}
     if os.path.exists(FILE_LIST_TXT):
-        current_section = None
         with open(FILE_LIST_TXT, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
-                if not line:
-                    continue
-                if line == "Inquiry Files:":
-                    current_section = "inquiry"
-                    continue
-                elif line == "Compare Files:":
-                    current_section = "compare"
-                    continue
-                elif line == "Order Files:":
-                    current_section = "order"
+                if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
                     continue
                 
-                # 解析格式：001: inquiry_001.opus - 文本内容
+                # 解析格式：001: filename.opus - 文本内容
                 match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s+(.+)', line)
                 if match:
                     filename = match.group(2)
                     text = match.group(3)
-                    text_map[filename] = text
+                    if text:  # 只保存非空文本
+                        text_map[filename] = text
     
-    # 如果file_list.txt没有，则从文本文件读取
-    if not text_map:
-        text_files = {
-            "inquiry": INQUIRIES_TXT,
-            "compare": COMPARES_TXT,
-            "order": ORDERS_TXT
-        }
-        
-        for file_type, txt_file in text_files.items():
-            if os.path.exists(txt_file):
-                with open(txt_file, 'r', encoding='utf-8') as f:
-                    for idx, line in enumerate(f, start=1):
-                        line = line.strip()
-                        if line and not line.startswith('---'):
-                            filename = f"{file_type}_{idx:03d}.opus"
-                            text_map[filename] = line
-    
-    # 扫描所有文件（不区分类型，包括audio_xxx.opus）
-    pattern = os.path.join(AUDIO_DIR, "*.opus")
+    # 统一扫描所有audio_前缀的文件
+    pattern = os.path.join(AUDIO_DIR, "audio_*.opus")
     files = sorted(glob.glob(pattern))
     
     for file_path in files:
         basename = os.path.basename(file_path)
-        # 匹配任何格式：inquiry_001, compare_001, order_001, audio_001等
-        match = re.match(r'\w+_(\d+)\.opus', basename)
+        # 匹配audio_XXX.opus格式
+        match = re.match(r'audio_(\d+)\.opus', basename)
         if match:
             index = match.group(1)
             file_stat = os.stat(file_path)
-            
-            # 检测文件类型（用于文本映射和分类）
-            type_match = re.match(r'(\w+)_\d+\.opus', basename)
-            detected_type = type_match.group(1) if type_match else "unknown"
             
             file_info = {
                 "index": index,
@@ -1805,16 +1836,8 @@ def scan_opus_files():
                 "created_time": datetime.fromtimestamp(file_stat.st_ctime).isoformat()
             }
             
-            # 为了保持兼容性，仍然分类存储（但前端会统一显示）
-            if detected_type == "inquiry":
-                inquiries.append(file_info)
-            elif detected_type == "compare":
-                compares.append(file_info)
-            elif detected_type == "order":
-                orders.append(file_info)
-            else:
-                # 新生成的audio_xxx文件，默认放到inquiries（不影响功能）
-                inquiries.append(file_info)
+            # 统一存储到inquiries（保持兼容性）
+            inquiries.append(file_info)
     
     return inquiries, compares, orders
 
@@ -1951,15 +1974,15 @@ def upload_text_file():
                 import glob
                 import re
                 
-                # 扫描所有opus文件，找到最大编号
-                pattern = os.path.join(AUDIO_DIR, "*.opus")
+                # 扫描所有audio_前缀的opus文件，找到最大编号
+                pattern = os.path.join(AUDIO_DIR, "audio_*.opus")
                 existing_files = glob.glob(pattern)
                 max_index = 0
                 
                 for file_path in existing_files:
                     basename = os.path.basename(file_path)
-                    # 匹配任何类型的文件：inquiry_001, compare_001, order_001, audio_001等
-                    match = re.match(r'\w+_(\d+)\.opus', basename)
+                    # 只匹配audio_前缀的文件
+                    match = re.match(r'audio_(\d+)\.opus', basename)
                     if match:
                         index = int(match.group(1))
                         if index > max_index:
@@ -2023,8 +2046,63 @@ def upload_text_file():
                         # 即使失败也移动到下一个索引
                         current_index += 1
                 
-                # 重新生成file_list.txt（保持兼容性）
+                # 重新生成file_list.txt（使用新生成的文件信息 + 已存在的文件）
+                # 先读取现有的file_list.txt，保留已存在文件的文本内容
+                existing_text_map = {}
+                if os.path.exists(FILE_LIST_TXT):
+                    with open(FILE_LIST_TXT, 'r', encoding='utf-8') as f:
+                        for line in f:
+                            line = line.strip()
+                            if not line or line in ["Inquiry Files:", "Compare Files:", "Order Files:"]:
+                                continue
+                            # 解析格式：001: filename.opus - 文本内容（文本可能为空）
+                            match = re.match(r'(\d+):\s+(\w+_\d+\.opus)\s+-\s*(.+)', line)
+                            if match:
+                                filename = match.group(2)
+                                text = match.group(3)
+                                if text:  # 只保存非空文本
+                                    existing_text_map[filename] = text
+                
+                # 更新新生成文件的文本内容（覆盖已有内容）
+                for file_info in result_files:
+                    existing_text_map[file_info["filename"]] = file_info["text"]
+                
+                # 重新扫描所有文件
                 inquiries, compares, orders = scan_opus_files()
+                
+                # 用existing_text_map中的文本内容覆盖扫描结果（确保新生成的文件有文本）
+                for file_list in [inquiries, compares, orders]:
+                    for file_info in file_list:
+                        if file_info["filename"] in existing_text_map:
+                            file_info["text"] = existing_text_map[file_info["filename"]]
+                
+                # 确保所有新生成的文件都在列表中（如果扫描时遗漏了）
+                for file_info in result_files:
+                    # 检查是否已经在某个列表中
+                    found = False
+                    for file_list in [inquiries, compares, orders]:
+                        if any(f["filename"] == file_info["filename"] for f in file_list):
+                            # 确保文本内容正确
+                            for f in file_list:
+                                if f["filename"] == file_info["filename"]:
+                                    f["text"] = file_info["text"]
+                            found = True
+                            break
+                    
+                    # 如果不在任何列表中，添加到inquiries（因为audio_xxx默认归类到inquiries）
+                    if not found:
+                        file_path = os.path.join(AUDIO_DIR, file_info["filename"])
+                        if os.path.exists(file_path):
+                            file_stat = os.stat(file_path)
+                            inquiries.append({
+                                "index": file_info["index"],
+                                "filename": file_info["filename"],
+                                "text": file_info["text"],
+                                "file_size": file_stat.st_size,
+                                "created_time": datetime.fromtimestamp(file_stat.st_ctime).isoformat()
+                            })
+                
+                # 生成新的file_list.txt（确保新生成文件的文本内容被保存）
                 from generate_batch_tts import generate_file_list
                 generate_file_list(
                     [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
@@ -2069,6 +2147,104 @@ def get_opus_file(filename):
         response.headers['Accept-Ranges'] = 'bytes'
         return response
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/opus/update-text', methods=['POST'])
+def update_opus_text():
+    """更新Opus文件的文本内容"""
+    try:
+        data = request.get_json() or {}
+        filename = data.get('filename')
+        text = data.get('text', '').strip()
+        
+        if not filename:
+            return jsonify({"error": "缺少文件名"}), 400
+        
+        file_path = os.path.join(AUDIO_DIR, filename)
+        if not os.path.exists(file_path):
+            return jsonify({"error": "文件不存在"}), 404
+        
+        # 重新扫描所有文件
+        inquiries, compares, orders = scan_opus_files()
+        
+        # 找到对应的文件并更新文本
+        found = False
+        for file_list in [inquiries, compares, orders]:
+            for file_info in file_list:
+                if file_info["filename"] == filename:
+                    file_info["text"] = text
+                    found = True
+                    break
+            if found:
+                break
+        
+        if not found:
+            return jsonify({"error": "文件未找到"}), 404
+        
+        # 重新生成file_list.txt
+        from generate_batch_tts import generate_file_list
+        generate_file_list(
+            [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
+            [(int(f["index"]), f["filename"], f["text"]) for f in compares],
+            [(int(f["index"]), f["filename"], f["text"]) for f in orders],
+            FILE_LIST_TXT
+        )
+        
+        return jsonify({"success": True, "message": "文本内容已更新"})
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/opus/batch-update-text', methods=['POST'])
+def batch_update_opus_text():
+    """批量更新Opus文件的文本内容（按文件名顺序关联文本列表）"""
+    try:
+        data = request.get_json() or {}
+        texts = data.get('texts', [])
+        
+        if not texts or not isinstance(texts, list):
+            return jsonify({"error": "请提供文本列表"}), 400
+        
+        # 重新扫描所有文件，找出没有文本的文件
+        inquiries, compares, orders = scan_opus_files()
+        all_files = inquiries + compares + orders
+        
+        # 找出没有文本的文件，按文件名排序
+        files_without_text = [f for f in all_files if not f.get("text") or not f["text"].strip()]
+        files_without_text.sort(key=lambda x: x["filename"])
+        
+        if len(texts) != len(files_without_text):
+            return jsonify({
+                "error": f"文本数量({len(texts)})与缺少文本的文件数量({len(files_without_text)})不匹配",
+                "files_count": len(files_without_text),
+                "texts_count": len(texts)
+            }), 400
+        
+        # 按顺序关联文本
+        updated_count = 0
+        for i, file_info in enumerate(files_without_text):
+            if i < len(texts):
+                file_info["text"] = texts[i].strip()
+                updated_count += 1
+        
+        # 重新生成file_list.txt
+        from generate_batch_tts import generate_file_list
+        generate_file_list(
+            [(int(f["index"]), f["filename"], f["text"]) for f in inquiries],
+            [(int(f["index"]), f["filename"], f["text"]) for f in compares],
+            [(int(f["index"]), f["filename"], f["text"]) for f in orders],
+            FILE_LIST_TXT
+        )
+        
+        return jsonify({
+            "success": True,
+            "message": f"已更新{updated_count}个文件的文本内容",
+            "updated_count": updated_count
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 @socketio.on('connect')

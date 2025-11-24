@@ -1311,6 +1311,23 @@ body {
     margin-top: 16px;
 }
 
+.metric-group {
+    margin-bottom: 32px;
+}
+
+.metric-group:last-child {
+    margin-bottom: 0;
+}
+
+.metric-group-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

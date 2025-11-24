@@ -210,6 +210,24 @@ class WebSocketClient:
     async def _handle_json_message(self, data: Dict[str, Any]):
         """处理接收到的 JSON 消息"""
         msg_type = data.get("type", "unknown")
+        current_time = get_timestamp()
+        
+        # 诊断日志：记录每个消息的接收
+        stt_time_str = f"{self.stt_response_time:.2f}ms" if self.stt_response_time else "None"
+        llm_time_str = f"{self.llm_response_time:.2f}ms" if self.llm_response_time else "None"
+        tts_start_time_str = f"{self.tts_start_time:.2f}ms" if self.tts_start_time else "None"
+        self.logger.debug(
+            f"Connection #{self.connection_id}: [DIAGNOSTIC] Received message | "
+            f"Type: {msg_type} | "
+            f"Time: {current_time:.2f}ms | "
+            f"Has_STT: {self.has_stt} | "
+            f"Has_LLM: {self.has_llm} | "
+            f"Has_TTS_Start: {self.has_tts_start} | "
+            f"Has_TTS_Stop: {self.has_tts_stop} | "
+            f"STT_Time: {stt_time_str} | "
+            f"LLM_Time: {llm_time_str} | "
+            f"TTS_Start_Time: {tts_start_time_str}"
+        )
         
         # 提取 session_id - 尝试多种可能的位置
         session_id_found = False
@@ -225,8 +243,6 @@ class WebSocketClient:
             if isinstance(data_obj, dict) and "session_id" in data_obj:
                 self.session_id = data_obj["session_id"]
                 session_id_found = True
-        
-        current_time = get_timestamp()
         
         if msg_type == "auth":
             # 认证响应
@@ -365,7 +381,15 @@ class WebSocketClient:
                 tts_start_duration = ""
                 if self.llm_response_time:
                     tts_start_duration = f" | Duration: {self.tts_start_time - self.llm_response_time:.2f}ms"
+                elif self.stt_response_time:
+                    tts_start_duration = f" | Duration from STT: {self.tts_start_time - self.stt_response_time:.2f}ms"
                 self.logger.info(f"Connection #{self.connection_id}: TTS Start Time{tts_start_duration}")
+                # 诊断日志：检查是否有LLM响应
+                if not self.has_llm:
+                    self.logger.warning(
+                        f"Connection #{self.connection_id}: [DIAGNOSTIC] TTS start received but no LLM response yet! "
+                        f"STT_Time: {self.stt_response_time:.2f}ms" if self.stt_response_time else "STT_Time: None"
+                    )
             elif state == "stop" and not self.has_tts_stop:
                 self.tts_stop_time = current_time
                 self.has_tts_stop = True
@@ -390,6 +414,13 @@ class WebSocketClient:
                     )
                 
                 self.logger.info(f"Connection #{self.connection_id}: TTS Sentence Start | Text: {text}")
+                # 诊断日志：记录sentence_start的详细信息
+                self.logger.info(
+                    f"Connection #{self.connection_id}: [DIAGNOSTIC] TTS sentence_start | "
+                    f"Sentence #{self.tts_sentence_count} | "
+                    f"Has_LLM: {self.has_llm} | "
+                    f"LLM_Time: {self.llm_response_time:.2f}ms" if self.llm_response_time else "LLM_Time: None"
+                )
             elif state == "sentence_end":
                 self.logger.info(f"Connection #{self.connection_id}: TTS Sentence End")
             else:
