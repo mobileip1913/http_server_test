@@ -1672,6 +1672,153 @@ def single_test():
     
     return jsonify({"status": "started"})
 
+@app.route('/api/single-test-from-file', methods=['POST'])
+def single_test_from_file():
+    """使用已有的Opus文件执行单语音测试"""
+    global test_state
+    
+    if test_state["is_running"]:
+        return jsonify({"error": "测试正在进行中，请先停止当前测试"}), 400
+    
+    data = request.get_json() or {}
+    filename = data.get('filename', '').strip()
+    text = data.get('text', '').strip()
+    
+    if not filename:
+        return jsonify({"error": "请指定要测试的文件名"}), 400
+    
+    # 检查文件是否存在
+    opus_file = os.path.join(AUDIO_DIR, filename)
+    if not os.path.exists(opus_file):
+        return jsonify({"error": f"文件不存在: {filename}"}), 404
+    
+    # 获取测试配置（多层fallback）
+    device_sns = data.get('device_sns', [])
+    if not device_sns:
+        # 从test_state获取默认配置
+        settings = test_state.get("settings", {})
+        device_sns = settings.get("device_sns", [])
+    
+    # 如果还是没有，使用Config中的默认值（单设备SN）
+    if not device_sns:
+        from config import Config
+        device_sns = [Config.DEVICE_SN]  # 使用Config中的默认设备SN
+    
+    # 确保至少有一个设备SN
+    if not device_sns:
+        return jsonify({"error": "请先配置设备SN（可在设置中配置，或使用config.py中的默认值）"}), 400
+    
+    ws_url = data.get('ws_url', '')
+    test_mode = data.get('test_mode', 'normal')
+    
+    # 在新线程中执行测试
+    def run_single_test_from_file():
+        global test_state
+        try:
+            test_state["is_running"] = True
+            test_state["start_time"] = datetime.now().isoformat()
+            
+            socketio.emit('single_test_start', {
+                "text": text or filename,
+                "status": "正在执行测试..."
+            })
+            
+            # 使用第一个设备SN进行测试
+            device_sn = device_sns[0] if device_sns else None
+            
+            # 如果提供了WebSocket URL，设置到Config
+            if ws_url:
+                from urllib.parse import urlparse
+                from config import Config as ConfigModule  # 在函数内部重新导入
+                if ws_url.startswith('wss://'):
+                    parsed = urlparse(ws_url.replace('wss://', 'http://'))
+                    host_with_port = f"{parsed.hostname}" + (f":{parsed.port}" if parsed.port else "")
+                    ConfigModule.WSS_SERVER_HOST = f"wss://{host_with_port}"
+                    ConfigModule.WS_SERVER_HOST = f"ws://{host_with_port}"
+                    ConfigModule.USE_SSL = True
+                else:
+                    parsed = urlparse(ws_url.replace('ws://', 'http://'))
+                    host_with_port = f"{parsed.hostname}" + (f":{parsed.port}" if parsed.port else "")
+                    ConfigModule.WS_SERVER_HOST = f"ws://{host_with_port}"
+                    ConfigModule.WSS_SERVER_HOST = f"wss://{host_with_port}"
+                    ConfigModule.USE_SSL = False
+            
+            # 执行测试
+            from websocket_client import WebSocketClient
+            
+            # 使用WebInquiryTester以支持实时更新
+            tester = WebInquiryTester()
+            client = WebSocketClient(connection_id=1, device_sn=device_sn)
+            
+            # 建立WebSocket连接
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            async def run_test_with_connection():
+                # 先建立连接
+                connected = await client.connect()
+                if not connected:
+                    socketio.emit('single_test_error', {"error": "WebSocket连接失败"})
+                    return None
+                
+                # 等待一小段时间让服务器响应（鉴权）
+                await asyncio.sleep(0.2)
+                wait_server_msg_time = 0
+                max_wait_server_msg = 3.0
+                check_interval = 0.1
+                while wait_server_msg_time < max_wait_server_msg and client.is_connected:
+                    if client.auth_received or client.session_id:
+                        break
+                    await asyncio.sleep(check_interval)
+                    wait_server_msg_time += check_interval
+                
+                if client.auth_failed:
+                    socketio.emit('single_test_error', {"error": "WebSocket鉴权失败"})
+                    return None
+                
+                # 为单语音测试创建实时更新回调
+                client._tts_sentence_callback = tester._create_tts_sentence_callback(
+                    client, 1, "single", text or filename, is_single_test=True
+                )
+                
+                # 执行单次测试（使用已有的Opus文件）
+                test_result = await tester.test_single_audio(
+                    client, opus_file, text or filename, "single", 1, is_single_test=True
+                )
+                
+                # 关闭连接
+                if client.is_connected:
+                    await client.close()
+                
+                return test_result
+            
+            # 执行测试
+            test_result = loop.run_until_complete(run_test_with_connection())
+            loop.close()
+            
+            if test_result is None:
+                return
+            
+            # 发送测试结果
+            test_state["end_time"] = datetime.now().isoformat()
+            test_state["is_running"] = False
+            
+            socketio.emit('single_test_complete', {
+                "result": test_result,
+                "text": text or filename
+            })
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            test_state["is_running"] = False
+            socketio.emit('single_test_error', {"error": str(e)})
+    
+    test_thread = threading.Thread(target=run_single_test_from_file, daemon=True)
+    test_thread.start()
+    
+    return jsonify({"status": "started"})
+
 @app.route('/api/start', methods=['POST'])
 def start_test():
     """开始测试"""

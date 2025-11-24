@@ -127,6 +127,109 @@
         </div>
     </div>
 
+    <!-- 单语音测试模态框 -->
+    <div id="opusTestModal" class="settings-modal">
+        <div class="settings-modal-overlay"></div>
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h2>🎤 Opus语音测试</h2>
+                <button class="settings-close-btn" onclick="closeOpusTest()">×</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">📝</span>
+                        <h3>测试信息</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label>文件名</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="opusTestFilename" class="settings-input" readonly>
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label>文本内容</label>
+                        <div class="input-wrapper">
+                            <textarea id="opusTestText" class="settings-input" rows="3" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-header">
+                        <span class="settings-icon">⚙️</span>
+                        <h3>测试配置</h3>
+                    </div>
+                    <div class="settings-field">
+                        <label for="opusTestDeviceSN">设备SN（可选，留空使用默认配置）</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="opusTestDeviceSN" class="settings-input" 
+                                   placeholder="留空则使用设置中的设备SN">
+                        </div>
+                    </div>
+                    <div class="settings-field">
+                        <label for="opusTestMode">测试模式</label>
+                        <div class="input-wrapper">
+                            <select id="opusTestMode" class="settings-input">
+                                <option value="normal">正常模式</option>
+                                <option value="fast">急速模式</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="opusTestStatus" class="single-test-status" style="display: none;">
+                    <div class="status-item">
+                        <span class="status-label">状态：</span>
+                        <span id="opusTestStatusText" class="status-text">准备中...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">请求文字：</span>
+                        <span id="opusTestRequestText" class="status-text">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">STT识别：</span>
+                        <span id="opusTestSTTText" class="status-text">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">LLM回复：</span>
+                        <span id="opusTestLLMText" class="status-text">-</span>
+                    </div>
+                </div>
+
+                <div id="opusTestMetrics" class="single-test-metrics" style="display: none;">
+                    <h3>性能指标</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">STT延迟：</span>
+                            <span id="opusMetricSTT" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">LLM延迟：</span>
+                            <span id="opusMetricLLM" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">TTS延迟：</span>
+                            <span id="opusMetricTTS" class="metric-value">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">端到端延迟：</span>
+                            <span id="opusMetricE2E" class="metric-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button id="btnStartOpusTest" class="btn btn-primary" onclick="startOpusTest()">
+                        <span class="icon">▶</span> 开始测试
+                    </button>
+                    <button class="btn btn-secondary" onclick="closeOpusTest()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/opus_management.js') }}"></script>
 </body>
 </html>

@@ -82,8 +82,8 @@ function renderFileTable() {
                     <button class="btn btn-small btn-danger" onclick="deleteFile('${escapeHtml(file.filename)}', '${escapedText}')" style="margin-right: 5px;">
                         删除
                     </button>
-                    <button class="btn btn-small btn-secondary" onclick="playAudio('${escapeHtml(file.filename)}')">
-                        播放
+                    <button class="btn btn-small btn-primary" onclick="testOpusFile('${escapeHtml(file.filename)}', '${escapedText}')">
+                        测试
                     </button>
                 </td>
             </tr>
@@ -390,5 +390,170 @@ function showError(message) {
 function showSuccess(message) {
     // 可以替换为更好的通知组件
     alert('成功: ' + message);
+}
+
+// ==================== Opus测试功能 ====================
+
+// 初始化Socket.IO连接
+let socket = null;
+try {
+    socket = io();
+} catch (e) {
+    console.error('Socket.IO初始化失败:', e);
+}
+
+// 当前测试的文件信息
+let currentTestFile = null;
+
+// 打开Opus测试模态框
+function testOpusFile(filename, text) {
+    currentTestFile = { filename, text };
+    
+    // 设置模态框内容
+    document.getElementById('opusTestFilename').value = filename;
+    document.getElementById('opusTestText').value = text || '';
+    
+    // 重置状态
+    document.getElementById('opusTestStatus').style.display = 'none';
+    document.getElementById('opusTestMetrics').style.display = 'none';
+    document.getElementById('opusTestStatusText').textContent = '准备中...';
+    document.getElementById('opusTestRequestText').textContent = text || '-';
+    document.getElementById('opusTestSTTText').textContent = '-';
+    document.getElementById('opusTestLLMText').textContent = '-';
+    document.getElementById('btnStartOpusTest').disabled = false;
+    document.getElementById('btnStartOpusTest').innerHTML = '<span class="icon">▶</span> 开始测试';
+    
+    // 显示模态框
+    document.getElementById('opusTestModal').classList.add('active');
+}
+
+// 关闭Opus测试模态框
+function closeOpusTest() {
+    document.getElementById('opusTestModal').classList.remove('active');
+    currentTestFile = null;
+}
+
+// 开始Opus测试
+async function startOpusTest() {
+    if (!currentTestFile) {
+        alert('请选择要测试的文件');
+        return;
+    }
+    
+    const deviceSN = document.getElementById('opusTestDeviceSN').value.trim();
+    const testMode = document.getElementById('opusTestMode').value;
+    
+    // 禁用按钮
+    const btn = document.getElementById('btnStartOpusTest');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="icon">⏳</span> 测试中...';
+    
+    // 显示状态
+    document.getElementById('opusTestStatus').style.display = 'block';
+    document.getElementById('opusTestStatusText').textContent = '正在连接服务器...';
+    document.getElementById('opusTestRequestText').textContent = currentTestFile.text || '-';
+    document.getElementById('opusTestSTTText').textContent = '-';
+    document.getElementById('opusTestLLMText').textContent = '-';
+    
+    try {
+        // 获取设置中的WebSocket URL（需要从主页面获取，这里先尝试从localStorage获取）
+        let wsUrl = '';
+        try {
+            const settings = localStorage.getItem('testSettings');
+            if (settings) {
+                const parsed = JSON.parse(settings);
+                wsUrl = parsed.wsUrl || '';
+            }
+        } catch (e) {
+            console.warn('无法读取设置:', e);
+        }
+        
+        // 发送测试请求
+        const response = await fetch('/api/single-test-from-file', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                filename: currentTestFile.filename,
+                text: currentTestFile.text || '',
+                device_sns: deviceSN ? [deviceSN] : [],
+                test_mode: testMode,
+                ws_url: wsUrl
+            })
+        });
+        
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.error || '测试启动失败');
+        }
+        
+        // 更新状态
+        document.getElementById('opusTestStatusText').textContent = '测试进行中...';
+        
+    } catch (error) {
+        console.error('Opus test error:', error);
+        alert('测试启动失败: ' + error.message);
+        btn.disabled = false;
+        btn.innerHTML = '<span class="icon">▶</span> 开始测试';
+        document.getElementById('opusTestStatusText').textContent = '测试失败: ' + error.message;
+    }
+}
+
+// 监听Socket.IO事件（如果Socket.IO可用）
+if (socket) {
+    // 单语音测试开始事件
+    socket.on('single_test_start', (data) => {
+        if (data.status) {
+            document.getElementById('opusTestStatusText').textContent = data.status;
+        } else {
+            document.getElementById('opusTestStatusText').textContent = '测试进行中...';
+        }
+    });
+    
+    // 单语音测试实时更新
+    socket.on('single_test_update', (data) => {
+        // 实时更新STT识别结果
+        if (data.stt_text) {
+            document.getElementById('opusTestSTTText').textContent = data.stt_text;
+        }
+        
+        // 实时更新LLM回复（流式显示）
+        if (data.llm_text) {
+            const llmTextElement = document.getElementById('opusTestLLMText');
+            if (llmTextElement) {
+                llmTextElement.textContent = data.llm_text;
+            }
+        }
+    });
+    
+    // 单语音测试完成事件
+    socket.on('single_test_complete', (data) => {
+        const result = data.result;
+        const btn = document.getElementById('btnStartOpusTest');
+        btn.disabled = false;
+        btn.innerHTML = '<span class="icon">▶</span> 开始测试';
+        
+        // 更新状态
+        document.getElementById('opusTestStatusText').textContent = result.success ? '测试成功' : '测试失败';
+        document.getElementById('opusTestSTTText').textContent = result.stt_text || '-';
+        document.getElementById('opusTestLLMText').textContent = result.llm_text || '-';
+        
+        // 显示性能指标
+        document.getElementById('opusTestMetrics').style.display = 'block';
+        document.getElementById('opusMetricSTT').textContent = result.stt_latency ? `${result.stt_latency.toFixed(2)} ms` : '-';
+        document.getElementById('opusMetricLLM').textContent = result.llm_latency ? `${result.llm_latency.toFixed(2)} ms` : '-';
+        document.getElementById('opusMetricTTS').textContent = result.tts_latency ? `${result.tts_latency.toFixed(2)} ms` : '-';
+        document.getElementById('opusMetricE2E').textContent = result.e2e_response_time ? `${result.e2e_response_time.toFixed(2)} ms` : '-';
+    });
+    
+    // 单语音测试错误事件
+    socket.on('single_test_error', (data) => {
+        const btn = document.getElementById('btnStartOpusTest');
+        btn.disabled = false;
+        btn.innerHTML = '<span class="icon">▶</span> 开始测试';
+        document.getElementById('opusTestStatusText').textContent = '错误: ' + (data.error || '未知错误');
+        alert('测试失败: ' + (data.error || '未知错误'));
+    });
 }
 
